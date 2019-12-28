@@ -1,0 +1,178 @@
+<div class="parallax">
+<div class="row" *ngIf="!editUserProfile">
+  <div class="text-center" style="width: 100%;margin: 20px;">
+    <h4>Login/Register</h4>
+  </div>
+  <div class="" style="width: 500px; margin: auto">
+
+    <div class="card">
+      <!-- When Uses is Not Logged In -->
+      <div class="card-body" *ngIf="!userDetails">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+
+            <div class="btn-group">
+              <button type="button" class="btn" [ngClass]="{'btn-primary active': selectedVal == 'login' }"
+                (click)="onValChange('login')"><strong>Login</strong></button>
+              <button type="button" class="btn" [ngClass]="{'btn-primary active': selectedVal == 'register' }"
+                (click)="onValChange('register')"><strong>Register</strong></button>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- login -->
+        <div  *ngIf="!isForgotPassword">
+          <span *ngIf="selectedVal == 'login'">
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" [(ngModel)]='emailInput' id="email" placeholder="Email">
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password" placeholder="Password">
+            </div>
+
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" (click)="loginUser()">Log In</button>
+            </div>
+
+            <a href="javascript:void(0)" (click)="this.isForgotPassword= true;">Forgot Password?</a>
+
+          </span>
+
+          <!-- register -->
+          <span *ngIf="selectedVal == 'register'">
+
+            <div class="col-sm-12 text-center form-group">
+              <div class="btn-group">
+                <button type="button" class="btn" [ngClass]="{'btn-primary active': registerItem == 'person' }"
+                  (click)="onLoginItemChange('person')"><strong>Person</strong></button>
+                <button type="button" class="btn" [ngClass]="{'btn-primary active': registerItem == 'institute' }"
+                  (click)="onLoginItemChange('institute')"><strong>institute</strong></button>
+              </div>
+            </div>
+
+            <div *ngIf="registerItem == 'person'">
+
+              <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="firstname" class="form-control" [(ngModel)]="firstNameInput" id="firstname" placeholder="First Name">
+              </div>
+
+              <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="lastname" class="form-control" [(ngModel)]="lastNameInput" id="lastname" placeholder="Last Name">
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="emailInput" id="email" placeholder="Email">
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password" placeholder="Password">
+              </div>
+
+              <div class="form-group">
+                <label for="contact">Contact</label>
+                <input type="contact" class="form-control" [(ngModel)]="contactInput" id="contact" placeholder="Contact">
+              </div>
+
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="registerUser()">Register</button>
+              </div>
+            </div>
+
+            <div *ngIf="registerItem == 'institute'">
+
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="name" class="form-control" [(ngModel)]="nameInput" id="name" placeholder="Name">
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="emailInput" id="email" placeholder="Email">
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password" placeholder="Password">
+              </div>
+
+              <div class="form-group">
+                <label for="contact">Contact</label>
+                <input type="contact" class="form-control" [(ngModel)]="contactInput" id="contact" placeholder="Contact">
+              </div>
+
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="registerUser()">Register</button>
+              </div>
+            </div>
+
+          </span>
+        </div>
+
+         <!-- Forgot password -->
+         <div class="form-group" *ngIf="isForgotPassword">
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="emailInput" id="email" placeholder="Email">
+          </div>
+
+          <button type="button" class="btn" (click)="this.isForgotPassword= false;">Cancel</button>
+          <button type="button" class="btn btn-primary"(click)="forgotPassword()">Get email to reset passowrd</button>
+        </div>
+
+
+      </div>
+      <!-- When Uses is Logged In using Email or Google Account -->
+      <div class="card-body" *ngIf="userDetails">
+        <div class="row">
+          <div class="col-sm-12">
+            <ul class="list-group">
+              <li class="list-group-item">Display Name:
+                {{userDetails['displayName']}}</li>
+              <li class="list-group-item">Email: {{userDetails['email']}}</li>
+              <li class="list-group-item">Is Email Varified:
+                {{userDetails['emailVerified']}}
+              </li>
+              <li class="list-group-item">
+                <button type="button" class="btn btn-danger"
+                  (click)="logoutUser()">Logout</button>
+              </li>
+              <li class="list-group-item">
+                <button type="button" class="btn btn-primary"
+                 [routerLink]="'/postadd'" >Post An Add</button>
+              </li>
+              <li class="list-group-item" *ngIf="registerItem == 'institute'">
+                <button type="button" class="btn btn-primary"  (click)="editProfileInstitute()" >Create Profile Details</button>
+              </li>
+              <div *ngIf="registerItem == 'person'">
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-primary"  (click)="editProfilePerson()" >Create Profile Details</button>
+                </li>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-primary"  (click)="editClassesPerson()" >Add Classes Details</button>
+                </li>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-{{responseMessageType}}" role="alert"
+      *ngIf="responseMessage.length">
+      {{responseMessage}}
+    </div>
+  </div>
+</div>
+
+
+</div>

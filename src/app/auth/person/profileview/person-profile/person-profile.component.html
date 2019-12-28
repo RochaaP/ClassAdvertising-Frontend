@@ -1,0 +1,193 @@
+<!-- <button type="button" class="btn btn-primary" (click)="getDetails();" >Get Profile Details</button> -->
+<div class="container">
+  <h1>Edit Profile</h1>
+  <hr>
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-3">
+      <div class="text-center">
+        <img src="//placehold.it/100" src="{{this.downloadURL}}"  class="avatar img-circle" class="img-thumbnail" alt="avatar">
+        <h6>Upload a different photo...</h6>
+        <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" />
+        <!-- <input type="file" class="form-control"> -->
+      </div>
+    </div>
+
+    <!-- edit form column -->
+    <div class="col-md-9 personal-info">
+      <!-- <div class="alert alert-info alert-dismissable">
+        <a class="panel-close close" data-dismiss="alert">×</a>
+        <i class="fa fa-coffee"></i>
+        This is an <strong>.alert</strong>. Use this to show important messages to the user.
+      </div> -->
+      <h3>Personal info</h3>
+      <!-- *ngFor="let post of users | async" -->
+      <form class="form-horizontal" role="form"  >
+            <div class="form-group">
+              <label class="col-lg-3 control-label">Title:</label>
+              <div class="col-lg-8">
+                <select class="form-control">
+                  <option value="">Title</option>
+                  <option value="Mr">Mr.</option>
+                  <option value="Miss">Miss.</option>
+                  <option value="Mrs">Mrs.</option>
+                  <option value="Dr">Dr.</option>
+                  <option value="Prof">Prof.</option>
+                </select>
+                <!-- <input class="form-control" type="text"  placeholder="t" [(ngModel)]="firstNameInput" name='first'> -->
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">First name:</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text"  placeholder="First Name" [(ngModel)]="firstNameInput" name='first'>
+              </div>
+            </div>
+          <div class="form-group">
+              <label class="col-lg-3 control-label">Last name:</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" placeholder="Last Name" [(ngModel)]="lastNameInput" name="last">
+              </div>
+            </div>
+          <!-- <div class="form-group">
+              <label class="col-lg-3 control-label">Company:</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" value="">
+              </div>
+            </div> -->
+            <div class="form-group">
+              <label class="col-lg-3 control-label">Email:</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text"  [(ngModel)]="emailInput"  name='email' readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">Contact:</label>
+              <div class="col-md-8">
+                <input class="form-control" type="text" placeholder="Contact" [(ngModel)]="contactInput" name='contact'>
+              </div>
+            </div>
+            <div class="form-group">
+            <label><input type="checkbox" (change)="eventUniversity($event)"/> Degree Holder</label>
+
+            <div  *ngIf="showhideUniversity">
+              <div class="form-group">
+                <label class="col-md-3 control-label">University:</label>
+                <div class="col-md-8">
+                  <input class="form-control" type="text" placeholder="University" [(ngModel)]="universityInput" name='university'>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label class="col-md-3 control-label">Degree:</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="Degree" [(ngModel)]="degreeInput" name='degree'>
+                  </div>
+              </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Year:</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="Year" [(ngModel)]="yearInput" name='year'>
+                  </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" [(ngModel)]="gradInput" name="radios" id="radios1" value="undergraduate" (change)="eventUnderGraduate($event)">
+                    <label class="form-check-label" for="radios1">
+                      Undergraduate
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" [(ngModel)]="gradInput" name="radios" id="radios2" value="Postgraduate" (change)="eventPostGraduate($event)">
+                    <label class="form-check-label" for="radios2">
+                      Postgraduate
+                    </label>
+                  </div>
+
+                  <div *ngIf="showPostGraduation">
+
+                    <div class="form-group">
+                      <label><input type="checkbox" (change)="eventMScHolder($event)"/> MSc Holder</label>
+
+                      <div  *ngIf="showhideMSc">
+
+                        <div class="form-group">
+                          <label class="col-md-3 control-label">University:</label>
+                          <div class="col-md-8">
+                            <input class="form-control" type="text" placeholder="University" [(ngModel)]="universityMScInput" name='universityMSc'>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">MSc Degree:</label>
+                            <div class="col-md-8">
+                              <input class="form-control" type="text" placeholder="Degree" [(ngModel)]="degreeMScInput" name='degreeMSc'>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-3 control-label">Year:</label>
+                          <div class="col-md-8">
+                            <input class="form-control" type="text" placeholder="Year" [(ngModel)]="yearMScInput" name='yearMSc'>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><input type="checkbox" (change)="eventPhDHolder($event)"/> PhD Holder</label>
+
+                      <div  *ngIf="showhidePhD">
+
+                        <div class="form-group">
+                          <label class="col-md-3 control-label">University:</label>
+                          <div class="col-md-8">
+                            <input class="form-control" type="text" placeholder="University" [(ngModel)]="universityPhDInput" name='universityPhD'>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">PhD Degree:</label>
+                            <div class="col-md-8">
+                              <input class="form-control" type="text" placeholder="Degree" [(ngModel)]="degreePhDInput" name='degreePhD'>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-md-3 control-label">Year:</label>
+                          <div class="col-md-8">
+                            <input class="form-control" type="text" placeholder="Year" [(ngModel)]="yearPhDInput" name='yearPhD'>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            </div>
+            <div class="form-group">
+              <label><input type="checkbox" (change)="eventOccupation($event)"/> Gov.Teaching</label>
+
+              <div  *ngIf="showhideOccupation">
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">School Teaching:</label>
+                    <div class="col-md-8">
+                      <input class="form-control" type="text" placeholder="Schoool" [(ngModel)]="teachingSchoolInput" name='school'>
+                </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-3 control-label">Experience in teaching:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" placeholder="Years" [(ngModel)]="yearExperienceInput" name='yearExperience'>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary"(click)="updateValues()">Update</button>
+            </div>
+      </form>
+    </div>
+</div>
+</div>
+<hr>

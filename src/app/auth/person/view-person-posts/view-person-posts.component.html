@@ -1,0 +1,47 @@
+<!-- <div class="conatiner">
+  <div class="row" *ngFor="let field of response">
+    <div class="details">
+      <div>{{field.data.firstName}}</div>
+      <div>{{field.data.degree}}</div>
+      <div>{{field.data.university}}</div>
+      <div>{{field.data.teachingSchool}}</div>
+      <div>contact {{field.data.email}}</div>
+    </div>
+  </div>
+</div> -->
+
+
+<div *ngFor="let field of response">
+<div class="continer">
+<mat-accordion>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Personal data
+      </mat-panel-title>
+      <mat-panel-description>
+        Type your name and age
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{field.data.email}}</p>
+    <p>{{field.data.contact}}</p>
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+       University Detiails
+      </mat-panel-title>
+      <mat-panel-description>
+        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{field.data.university}}</p>
+    <p>{{field.data.degree}}</p>
+    <p>{{field.data.grad}}</p>
+    <p>{{field.data.degreeYear}}</p>
+  </mat-expansion-panel>
+</mat-accordion>
+
+</div>
+</div>

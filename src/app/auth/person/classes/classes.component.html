@@ -1,0 +1,19 @@
+<ul *ngFor="let field of response">
+  <ul *ngFor="let subdetails of field.data.content">
+  <div  class= "Details">
+    <mat-card class="card">
+      <mat-card-subtitle><b>{{subdetails.primary}}</b></mat-card-subtitle>
+      <mat-card-subtitle> <b>Subject :</b>{{subdetails.subject}}</mat-card-subtitle>
+     <mat-card-content>
+      <p><b>Class place : </b>{{subdetails.place}}</p>
+      <p><b>Day         : </b>{{subdetails.day}}</p>
+      <p><b>Time        : </b>{{subdetails.time}}</p>
+      <p><b>Medium      : </b>{{subdetails.medium}}</p>
+      <p><b>Class type  : </b>{{subdetails.classType}}</p>
+      <p><b>City        : </b>{{subdetails.city}}</p>
+      <p><b>Province    : </b>{{subdetails.province}}</p>
+     </mat-card-content>
+    </mat-card>
+  </div>
+  </ul>
+</ul>

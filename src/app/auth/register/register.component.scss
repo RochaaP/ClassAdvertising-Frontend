@@ -1,0 +1,22 @@
+
+
+.parallax {
+//   background-image:url('../../../assets/login/background.png');
+//   filter:opacity(100%);
+//   position: fixed;
+//   top: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-size: cover;
+// }
+position: fixed;
+  background-image:url('../../../assets/login/background.png');
+
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+  }

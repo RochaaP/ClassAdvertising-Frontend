@@ -1,0 +1,75 @@
+<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="form-group">
+                <ul *ngFor="let field of response">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-white post">
+                                <div class="post-heading">
+                                    <div class="pull-left image">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-circle avatar" alt="user profile image">
+                                    </div>
+                                    <div class="pull-left meta">
+                                        <div class="title h5">
+                                            <a  (click)='triggered(field.data.email,field.data.registerItem, field.data.name)'><b>{{field.data.name}}</b></a>
+                                            uploaded a photo.
+                                        </div>
+                                        <h6 class="text-muted time">{{field.data.create}}</h6>
+                                    </div>
+                                </div>
+                                <div class="post-description">
+                                    <p>{{field.data.description}}</p>
+                                </div>
+                                <div class="post-image">
+                                    <img src="{{field.data.profileImagePath}}" class="image" alt="image post">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- (click)='triggered(field.data.email)' -->
+<!-- .toDate() | date: 'yyyy MMM dd hh:mm' -->
+<!-- <div class="continer"> -->
+
+<div class="parallax">
+  <div class="wrapper">
+    <h1>mtute.lk</h1>
+  </div>
+<!--
+  <div class="new">
+   <div>Escape</div>
+    <div><span>into amazing experiences</span></div>
+  </div>-->
+</div>
+
+<ul *ngFor="let field of response">
+  <div class= "container">
+    <mat-card class="card">
+      <mat-card-header>
+        <div mat-card-avatar class="header-image"></div>
+
+        <mat-card-title class="click"><a (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'>{{field.data.name}}</a>
+        </mat-card-title> uploaded a post
+        <div class ="val">Varified </div>
+        <!-- <mat-card-subtitle>{{field.data.create}}</mat-card-subtitle> -->
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>
+          {{field.data.description}}
+        </p>
+      </mat-card-content>
+      <img mat-card-image src={{field.data.path}} alt="Photo of a Shiba Inu">
+</mat-card>
+</div>
+</ul>

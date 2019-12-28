@@ -1,0 +1,46 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+    <div class="row" *ngFor="let field of response">
+      <div class="col-sm-10">
+        <div class="" style="width: 900px; margin: auto">
+          <div class="panel panel-white profile-widget">
+              <div class="row">
+                  <div class="col-sm-12">
+                      <div class="image-container bg2" style="background:url(http://www.shilpa.lk/sites/default/files/67725795_112795166730961_8937884297969270784_o.jpg)">
+                          <img src={{field.data.profileImagePath}} class="avatar" alt="avatar">
+                      </div>
+                  </div>
+                  <div class="col-sm-12">
+                      <div class="details">
+                          <h4>{{field.data.name}}  <i class="fa fa-sheild"></i></h4>
+                          <div class="mg-top-10">
+                              <!-- <a href="#" class="btn btn-default">About Kevin</a>
+                              <a href="#" class="btn btn-success">Add Kevin</a> -->
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+<div class="col-sm-10">
+  <div class="" style="width: 900px; margin: auto;">
+      <mat-tab-group>
+        <mat-tab label="Classes" >
+          <app-view-posts [childMessage]="this.email"></app-view-posts>
+        </mat-tab>
+
+        <mat-tab label="Posts">
+          <app-view-posts [childMessage]="this.email"></app-view-posts>
+        </mat-tab>
+
+        <mat-tab label="About">
+          <app-profile-details-institute [childMessage]="this.email"></app-profile-details-institute>
+        </mat-tab>
+    </mat-tab-group>
+    </div>
+</div>
