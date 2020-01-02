@@ -12,35 +12,99 @@
 
 
 <div *ngFor="let field of response">
-<div class="continer">
+<div class="container">
 <mat-accordion>
   <mat-expansion-panel expanded>
     <mat-expansion-panel-header>
       <mat-panel-title>
         Personal data
       </mat-panel-title>
-      <mat-panel-description>
+      <!-- <mat-panel-description>
         Type your name and age
-      </mat-panel-description>
+      </mat-panel-description> -->
     </mat-expansion-panel-header>
+    <p>{{field.data.firstName}} {{field.data.lastName}}</p>
     <p>{{field.data.email}}</p>
     <p>{{field.data.contact}}</p>
   </mat-expansion-panel>
-  <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false" expanded>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-       University Detiails
-      </mat-panel-title>
-      <mat-panel-description>
+
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false" expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+        University Details
+        </mat-panel-title>
+        <!-- <mat-panel-description>
+          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+        </mat-panel-description> -->
+      </mat-expansion-panel-header>
+      <p>{{field.data.university}}</p>
+      <p>{{field.data.degree}}</p>
+      <p>{{field.data.grad}}</p>
+      <p>{{field.data.degreeYear}}</p>
+    </mat-expansion-panel>
+
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+        MSc Degree Details
+        </mat-panel-title>
+        <!-- <mat-panel-description>
         Currently I am {{panelOpenState ? 'open' : 'closed'}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>{{field.data.university}}</p>
-    <p>{{field.data.degree}}</p>
-    <p>{{field.data.grad}}</p>
-    <p>{{field.data.degreeYear}}</p>
+        </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <p>{{field.data.universityMSc}}</p>
+        <p>{{field.data.degreeMSc}}</p>
+        <p>{{field.data.yearMSc}}</p>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+        PhD Degree Details
+        </mat-panel-title>
+        <p>{{field.data.universityPhD}}</p>
+        <p>{{field.data.degreePhD}}</p>
+        <p>{{field.data.yearPhD}}</p>
+        </mat-expansion-panel-header>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
+      <mat-expansion-panel-header>
+      <mat-panel-title>
+        Personal Achievements
+      </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul *ngFor="let list of field.data.personalAchievement">
+        <p>{{list}}</p>
+        <mat-divider></mat-divider>
+      </ul>
+      <mat-divider></mat-divider>
   </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+    <mat-panel-title>
+      Other Achievements
+    </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul *ngFor="let list of field.data.achievement">
+       <p>
+        <img src={{list.rankedProfileURL}} class="avatar" alt="avatar">
+       </p>
+      <b>Name of the student</b><p>{{list.rankedName}}</p>
+      <b>Year</b><p>{{list.rankedYear}}</p>
+      <b>District</b><p>{{list.rankedDistrictName}}</p>
+      <b>District Rank</b><p>{{list.rankedDistrict}}</p>
+      <b>Island Rank</b><p>{{list.rankedIsland}}</p>
+      <mat-divider></mat-divider>
+
+    </ul>
+
+</mat-expansion-panel>
+
+
 </mat-accordion>
 
 </div>

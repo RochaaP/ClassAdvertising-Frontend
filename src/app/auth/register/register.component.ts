@@ -7,7 +7,7 @@ import { AuthenticationService } from '../../service/auth/authentication.service
 import { Observable } from 'rxjs';
 // import { DataService } from "../../service/share/data.service";
 import { map, retryWhen } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 
@@ -66,6 +66,14 @@ export class RegisterComponent implements OnInit {
   parentMessage = 'message from parent';
   itemTemp: string[];
   name: string;
+
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
+
 
 
 
@@ -158,7 +166,7 @@ export class RegisterComponent implements OnInit {
       localStorage.setItem('registerUserName', JSON.stringify(response[0].name));
       localStorage.setItem('registerItem', JSON.stringify(response[0].reg));
     }, (error) => {
-      console.log('error during post is ', error);
+      console.log('error on register user ', error);
     });
 
   }
@@ -182,6 +190,7 @@ export class RegisterComponent implements OnInit {
   // }
   ngOnInit() {
     this.isUserLoggedIn();
+    this.registerItem = localStorage.getItem('registerItem');
 
     // this.userCol = this.afs.collection('users');
     // this.users = this.userCol.snapshotChanges().pipe(
@@ -338,12 +347,15 @@ export class RegisterComponent implements OnInit {
   }
 
   postAPIData(userValues: object) {
-    return this.http.post('api/postRegData', userValues);
+    return this.http.post('api/postRegData', JSON.stringify(userValues), this.httpOptions );
   }
 
   editProfileInstitute() {
     console.log('thisuser item ' + this.registerItem);
     this.router.navigate(['/editprofile/institute']);
+  }
+  editClassesInstitute() {
+    this.router.navigate(['/addclasses/institute']);
   }
   editProfilePerson() {
     console.log('thisuser item ' + this.registerItem);

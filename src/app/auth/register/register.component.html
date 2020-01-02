@@ -151,9 +151,14 @@
                 <button type="button" class="btn btn-primary"
                  [routerLink]="'/postadd'" >Post An Add</button>
               </li>
-              <li class="list-group-item" *ngIf="registerItem == 'institute'">
-                <button type="button" class="btn btn-primary"  (click)="editProfileInstitute()" >Create Profile Details</button>
-              </li>
+              <div *ngIf="registerItem == 'institute'">
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-primary"  (click)="editProfileInstitute()" >Create Profile Details</button>
+                </li>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-primary"  (click)="editClassesInstitute()" >Add Classes Details</button>
+                </li>
+              </div>
               <div *ngIf="registerItem == 'person'">
                 <li class="list-group-item">
                   <button type="button" class="btn btn-primary"  (click)="editProfilePerson()" >Create Profile Details</button>

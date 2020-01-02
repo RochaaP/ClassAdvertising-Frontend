@@ -1,0 +1,37 @@
+
+
+
+<div  *ngIf="notTriggeredClick; else details">
+<ul *ngFor="let field of response">
+  <!-- <div class= "container"> -->
+
+    <mat-card class="subDetails">
+      <div mat-card-avatar class="header-image"></div>
+
+      <div class="click">
+       <b><a (click) ='triggered(field.data.email)'>{{field.data.name}}</a></b>
+      </div>
+
+      <mat-card-subtitle>
+        <p>{{field.data.registerItem}}</p>
+      </mat-card-subtitle>
+
+    </mat-card>
+
+  <!-- </div> -->
+</ul>
+</div>
+
+<ng-template #details>
+  <div class ='subDetails'>
+    <app-view-person-posts [childMessage]="this.email"></app-view-person-posts>
+</div>
+    <button mat-raised-button class="goBack-button" (click)="goBack()" >
+      Go Back
+    </button>
+    <button mat-raised-button class="goBack-button" (click)="verify(this.email)" disabled >
+      Verify Details
+    </button>
+
+</ng-template>
+

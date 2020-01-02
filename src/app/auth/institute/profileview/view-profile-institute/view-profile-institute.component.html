@@ -31,7 +31,7 @@
   <div class="" style="width: 900px; margin: auto;">
       <mat-tab-group>
         <mat-tab label="Classes" >
-          <app-view-posts [childMessage]="this.email"></app-view-posts>
+          <app-classes-institute></app-classes-institute>
         </mat-tab>
 
         <mat-tab label="Posts">
@@ -40,6 +40,10 @@
 
         <mat-tab label="About">
           <app-profile-details-institute [childMessage]="this.email"></app-profile-details-institute>
+        </mat-tab>
+
+        <mat-tab label="Papers">
+          <app-papers [childMessage]="this.email"></app-papers>
         </mat-tab>
     </mat-tab-group>
     </div>

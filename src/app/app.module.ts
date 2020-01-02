@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 
 import { environment } from '../environments/environment';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -17,6 +16,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatStepperModule } from '@angular/material/stepper';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -45,6 +48,8 @@ import { ClassComponent } from './auth/common/class/class.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ClassesComponent } from './auth/person/classes/classes.component';
 import { PapersComponent } from './auth/common/papers/papers.component';
+import { AllUsersComponent } from './admin/all-users/all-users.component';
+import { ClassesInstituteComponent } from './auth/institute/classes-institute/classes-institute.component';
 
 const appRoutes: Routes = [
   { path: '', component: NewsfeedComponent },
@@ -56,8 +61,8 @@ const appRoutes: Routes = [
   { path: 'viewprofile/person/:id', component: ViewProfilePersonComponent},
   { path: 'viewprofile/institute/:id', component: ViewProfileInstituteComponent},
   { path: 'addclasses/person', component: ClassComponent},
-
-
+  { path: 'addclasses/institute', component: ClassesInstituteComponent},
+  { path: 'admin/getallusers', component: AllUsersComponent},
 
 
   // { path: 'postadd', component: PostaddComponent },
@@ -89,6 +94,8 @@ const appRoutes: Routes = [
     ClassComponent,
     ClassesComponent,
     PapersComponent,
+    AllUsersComponent,
+    ClassesInstituteComponent,
   ],
   imports: [
     RouterModule.forRoot(
@@ -99,12 +106,16 @@ const appRoutes: Routes = [
     FontAwesomeModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
+
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
+
     BrowserAnimationsModule,
+
     MatButtonModule,
     MatTabsModule,
     MatCardModule,
@@ -113,7 +124,11 @@ const appRoutes: Routes = [
     MatInputModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
+    MatListModule,
+    MatSnackBarModule,
+    MatDividerModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [RootComponent]

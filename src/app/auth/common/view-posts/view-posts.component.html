@@ -45,9 +45,11 @@
     <mat-card class="card">
       <mat-card-header>
 
-        <div mat-card-avatar class="header-image"></div>
+        <div mat-card-avatar>
+          <img class="header-image" src ={{field.data.proPic}} alt="Avatar">
+        </div>
 
-        <mat-card-title class="click"><b>{{field.data.name}}</b>
+        <mat-card-title class="click"><b>{{field.data.title}}. {{field.data.name}}</b>
         </mat-card-title> uploaded a post
         <mat-card-subtitle>{{field.data.create}}</mat-card-subtitle>
 

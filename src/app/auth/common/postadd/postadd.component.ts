@@ -6,6 +6,7 @@ import { DataService } from './../../../service/share/data.service';
 import { AuthenticationService } from '../../../service/auth/authentication.service';
 import * as firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-postadd',
@@ -32,7 +33,8 @@ export class PostaddComponent implements OnInit {
     private afs: AngularFirestore,
     private data: DataService,
     private authService: AuthenticationService,
-    private http: HttpClient
+    private http: HttpClient,
+    public router: Router
   ) { }
 
   toggleHover(event: boolean) {
@@ -74,6 +76,7 @@ export class PostaddComponent implements OnInit {
     });
 
     this.descriptionInput = '';
+    this.router.navigate(['/']);
   }
 
 postAPIData(userValues: object) {

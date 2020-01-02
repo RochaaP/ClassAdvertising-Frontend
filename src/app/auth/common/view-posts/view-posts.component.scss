@@ -394,3 +394,11 @@ body{margin-top:20px;
     align-items: center;
     padding: 10px
 }
+.header-image {
+  background-image: url('../../../../assets/propic/propic.png');
+  background-size: cover;
+  border-radius: 70%;
+  object-position: left;
+  width: 40px;
+  height: 40px;
+}

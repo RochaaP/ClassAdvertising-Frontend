@@ -1,0 +1,44 @@
+.click{
+  cursor:pointer;
+
+}
+.click:hover{
+  text-decoration: underline;
+  color:#54a7e3;
+}
+.container {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px
+}
+.card {
+  width: 300px;
+  margin:auto;
+  filter:drop-shadow(4px 4px 4px gray);
+}
+.header-image {
+  background-image: url('../../../assets/propic/propic.png');
+  background-size: cover;
+}
+
+.subDetails {
+  padding-top: 12px;;
+  width: 500px;
+  margin:auto;
+  filter:drop-shadow(4px 4px 4px gray);
+  justify-content: center;
+  align-items: center;
+  // display: flex;
+}
+// .subDetails{
+//   display: flex;
+//   justify-content: center;
+//   // align-items: center;
+//   margin: auto;
+//   width: 800px;
+// }
+
+.goBack_button{
+  // margin-top: 15px;
+}

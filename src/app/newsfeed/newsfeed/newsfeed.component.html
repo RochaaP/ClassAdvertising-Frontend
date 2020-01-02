@@ -56,11 +56,13 @@
   <div class= "container">
     <mat-card class="card">
       <mat-card-header>
-        <div mat-card-avatar class="header-image"></div>
+        <div mat-card-avatar>
+           <img class="header-image" src ={{field.data.proPic}} alt="Avatar">
+          </div>
 
-        <mat-card-title class="click"><a (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'>{{field.data.name}}</a>
+        <mat-card-title class="click"><a (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'>{{field.data.title}}. {{field.data.name}}</a>
         </mat-card-title> uploaded a post
-        <div class ="val">Varified </div>
+
         <!-- <mat-card-subtitle>{{field.data.create}}</mat-card-subtitle> -->
       </mat-card-header>
 

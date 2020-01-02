@@ -1,6 +1,6 @@
 <!-- <button type="button" class="btn btn-primary" (click)="getDetails();" >Get Profile Details</button> -->
 <div class="container">
-  <h2>Edit Profile</h2>
+  <h2>Build Up Profile</h2>
     <hr>
     <!-- <div class="row"> -->
 <div class="row">
@@ -24,94 +24,82 @@
       <h3>Info</h3>
       <!-- *ngFor="let post of users | async" -->
       <form class="form-horizontal" role="form"  >
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Name:</label>
-          <div class="col-lg-8">
-            <input class="form-control" type="text"  placeholder="Name" [(ngModel)]="nameInput" name='name'>
-          </div>
-         </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Email:</label>
-          <div class="col-lg-8">
-            <input class="form-control" type="text"  [(ngModel)]="emailInput"  name='email' readonly>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Contact:</label>
-          <div class="col-md-8">
-            <input class="form-control" type="text" placeholder="Contact" [(ngModel)]="contactInput" name='contact'>
-          </div>
-        </div>
+        <mat-vertical-stepper>
+
+          <!-- Personal Information -->
+          <mat-step label="Personal Information">
+
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Name:</label>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text"  placeholder="Name" [(ngModel)]="nameInput" name='name'>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Email:</label>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text"  [(ngModel)]="emailInput"  name='email' readonly>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-3 control-label">Contact:</label>
+                <div class="col-md-8">
+                  <input class="form-control" type="text" placeholder="Contact" [(ngModel)]="contactInput" name='contact'>
+                </div>
+              </div>
+
+          </mat-step>
+
+          <!-- Address -->
+          <mat-step label="Address">
+
+            <div class="form-group">
+              <label class="col-md-3 control-label">Street No 1</label>
+              <div class="col-md-8">
+                  <input type="text" class="form-control" id="streetNo1" placeholder="Street address, P.O. box" [(ngModel)]="street1Input" [(ngModel)]="street1Input" name='streetNo1'>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-md-3 control-label">Street No 2</label>
+              <div class="col-md-8">
+                  <input type="text" class="form-control" id="streetNo2" placeholder="Apartment, suite , unit, building, floor"  [(ngModel)]="street2Input" name='streetNo2'>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Town</label>
+                <div class="col-md-8">
+                  <input class="form-control" type="text" placeholder="Town" [(ngModel)]="townInput" name='town'>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">City</label>
+                <div class="col-md-8">
+                  <input class="form-control" type="text" placeholder="City" [(ngModel)]="cityInput" name='city'>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label">Province</label>
+              <div class="col-md-8">
+                <input class="form-control" type="text" placeholder="Province" [(ngModel)]="provinceInput" name='province'>
+              </div>
+            </div>
+          </mat-step>
+
+        </mat-vertical-stepper>
 
           <div class="form-group">
-              <label class="col-md-3 control-label">Addreess</label>
+              <button type="button" class="btn btn-primary"(click)="updateValues()">Update</button>
           </div>
 
-        <div class="form-group">
-          <label class="col-md-3 control-label">Street No 1</label>
-          <div class="col-md-8">
-              <input type="text" class="form-control" id="streetNo1" placeholder="Street address, P.O. box" [(ngModel)]="street1Input" [(ngModel)]="street1Input" name='streetNo1'>
-          </div>
-        </div>
-
-
-        <div class="form-group">
-          <label class="col-md-3 control-label">Street No 2</label>
-          <div class="col-md-8">
-              <input type="text" class="form-control" id="streetNo2" placeholder="Apartment, suite , unit, building, floor"  [(ngModel)]="street2Input" name='streetNo2'>
-          </div>
-        </div>
-
-
-      <div class="form-group">
-          <label class="col-md-3 control-label">Town</label>
-          <div class="col-md-8">
-            <input class="form-control" type="text" placeholder="Town" [(ngModel)]="townInput" name='town'>
-          </div>
-        </div>
-
-      <div class="form-group">
-          <label class="col-md-3 control-label">City</label>
-          <div class="col-md-8">
-            <input class="form-control" type="text" placeholder="City" [(ngModel)]="cityInput" name='city'>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-3 control-label">Province</label>
-          <div class="col-md-8">
-            <input class="form-control" type="text" placeholder="Province" [(ngModel)]="provinceInput" name='province'>
-          </div>
-        </div>
-
-
-
-
-
-        <!-- <div class="form-group">
-          <label class="col-md-3 control-label">Username:</label>
-          <div class="col-md-8">
-            <input class="form-control" type="text" value="janeuser">
-          </div>
-        </div> -->
-        <!-- <div class="form-group">
-          <label class="col-md-3 control-label">Password:</label>
-          <div class="col-md-8">
-            <input class="form-control" type="password" value="11111122333">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Confirm password:</label>
-          <div class="col-md-8">
-            <input class="form-control" type="password" value="11111122333">
-          </div>
-        </div> -->
-        <div class="form-group">
-            <button type="button" class="btn btn-primary"(click)="updateValues()">Update</button>
-            <!-- <input type="reset" class="btn btn-default" value="Cancel">
-          </div>-->
-        </div>
-      </form>
+    </form>
     </div>
 </div>
 </div>
