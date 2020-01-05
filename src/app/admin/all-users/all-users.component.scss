@@ -1,5 +1,7 @@
 .click{
   cursor:pointer;
+  font-size: 20px;
+  padding-top: 10px;
 
 }
 .click:hover{
@@ -17,18 +19,30 @@
   margin:auto;
   filter:drop-shadow(4px 4px 4px gray);
 }
-.header-image {
-  background-image: url('../../../assets/propic/propic.png');
-  background-size: cover;
+// .header-image {
+//   background-image: url('../../../assets/propic/propic.png');
+//   background-size: cover;
+// }
+
+.profileDetails {
+  padding-top: 12px;
+  width: 240px;
+  margin:auto;
+  filter:drop-shadow(4px 4px 4px gray);
+  justify-content: center;
+  align-items: center;
+  text-indent: 15px;
+  // display: flex;
 }
 
 .subDetails {
-  padding-top: 12px;;
+  padding-top: 12px;
   width: 500px;
   margin:auto;
   filter:drop-shadow(4px 4px 4px gray);
   justify-content: center;
   align-items: center;
+  text-indent: 15px;
   // display: flex;
 }
 // .subDetails{
@@ -41,4 +55,51 @@
 
 .goBack_button{
   // margin-top: 15px;
+}
+
+.newCard {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  height: 300px;
+  width: 300px;
+  background: #e2e1e0;
+  text-align: center;
+
+  justify-content: center;
+  align-items: center;
+  padding: 10px
+
+}
+
+.card-1 {
+  box-shadow: 0 5px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card-1:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.content {
+  position: relative;
+}
+.verification {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 50px;
+  text-indent: -999em;
+  text-decoration: none;
+}
+
+
+.header-image {
+  background-image: url('../../../assets/propic/propic.png');
+  background-size: cover;
+  border-radius: 70%;
+  object-position: left;
+  width: 150px;
+  height: 15  0px;
 }

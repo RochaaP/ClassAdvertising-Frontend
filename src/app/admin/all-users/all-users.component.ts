@@ -11,6 +11,7 @@ export class AllUsersComponent implements OnInit {
   response: any;
   notTriggeredClick: boolean;
   email: string;
+  verifiedif: boolean;
 
   constructor(
     private http: HttpClient
@@ -37,18 +38,17 @@ export class AllUsersComponent implements OnInit {
   goBack() {
     this.notTriggeredClick = true;
   }
-  verify(email: string) {
-    // this.postAPIData(email).subscribe((response) => {
-    //   console.log('response with all users ', response);
-    //   this.response = response;
-    // }, ( error) => {
-    //   console.log('error is ', error);
-    // });
-
+  verify() {
+    this.postAPIData().subscribe((response) => {
+      console.log('response what response ', response);
+      this.response = response;
+    }, ( error) => {
+      console.log('error is ', error);
+    });
   }
 
-  postAPIData(email: string) {
-    return this.http.post('/api/getAllUsers/verifyuser', {email});
+  postAPIData() {
+    return this.http.post('/api/getAllUsers/verifyUser', {email : this.email});
   }
 
 }

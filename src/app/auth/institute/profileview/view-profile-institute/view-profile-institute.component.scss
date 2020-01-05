@@ -2,6 +2,12 @@ body{margin-top:20px;
   background:#eee;
   }
 
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .profile-widget {
     position: relative;
   }
@@ -379,4 +385,11 @@ body{margin-top:20px;
   }
 .tabgroup{
   color:red
+}
+.tabssub{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 800px;
 }

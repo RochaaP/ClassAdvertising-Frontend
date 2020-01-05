@@ -28,18 +28,19 @@
 
 
 <div class="col-sm-10">
-  <div class="" style="width: 900px; margin: auto;">
+  <div class="tabssub">
       <mat-tab-group>
-        <mat-tab label="Classes" >
-          <app-classes-institute></app-classes-institute>
+
+        <mat-tab label="About">
+          <app-profile-details-institute [childMessage]="this.email"></app-profile-details-institute>
         </mat-tab>
 
         <mat-tab label="Posts">
           <app-view-posts [childMessage]="this.email"></app-view-posts>
         </mat-tab>
 
-        <mat-tab label="About">
-          <app-profile-details-institute [childMessage]="this.email"></app-profile-details-institute>
+        <mat-tab label="Classes" >
+          <app-classes-view-institute [childMessage]="this.email"></app-classes-view-institute>
         </mat-tab>
 
         <mat-tab label="Papers">

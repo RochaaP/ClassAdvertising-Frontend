@@ -2,24 +2,17 @@
 
 
 <div  *ngIf="notTriggeredClick; else details">
-<ul *ngFor="let field of response">
-  <!-- <div class= "container"> -->
-
-    <mat-card class="subDetails">
-      <div mat-card-avatar class="header-image"></div>
-
-      <div class="click">
-       <b><a (click) ='triggered(field.data.email)'>{{field.data.name}}</a></b>
+    <ul *ngFor="let field of response">
+      <div class="profileDetails card-1">
+        <img class="header-image" src ={{field.data.propic}} >
+        <div class="click">
+          <a (click) ='triggered(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+        </div>
+        <div id="content">
+          <img src={{field.data.verify}} class="verification"/>
+        </div>
       </div>
-
-      <mat-card-subtitle>
-        <p>{{field.data.registerItem}}</p>
-      </mat-card-subtitle>
-
-    </mat-card>
-
-  <!-- </div> -->
-</ul>
+  </ul>
 </div>
 
 <ng-template #details>
@@ -29,7 +22,7 @@
     <button mat-raised-button class="goBack-button" (click)="goBack()" >
       Go Back
     </button>
-    <button mat-raised-button class="goBack-button" (click)="verify(this.email)" disabled >
+    <button mat-raised-button class="goBack-button" (click)="verify(this.email)" >
       Verify Details
     </button>
 

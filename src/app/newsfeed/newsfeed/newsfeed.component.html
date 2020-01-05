@@ -17,7 +17,7 @@
                                             <a  (click)='triggered(field.data.email,field.data.registerItem, field.data.name)'><b>{{field.data.name}}</b></a>
                                             uploaded a photo.
                                         </div>
-                                        <h6 class="text-muted time">{{field.data.create}}</h6>
+                                        <h6 class="text-muted time">{{field.data.create.toDate() | date: 'yyyy MMM dd hh:mm'}}</h6>
                                     </div>
                                 </div>
                                 <div class="post-description">
@@ -45,33 +45,93 @@
   <div class="wrapper">
     <h1>mtute.lk</h1>
   </div>
-<!--
-  <div class="new">
-   <div>Escape</div>
-    <div><span>into amazing experiences</span></div>
-  </div>-->
 </div>
 
-<ul *ngFor="let field of response">
-  <div class= "container">
-    <mat-card class="card">
-      <mat-card-header>
-        <div mat-card-avatar>
-           <img class="header-image" src ={{field.data.proPic}} alt="Avatar">
+<section class="section_content">
+  <div class="container">
+
+    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+        <div class="servicetitle  animated fadeInDown">
+          <h4>Responsive Layout</h4>
+          <hr>
+        </div>
+        <div class="servicetitle  animated zoomIn">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+      <div class="servicetitle  animated fadeInDown">
+        <h4>Responsive Layout</h4>
+        <hr>
+      </div>
+      <div class="servicetitle  animated zoomIn">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+      <div class="servicetitle animated fadeInDown">
+        <h4>Responsive Layout</h4>
+        <hr>
+      </div>
+      <div class="servicetitle  animated zoomIn">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- <div class="row"> -->
+  <!-- <div class="col-sm-3">
+
+
+    <mat-drawer mode="side" opened>
+      <div class="sideBar">
+
+        <div>
+          search by
+          <mat-checkbox>Check me!</mat-checkbox>
+        </div>
+
+
+
+      </div>
+    </mat-drawer>
+  </div>
+ -->
+
+
+  <div class="col">
+
+    <ul *ngFor="let field of response">
+      <div class= "container">
+        <mat-card class="card">
+          <mat-card-header>
+            <div mat-card-avatar>
+               <img class="header-image" src ={{field.data.proPic}} alt="Avatar">
+              </div>
+
+            <mat-card-title class="click"><a (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'>{{field.data.title}}. {{field.data.name}}</a>
+            </mat-card-title> uploaded a post
+
+            <!-- <mat-card-subtitle>{{field.data.create}}</mat-card-subtitle> -->
+          </mat-card-header>
+          <div id="content">
+            <img src={{field.data.verify}} class="verification"/>
           </div>
+          <mat-card-content>
+            <p>
+              {{field.data.description}}
+            </p>
+          </mat-card-content>
+          <img mat-card-image src={{field.data.path}} alt="Photo of a Shiba Inu">
+        </mat-card>
+      </div>
+    </ul>
 
-        <mat-card-title class="click"><a (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'>{{field.data.title}}. {{field.data.name}}</a>
-        </mat-card-title> uploaded a post
-
-        <!-- <mat-card-subtitle>{{field.data.create}}</mat-card-subtitle> -->
-      </mat-card-header>
-
-      <mat-card-content>
-        <p>
-          {{field.data.description}}
-        </p>
-      </mat-card-content>
-      <img mat-card-image src={{field.data.path}} alt="Photo of a Shiba Inu">
-</mat-card>
+  <!-- </div> -->
 </div>
-</ul>
+

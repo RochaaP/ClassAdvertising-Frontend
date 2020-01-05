@@ -61,6 +61,7 @@ export class PersonProfileComponent implements OnInit {
   showhidePhD: boolean;
 
   downloadURL: any;
+  backgroundImageURL: any;
 
   details: any;
   ac: any;
@@ -101,6 +102,7 @@ export class PersonProfileComponent implements OnInit {
       this.firstNameInput = response[0].data.firstName;
       this.lastNameInput = response[0].data.lastName;
       this.downloadURL =  response[0].data.profileImagePath;
+      this.backgroundImageURL = response[0].data.backgroundImagePath;
       this.degreeInput = response[0].data.degree;
       this.universityInput = response[0].data.university;
       this.yearInput = response[0].data.degreeYear;
@@ -199,6 +201,28 @@ export class PersonProfileComponent implements OnInit {
 
   }
 
+  uploadBackground(event) {
+    const randomId = Math.random().toString(36).substring(2);
+    const path = `backgroundImages/${Date.now()}_${randomId}`;
+    // Reference to storage bucket
+    const ref = this.afStorage.ref(path);
+    // The main task
+    // this.task = this.afStorage.upload(path, event.target.files[0]);
+    // console.log(this.task.downloadURL());
+    // this.downloadURL = this.task.downloadURL();
+    // console.log(this.downloadURL);
+    const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
+      // const ref = this.afStorage.ref(path);
+      const downloadURL = ref.getDownloadURL().subscribe(url => {
+      const Url = url; // for ts
+      this.backgroundImageURL = url; // with this you can use it in the html
+      });
+    });
+    console.log('downloadurl ' + this.downloadURL);
+
+  }
+
+
   updateValues() {
     let userValues = {};
 
@@ -214,6 +238,7 @@ export class PersonProfileComponent implements OnInit {
         degreeYear: this.yearInput,
         grad: this.gradInput,
         profileImagePath: this.downloadURL,
+        backgroundImagePath: this.backgroundImageURL,
         yearExperiences: this.yearExperienceInput,
         teachingSchool: this.teachingSchoolInput,
 

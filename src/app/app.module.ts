@@ -20,6 +20,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -50,6 +52,8 @@ import { ClassesComponent } from './auth/person/classes/classes.component';
 import { PapersComponent } from './auth/common/papers/papers.component';
 import { AllUsersComponent } from './admin/all-users/all-users.component';
 import { ClassesInstituteComponent } from './auth/institute/classes-institute/classes-institute.component';
+import { ClassesPersonComponent } from './auth/person/classes-person/classes-person.component';
+import { ClassesViewInstituteComponent } from './auth/institute/classes-view-institute/classes-view-institute.component';
 
 const appRoutes: Routes = [
   { path: '', component: NewsfeedComponent },
@@ -60,7 +64,7 @@ const appRoutes: Routes = [
   { path: 'postadd', component: PostaddComponent },
   { path: 'viewprofile/person/:id', component: ViewProfilePersonComponent},
   { path: 'viewprofile/institute/:id', component: ViewProfileInstituteComponent},
-  { path: 'addclasses/person', component: ClassComponent},
+  { path: 'addclasses/person', component: ClassesPersonComponent},
   { path: 'addclasses/institute', component: ClassesInstituteComponent},
   { path: 'admin/getallusers', component: AllUsersComponent},
 
@@ -96,6 +100,8 @@ const appRoutes: Routes = [
     PapersComponent,
     AllUsersComponent,
     ClassesInstituteComponent,
+    ClassesPersonComponent,
+    ClassesViewInstituteComponent,
   ],
   imports: [
     RouterModule.forRoot(
@@ -128,7 +134,8 @@ const appRoutes: Routes = [
     MatListModule,
     MatSnackBarModule,
     MatDividerModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [RootComponent]

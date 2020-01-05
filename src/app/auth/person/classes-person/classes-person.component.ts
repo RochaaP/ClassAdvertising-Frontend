@@ -5,13 +5,11 @@ import { AuthenticationService } from 'src/app/service/auth/authentication.servi
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
-  selector: 'app-classes-institute',
-  templateUrl: './classes-institute.component.html',
-  styleUrls: ['./classes-institute.component.scss']
+  selector: 'app-classes-person',
+  templateUrl: './classes-person.component.html',
+  styleUrls: ['./classes-person.component.scss']
 })
-export class ClassesInstituteComponent implements OnInit {
-
-
+export class ClassesPersonComponent implements OnInit {
   tabs = [];
   cards = [];
   tempNew = [];
@@ -24,6 +22,7 @@ export class ClassesInstituteComponent implements OnInit {
   nameInput: string;
   id: string;
 
+  placeInput = '';
   classInput = '';
   timeInput = '';
   dayInput = '';
@@ -85,6 +84,7 @@ export class ClassesInstituteComponent implements OnInit {
     this.details = {
       index,
       subject: this.subjectInput,
+      place: this.placeInput,
       primary: this.tabs[index],
       city: this.cityInput,
       district: this.DistrictInput,
@@ -115,6 +115,7 @@ export class ClassesInstituteComponent implements OnInit {
       console.log('error during post is ', error);
     });
 
+    this.placeInput = '';
     this.classInput = '';
     this.timeInput = '';
     this.dayInput = '';
@@ -125,26 +126,26 @@ export class ClassesInstituteComponent implements OnInit {
     this.subjectInput = '';
 
     (document.getElementById('buttonUploadAll') as HTMLInputElement).disabled = true;
-    this.cards.splice(0, this.cards.length);
+    // this.cards.splice(0, this.cards.length);
     this.tabs.splice(0, this.tabs.length);
     this.tempNew.splice(0, this.tempNew.length);
   }
 
   postAPIData(userValues: object) {
-  return this.http.post('api/uploadClasses/institute', userValues);
+  return this.http.post('api/uploadClasses/person', userValues);
   }
 
   getExistingValues() {
     this.getAPIData().subscribe((response) => {
       // this.response = response[0].data.content;
-      if (response[0].id ==  null){
+      if (response[0] ==  null) {
         const id = this.afs.createId();
         this.id = id;
       }
       else {
         this.id = response[0].id;
+        this.cards = response[0].data.content;
       }
-      this.cards = response[0].data.content;
       console.log("thist is the response card" + this.cards);
       console.log('response from POST API is ', response);
     }, (error) => {
@@ -154,12 +155,15 @@ export class ClassesInstituteComponent implements OnInit {
 
 
   getAPIData() {
-    return this.http.post('api/getClasses/institute', {email: this.email});
+    return this.http.post('api/getClasses/person', {email: this.email});
   }
 
 
   delete(index: number) {
-
+    delete this.cards[index];
+    console.log(this.cards);
+    var newArray = this.cards.filter(value => JSON.stringify(value) !== 'empty');
+    console.log(newArray);
   }
   update(id: string) {
     // this.updateAPIData().subscribe((response) => {
