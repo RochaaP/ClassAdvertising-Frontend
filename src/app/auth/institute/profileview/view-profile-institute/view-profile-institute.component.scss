@@ -14,17 +14,17 @@ body{margin-top:20px;
   .profile-widget .image-container {
     background-size: cover;
     background-position: center;
-    padding: 190px 0 10px;
+    padding: 15px 0 10px;
   }
   .profile-widget .image-container .profile-background {
     width: 100%;
     height: auto;
   }
   .profile-widget .image-container .avatar {
-    width: 120px;
-    height: 120px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
-    margin: 0 auto -60px;
+    margin: -100px auto -40px;
     display: block;
   }
   .profile-widget .details {
@@ -392,4 +392,22 @@ body{margin-top:20px;
   align-items: center;
   margin: auto;
   width: 800px;
+}
+.backgroundImage{
+  width: 100%;
+  max-height: 200px;
+  overflow: hidden;
+}
+.parent {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  /* Magic */
+  display: flex;
+  align-items: center; /* vertical */
+  justify-content: center; /* horizontal */
+}
+.avatar{
+  margin-top:  -50px;
+  object-fit: cover;
 }

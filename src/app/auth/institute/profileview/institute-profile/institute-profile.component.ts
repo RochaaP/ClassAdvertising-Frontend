@@ -23,6 +23,7 @@ export class InstituteProfileComponent implements OnInit {
   townInput = '';
   provinceInput = '';
   downloadURL = '';
+  backgroundImageURL = '';
 
 
   constructor(
@@ -45,6 +46,7 @@ export class InstituteProfileComponent implements OnInit {
       this.emailInput = response[0].data.email;
       this.contactInput = response[0].data.contact;
       this.downloadURL =  response[0].data.profileImagePath;
+      this.backgroundImageURL = response[0].data.backgroundImagePath;
       this.street1Input = response[0].data.streetNo1;
       this.street2Input = response[0].data.streetNo2;
       this.cityInput = response[0].data.city;
@@ -74,6 +76,7 @@ export class InstituteProfileComponent implements OnInit {
         town: this.townInput,
         province: this.provinceInput,
         profileImagePath: this.downloadURL,
+        backgroundImagePath: this.backgroundImageURL
       };
     this.postAPIData(userValues).subscribe((response) => {
         console.log('response from POST API is ', response);
@@ -100,6 +103,24 @@ export class InstituteProfileComponent implements OnInit {
       const downloadURL = ref.getDownloadURL().subscribe(url => {
       const Url = url; // for ts
       this.downloadURL = url; // with this you can use it in the html
+      });
+
+    });
+  }
+  backgroundUpload(event) {
+    const randomId = Math.random().toString(36).substring(2);
+    const path = `backgroundImages/${Date.now()}_${randomId}`;
+    // Reference to storage bucket
+    const ref = this.afStorage.ref(path);
+    // The main task
+    // this.task = this.afStorage.upload(path, event.target.files[0]);
+    // console.log(this.task.downloadURL());
+    // this.downloadURL = this.task.downloadURL();
+    // console.log(this.downloadURL);
+    const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
+      const downloadURL = ref.getDownloadURL().subscribe(url => {
+      const Url = url; // for ts
+      this.backgroundImageURL = url; // with this you can use it in the html
       });
 
     });

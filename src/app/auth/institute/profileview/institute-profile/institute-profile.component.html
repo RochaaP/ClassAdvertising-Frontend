@@ -6,11 +6,22 @@
 <div class="row">
     <!-- left column -->
     <div class="col-md-3">
-      <div class="text-center">
-        <img src="//placehold.it/100" src={{this.downloadURL}} class="avatar img-circle" class="img-thumbnail" alt="avatar">
-        <h6>Upload a different photo...</h6>
-        <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" />
-        <!-- <input type="file" class="form-control"> -->
+      <h5>Profile Picture</h5>
+        <div class="text-center">
+          <img src="//placehold.it/100" src={{this.downloadURL}} class="avatar img-circle" class="img-thumbnail" alt="avatar">
+          <h6>Upload a different photo...</h6>
+          <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" />
+          <!-- <input type="file" class="form-control"> -->
+        </div>
+
+    <div class="backgroundImage">
+      <h5>Background Image</h5>
+        <div class="text-center">
+          <img src="//placehold.it/100" src={{this.backgroundImageURL}} class="avatar img-circle" class="img-thumbnail" alt="avatar">
+          <h6>Upload a different photo...</h6>
+          <input type="file" class="form-control" (change)="backgroundUpload($event)" accept=".png,.jpg" />
+          <!-- <input type="file" class="form-control"> -->
+        </div>
       </div>
     </div>
 
