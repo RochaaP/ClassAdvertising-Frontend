@@ -21,7 +21,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -135,7 +136,9 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatDividerModule,
     MatStepperModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatProgressBarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [RootComponent]

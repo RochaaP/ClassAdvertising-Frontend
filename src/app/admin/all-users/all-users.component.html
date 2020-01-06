@@ -2,6 +2,16 @@
 
 
 <div  *ngIf="notTriggeredClick; else details">
+
+    <div class='searchOption' >
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Enter First Name or Last Name" [(ngModel)]='searchInput' name='search'>
+      </mat-form-field>
+      <button mat-flat-button (click)='search()'>Search</button>
+      <button mat-flat-button (click)='searchClose()'>Close</button>
+    </div>
+
+  <div *ngIf="!searchClicked">
     <ul *ngFor="let field of response">
       <div class="profileDetails card-1">
         <img class="header-image" src ={{field.data.propic}} >
@@ -13,6 +23,21 @@
         </div>
       </div>
   </ul>
+  </div>
+
+  <div *ngIf = "searchClicked">
+    <ul *ngFor="let field of searchedList">
+      <div class="profileDetails card-1">
+        <img class="header-image" src ={{field.data.propic}} >
+        <div class="click">
+          <a (click) ='triggered(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+        </div>
+        <div id="content">
+          <img src={{field.data.verify}} class="verification"/>
+        </div>
+      </div>
+    </ul>
+  </div>
 </div>
 
 <ng-template #details>
@@ -27,4 +52,3 @@
     </button>
 
 </ng-template>
-

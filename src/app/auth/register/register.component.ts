@@ -190,7 +190,7 @@ export class RegisterComponent implements OnInit {
   // }
   ngOnInit() {
     this.isUserLoggedIn();
-    this.registerItem = localStorage.getItem('registerItem');
+    this.registerItem =  JSON.parse(localStorage.getItem('registerItem'));
 
     // this.userCol = this.afs.collection('users');
     // this.users = this.userCol.snapshotChanges().pipe(

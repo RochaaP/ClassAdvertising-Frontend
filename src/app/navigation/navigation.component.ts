@@ -10,6 +10,10 @@ import { DataService } from '../service/share/data.service';
 })
 export class NavigationComponent implements OnInit {
 
+  searchClicked: boolean;
+
+  searchInput: string;
+
   constructor(
     private authService: AuthenticationService,
     private dataService: DataService
@@ -32,14 +36,16 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
     console.log("Hi therer from navigation");
     this.isUserLoggedIn();
+    this.searchClicked = false;
   }
 
   isUserLoggedIn() {
     this.userDetails = this.authService.isUserLoggedIn();
     console.log('userdetails from navigation ' + this.userDetails);
-
   }
-
+  // search() {
+  //   this.dataService.passSearch(this.searchInput);
+  // }
 }
 
 

@@ -13,6 +13,9 @@ export class DataService {
   private emailSource = new BehaviorSubject('');
   currentEmail = this.emailSource.asObservable();
 
+  private searchSource = new BehaviorSubject('kasjdfk');
+  currentSearch = this.searchSource.asObservable();
+
   // @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
@@ -23,6 +26,10 @@ export class DataService {
 
   passEmail(email: string) {
     this.emailSource.next(email);
+  }
+
+  passSearch(search: string) {
+    this.searchSource.next(search);
   }
 
   // getEmitterUserName() {

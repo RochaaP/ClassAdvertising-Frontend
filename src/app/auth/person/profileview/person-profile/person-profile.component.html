@@ -9,7 +9,15 @@
       <div class="text-center">
         <img src="//placehold.it/100" src="{{this.downloadURL}}"  class="avatar img-circle" class="img-thumbnail" alt="avatar">
         <h6>Upload a different photo...</h6>
-        <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" />
+        <!-- <input type="file" class=" buttonImage" (change)="upload($event)" accept=".png,.jpg" /> -->
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" (change)="upload($event)" accept=".png,.jpg">
+          <label class="custom-file-label">Choose file</label>
+        </div>
+        <div *ngIf="percentageProfile | async as pct">
+          Progress: {{ pct | number }}%
+          <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+        </div>
         <!-- <input type="file" class="form-control"> -->
       </div>
 
@@ -18,10 +26,19 @@
         <div class="text-center">
           <img src="//placehold.it/100" src="{{this.backgroundImageURL}}"  class="avatar img-circle" class="img-thumbnail" alt="avatar">
           <h6>Upload a different photo...</h6>
-          <input type="file" class="form-control" (change)="uploadBackground($event)" accept=".png,.jpg" />
+          <!-- <input type="file" class="form-control buttonImage" (change)="uploadBackground($event)" accept=".png,.jpg" /> -->
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" (change)="uploadBackground($event)" accept=".png,.jpg">
+              <label class="custom-file-label">Choose file</label>
+            </div>
+            <div *ngIf="percentageBackground | async as pct">
+              Progress: {{ pct | number }}%
+              <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+            </div>
           <!-- <input type="file" class="form-control"> -->
         </div>
       </div>
+
     </div>
 
 
@@ -269,6 +286,10 @@
                     <img src="//placehold.it/100" src="{{this.rankedProfileURLInput}}"  class="avatar img-circle" class="img-thumbnail" alt="avatar" col-md-3>
                     <h6>Upload a photo of the student...</h6>
                     <input type="file" class="form-control" (change)="uploadImageStudent($event)" accept=".png,.jpg" />
+                    <div *ngIf="percentageStudent | async as pct">
+                      Progress: {{ pct | number }}%
+                      <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+                    </div>
                     <!-- <input type="file" class="form-control"> -->
                   </div>
 

@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-person-profile',
@@ -14,6 +15,16 @@ import { FormControl } from '@angular/forms';
 export class PersonProfileComponent implements OnInit {
 
   // @Input() childMessageEmail: string;
+
+  fileProfile: AngularFireUploadTask;
+  percentageProfile: Observable<number>;
+
+  fileBackground: AngularFireUploadTask;
+  percentageBackground: Observable<number>;
+
+  fileStudent: AngularFireUploadTask;
+  percentageStudent: Observable<number>;
+
 
   email: string;
   id: string;
@@ -185,19 +196,21 @@ export class PersonProfileComponent implements OnInit {
     const path = `profilePictures/${Date.now()}_${randomId}`;
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
+
     // The main task
-    // this.task = this.afStorage.upload(path, event.target.files[0]);
+    this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
+    this.percentageProfile = this.fileProfile.percentageChanges();
     // console.log(this.task.downloadURL());
     // this.downloadURL = this.task.downloadURL();
     // console.log(this.downloadURL);
     const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
       // const ref = this.afStorage.ref(path);
+
       const downloadURL = ref.getDownloadURL().subscribe(url => {
       const Url = url; // for ts
       this.downloadURL = url; // with this you can use it in the html
       });
-    });
-    console.log('downloadurl ' + this.downloadURL);
+   });
 
   }
 
@@ -206,6 +219,9 @@ export class PersonProfileComponent implements OnInit {
     const path = `backgroundImages/${Date.now()}_${randomId}`;
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
+
+    this.fileBackground = this.afStorage.upload(path, event.target.files[0]);
+    this.percentageBackground = this.fileBackground.percentageChanges();
     // The main task
     // this.task = this.afStorage.upload(path, event.target.files[0]);
     // console.log(this.task.downloadURL());
@@ -303,6 +319,7 @@ export class PersonProfileComponent implements OnInit {
     this.rankedIslandInput = '';
     this.rankedDistrictNameInput = '';
     this.rankedProfileURLInput = '';
+    this.percentageStudent = null;
   }
 
   uploadImageStudent(event) {
@@ -310,6 +327,9 @@ export class PersonProfileComponent implements OnInit {
     const path = `profilePicturesofStudents/${Date.now()}_${randomId}`;
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
+
+    this.fileStudent = this.afStorage.upload(path, event.target.files[0]);
+    this.percentageStudent = this.fileStudent.percentageChanges();
     // The main task
     // this.task = this.afStorage.upload(path, event.target.files[0]);
     // console.log(this.task.downloadURL());
