@@ -23,6 +23,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -55,6 +56,10 @@ import { AllUsersComponent } from './admin/all-users/all-users.component';
 import { ClassesInstituteComponent } from './auth/institute/classes-institute/classes-institute.component';
 import { ClassesPersonComponent } from './auth/person/classes-person/classes-person.component';
 import { ClassesViewInstituteComponent } from './auth/institute/classes-view-institute/classes-view-institute.component';
+import { ProfilesSearchComponent } from './auth/common/profiles-search/profiles-search.component';
+import { PersonSearchComponent } from './auth/person/person-search/person-search.component';
+import { InstituteSearchComponent } from './auth/institute/institute-search/institute-search.component';
+
 
 const appRoutes: Routes = [
   { path: '', component: NewsfeedComponent },
@@ -68,6 +73,9 @@ const appRoutes: Routes = [
   { path: 'addclasses/person', component: ClassesPersonComponent},
   { path: 'addclasses/institute', component: ClassesInstituteComponent},
   { path: 'admin/getallusers', component: AllUsersComponent},
+  { path: 'viewProfiles/person', component: PersonSearchComponent},
+  { path: 'viewProfiles/institute', component: InstituteSearchComponent},
+
 
 
   // { path: 'postadd', component: PostaddComponent },
@@ -103,6 +111,9 @@ const appRoutes: Routes = [
     ClassesInstituteComponent,
     ClassesPersonComponent,
     ClassesViewInstituteComponent,
+    ProfilesSearchComponent,
+    PersonSearchComponent,
+    InstituteSearchComponent,
   ],
   imports: [
     RouterModule.forRoot(
@@ -138,7 +149,8 @@ const appRoutes: Routes = [
     MatStepperModule,
     MatSidenavModule,
     MatProgressBarModule,
-    MatIconModule
+    MatIconModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [RootComponent]

@@ -64,7 +64,7 @@ export class AllUsersComponent implements OnInit {
     if (this.searchInput !== '') {
       this.searchClicked = true;
       for (const index in this.response) {
-        if (this.response[index].data.name.toLowerCase() === this.searchInput[0].toLowerCase() ||
+        if (this.response[index].data.name.toLowerCase() === this.searchInput.toLowerCase() ||
            (this.response[index].data.registerItem === 'person' &&
             this.response[index].data.lastName.toLowerCase() === this.searchInput.toLowerCase())) {
             this.searchedList.push(this.response[index]);
