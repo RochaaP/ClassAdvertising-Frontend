@@ -1,0 +1,106 @@
+<div class='container-fluid'>
+  <div class="row">
+
+
+    <div class = 'col-md-3'>
+      <div class='row radios'>
+        <!-- <mat-radio-button value="Name" (change)="eventByName($event)" >Name</mat-radio-button> -->
+
+        <!-- <div *ngIf="!showByName"> -->
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Enter Name" [(ngModel)]='searchNameInput' name='searchName' required>
+          </mat-form-field>
+          <div class = 'full-width'>
+            <button mat-flat-button (click)='searchName()'>Search</button>
+            <button mat-flat-button (click)='searchNameClose()'>Close</button>
+          </div>
+
+        <!-- </div> -->
+      </div>
+      <div class ='row radios '>
+
+        <!-- <mat-radio-button value="Class" (change)="eventByClass($event)">Class</mat-radio-button> -->
+
+        <!-- <div *ngIf="showByClass"> -->
+
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Enter Lecture's Name" [(ngModel)]='searchPersonInput' name='searchClass' >
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Enter District" [(ngModel)]='searchDistrictInput' name='searchClass' required>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Enter Subject" [(ngModel)]='searchSubjectInput' name='searchClass' required>
+          </mat-form-field>
+
+          <div class ='full-width'>
+            <button mat-flat-button (click)='searchClass()'>Search</button>
+            <button mat-flat-button (click)='searchClassClose()'>Close</button>
+          </div>
+        <!-- </div> -->
+      </div>
+
+    </div>
+
+    <div class = 'col-md-5'>
+
+      <div *ngIf="!nameSearchClicked">
+       <div *ngIf="!classSearchClicked">
+      <ul *ngFor="let field of instituteResponse">
+        <div class="profileDetails card-1">
+          <img class="header-image" src ={{field.data.propic}} >
+          <div class="click">
+            <a (click) ='profileView(field.data.email, field.data.name)'>{{field.data.name}}</a>
+          </div>
+          <div id="content">
+            <img src={{field.data.verify}} class="verification"/>
+          </div>
+        </div>
+      </ul>
+    </div>
+    </div>
+
+    <!-- <div *ngIf = '!classSearchClicked'> -->
+      <div *ngIf = "nameSearchClicked">
+        <ul *ngFor="let field of searchedList">
+          <div class="profileDetails card-1">
+            <img class="header-image" src ={{field.data.propic}} >
+            <div class="click">
+              <a (click) ='profileView(field.data.email, field.data.name)'>{{field.data.name}} </a>
+            </div>
+            <div id="content">
+              <img src={{field.data.verify}} class="verification"/>
+            </div>
+          </div>
+        </ul>
+      </div>
+    <!-- </div> -->
+
+      <div *ngIf='classSearchClicked'>
+        <ul *ngFor="let field of searchedClassList; let index = index">
+          <div class="classDetails card-1">
+            <mat-accordion >
+              <mat-expansion-panel >
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{field.primary}}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    <a class="click" (click) ='profileView(emailClassList[index].email, emailClassList[index].name)'>{{emailClassList[index].name}}</a>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <b>Class       : </b><p>{{field.class}}</p>
+                <b>Day         : </b><p>{{field.day}}</p>
+                <b>Time        : </b><p>{{field.time}}</p>
+                <b>Medium      : </b><p>{{field.medium}}</p>
+                <b>Class type  : </b><p>{{field.classType}}</p>
+                <b>City        : </b><p>{{field.city}}</p>
+                <b>District    : </b><p>{{field.district}}</p>
+              </mat-expansion-panel>
+            </mat-accordion>
+
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>

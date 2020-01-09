@@ -1,22 +1,26 @@
+
+
+
 <div class="parallax">
 <div class="row" *ngIf="!editUserProfile">
   <div class="text-center" style="width: 100%;margin: 20px;">
-    <h4>Login/Register</h4>
+    <h4 *ngIf='loginView'>Login</h4>
+    <h4 *ngIf='!loginView'>Register</h4>
   </div>
   <div class="" style="width: 500px; margin: auto">
 
-    <div class="card">
+    <div class="card" *ngIf='!circleView'>
       <!-- When Uses is Not Logged In -->
       <div class="card-body" *ngIf="!userDetails">
         <div class="row">
           <div class="col-sm-12 text-center">
 
-            <div class="btn-group">
+            <!-- <div class="btn-group">
               <button type="button" class="btn" [ngClass]="{'btn-primary active': selectedVal == 'login' }"
                 (click)="onValChange('login')"><strong>Login</strong></button>
               <button type="button" class="btn" [ngClass]="{'btn-primary active': selectedVal == 'register' }"
                 (click)="onValChange('register')"><strong>Register</strong></button>
-            </div>
+            </div> -->
 
           </div>
         </div>
@@ -38,25 +42,28 @@
 
             <div class="form-group">
               <button type="button" class="btn btn-primary" (click)="loginUser()">Log In</button>
+              <div class= "createAccount" (click)="this.circleView = true; loginView =false;">Create an Account</div>
             </div>
 
             <a href="javascript:void(0)" (click)="this.isForgotPassword= true;">Forgot Password?</a>
+
 
           </span>
 
           <!-- register -->
           <span *ngIf="selectedVal == 'register'">
 
-            <div class="col-sm-12 text-center form-group">
+            <!-- <div class="col-sm-12 text-center form-group">
               <div class="btn-group">
                 <button type="button" class="btn" [ngClass]="{'btn-primary active': registerItem == 'person' }"
                   (click)="onLoginItemChange('person')"><strong>Person</strong></button>
                 <button type="button" class="btn" [ngClass]="{'btn-primary active': registerItem == 'institute' }"
                   (click)="onLoginItemChange('institute')"><strong>institute</strong></button>
               </div>
-            </div>
+            </div> -->
 
             <div *ngIf="registerItem == 'person'">
+              <h3>Person Registration</h3>
 
               <div class="form-group">
                 <label for="firstname">First Name</label>
@@ -89,6 +96,7 @@
             </div>
 
             <div *ngIf="registerItem == 'institute'">
+              <h3>Institute Registration</h3>
 
               <div class="form-group">
                 <label for="name">Name</label>
@@ -114,6 +122,7 @@
                 <button type="button" class="btn btn-primary" (click)="registerUser()">Register</button>
               </div>
             </div>
+            <div class= "createAccount" (click)="this.circleView = false; selectedVal='login'; loginView='true';"> Have an Account</div>
 
           </span>
         </div>
@@ -179,5 +188,56 @@
   </div>
 </div>
 
+<div class="" style="width: 700px; margin: auto" *ngIf='circleView'>
+  <div class="row">
+    <div class="col-sm-4">
+
+      <!-- normal -->
+      <div class="ih-item circle effect6 scale_up" (click)='registerPerson()'><a>
+          <div class="img"><img src="assets/Classes/ArteGaleriade.jpg" alt="img"></div>
+          <div class="info">
+            <h3>TEACHER</h3>
+            <p>MARKET YOUSELF</p>
+          </div></a></div>
+      <!-- end normal -->
+
+    </div>
+    <div class="col-sm-4">
+
+      <!-- colored -->
+      <div class="ih-item circle colored effect6 scale_up" (click)='registerInstitute()'><a>
+          <div class="img"><img src="assets/Classes/pattern2.jpg" alt="img"></div>
+          <div class="info">
+            <h3>INSTITUTE</h3>
+            <p>MAKE PPOFIT</p>
+          </div></a></div>
+      <!-- end colored-->
+
+    </div>
+
+    <div class="col-sm-4">
+
+      <!-- normal -->
+      <div class="ih-item circle effect6 scale_up"><a>
+          <div class="img"><img src="assets/Classes/ArteGaleriade.jpg" alt="img"></div>
+          <div class="info">
+            <h3>STUDENT</h3>
+            <p>COMING SOON</p>
+          </div></a></div>
+      <!-- end normal -->
+
+    </div>
+  </div>
 
 </div>
+
+
+
+
+<!-- Scale up-->
+
+
+
+
+
+<!-- end Scale up-->

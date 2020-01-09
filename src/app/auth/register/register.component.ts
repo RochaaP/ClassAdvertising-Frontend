@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { map, retryWhen } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 interface User {
@@ -55,6 +56,8 @@ export class RegisterComponent implements OnInit {
   userDetails: any;
   editUserProfile: boolean;
   registerItem: string;
+  circleView: boolean;
+  loginView: boolean;
 
   userCol: AngularFirestoreCollection<User>;
   users: any;
@@ -91,6 +94,7 @@ export class RegisterComponent implements OnInit {
     this.isForgotPassword = false;
     this.editUserProfile = false;
     this.registerItem = 'person';
+    this.loginView = true;
     // this.items = db.list('items').valueChanges();
   }
 
@@ -104,10 +108,7 @@ export class RegisterComponent implements OnInit {
   }
 
   // Called on switching Login/ Register tabs
-  public onValChange(val: string) {
-    this.showMessage('', '');
-    this.selectedVal = val;
-  }
+
 
   public onLoginItemChange(val: string) {
     this.registerItem = val;
@@ -150,7 +151,7 @@ export class RegisterComponent implements OnInit {
       .then(res => {
         console.log(res);
         this.showMessage('success', 'Successfully Logged In!');
-        this.isUserLoggedIn();
+        // this.isUserLoggedIn();
         this.getReg();
         // this.getid();
       }, err => {
@@ -167,8 +168,9 @@ export class RegisterComponent implements OnInit {
       localStorage.setItem('registerItem', JSON.stringify(response[0].reg));
     }, (error) => {
       console.log('error on register user ', error);
+    }, () => {
+      this.navi();
     });
-
   }
 
     getUserRegData() {
@@ -191,6 +193,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.isUserLoggedIn();
     this.registerItem =  JSON.parse(localStorage.getItem('registerItem'));
+    this.circleView = false;
 
     // this.userCol = this.afs.collection('users');
     // this.users = this.userCol.snapshotChanges().pipe(
@@ -208,6 +211,28 @@ export class RegisterComponent implements OnInit {
     this.postDoc = this.afs.collection('users').doc(postId);
     this.post = this.postDoc.valueChanges();
   }
+//// circle click on Person
+registerPerson() {
+  this.registerItem = 'person';
+  this.onValChange('register');
+  this.circleView = false;
+  this.loginView = false;
+}
+
+/// circle click Institute
+registerInstitute() {
+  this.registerItem = 'institute';
+  this.onValChange('register');
+  this.circleView  = false;
+  this.loginView = false;
+}
+public onValChange(val: string) {
+  this.showMessage('', '');
+  this.selectedVal = val;
+}
+
+
+
   // Register user with  provided Email/ Password
   registerUser() {
     this.authService.register(this.emailInput, this.passwordInput)
@@ -225,6 +250,7 @@ export class RegisterComponent implements OnInit {
           this.showMessage('danger', err.message);
         });
         this.isUserLoggedIn();
+        this.navi();
       }, err => {
         this.showMessage('danger', err.message);
       });
@@ -364,5 +390,7 @@ export class RegisterComponent implements OnInit {
   editClassesPerson() {
     this.router.navigate(['/addclasses/person']);
   }
-
+  navi() {
+    this.router.navigate(['/'])
+  }
 }
