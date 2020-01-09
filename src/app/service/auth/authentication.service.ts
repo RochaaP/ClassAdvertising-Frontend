@@ -54,6 +54,10 @@ export class AuthenticationService {
   //   return await this.angularFireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
   // }
   getEmitterUserName() {
-    return localStorage.getItem('registerUserName');
+    return JSON.parse(localStorage.getItem('registerUserName'));
+  }
+
+  getRegisterItem() {
+    return JSON.parse(localStorage.getItem('registerItem'));
   }
 }
