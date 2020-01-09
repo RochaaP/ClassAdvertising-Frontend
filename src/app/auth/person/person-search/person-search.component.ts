@@ -14,13 +14,11 @@ import { Router } from '@angular/router';
 export class PersonSearchComponent implements OnInit {
 
   response: any;
-  notTriggeredClick: boolean;
   email: string;
   verifiedif: boolean;
 
 
-  personResponse = [];
-  instituteResponse = [];
+  personResponse: any;
   classResponse: any;
   searchedList = [];
   searchedClassList = [];
@@ -51,22 +49,21 @@ export class PersonSearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.notTriggeredClick = true;
     this.nameSearchClicked = false;
     this.classSearchClicked = false;
 
     this.showByName = false;
 
-    this.getAPIData().subscribe((response) => {
-      console.log('response what response ', response);
-      this.response = response;
-      for (const index in this.response) {
-        if (this.response[index].data.registerItem === 'person') {
-          this.personResponse.push(this.response[index]);
-        } else if (this.response[index].data.registerItem === 'institute') {
-          this.instituteResponse.push(this.response[index]);
-        }
-      }
+    this.getAPIData().subscribe((instituteResponse) => {
+      console.log('response what response ', instituteResponse);
+      this.personResponse = instituteResponse;
+      // for (const index in this.response) {
+      //   if (this.response[index].data.registerItem === 'person') {
+      //     this.personResponse.push(this.response[index]);
+      //   } else if (this.response[index].data.registerItem === 'institute') {
+      //     this.instituteResponse.push(this.response[index]);
+      //   }
+      // }
     }, ( error) => {
       console.log('error is ', error);
     });
@@ -75,7 +72,7 @@ export class PersonSearchComponent implements OnInit {
   }
 
   getAPIData() {
-    return this.http.get('/api/getAllUsers');
+    return this.http.get('/api/getAllUsers/person');
   }
 
   getClassDetails() {
@@ -92,11 +89,11 @@ export class PersonSearchComponent implements OnInit {
   }
 
   triggered(email: string) {
-      this.notTriggeredClick = false;
+      // this.notTriggeredClick = false;
       this.email = email;
   }
 
-  search() {
+  searchName() {
     this.searchedList.splice(0, this.searchedList.length);
     if (this.searchNameInput) {
       this.nameSearchClicked = true;
@@ -143,7 +140,8 @@ searchAllTogether() {
                     this.searchedClassList2.push(name[val]);
                     this.emailList2.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
                 }
-              } else if (name[val].district.toLowerCase() === this.searchDistrictInput.toLowerCase() &&
+              }
+              else if (name[val].district.toLowerCase() === this.searchDistrictInput.toLowerCase() &&
                 name[val].subject.toLowerCase() === this.searchSubjectInput.toLowerCase() ) {
               this.searchedClassList2.push(name[val]);
               this.emailList2.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
@@ -175,10 +173,11 @@ searchAllTogether() {
                   this.searchedClassList.push(name[val]);
                   this.emailList.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
               }
-            } else if (name[val].district.toLowerCase() === this.searchDistrictInput.toLowerCase() &&
-              name[val].subject.toLowerCase() === this.searchSubjectInput.toLowerCase() ) {
-            this.searchedClassList.push(name[val]);
-            this.emailList.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
+            }
+            else if (name[val].district.toLowerCase() === this.searchDistrictInput.toLowerCase() &&
+                    name[val].subject.toLowerCase() === this.searchSubjectInput.toLowerCase() ) {
+                this.searchedClassList.push(name[val]);
+                this.emailList.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
           }
         }
       }
@@ -186,33 +185,48 @@ searchAllTogether() {
   }
 
 
-  searchClose() {
+  searchNameClose() {
     this.searchedList.splice(0, this.searchedList.length);
     this.nameSearchClicked = false;
+    this.searchNameInput = '';
+    // (document.getElementById('nameRadioButton') as HTMLInputElement).checked = false;
+    // this.showByName = false;
+  }
+
+  searchClassClose() {
+    this.searchedList.splice(0, this.searchedList.length);
+    this.emailList.splice(0, this.emailList.length);
+    this.searchDistrictInput = '';
+    this.searchSubjectInput = '';
     this.searchNameInput = '';
     this.classSearchClicked = false;
     // (document.getElementById('nameRadioButton') as HTMLInputElement).checked = false;
     // this.showByName = false;
   }
-  eventByName(event: MatRadioChange) {
-    if (event.value === 'Name') {
-      this.showByName = true;
-      this.showByClass = false;
-    } else {
-      this.showByName = false;
-    }
+//   eventByName(event: MatRadioChange) {
+//     if (event.value === 'Name') {
+//       this.showByName = true;
+//       this.showByClass = false;
+//     } else {
+//       this.showByName = false;
+//     }
+//   }
+
+// eventByClass(event: MatRadioChange) {
+//     if (event.value === 'Class') {
+//       this.showByClass = true;
+//       // this.showByName = false;
+//     } else {
+//       this.showByClass = false;
+//     }
+  // }
+
+  profileView(email: string, name: string, lastName: string) {
+    this.dataService.passEmail(email);
+    this.router.navigate(['/viewprofile/person/' + name + ' ' + lastName]);
   }
 
-eventByClass(event: MatRadioChange) {
-    if (event.value === 'Class') {
-      this.showByClass = true;
-      // this.showByName = false;
-    } else {
-      this.showByClass = false;
-    }
-  }
-
-  profileView(email: string, name: string) {
+  profileView2(email: string, name: string) {
     this.dataService.passEmail(email);
     this.router.navigate(['/viewprofile/person/' + name]);
   }
