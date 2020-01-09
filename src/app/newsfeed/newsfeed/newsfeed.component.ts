@@ -26,6 +26,7 @@ export class NewsfeedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.getAPIData().subscribe((response) => {
       console.log('response from GET API is ', response);
       this.response = response;

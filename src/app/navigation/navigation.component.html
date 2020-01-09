@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -26,8 +26,55 @@
         <a class="nav-link" href="#"><fa-icon [icon]='faUser'></fa-icon></a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/account/register'" ><fa-icon [icon]='faUser'></fa-icon>  account</a>
+          <a class="nav-link" [routerLink]="'/account/login'" ><fa-icon [icon]='faUser'></fa-icon>  account</a>
       </li>
     </ul>
   </div>
+</nav> -->
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+          <img src="../../assets/Logo1.png" height="50px" alt="">
+          mtute.lk
+        </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+        </li> -->
+        <li class="nav-item ">
+          <a class="nav-link"  [routerLink]="'/viewProfiles/person'" ><fa-icon [icon]='faChalkboardTeacher'></fa-icon> Teachers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/viewProfiles/institute'">  <fa-icon [icon]='faSchool'></fa-icon> Institutes</a>
+        </li>
+        <li class="nav-item" *ngIf='!userLogged'>
+          <a class="nav-link" [routerLink]="'/account/login'"><fa-icon [icon]='faUser'></fa-icon> Account</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf='userLogged'>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <fa-icon [icon]='faUser'></fa-icon> {{userName}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" (click)='clickViewProfile()'><fa-icon [icon]='faAd'></fa-icon> View Profile</a>
+            <a class="dropdown-item" (click)='clickPostAd()'><fa-icon [icon]='faAd'></fa-icon> Post Ad</a>
+            <a class="dropdown-item" (click)='clickProfile()'><fa-icon [icon]='faIdCard'></fa-icon> Change Details</a>
+            <a class="dropdown-item" (click)='clickClasses()'><fa-icon [icon]='faUserFriends'></fa-icon> Classes</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)='logoutUser()'><fa-icon [icon]='faSignOutAlt'></fa-icon> LOGOUT</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
+
+
+
