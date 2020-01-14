@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/service/share/data.service';
 import { Router } from '@angular/router';
 import { MatRadioChange } from '@angular/material';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-institute-search',
@@ -36,10 +38,12 @@ export class InstituteSearchComponent implements OnInit {
     private http: HttpClient,
     private dataService: DataService,
     public router: Router,
+    private snackBar: MatSnackBar,
+    private spinnerService: Ng4LoadingSpinnerService
   ) { }
 
   ngOnInit() {
-
+    this.spinnerService.show();
     // this.notTriggeredClick = true;
     this.nameSearchClicked = false;
     this.showByName = false;
@@ -48,6 +52,7 @@ export class InstituteSearchComponent implements OnInit {
     this.getAPIData().subscribe((instituteResponse) => {
       console.log('response what response ', instituteResponse);
       this.instituteResponse = instituteResponse;
+      this.spinnerService.hide();
       // for (const index in this.response) {
       //   if (this.response[index].data.registerItem === 'person') {
       //     // this.personResponse.push(this.response[index]);
@@ -105,20 +110,23 @@ export class InstituteSearchComponent implements OnInit {
   // }
 
   searchName() {
+    this.spinnerService.show();
     this.searchedList.splice(0, this.searchedList.length);
     if (this.searchNameInput) {
       this.nameSearchClicked = true;
       this.showByName = true;
       for (const index in this.instituteResponse) {
-        if (this.instituteResponse[index].data.name.toLowerCase() === this.searchNameInput.toLowerCase()) {
+        if (this.instituteResponse[index].data.name.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
           this.searchedList.push(this.instituteResponse[index]);
         }
       }
-      console.log('show by name '+ this.searchedList);
     }
+    this.spinnerService.hide();
   }
 
   searchClass() {
+    this.spinnerService.show();
+
     this.searchedClassList.splice(0, this.searchedClassList.length);
     this.emailClassList.splice(0, this.emailClassList.length);
 
@@ -132,14 +140,14 @@ export class InstituteSearchComponent implements OnInit {
           // console.log("hit there");
           if (this.searchPersonInput) {
 
-            if (name[val].primary.toLowerCase() === this.searchPersonInput.toLowerCase() &&
-                name[val].district.toLowerCase() === this.searchDistrictInput.toLowerCase() &&
-                name[val].subject.toLowerCase() === this.searchSubjectInput.toLowerCase() ) {
+            if (name[val].primary.toLowerCase() === this.searchPersonInput.trim().toLowerCase() &&
+                name[val].district.toLowerCase() === this.searchDistrictInput.trim().toLowerCase() &&
+                name[val].subject.toLowerCase() === this.searchSubjectInput.trim().toLowerCase() ) {
                   this.searchedClassList.push(name[val]);
                   this.emailClassList.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
               }
-            } else if (name[val].district.toLowerCase() === this.searchDistrictInput.toLowerCase() &&
-                        name[val].subject.toLowerCase() === this.searchSubjectInput.toLowerCase() ) {
+            } else if (name[val].district.toLowerCase() === this.searchDistrictInput.trim().toLowerCase() &&
+                        name[val].subject.toLowerCase() === this.searchSubjectInput.trim().toLowerCase() ) {
                   this.searchedClassList.push(name[val]);
                   this.emailClassList.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
           }
@@ -147,6 +155,8 @@ export class InstituteSearchComponent implements OnInit {
       }
     }
     // console.log(this.searchedClassList);
+    this.spinnerService.hide();
+
   }
 
   searchNameClose() {

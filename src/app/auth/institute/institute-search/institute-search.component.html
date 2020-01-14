@@ -12,7 +12,7 @@
           </mat-form-field>
           <div class = 'full-width'>
             <button mat-flat-button (click)='searchName()'>Search</button>
-            <button mat-flat-button (click)='searchNameClose()'>Close</button>
+            <button mat-flat-button (click)='searchNameClose()'>Clear</button>
           </div>
 
         <!-- </div> -->
@@ -35,7 +35,7 @@
 
           <div class ='full-width'>
             <button mat-flat-button (click)='searchClass()'>Search</button>
-            <button mat-flat-button (click)='searchClassClose()'>Close</button>
+            <button mat-flat-button (click)='searchClassClose()'>Clear</button>
           </div>
         <!-- </div> -->
       </div>
@@ -48,7 +48,8 @@
        <div *ngIf="!classSearchClicked">
       <ul *ngFor="let field of instituteResponse">
         <div class="profileDetails card-1">
-          <img class="header-image" src ={{field.data.propic}} >
+          <img *ngIf= "field.data.propic" class="header-image" src ={{field.data.propic}} >
+          <img *ngIf= "!field.data.propic" class="header-image" src =  'assets/propic/propic.png'>
           <div class="click">
             <a (click) ='profileView(field.data.email, field.data.name)'>{{field.data.name}}</a>
           </div>
@@ -64,7 +65,8 @@
       <div *ngIf = "nameSearchClicked">
         <ul *ngFor="let field of searchedList">
           <div class="profileDetails card-1">
-            <img class="header-image" src ={{field.data.propic}} >
+            <img *ngIf= "field.data.propic" class="header-image" src ={{field.data.propic}} >
+            <img *ngIf= "!field.data.propic" class="header-image" src =  'assets/propic/propic.png'>
             <div class="click">
               <a (click) ='profileView(field.data.email, field.data.name)'>{{field.data.name}} </a>
             </div>

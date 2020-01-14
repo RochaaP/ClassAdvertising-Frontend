@@ -4,6 +4,9 @@ import { DataService } from 'src/app/service/share/data.service';
 import { ThrowStmt } from '@angular/compiler';
 import { MatRadioChange } from '@angular/material';
 import { Router } from '@angular/router';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 
 @Component({
@@ -46,9 +49,12 @@ export class PersonSearchComponent implements OnInit {
     private http: HttpClient,
     private dataService: DataService,
     public router: Router,
+    private snackBar: MatSnackBar,
+    private spinnerService: Ng4LoadingSpinnerService
   ) { }
 
   ngOnInit() {
+    this.spinnerService.show();
     this.nameSearchClicked = false;
     this.classSearchClicked = false;
 
@@ -57,6 +63,8 @@ export class PersonSearchComponent implements OnInit {
     this.getAPIData().subscribe((instituteResponse) => {
       console.log('response what response ', instituteResponse);
       this.personResponse = instituteResponse;
+      this.spinnerService.hide();
+      // this.spinnerService.hide();
       // for (const index in this.response) {
       //   if (this.response[index].data.registerItem === 'person') {
       //     this.personResponse.push(this.response[index]);
@@ -94,6 +102,7 @@ export class PersonSearchComponent implements OnInit {
   }
 
   searchName() {
+    this.spinnerService.show();
     this.searchedList.splice(0, this.searchedList.length);
     if (this.searchNameInput) {
       this.nameSearchClicked = true;
@@ -108,19 +117,21 @@ export class PersonSearchComponent implements OnInit {
 
               this.searchedList.push(this.personResponse[index]);
 
-        } else if (this.personResponse[index].data.name.toLowerCase() === this.searchNameInput.toLowerCase() ||
-                 this.personResponse[index].data.lastName.toLowerCase() === this.searchNameInput.toLowerCase()) {
+        } else if (this.personResponse[index].data.name.toLowerCase() === this.searchNameInput.trim().toLowerCase() ||
+                 this.personResponse[index].data.lastName.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
 
               this.searchedList.push(this.personResponse[index]);
 
         }
       }
     }
+    this.spinnerService.hide();
   }
 
 
 searchAllTogether() {
   // tslint:disable-next-line: forin
+  this.spinnerService.show();
   this.searchedClassList2.splice(0, this.searchedClassList2.length);
   this.emailList2.splice(0, this.emailList2.length);
   // tslint:disable-next-line: forin
@@ -134,15 +145,15 @@ searchAllTogether() {
 
             if (Boolean(this.searchCityInput)) {
 
-              if (name[val].city.toLowerCase() === this.searchCityInput.toLowerCase() &&
-                  name[val].district.toLowerCase() === this.searchDistrictInput.toLowerCase() &&
-                  name[val].subject.toLowerCase() === this.searchSubjectInput.toLowerCase() ) {
+              if (name[val].city.toLowerCase() === this.searchCityInput.trim().toLowerCase() &&
+                  name[val].district.toLowerCase() === this.searchDistrictInput.trim().toLowerCase() &&
+                  name[val].subject.toLowerCase() === this.searchSubjectInput.trim().toLowerCase() ) {
                     this.searchedClassList2.push(name[val]);
                     this.emailList2.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
                 }
               }
-              else if (name[val].district.toLowerCase() === this.searchDistrictInput.toLowerCase() &&
-                name[val].subject.toLowerCase() === this.searchSubjectInput.toLowerCase() ) {
+              else if (name[val].district.toLowerCase() === this.searchDistrictInput.trim().toLowerCase() &&
+                name[val].subject.toLowerCase() === this.searchSubjectInput.trim().toLowerCase() ) {
               this.searchedClassList2.push(name[val]);
               this.emailList2.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
             }
@@ -151,9 +162,12 @@ searchAllTogether() {
       }
     }
   }
+  this.spinnerService.hide();
+
 }
 
   searchClass() {
+    this.spinnerService.show();
     this.searchAllTogether();
     this.searchedClassList.splice(0, this.searchedClassList.length);
     this.emailList.splice(0, this.emailList.length);
@@ -167,21 +181,22 @@ searchAllTogether() {
         for (const val in name) {
           if (Boolean(this.searchCityInput)) {
 
-            if (name[val].city.toLowerCase() === this.searchCityInput.toLowerCase() &&
-                name[val].district.toLowerCase() === this.searchDistrictInput.toLowerCase() &&
-                name[val].subject.toLowerCase() === this.searchSubjectInput.toLowerCase() ) {
+            if (name[val].city.toLowerCase() === this.searchCityInput.trim().toLowerCase() &&
+                name[val].district.toLowerCase() === this.searchDistrictInput.trim().toLowerCase() &&
+                name[val].subject.toLowerCase() === this.searchSubjectInput.trim().toLowerCase() ) {
                   this.searchedClassList.push(name[val]);
                   this.emailList.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
               }
             }
-            else if (name[val].district.toLowerCase() === this.searchDistrictInput.toLowerCase() &&
-                    name[val].subject.toLowerCase() === this.searchSubjectInput.toLowerCase() ) {
+            else if (name[val].district.toLowerCase() === this.searchDistrictInput.trim().toLowerCase() &&
+                    name[val].subject.toLowerCase() === this.searchSubjectInput.trim().toLowerCase() ) {
                 this.searchedClassList.push(name[val]);
                 this.emailList.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
           }
         }
       }
     }
+    this.spinnerService.hide();
   }
 
 
