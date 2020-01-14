@@ -1,3 +1,8 @@
 <app-navigation></app-navigation>
 
-<router-outlet></router-outlet>
+<router-outlet (activate)="onActivate($event)"></router-outlet>
+<ng4-loading-spinner [loadingText]="'Please wait...'" [timeout]="10000" [threshold]="1000"> </ng4-loading-spinner>
+
+
+<!-- more about loading spinner
+https://www.npmjs.com/package/ng4-loading-spinner -->

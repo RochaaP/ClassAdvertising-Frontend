@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +34,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
+import { GuardService } from './service/guard/guard.service';
 import { DropzoneDirective } from './service/dropzone/dropzone.directive';
 
 import { RootComponent } from './root/root.component';
@@ -65,13 +68,13 @@ const appRoutes: Routes = [
   { path: '', component: NewsfeedComponent },
   { path: 'account/register', component: RegisterComponent },
   { path: 'account/login', component: RegisterComponent },
-  { path: 'editprofile/person', component: PersonProfileComponent },
-  { path: 'editprofile/institute', component: InstituteProfileComponent },
-  { path: 'postadd', component: PostaddComponent },
+  { path: 'editprofile/person', canActivate: [GuardService], component: PersonProfileComponent },
+  { path: 'editprofile/institute', canActivate: [GuardService], component: InstituteProfileComponent },
+  { path: 'postadd', canActivate:[GuardService], component: PostaddComponent },
   { path: 'viewprofile/person/:id', component: ViewProfilePersonComponent},
   { path: 'viewprofile/institute/:id', component: ViewProfileInstituteComponent},
-  { path: 'addclasses/person', component: ClassesPersonComponent},
-  { path: 'addclasses/institute', component: ClassesInstituteComponent},
+  { path: 'addclasses/person', canActivate: [GuardService], component: ClassesPersonComponent},
+  { path: 'addclasses/institute', canActivate: [GuardService], component: ClassesInstituteComponent},
   { path: 'admin/getallusers', component: AllUsersComponent},
   { path: 'viewProfiles/person', component: PersonSearchComponent},
   { path: 'viewProfiles/institute', component: InstituteSearchComponent},
@@ -117,7 +120,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(
-      appRoutes,{onSameUrlNavigation: 'reload'}
+      appRoutes, {onSameUrlNavigation: 'reload'}
     ),
     BrowserModule,
     HttpClientModule,
@@ -125,6 +128,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    ImageCropperModule,
+    Ng4LoadingSpinnerModule.forRoot(),
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
