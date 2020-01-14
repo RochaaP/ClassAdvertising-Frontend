@@ -19,6 +19,8 @@ export class NewsfeedComponent implements OnInit {
   response: any;
   message: string;
 
+  firstReload: string;
+
   constructor(
     private http: HttpClient,
     public router: Router,
@@ -26,7 +28,11 @@ export class NewsfeedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.firstReload = localStorage.getItem('needToReloadPage');
+    if (this.firstReload) {
+      window.location.reload();
+      localStorage.removeItem('needToReloadPage');
+    }
     this.getAPIData().subscribe((response) => {
       console.log('response from GET API is ', response);
       this.response = response;
@@ -41,6 +47,7 @@ export class NewsfeedComponent implements OnInit {
   }
 
   triggered(email: string, registerItem: string, name: string) {
+    localStorage.setItem('emailtemp', email);
     if (registerItem === 'person') {
       this.data.passEmail(email);
       this.router.navigate(['/viewprofile/person/' + name]);

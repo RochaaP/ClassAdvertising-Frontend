@@ -10,15 +10,15 @@
 //   background-size: cover;
 // }
 // position: fixed;
-  background-image:url('../../../assets/Classes/ArteGaleriade.jpg');
+  background-image:url('../../../assets/Classes/pattern2.jpg');
 
     width: 100%;
     height: 100%;
-    background-repeat: no-repeat;
+    background-repeat:repeat;
     background-position: center;
     // background-attachment: fixed;
     background-size: cover;
-    overflow: hidden;
+    overflow: auto;
   }
 
   // @import url('normalize.css');

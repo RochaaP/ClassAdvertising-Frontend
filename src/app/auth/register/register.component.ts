@@ -221,8 +221,9 @@ registerPerson() {
 
 /// circle click Institute
 registerInstitute() {
-  this.registerItem = 'institute';
   this.onValChange('register');
+  this.registerItem = 'institute';
+
   this.circleView  = false;
   this.loginView = false;
 }
@@ -347,9 +348,9 @@ public onValChange(val: string) {
       userValues = {
         id: this.id,
         registerItem: this.registerItem,
-        email : this.emailInput,
-        firstName: this.firstNameInput,
-        lastName: this.lastNameInput,
+        email : this.emailInput.trim(),
+        firstName: this.firstNameInput.trim(),
+        lastName: this.lastNameInput.trim(),
         contact:  this.contactInput
       };
     } else if (this.registerItem === 'institute') {
@@ -358,8 +359,8 @@ public onValChange(val: string) {
       userValues = {
         id: this.id,
         registerItem: this.registerItem,
-        email : this.emailInput,
-        name: this.nameInput,
+        email : this.emailInput.trim(),
+        name: this.nameInput.trim(),
         contact:  this.contactInput
       };
     }
@@ -391,6 +392,8 @@ public onValChange(val: string) {
     this.router.navigate(['/addclasses/person']);
   }
   navi() {
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
+    localStorage.setItem('needToReloadPage', 'true');
+
   }
 }

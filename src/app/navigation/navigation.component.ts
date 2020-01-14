@@ -82,6 +82,7 @@ export class NavigationComponent implements OnInit {
   }
 
   clickViewProfile() {
+    localStorage.setItem('emailtemp', this.userDetails.email);
     if (this.registerItem === 'person') {
       this.dataService.passEmail(this.userDetails.email);
       this.router.navigate(['viewprofile/person/' + this.userName]);

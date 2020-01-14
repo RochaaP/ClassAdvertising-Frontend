@@ -1,56 +1,31 @@
-<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-            <div class="form-group">
-                <ul *ngFor="let field of response">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="panel panel-white post">
-                                <div class="post-heading">
-                                    <div class="pull-left image">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-circle avatar" alt="user profile image">
-                                    </div>
-                                    <div class="pull-left meta">
-                                        <div class="title h5">
-                                            <a  (click)='triggered(field.data.email,field.data.registerItem, field.data.name)'><b>{{field.data.name}}</b></a>
-                                            uploaded a photo.
-                                        </div>
-                                        <h6 class="text-muted time">{{field.data.create.toDate() | date: 'yyyy MMM dd hh:mm'}}</h6>
-                                    </div>
-                                </div>
-                                <div class="post-description">
-                                    <p>{{field.data.description}}</p>
-                                </div>
-                                <div class="post-image">
-                                    <img src="{{field.data.profileImagePath}}" class="image" alt="image post">
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </ul>
-
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <!-- (click)='triggered(field.data.email)' -->
 <!-- .toDate() | date: 'yyyy MMM dd hh:mm' -->
 <!-- <div class="continer"> -->
+  <div class='container-fluid'>
 
-<div class="parallax">
-  <div class="wrapper">
-    <h1>mtute.lk</h1>
+  <div class="parallax">
+    <div class="wrapper">
+      <h1>mtute.lk</h1>
+    </div>
   </div>
-</div>
 
-<section class="section_content">
-  <div class="container">
+  <section class="section_content">
+    <div class="container">
 
-    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+      <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+          <div class="servicetitle  animated fadeInDown">
+            <h4>Responsive Layout</h4>
+            <hr>
+          </div>
+          <div class="servicetitle  animated zoomIn">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
+          </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-4 text-center">
         <div class="servicetitle  animated fadeInDown">
           <h4>Responsive Layout</h4>
           <hr>
@@ -58,30 +33,20 @@
         <div class="servicetitle  animated zoomIn">
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
         </div>
-    </div>
+      </div>
 
-    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
-      <div class="servicetitle  animated fadeInDown">
-        <h4>Responsive Layout</h4>
-        <hr>
+      <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+        <div class="servicetitle animated fadeInDown">
+          <h4>Responsive Layout</h4>
+          <hr>
+        </div>
+        <div class="servicetitle  animated zoomIn">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
+        </div>
       </div>
-      <div class="servicetitle  animated zoomIn">
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
-      </div>
-    </div>
 
-    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
-      <div class="servicetitle animated fadeInDown">
-        <h4>Responsive Layout</h4>
-        <hr>
-      </div>
-      <div class="servicetitle  animated zoomIn">
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
-      </div>
     </div>
-
-  </div>
-</section>
+  </section>
 
 
 <!-- <div class="row"> -->
@@ -103,7 +68,7 @@
   </div>
  -->
 
-  <div class="col">
+  <!-- <div class="col">
 
     <ul *ngFor="let field of response">
       <div class= "container">
@@ -115,7 +80,7 @@
 
             <mat-card-title class="click"><a (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'>{{field.data.title}}. {{field.data.name}}</a>
             </mat-card-title>
-            <!-- <mat-card-subtitle>{{field.data.create}}</mat-card-subtitle> -->
+            <mat-card-subtitle>{{field.data.create}}</mat-card-subtitle>
           </mat-card-header>
           <div id="content">
             <img src={{field.data.verify}} class="verification"/>
@@ -130,6 +95,50 @@
       </div>
     </ul>
 
-  <!-- </div> -->
-</div>
+  </div>
+</div> -->
 
+
+  <div class ="col">
+      <ul *ngFor ="let field of response">
+        <div class='postContainer '>
+
+          <div class="row">
+
+            <div class="verify">
+              <img src={{field.data.verify}} class="verify-image" >
+            </div>
+
+              <div class="proPicImage">
+                <img class="header-image" src ={{field.data.proPic}} alt="">
+              </div>
+
+              <div class= "col">
+                <p class="title">{{field.data.title}}</p>
+                <p>By <a class="click" (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'> {{field.data.name}}</a></p>
+              </div>
+          </div>
+
+
+          <div class ="row">
+            <div class="col-md-4 col-lg">
+              <img src={{field.data.path}} alt="" class="zoom">
+            </div>
+            <div class="col-md-4 col-lg">
+
+
+              <p>{{field.data.description}}</p>
+              <p>{{field.data.contact}}</p>
+              <p>{{field.data.distict}}</p>
+
+            </div>
+
+          </div>
+
+        </div>
+      </ul>
+
+
+  </div>
+
+  </div>
