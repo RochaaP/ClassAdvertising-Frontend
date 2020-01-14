@@ -2,10 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+
 
 @Component({
   selector: 'app-person-profile',
@@ -25,6 +28,11 @@ export class PersonProfileComponent implements OnInit {
   fileStudent: AngularFireUploadTask;
   percentageStudent: Observable<number>;
 
+  uploadProfilePath = '';
+  uploadProfile: boolean;
+
+  uploadBackgroundPath = '';
+  uploadBackground: boolean;
 
   email: string;
   id: string;
@@ -79,6 +87,7 @@ export class PersonProfileComponent implements OnInit {
   cards = [];
   tab = [];
   achievementslist = [];
+  response: any;
   // lists = [];
 
   tabs = [];
@@ -88,23 +97,29 @@ export class PersonProfileComponent implements OnInit {
   activeLink = this.links[0];
   background = '';
 
-  MESSAGE = 'DETAILS UPDATED';
+  MESSAGE_SUCCESS = 'DETAILS UPDATED';
+  MESSAGE_FAIL = 'UPDATE FAILED';
+
+  triggeredcrop: boolean;
 
   constructor(
      private afStorage: AngularFireStorage,
      private http: HttpClient,
      private afs: AngularFirestore,
-     private snackBar: MatSnackBar
+     private snackBar: MatSnackBar,
+     private spinnerService: Ng4LoadingSpinnerService
     ) { }
 
   ngOnInit() {
+
+    this.triggeredcrop = false;
     const itemTemp  = JSON.parse( localStorage.getItem('user'));
     if (itemTemp != null) {
       this.emailInput = itemTemp.email;
       console.log('asdkfjka email ' + this.emailInput);
     }
     this.getAPIData().subscribe((response) => {
-      console.log('response from GET API is ', response[0]);
+      console.log('response from GET is ', response[0]);
 
       this.id = response[0].id;
       this.titleInput = response[0].data.title;
@@ -113,7 +128,17 @@ export class PersonProfileComponent implements OnInit {
       this.firstNameInput = response[0].data.firstName;
       this.lastNameInput = response[0].data.lastName;
       this.downloadURL =  response[0].data.profileImagePath;
+      if (!this.downloadURL) {
+        this.uploadProfile = false;
+      } else {
+        this.uploadProfile = true;
+      }
       this.backgroundImageURL = response[0].data.backgroundImagePath;
+      if (!this.backgroundImageURL) {
+        this.uploadBackground = false;
+      } else {
+         this.uploadBackground = true;
+      }
       this.degreeInput = response[0].data.degree;
       this.universityInput = response[0].data.university;
       this.yearInput = response[0].data.degreeYear;
@@ -192,11 +217,12 @@ export class PersonProfileComponent implements OnInit {
 
 
   upload(event) {
+    this.uploadProfile = true;
     const randomId = Math.random().toString(36).substring(2);
     const path = `profilePictures/${Date.now()}_${randomId}`;
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
-
+    this.uploadProfilePath = path;
     // The main task
     this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
     this.percentageProfile = this.fileProfile.percentageChanges();
@@ -211,12 +237,26 @@ export class PersonProfileComponent implements OnInit {
       this.downloadURL = url; // with this you can use it in the html
       });
    });
-
   }
 
-  uploadBackground(event) {
+  deleteProfile() {
+    if (this.uploadProfilePath) {
+      this.afStorage.ref(this.uploadProfilePath).delete().subscribe(() => {
+      }, (error) => {
+        console.log(error);
+      }, () => {
+        console.log('successfully deleted');
+      });
+    }
+    this.uploadProfile = false;
+    this.downloadURL = '';
+  }
+
+  backgroundUpload(event) {
+    this.uploadBackground = true;
     const randomId = Math.random().toString(36).substring(2);
     const path = `backgroundImages/${Date.now()}_${randomId}`;
+    this.uploadBackgroundPath = path;
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
 
@@ -238,17 +278,32 @@ export class PersonProfileComponent implements OnInit {
 
   }
 
+  deleteBackground() {
+    if (this.uploadBackgroundPath) {
+      this.afStorage.ref(this.uploadBackgroundPath).delete().subscribe(() => {
+
+      }, () => {
+        console.log('deleted Failed');
+      }, () => {
+        console.log('successfully deleted');
+      });
+    }
+
+    this.uploadBackground = false;
+    this.backgroundImageURL = '';
+  }
+
 
   updateValues() {
+    this.spinnerService.show();
     let userValues = {};
-
     userValues = {
         id: this.id,
         title: this.titleInput,
-        email : this.emailInput,
-        firstName: this.firstNameInput,
-        lastName: this.lastNameInput,
-        contact:  this.contactInput,
+        email : this.emailInput.trim(),
+        firstName: this.firstNameInput.trim(),
+        lastName: this.lastNameInput.trim(),
+        contact:  this.contactInput.trim(),
         degree: this.degreeInput,
         university: this.universityInput,
         degreeYear: this.yearInput,
@@ -277,10 +332,22 @@ export class PersonProfileComponent implements OnInit {
 
       };
     this.postAPIData(userValues).subscribe((response) => {
-        console.log('response from POST API is ', response);
+        console.log('response from POST API is here', response);
+        this.response = response;
+        console.log(this.response.status);
+        if (this.response.status === 200) {
+          this.openSnackBar(this.MESSAGE_SUCCESS);
+          this.spinnerService.hide();
+        }
+        else if (this.response.status === 400) {
+          this.openSnackBar(this.MESSAGE_FAIL);
+          this.spinnerService.hide();
+        }
       }, (error) => {
         console.log('error during post is ', error);
-      } , () => this.openSnackBar());
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      });
   }
 
   postAPIData(userValues: object) {
@@ -295,14 +362,15 @@ export class PersonProfileComponent implements OnInit {
     this.links.push(`Link ${this.links.length + 1}`);
   }
 
-  openSnackBar() {
-    this.snackBar.open(this.MESSAGE, 'Done', {
-      duration: 2000,
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Done', {
+      duration: 5000,
     });
   }
 
 
   submit() {
+
     this.details = {
       rankedName: this.rankedNameInput,
       rankedYear: this.rankedYearInput,
@@ -345,9 +413,10 @@ export class PersonProfileComponent implements OnInit {
     console.log('downloadurl ' + this.downloadURL);
 
   }
-addPersonalAchievements() {
 
+  addPersonalAchievements() {
     this.achievementslist.push(this.personalAchievementInput);
+    this.personalAchievementInput = '';
   }
 
 
@@ -364,7 +433,72 @@ addPersonalAchievements() {
     this.tabs.splice(index, 1);
   }
 
-  deleteValues() {
-
+  deletePersonalAchievements(index: number) {
+    this.achievementslist.splice(index, 1);
   }
+
+  deleteResultAchievement(index: number) {
+    this.cards.splice(index, 1);
+  }
+
 }
+
+//   title = 'angular-image-uploader';
+
+//   imageChangedEvent: any = '';
+//   croppedImage: any = '';
+//   imageBlob: any = '';
+
+//   fileChangeEvent(event: any): void {
+//       this.imageChangedEvent = event;
+//   }
+//   imageCropped(event: ImageCroppedEvent) {
+//       this.croppedImage = event.base64;
+//       this.imageBlob = this.dataURItoBlob(event.base64);
+//     console.log(this.croppedImage)
+//     }
+
+//   imageLoaded() {
+//       // show cropper
+//   }
+//   cropperReady() {
+//       // cropper ready
+//   }
+//   loadImageFailed() {
+//       // show message
+//   }
+//   dataURItoBlob(dataURI) {
+//     const byteString = window.atob(dataURI);
+//     const arrayBuffer = new ArrayBuffer(byteString.length);
+//     const int8Array = new Uint8Array(arrayBuffer);
+//     for (let i = 0; i < byteString.length; i++) {
+//       int8Array[i] = byteString.charCodeAt(i);
+//     }
+//     const blob = new Blob([int8Array], { type: 'image/jpeg' });
+//     return blob;
+//  }
+//   uploadImagecropped(event) {
+//     const randomId = Math.random().toString(36).substring(2);
+//     const path = `profilePicturesofStudents/${Date.now()}_${randomId}`;
+//     // Reference to storage bucket
+//     const ref = this.afStorage.ref(path);
+
+
+//     this.fileStudent = this.afStorage.upload(path, this.imageBlob);
+//     this.percentageStudent = this.fileStudent.percentageChanges();
+//     // The main task
+//     // this.task = this.afStorage.upload(path, event.target.files[0]);
+//     // console.log(this.task.downloadURL());
+//     // this.downloadURL = this.task.downloadURL();
+//     // console.log(this.downloadURL);
+//     const task = this.afStorage.upload(path, this.imageBlob).then(() => {
+//       // const ref = this.afStorage.ref(path);
+//       const downloadURL = ref.getDownloadURL().subscribe(url => {
+//       const Url = url; // for ts
+//       this.rankedProfileURLInput = url; // with this you can use it in the html
+//       });
+//     });
+//     console.log('downloadurl ' + this.downloadURL);
+
+//   }
+// }

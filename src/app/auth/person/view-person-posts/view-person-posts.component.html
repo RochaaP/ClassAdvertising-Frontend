@@ -13,8 +13,12 @@
 
 <div *ngFor="let field of response">
 <div class="container">
+
+
+
 <mat-accordion>
-  <mat-expansion-panel expanded>
+   <!-- <div *ngIf ="field.data.firstName"> -->
+  <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
         Personal data
@@ -27,7 +31,8 @@
     <p>{{field.data.email}}</p>
     <p>{{field.data.contact}}</p>
   </mat-expansion-panel>
-
+<!-- </div> -->
+  <div *ngIf ="field.data.university">
     <mat-expansion-panel (opened)="panelOpenState = true"
                         (closed)="panelOpenState = false" expanded>
       <mat-expansion-panel-header>
@@ -43,8 +48,10 @@
       <p>{{field.data.grad}}</p>
       <p>{{field.data.degreeYear}}</p>
     </mat-expansion-panel>
+  </div>
 
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
+    <div *ngIf = "field.data.universityMSc">
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
         <mat-panel-title>
         MSc Degree Details
@@ -56,9 +63,11 @@
         <p>{{field.data.universityMSc}}</p>
         <p>{{field.data.degreeMSc}}</p>
         <p>{{field.data.yearMSc}}</p>
-    </mat-expansion-panel>
+      </mat-expansion-panel>
+    </div>
 
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
+    <div *ngIf = "field.data.universityPhD">
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
         <mat-expansion-panel-header>
         <mat-panel-title>
         PhD Degree Details
@@ -67,43 +76,46 @@
         <p>{{field.data.degreePhD}}</p>
         <p>{{field.data.yearPhD}}</p>
         </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </div>
+
+    <div *ngIf ="field.data.personalAchievement">
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal Achievements
+        </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul *ngFor="let list of field.data.personalAchievement">
+          <p>{{list}}</p>
+          <mat-divider></mat-divider>
+        </ul>
+        <mat-divider></mat-divider>
+      </mat-expansion-panel>
+    </div>
+
+  <div *ngIf = "field.data.achievement">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+          Other Achievements
+        </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul *ngFor="let list of field.data.achievement">
+          <p>
+            <img src={{list.rankedProfileURL}} class="avatar" alt="avatar">
+          </p>
+          <b>Name of the student</b><p>{{list.rankedName}}</p>
+          <b>Year</b><p>{{list.rankedYear}}</p>
+          <b>District</b><p>{{list.rankedDistrictName}}</p>
+          <b>District Rank</b><p>{{list.rankedDistrict}}</p>
+          <b>Island Rank</b><p>{{list.rankedIsland}}</p>
+          <mat-divider></mat-divider>
+
+        </ul>
 
     </mat-expansion-panel>
-
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
-      <mat-expansion-panel-header>
-      <mat-panel-title>
-        Personal Achievements
-      </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ul *ngFor="let list of field.data.personalAchievement">
-        <p>{{list}}</p>
-        <mat-divider></mat-divider>
-      </ul>
-      <mat-divider></mat-divider>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-    <mat-panel-title>
-      Other Achievements
-    </mat-panel-title>
-    </mat-expansion-panel-header>
-    <ul *ngFor="let list of field.data.achievement">
-       <p>
-        <img src={{list.rankedProfileURL}} class="avatar" alt="avatar">
-       </p>
-      <b>Name of the student</b><p>{{list.rankedName}}</p>
-      <b>Year</b><p>{{list.rankedYear}}</p>
-      <b>District</b><p>{{list.rankedDistrictName}}</p>
-      <b>District Rank</b><p>{{list.rankedDistrict}}</p>
-      <b>Island Rank</b><p>{{list.rankedIsland}}</p>
-      <mat-divider></mat-divider>
-
-    </ul>
-
-</mat-expansion-panel>
-
+  </div>
 
 </mat-accordion>
 

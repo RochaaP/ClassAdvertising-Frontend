@@ -1,4 +1,4 @@
-
+<!--
 <div class ="headers"  align-items-center>
   <h3>Add Classes</h3>
 </div>
@@ -39,9 +39,7 @@
 <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)"  >
 <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab" >
   <h4>Contents for {{tab}}</h4>
-  <!-- <button mat-raised-button class="example-delete-tab-button" (click)="removeTab(index)">
-    Delete Tab
-  </button> -->
+
   <form class="form" >
   <mat-accordion >
     <mat-expansion-panel expanded>
@@ -81,6 +79,7 @@
           <mat-option value="Gampaha">Gampaha</mat-option>
           <mat-option value="Hambantota">Hambantota</mat-option>
           <mat-option value="Jaffna">Jaffna</mat-option>
+          <mat-option value="Kandy">Kandy</mat-option>
           <mat-option value="Kalutara">Kalutara</mat-option>
           <mat-option value="Kegalle">Kegalle</mat-option>
           <mat-option value="Kilinochchi">Kilinochchi</mat-option>
@@ -194,4 +193,190 @@ Upload all values
 
     </mat-expansion-panel>
   </mat-accordion>
+</div> -->
+
+
+
+<div class="container-fluid">
+  <h3>Classes</h3>
+  <hr>
+<div class = "subcontainer"  class="parallax">
+
+    <form class="form col" >
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Grade, A/L,  O/L , After A/L" [(ngModel)]="primaryInput" name="primary">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Subject" [(ngModel)]="subjectInput" name="subject">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Name of the Place" [(ngModel)]="placeInput" name="place">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Starting Time" [(ngModel)]="timeInput" name='time'>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="City" [(ngModel)]="cityInput" name='city'>
+        </mat-form-field>
+
+        <mat-form-field class ='full-width'>
+          <mat-select placeholder="District" [(ngModel)]="DistrictInput" name='District'>
+            <mat-option value="Ampara">Ampara</mat-option>
+            <mat-option value="Anuradhapura">Anuradhapura</mat-option>
+            <mat-option value="Badulla">Badulla</mat-option>
+            <mat-option value="Batticaloa">Batticaloa</mat-option>
+            <mat-option value="Colombo">Colombo</mat-option>
+            <mat-option value="Galle">Galle</mat-option>
+            <mat-option value="Gampaha">Gampaha</mat-option>
+            <mat-option value="Hambantota">Hambantota</mat-option>
+            <mat-option value="Jaffna">Jaffna</mat-option>
+            <mat-option value="Kandy">Kandy</mat-option>
+            <mat-option value="Kalutara">Kalutara</mat-option>
+            <mat-option value="Kegalle">Kegalle</mat-option>
+            <mat-option value="Kilinochchi">Kilinochchi</mat-option>
+            <mat-option value="Kurunegala">Kurunegala</mat-option>
+            <mat-option value="Mannar">Mannar</mat-option>
+            <mat-option value="Matale">Matale</mat-option>
+            <mat-option value="Matara">Matara</mat-option>
+            <mat-option value="Moneragala">Moneragala</mat-option>
+            <mat-option value="Mullaitivu">Mullaitivu</mat-option>
+            <mat-option value="Nuwara Eliya">Nuwara Eliya</mat-option>
+            <mat-option value="Polonnaruwa">Polonnaruwa</mat-option>
+            <mat-option value="Puttalam">Puttalam</mat-option>
+            <mat-option value="Ratnapura">Ratnapura</mat-option>
+            <mat-option value="Trincomalee">Trincomalee</mat-option>
+            <mat-option value="Vavuniya">Vavuniya</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class ='full-width'>
+          <mat-select placeholder="Class Day" [(ngModel)]="dayInput" name='day'>
+            <mat-option value="Monday">Monday</mat-option>
+            <mat-option value="Tuesday">Tuesday</mat-option>
+            <mat-option value="Wednesday">Wednesday</mat-option>
+            <mat-option value="Thursday">Thursday</mat-option>
+            <mat-option value="Friday">Friday</mat-option>
+            <mat-option value="Saturday">Saturday</mat-option>
+            <mat-option value="Sunday">Sunday</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class ='full-width'>
+          <mat-select placeholder="Medium" [(ngModel)]="mediumInput" name='medium'>
+            <mat-option value="Sinhala">Sinhala</mat-option>
+            <mat-option value="English">English</mat-option>
+            <mat-option value="Tamil">Tamil</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class ='full-width'>
+          <mat-select placeholder="Class Type" [(ngModel)]="classTypeInput" name='classtype'>
+            <mat-option value="Hall Class">Hall Class</mat-option>
+            <mat-option value="Group Class">Group Class</mat-option>
+            <mat-option value="Limited Class">Limited Class</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button class="example-delete-tab-button" (click)="submit()" [disabled]= "editListAll || editListNew">
+          Add Details
+        </button>
+        <button mat-raised-button class="example-delete-tab-button" (click)="clear()" >
+          Clear All
+        </button>
+        <button mat-raised-button class="example-delete-tab-button" (click)="updateEditedFromAll()" [hidden] = "!editListAll">
+          Update
+        </button>
+        <button mat-raised-button class="example-delete-tab-button" (click)="updateEditedFromNew()" [hidden] = "!editListNew">
+          Update
+        </button>
+  </form>
+  </div>
+<!-- </div> -->
+
+<div class="container-fluid">
+<div class = 'row'>
+  <div class = 'col col-sm-6 col-md-6'>
+
+    <div class ="headers" align-items-center>
+      <h4>Newly Added Class Details</h4>
+    </div>
+
+    <div class= "addedDetails" *ngFor="let tab of classListNewlyAdded; let index = index;">
+      <mat-accordion>
+        <mat-expansion-panel class="imageExpansion">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{tab.primary}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{tab.class}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <b>Day         : </b><p>{{tab.day}}</p>
+          <b>Time        : </b><p>{{tab.time}}</p>
+          <b>Medium      : </b><p>{{tab.medium}}</p>
+          <b>Class type  : </b><p>{{tab.classType}}</p>
+          <b>City        : </b><p>{{tab.city}}</p>
+          <button mat-raised-button class="example-delete-tab-button" (click)="deleteFromNew(index)" >
+            Delete
+          </button>
+          <button mat-raised-button class="example-delete-tab-button" (click)="editFromNew(index)" [disabled]="editListAll">
+            Edit
+          </button>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+
+
+    <button mat-raised-button class="example-delete-tab-button" (click)="upload()"  id='buttonUploadAll'>
+    Save Changes   </button>
+  </div>
+
+  <div class='col col-md-6'>
+
+
+    <div class ="headers" align-items-cente>
+      <h4>Al Class Details</h4>
+      </div>
+
+      <div class= "addedDetails"  *ngFor="let tab of classListAll; let index = index;">
+        <mat-accordion>
+          <mat-expansion-panel class="imageExpansion">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{tab.primary}}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{tab.place}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <b>Day         : </b><p>{{tab.day}}</p>
+            <b>Time        : </b><p>{{tab.time}}</p>
+            <b>Medium      : </b><p>{{tab.medium}}</p>
+            <b>Class type  : </b><p>{{tab.classType}}</p>
+            <b>City        : </b><p>{{tab.city}}</p>
+            <button mat-raised-button class="example-delete-tab-button" (click)="deleteFromAll(index)">
+              Delete
+            </button>
+            <button mat-raised-button class="example-delete-tab-button" (click)="editFromAll(index)" [disabled]="editListNew">
+              Edit
+            </button>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+  </div>
 </div>
+
+</div>
+</div>
+
+
+

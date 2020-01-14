@@ -13,7 +13,6 @@ export class ViewProfilePersonComponent implements OnInit {
   email: string;
   response: any;
 
-
   constructor(
     private data: DataService,
     private http: HttpClient
@@ -22,13 +21,20 @@ export class ViewProfilePersonComponent implements OnInit {
   ngOnInit() {
     this.data.currentEmail.subscribe(message => this.email = message);
 
+    // this.email = localStorage.getItem('emailtemp');
+    // console.log("hereh here" +this.email);
+    // if (localStorage.getItem('emailtemp') && (this.email)) {
+    //   this.email = localStorage.getItem('emailtemp');
+    //   console.log("hearaer on hahd", this.email)
+
+    // }
+
     this.getAPIData().subscribe((response) => {
       console.log('response from GET API is ', response);
       this.response = response;
     }, ( error) => {
       console.log('error is ', error);
     });
-
   }
 
   getAPIData() {

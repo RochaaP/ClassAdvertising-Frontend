@@ -1,4 +1,36 @@
 <!-- <button type="button" class="btn btn-primary" (click)="getDetails();" >Get Profile Details</button> -->
+
+<!-- <div class="container">
+  <div class="row" style="margin-top: 5%;">
+      <div class="text-center col-md-12">
+          <input type="file" (change)="fileChangeEvent($event)" />
+      </div>
+  </div>
+  <div class="row" style="margin-top: 5%;">
+      <div class="text-center col-md-8">
+          <h5>Crop Image</h5>
+          <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="4 / 4"
+          [resizeToWidth]="256"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"></image-cropper>
+      </div>
+      <div class="text-center col-md-4">
+          <h5>Preview</h5>
+          <img [src]="croppedImage" />
+          <button type="button" class="btn btn-primary" (click)="uploadImagecropped()" >Upload</button>
+
+      </div>
+  </div>
+</div> -->
+
+
+
 <div class="container">
   <h3>Build Up the Profile</h3>
   <hr>
@@ -6,36 +38,47 @@
     <div class="col-md-3">
      <h5>Profile Picture</h5>
 
-      <div class="text-center">
-        <img src="//placehold.it/100" src="{{this.downloadURL}}"  class="avatar img-circle" class="img-thumbnail" alt="avatar">
-        <h6>Upload a different photo...</h6>
-        <!-- <input type="file" class=" buttonImage" (change)="upload($event)" accept=".png,.jpg" /> -->
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" (change)="upload($event)" accept=".png,.jpg">
-          <label class="custom-file-label">Choose file</label>
-        </div>
+     <div class="text-center">
+
+      <div *ngIf='uploadProfile'>
+        <img src="//placehold.it/100" src={{this.downloadURL}} class="avatar img-circle" class="img-thumbnail" alt="">
+        <a (click)="deleteProfile()" >Delete</a>
         <div *ngIf="percentageProfile | async as pct">
           Progress: {{ pct | number }}%
           <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
         </div>
-        <!-- <input type="file" class="form-control"> -->
       </div>
+
+      <div *ngIf="!uploadProfile">
+
+        <h6>Upload a different photo...</h6>
+        <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" />
+      <!-- <input type="file" class="form-control"> -->
+
+    </div>
+    </div>
+
 
       <div class="backgroundImage">
         <h5>Background Image</h5>
         <div class="text-center">
-          <img src="//placehold.it/100" src="{{this.backgroundImageURL}}"  class="avatar img-circle" class="img-thumbnail" alt="avatar">
-          <h6>Upload a different photo...</h6>
-          <!-- <input type="file" class="form-control buttonImage" (change)="uploadBackground($event)" accept=".png,.jpg" /> -->
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" (change)="uploadBackground($event)" accept=".png,.jpg">
-              <label class="custom-file-label">Choose file</label>
-            </div>
+
+          <div *ngIf='uploadBackground'>
+            <img src="//placehold.it/100" src={{this.backgroundImageURL}} class="avatar img-circle" class="img-thumbnail" alt="">
+            <a (click)="deleteBackground()" >Delete</a>
             <div *ngIf="percentageBackground | async as pct">
               Progress: {{ pct | number }}%
               <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
             </div>
-          <!-- <input type="file" class="form-control"> -->
+          </div>
+
+          <div *ngIf='!uploadBackground'>
+
+            <h6>Upload a different photo...</h6>
+            <input type="file" class="form-control" (change)="backgroundUpload($event)" accept=".png,.jpg" />
+            <!-- <input type="file" class="form-control"> -->
+          </div>
+
         </div>
       </div>
 
@@ -276,14 +319,22 @@
           </mat-step>
 
           <!-- Results Achievements -->
-          <mat-step label="Results Achievements" >
+          <mat-step label="Results Achievements" optional>
               <div class="form-group">
                 <label class="col-md-4 control-label"> Ranked achieved in Past Years:</label>
               </div>
 
                 <div>
                   <div class="image">
-                    <img src="//placehold.it/100" src="{{this.rankedProfileURLInput}}"  class="avatar img-circle" class="img-thumbnail" alt="avatar" col-md-3>
+                    <div *ngIf = "this.rankedProfileURLInput">
+                      <img src="{{this.rankedProfileURLInput}}"  class="avatar img-circle" class="img-thumbnail" alt="" col-md-3>
+                    </div>
+                    <div *ngIf = "!this.rankedProfileURLInput">
+
+                      <img  src="//placehold.it/100"   class="avatar img-circle" class="img-thumbnail" alt="" col-md-3>
+
+                    </div>
+
                     <h6>Upload a photo of the student...</h6>
                     <input type="file" class="form-control" (change)="uploadImageStudent($event)" accept=".png,.jpg" />
                     <div *ngIf="percentageStudent | async as pct">
@@ -323,7 +374,7 @@
                   if you have uploaded a profile photo wait till photo is shown.
                 </div>
 
-                <div class= "addedDetails col-md-8" *ngFor="let tab of cards">
+                <div class= "addedDetails col-md-8" *ngFor="let tab of cards; let index = index">
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title>
@@ -336,22 +387,28 @@
 
                       </mat-expansion-panel-header>
                         <div class="image">
-                          <img src="//placehold.it/100" src="{{tab.rankedProfileURL}}"  class="avatar img-circle" class="img-thumbnail" alt="avatar" col-md-3>
+                          <div *ngIf = "tab.rankedProfileURL">
+                            <img src="{{tab.rankedProfileURL}}"  class="avatar img-circle" class="img-thumbnail" alt="" col-md-3>
+                          </div>
+                          <div *ngIf = "!tab.rankedProfileURL">
+                            <img  src="//placehold.it/100"   class="avatar img-circle" class="img-thumbnail" alt="" col-md-3>
+
+                          </div>
+                          <!-- <img src="//placehold.it/100" src="{{tab.rankedProfileURL}}"  class="avatar img-circle" class="img-thumbnail" alt="" col-md-3> -->
                         </div>
-                        <b>District</b> <p>{{tab.District}}</p>
+                        <b>District</b> <p>{{tab.rankedDistrictName}}</p>
                         <b>District Rank</b> <p>{{tab.rankedDistrict}}</p>
                         <b>Island Rank</b> <p>{{tab.rankedIsland}}</p>
+                        <div class="form-group">
+                          <button type="button" class="btn btn-primary" (click)="deleteResultAchievement(index)" >Delete</button>
+                      </div>
                       </mat-expansion-panel>
-
-                      <div class="form-group">
-                        <button type="button" class="btn btn-primary" (click)="deleteValues()" disabled >Delete</button>
-                    </div>
                 </div>
 
           </mat-step>
 
           <!-- personal Achievements -->
-          <mat-step label="personal Achievements">
+          <mat-step label="Personal Achievements" optional>
 
               <div class="form-group">
                 <label class="col-md-3 control-label">Personal Achievements</label>
@@ -365,13 +422,13 @@
                 <button type="button" class="btn btn-primary" (click)="addPersonalAchievements()">Add Personal Achievements</button>
               </div>
 
-              <div class= "addedDetails col-md-8" *ngFor="let list of achievementslist">
+              <div class= "addedDetails col-md-8" *ngFor="let list of achievementslist; let index =  index">
                 <mat-list role="list">
                   <mat-list-item role="listitem">{{list}}</mat-list-item>
                 </mat-list>
 
                     <div class="form-group">
-                      <button type="button" class="btn btn-primary" (click)="deleteValues()" disabled >Delete</button>
+                      <button type="button" class="btn btn-primary" (click)="deletePersonalAchievements(index)">Delete</button>
                   </div>
               </div>
           </mat-step>
