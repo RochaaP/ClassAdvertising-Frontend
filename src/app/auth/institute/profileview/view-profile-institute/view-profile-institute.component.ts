@@ -20,7 +20,11 @@ export class ViewProfileInstituteComponent implements OnInit {
 
   ngOnInit() {
     this.data.currentEmail.subscribe(message => this.email = message);
-    console.log('this is from insti profile '+ this.email);
+    if (!this.email) {
+      this.email = localStorage.getItem('navigateUser');
+    }
+
+    console.log('this is from insti profile ' + this.email);
     this.getAPIData().subscribe((response) => {
       console.log('response from GET API is ', response);
       this.response = response;

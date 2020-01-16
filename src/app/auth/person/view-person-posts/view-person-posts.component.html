@@ -103,14 +103,17 @@
         </mat-expansion-panel-header>
         <ul *ngFor="let list of field.data.achievement">
           <p>
-            <img src={{list.rankedProfileURL}} class="avatar" alt="avatar">
+            <img *ngIf = "list.rankedProfileURL" src={{list.rankedProfileURL}} class="avatar" alt="">
+            <img *ngIf = "!list.rankedProfileURL" src="assets/propic/propic.png" class="avatar" alt="">
           </p>
+          <div>
           <b>Name of the student</b><p>{{list.rankedName}}</p>
           <b>Year</b><p>{{list.rankedYear}}</p>
           <b>District</b><p>{{list.rankedDistrictName}}</p>
           <b>District Rank</b><p>{{list.rankedDistrict}}</p>
           <b>Island Rank</b><p>{{list.rankedIsland}}</p>
           <mat-divider></mat-divider>
+          </div>
 
         </ul>
 

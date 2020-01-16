@@ -1,30 +1,18 @@
 
-
-
+<div class ="container-fluid">
 <div class="parallax">
 <div class="row" *ngIf="!editUserProfile">
-  <div class="text-center" style="width: 100%;margin: 20px;">
+
+  <div class="text-center">
     <h4 *ngIf='loginView'>Login</h4>
     <h4 *ngIf='!loginView'>Register</h4>
   </div>
-  <div class="" style="width: 500px; margin: auto">
+
+  <div class=" mainClass col-md-6 col-lg-6" >
 
     <div class="card" *ngIf='!circleView'>
       <!-- When Uses is Not Logged In -->
       <div class="card-body" *ngIf="!userDetails">
-        <div class="row">
-          <div class="col-sm-12 text-center">
-
-            <!-- <div class="btn-group">
-              <button type="button" class="btn" [ngClass]="{'btn-primary active': selectedVal == 'login' }"
-                (click)="onValChange('login')"><strong>Login</strong></button>
-              <button type="button" class="btn" [ngClass]="{'btn-primary active': selectedVal == 'register' }"
-                (click)="onValChange('register')"><strong>Register</strong></button>
-            </div> -->
-
-          </div>
-        </div>
-
 
         <!-- login -->
         <div  *ngIf="!isForgotPassword">
@@ -36,7 +24,7 @@
 
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password" placeholder="Password">
+              <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password" placeholder="Password" (keydown.enter)='loginUser()'>
             </div>
 
             <div class="form-group">
@@ -51,15 +39,6 @@
 
           <!-- register -->
           <span *ngIf="selectedVal == 'register'">
-
-            <!-- <div class="col-sm-12 text-center form-group">
-              <div class="btn-group">
-                <button type="button" class="btn" [ngClass]="{'btn-primary active': registerItem == 'person' }"
-                  (click)="onLoginItemChange('person')"><strong>Person</strong></button>
-                <button type="button" class="btn" [ngClass]="{'btn-primary active': registerItem == 'institute' }"
-                  (click)="onLoginItemChange('institute')"><strong>institute</strong></button>
-              </div>
-            </div> -->
 
             <div *ngIf="registerItem == 'person'">
               <h3>Person Registration</h3>
@@ -86,7 +65,7 @@
 
               <div class="form-group">
                 <label for="contact">Contact</label>
-                <input type="contact" class="form-control" [(ngModel)]="contactInput" id="contact" placeholder="Contact">
+                <input type="contact" class="form-control" [(ngModel)]="contactInput" id="contact" placeholder="Contact" (keydown.enter)='registerUser()'>
               </div>
 
               <div class="form-group">
@@ -114,7 +93,7 @@
 
               <div class="form-group">
                 <label for="contact">Contact</label>
-                <input type="contact" class="form-control" [(ngModel)]="contactInput" id="contact" placeholder="Contact">
+                <input type="contact" class="form-control" [(ngModel)]="contactInput" id="contact" placeholder="Contact" (keydown.enter)='registerUser()'>
               </div>
 
               <div class="form-group">
@@ -187,9 +166,9 @@
   </div>
 </div>
 
-<div class="" style="width: 700px; margin: auto" *ngIf='circleView'>
+<div class=" mainClass text-center circle" *ngIf='circleView'>
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-md-4 col-lg-4">
 
       <!-- normal -->
       <div class="ih-item circle effect6 scale_up" (click)='registerPerson()'><a>
@@ -201,7 +180,7 @@
       <!-- end normal -->
 
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-md-4 col-lg-4">
 
       <!-- colored -->
       <div class="ih-item circle colored effect6 scale_up" (click)='registerInstitute()'><a>
@@ -214,7 +193,7 @@
 
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-md-4 col-lg-4">
 
       <!-- normal -->
       <div class="ih-item circle effect6 scale_up"><a>
@@ -230,7 +209,8 @@
 
 </div>
 
-
+</div>
+</div>
 
 
 <!-- Scale up-->

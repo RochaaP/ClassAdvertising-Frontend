@@ -100,9 +100,9 @@ export class ClassesInstituteComponent implements OnInit {
   //   console.log(this.cards);
   // }
 
-  submit(index: number) {
+  submit() {
     this.details = {
-      index,
+
       subject: this.subjectInput,
       primary: this.primaryInput,
       city: this.cityInput,

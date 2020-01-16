@@ -238,11 +238,13 @@ searchAllTogether() {
 
   profileView(email: string, name: string, lastName: string) {
     this.dataService.passEmail(email);
+    localStorage.setItem('navigateUser', email);
     this.router.navigate(['/viewprofile/person/' + name + ' ' + lastName]);
   }
 
   profileView2(email: string, name: string) {
     this.dataService.passEmail(email);
+    localStorage.setItem('navigateUser', email);
     this.router.navigate(['/viewprofile/person/' + name]);
   }
 

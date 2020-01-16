@@ -99,9 +99,9 @@
 </div> -->
 
 
-  <div class ="col">
+  <div class ="container-fluid">
       <ul *ngFor ="let field of response">
-        <div class='postContainer '>
+        <div class='postContainer col-md-9'>
 
           <div class="row">
 
@@ -110,18 +110,20 @@
             </div>
 
               <div class="proPicImage">
-                <img class="header-image" src ={{field.data.proPic}} alt="">
+                <img *ngIf='field.data.proPic' class="header-image" src ={{field.data.proPic}} alt="">
+                <img *ngIf='!field.data.proPic' class="header-image" src ='../../../assets/propic/propic.png' alt="">
               </div>
 
               <div class= "col">
-                <p class="title">{{field.data.title}}</p>
                 <p>By <a class="click" (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'> {{field.data.name}}</a></p>
+                <p class="title">{{field.data.title}}</p>
+                <!-- {{field.data.create.toDate  | date: 'dd.mm.yyyy hh:MM:ss'}} -->
               </div>
           </div>
 
 
           <div class ="row">
-            <div class="col-md-4 col-lg">
+            <div class="col">
               <img src={{field.data.path}} alt="" class="zoom">
             </div>
             <div class="col-md-4 col-lg">

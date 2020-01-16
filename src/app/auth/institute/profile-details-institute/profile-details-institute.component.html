@@ -1,5 +1,5 @@
 <div *ngFor="let field of response">
-  <div class="continer">
+  <div class="container">
   <mat-accordion>
     <mat-expansion-panel expanded>
       <mat-expansion-panel-header>
@@ -7,7 +7,7 @@
           Personal data
         </mat-panel-title>
         <mat-panel-description>
-          Type your name and age
+          <!-- Type your name and age -->
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>{{field.data.email}}</p>
@@ -20,7 +20,7 @@
         Location
         </mat-panel-title>
         <mat-panel-description>
-          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+          <!-- Currently I am {{panelOpenState ? 'open' : 'closed'}} -->
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>{{field.data.streetNo1}}</p>

@@ -48,6 +48,7 @@ export class NewsfeedComponent implements OnInit {
 
   triggered(email: string, registerItem: string, name: string) {
     localStorage.setItem('emailtemp', email);
+    localStorage.setItem('navigateUser', email);
     if (registerItem === 'person') {
       this.data.passEmail(email);
       this.router.navigate(['/viewprofile/person/' + name]);

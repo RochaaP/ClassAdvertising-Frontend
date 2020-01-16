@@ -176,6 +176,7 @@ export class InstituteSearchComponent implements OnInit {
   profileView(email: string, name: string) {
     console.log("yes")
     this.dataService.passEmail(email);
+    localStorage.setItem('navigateUser', email);
     this.router.navigate(['/viewprofile/institute/' + name]);
   }
 }

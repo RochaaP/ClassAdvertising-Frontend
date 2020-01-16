@@ -1,7 +1,7 @@
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
+<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container-fluid">
     <div *ngFor="let field of response">
-      <div class="col-sm-10">
+      <div class="col-sm-6">
         <div class="" style="width: 900px; margin: auto">
           <div class="panel panel-white profile-widget">
               <div class="row">
@@ -17,8 +17,8 @@
                       <div class="details">
                           <h4>{{field.data.firstName}}  {{field.data.lastName}} <i class="fa fa-sheild"></i></h4>
                           <div class="mg-top-10">
-                              <!-- <a href="#" class="btn btn-default">About Kevin</a>
-                              <a href="#" class="btn btn-success">Add Kevin</a> -->
+                              <a href="#" class="btn btn-default">About Kevin</a>
+                              <a href="#" class="btn btn-success">Add Kevin</a>
                           </div>
                       </div>
                   </div>
@@ -28,9 +28,9 @@
         </div>
       </div>
 </div>
-<!-- <app-view-posts ></app-view-posts> -->
+<app-view-posts ></app-view-posts>
 
-<div class="col-sm-10">
+<div class="col-sm-6">
   <div class="tabssub">
       <mat-tab-group>
 
@@ -52,4 +52,47 @@
 
     </mat-tab-group>
     </div>
+</div> -->
+
+<div class = 'container-fluid'>
+  <div *ngFor="let field of response">
+
+      <div class="flapImage col-12" id="idHot">
+        <img *ngIf="field.data.backgroundImagePath" src={{field.data.backgroundImagePath}}  class="img-fluid backgroundImage" />
+        <img *ngIf="!field.data.backgroundImagePath" src='assets/propic/noPphotoBackground.png'  class="img-fluid backgroundImage" />
+
+        <img *ngIf="field.data.profileImagePath" src={{field.data.profileImagePath}}  class="avatar" />
+        <img *ngIf="!field.data.profileImagePath" src='assets/propic/propic.png'  class="avatar" />
+     </div>
+
+     <div class="text-center">
+      <h4 >{{field.data.firstName}} {{field.data.lastName}}</h4>
+    </div>
+
+  </div>
 </div>
+
+<!-- <div class="col-9"> -->
+  <div class="tabssub">
+      <mat-tab-group>
+
+        <mat-tab label="About">
+          <app-view-person-posts [childMessage]="this.email"></app-view-person-posts>
+        </mat-tab>
+
+        <mat-tab label="Posts">
+          <app-view-posts [childMessage]="this.email"></app-view-posts>
+        </mat-tab>
+
+        <mat-tab label="Classes">
+          <app-classes [childMessage]="this.email"></app-classes>
+        </mat-tab>
+
+        <mat-tab label="Papers" >
+          <app-papers [childMessage]="this.email"></app-papers>
+        </mat-tab>
+
+    </mat-tab-group>
+  </div>
+<!-- </div> -->
+

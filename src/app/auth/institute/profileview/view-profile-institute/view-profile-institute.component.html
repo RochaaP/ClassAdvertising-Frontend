@@ -1,37 +1,22 @@
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
-  <div class="row" *ngFor="let field of response">
-      <div class="col-sm-10">
-        <div class="" style="width: 900px; margin: auto">
-          <div class="panel panel-white profile-widget">
-              <div class="row">
-                  <div class="col-sm-12">
-                      <div class="image-container bg2">
-                          <div class="parent">
-                            <img src={{field.data.backgroundImagePath}}/>
-                          </div>
-                          <img src={{field.data.profileImagePath}} class="avatar" alt="avatar">
-                      </div>
-                  </div>
-                  <div class="col-sm-12">
-                      <div class="details">
-                          <h4>{{field.data.name}}  <i class="fa fa-sheild"></i></h4>
-                          <div class="mg-top-10">
-                              <!-- <a href="#" class="btn btn-default">About Kevin</a>
-                              <a href="#" class="btn btn-success">Add Kevin</a> -->
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
+<div class = 'container-fluid'>
+  <div *ngFor="let field of response">
+
+      <div class="flapImage col-12" id="idHot">
+        <img *ngIf="field.data.backgroundImagePath" src={{field.data.backgroundImagePath}}  class="img-fluid backgroundImage" />
+        <img *ngIf="!field.data.backgroundImagePath" src='assets/propic/noPphotoBackground.png'  class="img-fluid backgroundImage" />
+
+        <img *ngIf="field.data.profileImagePath" src={{field.data.profileImagePath}}  class="avatar" />
+        <img *ngIf="!field.data.profileImagePath" src='assets/propic/propic.png'  class="avatar" />
+     </div>
+
+     <div class="text-center">
+      <h4 >{{field.data.name}}</h4>
+    </div>
+
   </div>
+</div>
 
-
-<div class="col-sm-10">
-  <div class="tabssub">
+  <div class="tabssub col-9">
       <mat-tab-group>
 
         <mat-tab label="About">
@@ -49,6 +34,6 @@
         <mat-tab label="Papers">
           <app-papers [childMessage]="this.email"></app-papers>
         </mat-tab>
+
     </mat-tab-group>
-    </div>
-</div>
+  </div>

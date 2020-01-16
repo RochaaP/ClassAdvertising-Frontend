@@ -97,9 +97,8 @@ export class ClassesPersonComponent implements OnInit {
   //   console.log(this.cards);
   // }
 
-  submit(index: number) {
+  submit() {
     this.details = {
-      index,
       subject: this.subjectInput,
       place: this.placeInput,
       primary: this.primaryInput,

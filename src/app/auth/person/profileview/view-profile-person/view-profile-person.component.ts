@@ -19,7 +19,11 @@ export class ViewProfilePersonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.data.currentEmail.subscribe(message => this.email = message);
+    // this.data.currentEmail.subscribe(message => this.email = message);
+    // if (!this.email) {
+      this.email = localStorage.getItem('navigateUser');
+      console.log('email from local storage '+ this.email )
+    // }
 
     // this.email = localStorage.getItem('emailtemp');
     // console.log("hereh here" +this.email);

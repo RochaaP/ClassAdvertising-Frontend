@@ -1,94 +1,96 @@
-<form  style="overflow: hidden; margin: 20px;">
-  <div class="row">
-      <div class="text-center" style="width: 100%;margin: 20px;">
-          <h4>Post an Advertisement</h4>
-      </div>
+<div class = "container-fluid">
+  <form class = 'form'>
+    <div class="row">
+        <div class="text-center">
+            <h4>Post an Advertisement</h4>
+        </div>
 
-      <div style="width: 500px; margin: auto; overflow: hidden;">
+        <div class = "col-6 col-6 formInputs">
 
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Title" [(ngModel)]="titleInput" name='title' required>
-          </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Title" [(ngModel)]="titleInput" name='title' required>
+            </mat-form-field>
 
-          <mat-form-field class="full-width">
-            <textarea matInput placeholder="Description" [(ngModel)]="descriptionInput" name='decription' required></textarea>
-            <mat-hint>Make this Short</mat-hint>
-          </mat-form-field>
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="Description" [(ngModel)]="descriptionInput" name='decription' required></textarea>
+              <mat-hint>Make this Short</mat-hint>
+            </mat-form-field>
 
-          <mat-form-field class="full-width">
-            <input matInput placeholder="City" [(ngModel)]="cityInput" name='city' required>
-          </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="City" [(ngModel)]="cityInput" name='city' required>
+            </mat-form-field>
 
-          <mat-form-field class ='full-width'>
-            <mat-select placeholder="District" [(ngModel)]="districtInput" name='District' required>
-              <mat-option value="Ampara">Ampara</mat-option>
-              <mat-option value="Anuradhapura">Anuradhapura</mat-option>
-              <mat-option value="Badulla">Badulla</mat-option>
-              <mat-option value="Batticaloa">Batticaloa</mat-option>
-              <mat-option value="Colombo">Colombo</mat-option>
-              <mat-option value="Galle">Galle</mat-option>
-              <mat-option value="Gampaha">Gampaha</mat-option>
-              <mat-option value="Hambantota">Hambantota</mat-option>
-              <mat-option value="Jaffna">Jaffna</mat-option>
-              <mat-option value="Kalutara">Kalutara</mat-option>
-              <mat-option value="Kandy">Kandy</mat-option>
-              <mat-option value="Kegalle">Kegalle</mat-option>
-              <mat-option value="Kilinochchi">Kilinochchi</mat-option>
-              <mat-option value="Kurunegala">Kurunegala</mat-option>
-              <mat-option value="Mannar">Mannar</mat-option>
-              <mat-option value="Matale">Matale</mat-option>
-              <mat-option value="Matara">Matara</mat-option>
-              <mat-option value="Moneragala">Moneragala</mat-option>
-              <mat-option value="Mullaitivu">Mullaitivu</mat-option>
-              <mat-option value="Nuwara Eliya">Nuwara Eliya</mat-option>
-              <mat-option value="Polonnaruwa">Polonnaruwa</mat-option>
-              <mat-option value="Puttalam">Puttalam</mat-option>
-              <mat-option value="Ratnapura">Ratnapura</mat-option>
-              <mat-option value="Trincomalee">Trincomalee</mat-option>
-              <mat-option value="Vavuniya">Vavuniya</mat-option>
-            </mat-select>
-          </mat-form-field>
+            <mat-form-field class ='full-width'>
+              <mat-select placeholder="District" [(ngModel)]="districtInput" name='District' required>
+                <mat-option value="Ampara">Ampara</mat-option>
+                <mat-option value="Anuradhapura">Anuradhapura</mat-option>
+                <mat-option value="Badulla">Badulla</mat-option>
+                <mat-option value="Batticaloa">Batticaloa</mat-option>
+                <mat-option value="Colombo">Colombo</mat-option>
+                <mat-option value="Galle">Galle</mat-option>
+                <mat-option value="Gampaha">Gampaha</mat-option>
+                <mat-option value="Hambantota">Hambantota</mat-option>
+                <mat-option value="Jaffna">Jaffna</mat-option>
+                <mat-option value="Kalutara">Kalutara</mat-option>
+                <mat-option value="Kandy">Kandy</mat-option>
+                <mat-option value="Kegalle">Kegalle</mat-option>
+                <mat-option value="Kilinochchi">Kilinochchi</mat-option>
+                <mat-option value="Kurunegala">Kurunegala</mat-option>
+                <mat-option value="Mannar">Mannar</mat-option>
+                <mat-option value="Matale">Matale</mat-option>
+                <mat-option value="Matara">Matara</mat-option>
+                <mat-option value="Moneragala">Moneragala</mat-option>
+                <mat-option value="Mullaitivu">Mullaitivu</mat-option>
+                <mat-option value="Nuwara Eliya">Nuwara Eliya</mat-option>
+                <mat-option value="Polonnaruwa">Polonnaruwa</mat-option>
+                <mat-option value="Puttalam">Puttalam</mat-option>
+                <mat-option value="Ratnapura">Ratnapura</mat-option>
+                <mat-option value="Trincomalee">Trincomalee</mat-option>
+                <mat-option value="Vavuniya">Vavuniya</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Contact" [(ngModel)]="contactInput" name='contact' required>
-          </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Contact" [(ngModel)]="contactInput" name='contact' required>
+            </mat-form-field>
 
-          <div class="form-group">
-              <div class="dropzone" appdropzone  (hovered)="toggleHover($event)" (dropped)="onDrop($event)" [class.hovering]="isHovering">
-                <!-- <div class="col-md-3"> -->
-                <div class="text-center">
-                  <div *ngIf ='uploadImage'>
-                    <img src="{{this.downloadURL}}"  class="avatar img-circle" class="img-thumbnail" alt="">
-                    <a (click)="deleteImage()" >Delete</a>
-                    <div *ngIf="percentageposts | async as pct">
-                      Progress: {{ pct | number }}%
-                      <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+            <div class="form-group">
+                <div class="dropzone" appdropzone  (hovered)="toggleHover($event)" (dropped)="onDrop($event)" [class.hovering]="isHovering">
+                  <!-- <div class="col-md-3"> -->
+                  <div class="text-center">
+                    <div *ngIf ='uploadImage'>
+                      <img src="{{this.downloadURL}}"  class="avatar img-circle" class="img-thumbnail" alt="">
+                      <a (click)="deleteImage()" >Delete</a>
+                      <div *ngIf="percentageposts | async as pct">
+                        Progress: {{ pct | number }}%
+                        <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+                      </div>
                     </div>
+
+                    <div *ngIf='!uploadImage'>
+                      <h6>Upload a photo...*</h6>
+                      <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" required />
+                    </div>
+
+
+                    <!-- <input type="file" class="form-control"> -->
                   </div>
-
-                  <div *ngIf='!uploadImage'>
-                    <h6>Upload a photo...*</h6>
-                    <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" required />
-                  </div>
-
-
-                  <!-- <input type="file" class="form-control"> -->
+                <!-- </div> -->
                 </div>
-              <!-- </div> -->
-              </div>
-          </div>
+            </div>
 
 
-          <div class="form-group">
-              <div *ngFor="let file of files">
-                  <app-upload-task [file]="file" ></app-upload-task>
-              </div>
-              <!-- <h4>{{path}}</h4> -->
-          </div>
-          <div class="form-group">
-              <button type="submit" class="btn btn-success" (click)="onSubmit()">Post</button>
-              if you have uploaded a post wait till shown.
-          </div>
-      </div>
-  </div>
-</form>
+            <div class="form-group">
+                <div *ngFor="let file of files">
+                    <app-upload-task [file]="file" ></app-upload-task>
+                </div>
+                <!-- <h4>{{path}}</h4> -->
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success" (click)="onSubmit()">Post</button>
+                if you have uploaded a post wait till shown.
+            </div>
+        </div>
+    </div>
+  </form>
+</div>

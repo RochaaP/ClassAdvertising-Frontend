@@ -85,10 +85,12 @@ export class NavigationComponent implements OnInit {
     localStorage.setItem('emailtemp', this.userDetails.email);
     if (this.registerItem === 'person') {
       this.dataService.passEmail(this.userDetails.email);
+      localStorage.setItem('navigateUser', this.userDetails.email);
       this.router.navigate(['viewprofile/person/' + this.userName]);
     }
     else if (this.registerItem === 'institute'){
       this.dataService.passEmail(this.userDetails.email);
+      localStorage.setItem('navigateUser', this.userDetails.email);
       this.router.navigate(['viewprofile/institute/' + this.userName]);
     }
   }
