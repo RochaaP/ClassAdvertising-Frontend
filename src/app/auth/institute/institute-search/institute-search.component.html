@@ -8,7 +8,7 @@
 
         <!-- <div *ngIf="!showByName"> -->
           <mat-form-field class="full-width">
-            <input matInput placeholder="Enter Name" [(ngModel)]='searchNameInput' name='searchName' required>
+            <input matInput placeholder="Enter Name" [(ngModel)]='searchNameInput' name='searchName' required (keydown.enter)='searchName()'>
           </mat-form-field>
           <div class = 'full-width'>
             <button mat-flat-button (click)='searchName()'>Search</button>
@@ -30,7 +30,7 @@
             <input matInput placeholder="Enter District" [(ngModel)]='searchDistrictInput' name='searchClass' required>
           </mat-form-field>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Enter Subject" [(ngModel)]='searchSubjectInput' name='searchClass' required>
+            <input matInput placeholder="Enter Subject" [(ngModel)]='searchSubjectInput' name='searchClass' required (keydown.enter)='searchClass()'>
           </mat-form-field>
 
           <div class ='full-width'>

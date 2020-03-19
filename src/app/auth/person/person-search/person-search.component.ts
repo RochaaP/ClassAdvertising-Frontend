@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/service/share/data.service';
 import { ThrowStmt } from '@angular/compiler';
@@ -20,6 +20,9 @@ export class PersonSearchComponent implements OnInit {
   email: string;
   verifiedif: boolean;
 
+  // screenHeight: number;
+  // screenWidth: number;
+  smallerScreens: boolean;
 
   personResponse: any;
   classResponse: any;
@@ -51,7 +54,24 @@ export class PersonSearchComponent implements OnInit {
     public router: Router,
     private snackBar: MatSnackBar,
     private spinnerService: Ng4LoadingSpinnerService
-  ) { }
+  ) {
+    this.getScreenSize();
+   }
+
+   @HostListener('window:resize', ['$event'])
+   getScreenSize(event?) {
+        //  this.screenHeight = window.innerHeight;
+        //  this.screenWidth = window.innerWidth;
+
+         if (window.innerWidth < 768) {
+            this.smallerScreens = true;
+         }
+         else {
+           this.smallerScreens = false;
+         }
+        //  console.log(this.screenHeight, this.screenWidth);
+   }
+
 
   ngOnInit() {
     this.spinnerService.show();
@@ -64,14 +84,6 @@ export class PersonSearchComponent implements OnInit {
       console.log('response what response ', instituteResponse);
       this.personResponse = instituteResponse;
       this.spinnerService.hide();
-      // this.spinnerService.hide();
-      // for (const index in this.response) {
-      //   if (this.response[index].data.registerItem === 'person') {
-      //     this.personResponse.push(this.response[index]);
-      //   } else if (this.response[index].data.registerItem === 'institute') {
-      //     this.instituteResponse.push(this.response[index]);
-      //   }
-      // }
     }, ( error) => {
       console.log('error is ', error);
     });
@@ -126,6 +138,10 @@ export class PersonSearchComponent implements OnInit {
       }
     }
     this.spinnerService.hide();
+    if (this.smallerScreens) {
+      window.scrollTo({top: 600, behavior: 'smooth'});
+    }
+
   }
 
 
@@ -163,6 +179,10 @@ searchAllTogether() {
     }
   }
   this.spinnerService.hide();
+  if (this.smallerScreens) {
+    window.scrollTo({top: 600, behavior: 'smooth'});
+  }
+
 
 }
 
@@ -197,6 +217,10 @@ searchAllTogether() {
       }
     }
     this.spinnerService.hide();
+    if (this.smallerScreens) {
+      window.scrollTo({top: 600, behavior: 'smooth'});
+    }
+
   }
 
 

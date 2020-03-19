@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { NgaReadMoreModule } from 'nga-read-more';
 
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,6 +27,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -62,6 +64,7 @@ import { ClassesViewInstituteComponent } from './auth/institute/classes-view-ins
 import { ProfilesSearchComponent } from './auth/common/profiles-search/profiles-search.component';
 import { PersonSearchComponent } from './auth/person/person-search/person-search.component';
 import { InstituteSearchComponent } from './auth/institute/institute-search/institute-search.component';
+import { fromEventPattern } from 'rxjs';
 
 
 const appRoutes: Routes = [
@@ -130,6 +133,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     ImageCropperModule,
     Ng4LoadingSpinnerModule.forRoot(),
+    NgaReadMoreModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -155,7 +159,9 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatProgressBarModule,
     MatIconModule,
-    MatRadioModule
+    MatRadioModule,
+    MatPaginatorModule
+
   ],
   providers: [],
   bootstrap: [RootComponent]

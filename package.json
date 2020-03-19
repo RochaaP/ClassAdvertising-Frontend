@@ -33,6 +33,7 @@
     "jquery": "^3.4.1",
     "lightbox2": "^2.11.1",
     "ng4-loading-spinner": "^1.2.3",
+    "nga-read-more": "0.0.3",
     "ngx-image-cropper": "^2.0.4",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",

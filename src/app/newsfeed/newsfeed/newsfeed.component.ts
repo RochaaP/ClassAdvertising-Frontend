@@ -21,6 +21,9 @@ export class NewsfeedComponent implements OnInit {
 
   firstReload: string;
 
+  postsLength: number;
+  pageSize: number;
+
   constructor(
     private http: HttpClient,
     public router: Router,
@@ -36,6 +39,10 @@ export class NewsfeedComponent implements OnInit {
     this.getAPIData().subscribe((response) => {
       console.log('response from GET API is ', response);
       this.response = response;
+      this.postsLength = Object.keys(this.response).length;
+      console.log('hi there this is for eng ' + this.postsLength);
+      this.pageSize = 10;
+
     }, ( error) => {
       console.log('error is ', error);
     });
@@ -52,9 +59,14 @@ export class NewsfeedComponent implements OnInit {
     if (registerItem === 'person') {
       this.data.passEmail(email);
       this.router.navigate(['/viewprofile/person/' + name]);
-    } else if (registerItem === 'institute') {
+    } 
+    else if (registerItem === 'institute') {
       this.data.passEmail(email);
       this.router.navigate(['/viewprofile/institute/' + name]);
+    }
+    else if (registerItem === 'student') {
+      this.data.passEmail(email);
+      this.router.navigate(['/viewprofile/student/' + name]);
     }
   }
 

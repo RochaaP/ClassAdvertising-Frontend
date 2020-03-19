@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSearch, faBell, faUser, faSchool, faSignOutAlt,
+import { faSearch, faBell, faUser, faSchool, faSignOutAlt, faIdBadge,
          faChalkboardTeacher, faAd, faIdCard, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from '../service/auth/authentication.service';
 import { DataService } from '../service/share/data.service';
@@ -35,6 +35,7 @@ export class NavigationComponent implements OnInit {
   faIdCard = faIdCard;
   faUserFriends = faUserFriends;
   faSignOutAlt = faSignOutAlt;
+  faIdBadge = faIdBadge;
 
 
   item: string[];
@@ -64,9 +65,6 @@ export class NavigationComponent implements OnInit {
       this.userLogged = false;
    }
   }
-  // search() {
-  //   this.dataService.passSearch(this.searchInput);
-  // }
 
   logoutUser() {
     this.authService.logout()
@@ -88,10 +86,15 @@ export class NavigationComponent implements OnInit {
       localStorage.setItem('navigateUser', this.userDetails.email);
       this.router.navigate(['viewprofile/person/' + this.userName]);
     }
-    else if (this.registerItem === 'institute'){
+    else if (this.registerItem === 'institute') {
       this.dataService.passEmail(this.userDetails.email);
       localStorage.setItem('navigateUser', this.userDetails.email);
       this.router.navigate(['viewprofile/institute/' + this.userName]);
+    }
+    else if (this.registerItem === 'student') {
+      this.dataService.passEmail(this.userDetails.email);
+      localStorage.setItem('navigateUser', this.userDetails.email);
+      this.router.navigate(['viewprofile/student/' + this.userName]);
     }
   }
 
@@ -105,6 +108,9 @@ export class NavigationComponent implements OnInit {
     }
     else if (this.registerItem === 'institute'){
       this.router.navigate(['/editprofile/institute']);
+    }
+    else if (this.registerItem === 'student'){
+      this.router.navigate(['/editprofile/student']);
     }
   }
 

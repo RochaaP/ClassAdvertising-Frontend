@@ -88,6 +88,7 @@ export class PersonProfileComponent implements OnInit {
   tab = [];
   achievementslist = [];
   response: any;
+  // show: boolean;
   // lists = [];
 
   tabs = [];
@@ -128,17 +129,20 @@ export class PersonProfileComponent implements OnInit {
       this.firstNameInput = response[0].data.firstName;
       this.lastNameInput = response[0].data.lastName;
       this.downloadURL =  response[0].data.profileImagePath;
+
       if (!this.downloadURL) {
         this.uploadProfile = false;
       } else {
         this.uploadProfile = true;
       }
+
       this.backgroundImageURL = response[0].data.backgroundImagePath;
       if (!this.backgroundImageURL) {
         this.uploadBackground = false;
       } else {
          this.uploadBackground = true;
       }
+
       this.degreeInput = response[0].data.degree;
       this.universityInput = response[0].data.university;
       this.yearInput = response[0].data.degreeYear;
@@ -170,6 +174,14 @@ export class PersonProfileComponent implements OnInit {
   getAPIData() {
     return this.http.post('/api/getUserData/person', {email: this.emailInput} );
   }
+  // event() {
+  //   if (this.titleInput === 'Other') {
+  //       this.show = true;
+  //   }
+  //   else {
+  //     this.show = false;
+  //   }
+  // }
 
   eventUniversity(event: { target: { checked: any; }; }) {
     if (event.target.checked) {

@@ -243,16 +243,39 @@ div:last-of-type span {
 
 
 ///////posts on newsfeed///////
+.container-fluid{
+  margin-top: 20px;
+}
+.postfield{
+  // background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+  // https://www.scottlib.org/ImageRepository/Document?documentID=3348
+  background: url('http://www.lucerne.k12.ca.us/images/books%20background.jpg') no-repeat center center fixed ;
 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
 .postContainer{
   // height: 90%;
   // display: flex;
   // width: 700px;
   margin-top: 20px;
+  border-radius: 20px;
+  // padding-top: 20px;
   // justify-content: center;
   // align-items: center;
   padding: 15px;
-  background-color: #b8abab;
+  // background-color: #80d474;
+//   background: #00B4DB;  /* fallback for old browsers */
+// background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
+// background: linear-gradient(to right, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  background: #1f4037;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #99f2c8, #2a4c43);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
   box-shadow: 1px 12px 54px rgba(22, 21, 21, 0.2);
 
   margin:0 auto;
@@ -305,9 +328,10 @@ div:last-of-type span {
 
 .zoom {
   max-width: 300px;
-  width: 100%;
+  // width: 100%;
   // height: auto;
-  max-height: 350px;
+  max-height: 250px;
+  width: 100%;
   transition: transform .5s;
   cursor: pointer;
 
