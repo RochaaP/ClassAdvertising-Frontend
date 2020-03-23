@@ -1,0 +1,243 @@
+<!-- Overlay -->
+<!-- <div *ngIf="paper.id=='0'" class="overlay-panel overlay-panel-bg" ng-style="{ 'width' : width}"></div> -->
+
+<div>
+    <h3 class="text-center">Edit Paper</h3>
+    <div class="container-fluid px-0 pb-5">
+        <h6 *ngIf="paper.id=='0'" class="text-center">(This is a dummy paper. Create and select the paper from the paper list)</h6>
+        <!-- Paper Details -->
+        <div class="card my-3">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-md-11 col-sm-11">
+                        <p class="my-1 float-left h6"><label>Paper Details</label></p>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-sm mx-0 close float-right" (click)="isShowPaperDetail = !isShowPaperDetail">
+                            <i class="fas"
+                                [ngClass]="{'fa-angle-up': isShowPaperDetail, 'fa-angle-down': !isShowPaperDetail}"></i>
+                        </button>
+                    </div>	
+                </div>			
+            </div>
+            <div *ngIf="isShowPaperDetail" class="card-body py-1">
+                <form ngNativeValidate>
+            <div class="row">
+              <div class="col-md-8 col-sm-8">
+                  <div class="form-group">
+                    <label for="paperName">
+                      Paper Name
+                    </label>
+                    <div class="badge-required mx-2"></div>
+                    <input type="text" [(ngModel)]="paper.data.name" name="paperName" class="form-control form-control-sm"
+                      id="paperName" placeholder="Paper Name" required >
+                  </div>
+              </div>
+              <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="paperYear">
+                      Year
+                    </label>
+                    <div class="badge-required mx-2"></div>
+                    <input type="text" [(ngModel)]="paper.data.year" name="paperYear" class="form-control form-control-sm"
+                      id="paperYear" placeholder="Year" required >
+                  </div>
+              </div>
+            </div>
+            <div class="form-group">
+                        <label for="paperInstructor">
+                            Instructor
+                        </label>
+                        <div class="badge-required mx-2"></div>
+                        <input type="text" [(ngModel)]="paper.data.instructor" name="paperInstructor" class="form-control form-control-sm"
+                            id="paperInstructor" placeholder="Instructor" readonly>
+            </div>
+            <div class="form-group">
+                        <label for="paperSubject">
+                            Subject
+                        </label>
+                        <div class="badge-required mx-2"></div>
+                        <input type="text" [(ngModel)]="paper.data.subject" name="paperSubject" class="form-control form-control-sm"
+                            id="paperSubject" placeholder="Subject" readonly>
+            </div>
+            <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                <label for="grade_level">
+                    Grade/ Level
+                </label>
+                <div class="badge-required mx-2"></div>
+                <input type="text" [(ngModel)]="paper.data.grade_level" name="grade_level" class="form-control form-control-sm"
+                    id="paperPrice" placeholder="Grade/ Level" required >
+                </div>
+            </div>
+              <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                  <label for="paperTime">
+                    Allocated Time
+                  </label>
+                  <div class="badge-required mx-2"></div>
+                  <input type="text" [(ngModel)]="paper.data.time" name="paperTime" class="form-control form-control-sm"
+                    id="paperTime" placeholder="Time" required >
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    <label for="paperNoOfQuestions">
+                        No. of Questions
+                    </label>
+                    <div class="badge-required mx-2"></div>
+                    <input type="text" [(ngModel)]="paper.data.no_of_questions" name="paperNoOfQuestions" class="form-control form-control-sm"
+                        id="paperNoOfQuestions" placeholder="No. of Questions" required >
+                </div>		
+              </div>
+            </div>
+            
+                    <!-- <div class="form-row">
+                        <div class="col-sm-8">
+                            <label for="courseImage">{{ 'ICE_COURSE.COURSE.IMAGE_LABEL' | translate }}</label>
+                            <div class="badge-required mx-2"></div>
+                            <input (keydown)="returnTyping()" *ngIf="course.courseImage == null" type="text"
+                                class="form-control form-control-sm" [(ngModel)]="course.courseImage" name="courseImage"
+                                id="courseImage" placeholder="{{ 'ICE_COURSE.COURSE.IMAGE_PLACEHOLDER' | translate }}"
+                                (click)="addCourseImage()" required >
+                            <div *ngIf="course.courseImage != null" class="card" style="width: 8rem;">
+                                <button class="float-left" (click)="removeCourseImage()" style="width: 2rem;" >
+                                    <i class="fas fa-times fa-sm" aria-hidden="true"></i>
+                                </button>
+                                <img class="img-fluid" src="data:image/jpeg;base64,{{course.courseImage.thumbnailImage}}"
+                                    alt="{{course.courseImage.title}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="courseIcon">{{ 'ICE_COURSE.COURSE.ICON_LABEL' | translate }}</label>
+                            <div class="badge-required mx-2"></div>
+                            <input (keydown)="returnTyping()" *ngIf="course.courseIcon == null" type="text"
+                                class="form-control form-control-sm" id="courseTitle"
+                                placeholder="{{ 'ICE_COURSE.COURSE.ICON_PLACEHOLDER' | translate }}"
+                                (click)="addCourseIcon()" required >
+                            <div *ngIf="course.courseIcon != null" class="card" style="width: 8rem;">
+                                <button class="float-left" (click)="removeCourseIcon()" style="width: 2rem;" >
+                                    <i class="fas fa-times fa-sm" aria-hidden="true"></i>
+                                </button>
+                                <img class="img-fluid" src="data:image/jpeg;base64,{{course.courseIcon.thumbnailImage}}"
+                                    alt="{{course.courseIcon.title}}">
+                            </div>
+                        </div>
+                    </div> -->
+                    <hr class="mt-3 mb-2" />
+                    <div class="form-group">
+                        <button class="btn btn-sm btn-primary float-right" (click)="paperDetailSave()" [disabled]="paper.id=='0'">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        <!-- Question list -->
+        <div class="card my-3">
+            <div class="card-header py-1">
+                <div class="row">
+                    <div class="col-md-9 col-sm-9">
+                        <p class="my-1 float-left h6">
+                            <span class="badge badge-primary mr-2">{{questionList.length}}</span>
+                            <label>Questions</label>
+                        </p>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <button id="saveQuestions" type="button" class="btn btn-sm btn-dark mx-1 float-right"
+                        (click)="saveQuestions()" [disabled]="paper.id=='0'">
+                        <i class="fas fa-save"></i>
+                        </button>
+                        <button id="addNewQuestion" type="button" class="btn btn-sm btn-dark mx-1 float-right"
+                        (click)="addNewQuestion()" [disabled]="paper.id=='0'">
+                        <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-1 col-sm-1">
+                        <button id="showMoreQuestion" type="button" class="btn btn-sm my-1 mx-0 close float-right"
+                        (click)="isShowQuestion = !isShowQuestion">
+                        <i class="fas " [ngClass]="{'fa-angle-up': isShowQuestion, 'fa-angle-down': !isShowQuestion}"></i>
+                        </button>
+                    </div>
+                </div>			
+            </div>
+        </div>
+        <div *ngIf="isShowQuestion" class="card-body p-2">
+            <div *ngFor="let question of questionList; let t = index"
+                class="card card-secondary my-2">
+                <div class="card-body container-fluid p-1">
+                    <div class="">
+                        <div class="col-sm-8 float-left pl-2 pr-0">
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2"><label>Question {{t+1}}</label></div>
+                                <div class="col-md-10 col-sm-10">
+                                    <label (click)="openKeyboard(question.data.question, true, questionList, t, 'data.question')" class="form-control form-control-sm" id="question" name="question" [innerHTML]="question.data.question"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2"><label>A</label></div>
+                                <div class="col-md-10 col-sm-10">
+                                    <label (click)="openKeyboard(question.data.a, true, questionList, t, 'data.a')" class="form-control form-control-sm" id="a" name="a" [innerHTML]="question.data.a"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2"><label>B</label></div>
+                                <div class="col-md-10 col-sm-10">
+                                    <label (click)="openKeyboard(question.data.b, true, questionList, t, 'data.b')" class="form-control form-control-sm" id="b" name="b" [innerHTML]="question.data.b"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2"><label>C</label></div>
+                                <div class="col-md-10 col-sm-10">
+                                    <label (click)="openKeyboard(question.data.c, true, questionList, t, 'data.c')" class="form-control form-control-sm" id="c" name="c" [innerHTML]="question.data.c"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2"><label>D</label></div>
+                                <div class="col-md-10 col-sm-10">
+                                    <label (click)="openKeyboard(question.data.d, true, questionList, t, 'data.d')" class="form-control form-control-sm" id="d" name="d" [innerHTML]="question.data.d"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2"><label>E</label></div>
+                                <div class="col-md-10 col-sm-10">
+                                    <label (click)="openKeyboard(question.data.e, true, questionList, t, 'data.e')" class="form-control form-control-sm" id="e" name="e" [innerHTML]="question.data.e"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-2 col-sm-2"><label>Answer</label></div>
+                                    <select class="col-md-10 col-sm-10 form-control form-control-sm" >
+                                        <option value="A"><label [innerHTML]="question.data.a"></label></option>
+                                        <option value="B"><label [innerHTML]="question.data.b"></label></option>
+                                        <option value="C"><label [innerHTML]="question.data.c"></label></option>
+                                        <option value="D"><label [innerHTML]="question.data.d"></label></option>
+                                        <option value="E"><label [innerHTML]="question.data.e"></label></option>
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="col-sm-4 float-right px-0">
+                            <button id="btnGotoTopic" type="button" class="my-1 mx-3 close float-right"
+                                (click)="showInfoQuestion(question)" [disabled]="paper.id=='0'">
+                                <i class="fas fa-angle-right"></i>
+                            </button>
+                            <button id="btnDeleteTopic" type="button" class="my-1 mx-2 close float-right"
+                                (click)="deleteQuestion(question, t)" [disabled]="paper.id=='0'">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <button *ngIf="(questionList.length > 1) && (t != 0) && question.id!='0'" id="btnMoveUpTopic" type="button"
+                                class="my-1 mx-2 close float-right" (click)="changePositionQuestion(question, t, 'up')" [disabled]="paper.id=='0'">
+                                <i class="fas fa-arrow-up"></i>
+                            </button>
+                            <button *ngIf="(questionList.length > 1) && (t != (questionList.length - 1)) && questionList.id!='0' && !(t + 1 >= questionList.length) && (questionList[t+1].id!='0')"
+                                id="btnMoveDownTopic" type="button" class="my-1 mx-2 close float-right"
+                                (click)="changePositionQuestion(question, t, 'down')" [disabled]="paper.id=='0'">
+                                <i class="fas fa-arrow-down"></i>
+                            </button>						
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+        
