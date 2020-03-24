@@ -379,7 +379,7 @@ public onValChange(val: string) {
       };
     }
     else if (this.registerItem === 'student') {
-      localStorage.setItem('registerUserName', JSON.stringify(this.nameInput));
+      localStorage.setItem('registerUserName', JSON.stringify(this.firstNameInput));
 
       userValues = {
         id: this.id,
@@ -400,7 +400,7 @@ public onValChange(val: string) {
   }
 
   postAPIData(userValues: object) {
-    return this.http.post('api/api/postRegData', JSON.stringify(userValues), this.httpOptions );
+    return this.http.post('api/postRegData', JSON.stringify(userValues), this.httpOptions );
   }
 
   editProfileInstitute() {

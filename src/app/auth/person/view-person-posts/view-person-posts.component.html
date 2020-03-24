@@ -27,12 +27,12 @@
         Type your name and age
       </mat-panel-description> -->
     </mat-expansion-panel-header>
-    <p>{{field.data.firstName}} {{field.data.lastName}}</p>
+    <p>{{field.data.firstname}} {{field.data.lastname}}</p>
     <p>{{field.data.email}}</p>
     <p>{{field.data.contact}}</p>
   </mat-expansion-panel>
 <!-- </div> -->
-  <div *ngIf ="field.data.university">
+  <div *ngIf ="field.more.university">
     <mat-expansion-panel (opened)="panelOpenState = true"
                         (closed)="panelOpenState = false" expanded>
       <mat-expansion-panel-header>
@@ -43,14 +43,14 @@
           Currently I am {{panelOpenState ? 'open' : 'closed'}}
         </mat-panel-description> -->
       </mat-expansion-panel-header>
-      <p>{{field.data.university}}</p>
-      <p>{{field.data.degree}}</p>
-      <p>{{field.data.grad}}</p>
-      <p>{{field.data.degreeYear}}</p>
+      <p>{{field.more.university}}</p>
+      <p>{{field.more.degree}}</p>
+      <p>{{field.more.grad}}</p>
+      <p>{{field.more.degreeYear}}</p>
     </mat-expansion-panel>
   </div>
 
-    <div *ngIf = "field.data.universityMSc">
+    <div *ngIf = "field.more.universityMSc">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
         <mat-panel-title>
@@ -60,33 +60,33 @@
         Currently I am {{panelOpenState ? 'open' : 'closed'}}
         </mat-panel-description> -->
         </mat-expansion-panel-header>
-        <p>{{field.data.universityMSc}}</p>
-        <p>{{field.data.degreeMSc}}</p>
-        <p>{{field.data.yearMSc}}</p>
+        <p>{{field.more.universityMSc}}</p>
+        <p>{{field.more.degreeMSc}}</p>
+        <p>{{field.more.yearMSc}}</p>
       </mat-expansion-panel>
     </div>
 
-    <div *ngIf = "field.data.universityPhD">
+    <div *ngIf = "field.more.universityPhD">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
         <mat-expansion-panel-header>
         <mat-panel-title>
         PhD Degree Details
         </mat-panel-title>
-        <p>{{field.data.universityPhD}}</p>
-        <p>{{field.data.degreePhD}}</p>
-        <p>{{field.data.yearPhD}}</p>
+        <p>{{field.more.universityPhD}}</p>
+        <p>{{field.more.degreePhD}}</p>
+        <p>{{field.more.yearPhD}}</p>
         </mat-expansion-panel-header>
       </mat-expansion-panel>
     </div>
 
-    <div *ngIf ="field.data.personalAchievement">
+    <div *ngIf ="field.more.personalAchievement">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
         <mat-expansion-panel-header>
         <mat-panel-title>
           Personal Achievements
         </mat-panel-title>
         </mat-expansion-panel-header>
-        <ul *ngFor="let list of field.data.personalAchievement">
+        <ul *ngFor="let list of field.more.personalAchievement">
           <p>{{list}}</p>
           <mat-divider></mat-divider>
         </ul>
@@ -94,14 +94,14 @@
       </mat-expansion-panel>
     </div>
 
-  <div *ngIf = "field.data.achievement">
+  <div *ngIf = "field.more.achievement">
     <mat-expansion-panel>
         <mat-expansion-panel-header>
         <mat-panel-title>
           Other Achievements
         </mat-panel-title>
         </mat-expansion-panel-header>
-        <ul *ngFor="let list of field.data.achievement">
+        <ul *ngFor="let list of field.more.achievement">
           <p>
             <img *ngIf = "list.rankedProfileURL" src={{list.rankedProfileURL}} class="avatar" alt="">
             <img *ngIf = "!list.rankedProfileURL" src="assets/propic/propic.png" class="avatar" alt="">

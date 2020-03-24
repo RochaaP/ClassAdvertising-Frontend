@@ -36,7 +36,7 @@ export class PersonProfileComponent implements OnInit {
 
   email: string;
   id: string;
-  titleInput: string;
+  // titleInput: string;
   emailInput: string;
   firstNameInput: string;
   lastNameInput: string;
@@ -79,7 +79,7 @@ export class PersonProfileComponent implements OnInit {
   showhideMSc: boolean;
   showhidePhD: boolean;
 
-  downloadURL: any;
+  img_url: any;
   backgroundImageURL: any;
 
   details: any;
@@ -123,49 +123,49 @@ export class PersonProfileComponent implements OnInit {
       console.log('response from GET is ', response[0]);
 
       this.id = response[0].id;
-      this.titleInput = response[0].data.title;
+      // this.titleInput = response[0].data.title;
       this.emailInput = response[0].data.email;
       this.contactInput = response[0].data.contact;
-      this.firstNameInput = response[0].data.firstName;
-      this.lastNameInput = response[0].data.lastName;
-      this.downloadURL =  response[0].data.profileImagePath;
+      this.firstNameInput = response[0].data.firstname;
+      this.lastNameInput = response[0].data.lastname;
+      this.img_url =  response[0].data.img_url;
 
-      if (!this.downloadURL) {
+      if (!this.img_url) {
         this.uploadProfile = false;
       } else {
         this.uploadProfile = true;
       }
 
-      this.backgroundImageURL = response[0].data.backgroundImagePath;
+      this.backgroundImageURL = response[0].more.backgroundImagePath;
       if (!this.backgroundImageURL) {
         this.uploadBackground = false;
       } else {
          this.uploadBackground = true;
       }
 
-      this.degreeInput = response[0].data.degree;
-      this.universityInput = response[0].data.university;
-      this.yearInput = response[0].data.degreeYear;
-      this.gradInput = response[0].data.grad;
-      this.teachingSchoolInput = response[0].data.teachingSchool;
-      this.yearExperienceInput = response[0].data.yearExperiences;
+      this.degreeInput = response[0].more.degree;
+      this.universityInput = response[0].more.university;
+      this.yearInput = response[0].more.degreeYear;
+      this.gradInput = response[0].more.grad;
+      this.teachingSchoolInput = response[0].more.teachingSchool;
+      this.yearExperienceInput = response[0].more.yearExperiences;
 
-      this.universityMScInput = response[0].data.universityMSc;
-      this.degreeMScInput = response[0].data.degreeMSc;
-      this.yearMScInput = response[0].data.yearMSc;
+      this.universityMScInput = response[0].more.universityMSc;
+      this.degreeMScInput = response[0].more.degreeMSc;
+      this.yearMScInput = response[0].more.yearMSc;
 
-      this.universityPhDInput = response[0].data.universityPhD;
-      this.degreePhDInput = response[0].data.degreePhd;
-      this.yearPhDInput = response[0].data.yearPhD;
+      this.universityPhDInput = response[0].more.universityPhD;
+      this.degreePhDInput = response[0].more.degreePhd;
+      this.yearPhDInput = response[0].more.yearPhD;
 
-      this.subjectInput = response[0].data.subject;
-      this.gradeAInput = response[0].data.gradeA;
-      this.gradeBInput = response[0].data.gradeB;
-      this.gradeCInput = response[0].data.gradeC;
-      this.gradeSInput = response[0].data.gradeS;
+      this.subjectInput = response[0].more.subject;
+      this.gradeAInput = response[0].more.gradeA;
+      this.gradeBInput = response[0].more.gradeB;
+      this.gradeCInput = response[0].more.gradeC;
+      this.gradeSInput = response[0].more.gradeS;
 
-      this.cards = response[0].data.achievement;
-      this.achievementslist = response[0].data.personalAchievement;
+      this.cards = response[0].more.achievement;
+      this.achievementslist = response[0].more.personalAchievement;
 
     }, ( error) => {
       console.log('error is ', error);
@@ -238,15 +238,15 @@ export class PersonProfileComponent implements OnInit {
     // The main task
     this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
     this.percentageProfile = this.fileProfile.percentageChanges();
-    // console.log(this.task.downloadURL());
-    // this.downloadURL = this.task.downloadURL();
-    // console.log(this.downloadURL);
+    // console.log(this.task.img_url());
+    // this.img_url = this.task.img_url();
+    // console.log(this.img_url);
     const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
       // const ref = this.afStorage.ref(path);
 
-      const downloadURL = ref.getDownloadURL().subscribe(url => {
+      ref.getDownloadURL().subscribe(url => {
       const Url = url; // for ts
-      this.downloadURL = url; // with this you can use it in the html
+      this.img_url = url; // with this you can use it in the html
       });
    });
   }
@@ -261,7 +261,7 @@ export class PersonProfileComponent implements OnInit {
       });
     }
     this.uploadProfile = false;
-    this.downloadURL = '';
+    this.img_url = '';
   }
 
   backgroundUpload(event) {
@@ -281,12 +281,12 @@ export class PersonProfileComponent implements OnInit {
     // console.log(this.downloadURL);
     const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
       // const ref = this.afStorage.ref(path);
-      const downloadURL = ref.getDownloadURL().subscribe(url => {
+      const r = ref.getDownloadURL().subscribe(url => {
       const Url = url; // for ts
       this.backgroundImageURL = url; // with this you can use it in the html
       });
     });
-    console.log('downloadurl ' + this.downloadURL);
+    console.log('img_url ' + this.backgroundImageURL);
 
   }
 
@@ -311,7 +311,7 @@ export class PersonProfileComponent implements OnInit {
     let userValues = {};
     userValues = {
         id: this.id,
-        title: this.titleInput,
+        // title: this.titleInput,
         email : this.emailInput.trim(),
         firstName: this.firstNameInput.trim(),
         lastName: this.lastNameInput.trim(),
@@ -320,7 +320,7 @@ export class PersonProfileComponent implements OnInit {
         university: this.universityInput,
         degreeYear: this.yearInput,
         grad: this.gradInput,
-        profileImagePath: this.downloadURL,
+        img_url: this.img_url,
         backgroundImagePath: this.backgroundImageURL,
         yearExperiences: this.yearExperienceInput,
         teachingSchool: this.teachingSchoolInput,
@@ -417,12 +417,12 @@ export class PersonProfileComponent implements OnInit {
     // console.log(this.downloadURL);
     const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
       // const ref = this.afStorage.ref(path);
-      const downloadURL = ref.getDownloadURL().subscribe(url => {
+      const img_url = ref.getDownloadURL().subscribe(url => {
       const Url = url; // for ts
       this.rankedProfileURLInput = url; // with this you can use it in the html
       });
     });
-    console.log('downloadurl ' + this.downloadURL);
+    console.log('img_url ' + this.img_url);
 
   }
 

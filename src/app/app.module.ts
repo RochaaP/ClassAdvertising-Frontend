@@ -134,6 +134,7 @@ const appRoutes: Routes = [
     ImageCropperModule,
     Ng4LoadingSpinnerModule.forRoot(),
     NgaReadMoreModule,
+    
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

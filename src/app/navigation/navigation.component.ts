@@ -18,6 +18,8 @@ export class NavigationComponent implements OnInit {
   userLogged: boolean;
   registerItem: string;
 
+  isStudent: boolean;
+
   constructor(
     private authService: AuthenticationService,
     private dataService: DataService,
@@ -48,7 +50,6 @@ export class NavigationComponent implements OnInit {
 //     console.log('this.userName '+ this.userName);
 // }
   ngOnInit() {
-    console.log('Hi therer from navigation');
     this.isUserLoggedIn();
     this.searchClicked = false;
 
@@ -60,6 +61,12 @@ export class NavigationComponent implements OnInit {
       this.userLogged = true;
       this.userName = this.authService.getEmitterUserName();
       this.registerItem = this.authService.getRegisterItem();
+      if (this.registerItem === 'student') {
+        this.isStudent = true;
+      }
+      else {
+        this.isStudent = false;
+      }
       // location.reload();
    } else {
       this.userLogged = false;

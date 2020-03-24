@@ -80,9 +80,8 @@ export class PersonSearchComponent implements OnInit {
 
     this.showByName = false;
 
-    this.getAPIData().subscribe((instituteResponse) => {
-      console.log('response what response ', instituteResponse);
-      this.personResponse = instituteResponse;
+    this.getAPIData().subscribe((response) => {
+      this.personResponse = response;
       this.spinnerService.hide();
     }, ( error) => {
       console.log('error is ', error);
@@ -97,7 +96,6 @@ export class PersonSearchComponent implements OnInit {
 
   getClassDetails() {
     this.getAPIClassData().subscribe((classResponse) => {
-      console.log('response what response ', classResponse);
       this.classResponse = classResponse;
     }, ( error) => {
       console.log('error is ', error);
@@ -124,13 +122,13 @@ export class PersonSearchComponent implements OnInit {
       }
       for (const index in this.personResponse) {
         if (this.secondNamePart !== '' &&
-            this.personResponse[index].data.name.toLowerCase() === this.firstNamePart &&
-            this.personResponse[index].data.lastName.toLowerCase() === this.secondNamePart ) {
+            this.personResponse[index].data.firstname.toLowerCase() === this.firstNamePart &&
+            this.personResponse[index].data.lastname.toLowerCase() === this.secondNamePart ) {
 
               this.searchedList.push(this.personResponse[index]);
 
-        } else if (this.personResponse[index].data.name.toLowerCase() === this.searchNameInput.trim().toLowerCase() ||
-                 this.personResponse[index].data.lastName.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
+        } else if (this.personResponse[index].data.firstname.toLowerCase() === this.searchNameInput.trim().toLowerCase() ||
+                 this.personResponse[index].data.lastname.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
 
               this.searchedList.push(this.personResponse[index]);
 

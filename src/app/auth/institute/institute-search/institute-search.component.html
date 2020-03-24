@@ -48,10 +48,10 @@
        <div *ngIf="!classSearchClicked">
       <ul *ngFor="let field of instituteResponse">
         <div class="profileDetails card-1">
-          <img *ngIf= "field.data.propic" class="header-image" src ={{field.data.propic}} >
-          <img *ngIf= "!field.data.propic" class="header-image" src =  'assets/propic/propic.png'>
+          <img *ngIf= "field.data.img_url" class="header-image" src ={{field.data.img_url}} >
+          <img *ngIf= "!field.data.img_url" class="header-image" src =  'assets/propic/propic.png'>
           <div class="click">
-            <a (click) ='profileView(field.data.email, field.data.name)'>{{field.data.name}}</a>
+            <a (click) ='profileView(field.data.email, field.data.firstname)'>{{field.data.firstname}}</a>
           </div>
           <div id="content">
             <img src={{field.data.verify}} class="verification"/>
@@ -65,10 +65,10 @@
       <div *ngIf = "nameSearchClicked">
         <ul *ngFor="let field of searchedList">
           <div class="profileDetails card-1">
-            <img *ngIf= "field.data.propic" class="header-image" src ={{field.data.propic}} >
-            <img *ngIf= "!field.data.propic" class="header-image" src =  'assets/propic/propic.png'>
+            <img *ngIf= "field.data.img_url" class="header-image" src ={{field.data.img_url}} >
+            <img *ngIf= "!field.data.img_url" class="header-image" src =  'assets/propic/propic.png'>
             <div class="click">
-              <a (click) ='profileView(field.data.email, field.data.name)'>{{field.data.name}} </a>
+              <a (click) ='profileView(field.data.email, field.data.firstname)'>{{field.data.firstname}} </a>
             </div>
             <div id="content">
               <img src={{field.data.verify}} class="verification"/>

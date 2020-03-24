@@ -134,7 +134,7 @@ export class InstituteSearchComponent implements OnInit {
       this.nameSearchClicked = true;
       this.showByName = true;
       for (const index in this.instituteResponse) {
-        if (this.instituteResponse[index].data.name.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
+        if (this.instituteResponse[index].data.firstname.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
           this.searchedList.push(this.instituteResponse[index]);
         }
       }

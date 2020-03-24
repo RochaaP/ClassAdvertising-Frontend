@@ -41,7 +41,7 @@
      <div class="text-center">
 
       <div *ngIf='uploadProfile'>
-        <img src="//placehold.it/100" src={{this.downloadURL}} class="avatar img-circle" class="img-thumbnail" alt="">
+        <img src="//placehold.it/100" src={{this.img_url}} class="avatar img-circle" class="img-thumbnail" alt="">
         <a (click)="deleteProfile()" >Delete</a>
         <div *ngIf="percentageProfile | async as pct">
           Progress: {{ pct | number }}%
@@ -100,7 +100,7 @@
           <!-- personal Information -->
           <mat-step label="Personal Information">
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label class="col-lg-3 control-label">Title:</label>
               <div class="col-lg-8">
                 <select class="form-control" placeholder='Title' [(ngModel)]='titleInput' name='title' >
@@ -110,9 +110,9 @@
                   <option value="Dr">Dr.</option>
                   <option value="Prof">Prof.</option>
                 </select>
-                <!-- <input class="form-control" type="text"  placeholder="t" [(ngModel)]="firstNameInput" name='first'> -->
+                <input class="form-control" type="text"  placeholder="t" [(ngModel)]="firstNameInput" name='first'>
               </div>
-            </div>
+            </div> -->
 
 
             <div class="form-group">
