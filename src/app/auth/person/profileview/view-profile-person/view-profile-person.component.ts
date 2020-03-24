@@ -33,7 +33,7 @@ export class ViewProfilePersonComponent implements OnInit {
 
     // }
 
-    this.getAPIData().subscribe((response) => {
+      this.getAPIData().subscribe((response) => {
       console.log('response from GET API is ', response);
       this.response = response;
     }, ( error) => {

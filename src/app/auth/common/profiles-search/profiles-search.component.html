@@ -51,9 +51,9 @@
         <div *ngIf="!classSearchClicked">
       <ul *ngFor="let field of personResponse">
         <div class="profileDetails card-1">
-          <img class="header-image" src ={{field.data.propic}} >
+          <img class="header-image" src ={{field.data.img_url}} >
           <div class="click">
-            <a (click) ='triggered(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+            <a (click) ='triggered(field.data.email)'>{{field.data.firstname}} {{field.data.lastname}}</a>
           </div>
           <div id="content">
             <img src={{field.data.verify}} class="verification"/>
@@ -66,9 +66,9 @@
       <div *ngIf = "nameSearchClicked">
         <ul *ngFor="let field of searchedList">
           <div class="profileDetails card-1">
-            <img class="header-image" src ={{field.data.propic}} >
+            <img class="header-image" src ={{field.data.img_url}} >
             <div class="click">
-              <a (click) ='triggered(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+              <a (click) ='triggered(field.data.email)'>{{field.data.firstname}} {{field.data.lastname}}</a>
             </div>
             <div id="content">
               <img src={{field.data.verify}} class="verification"/>

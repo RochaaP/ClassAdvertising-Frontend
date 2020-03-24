@@ -5,63 +5,118 @@
 
       <div class='searchOption' >
         <mat-form-field class="full-width">
-          <input matInput placeholder="Enter First Name or Last Name" [(ngModel)]='searchInput' name='search'>
+          <input matInput placeholder="Enter Name" [(ngModel)]='searchInput' name='search' (keydown.enter) = 'search()'>
         </mat-form-field>
         <button mat-flat-button (click)='search()'>Search</button>
         <button mat-flat-button (click)='searchClose()'>Close</button>
       </div>
 
 
-      <div class ='row'  >
-        <div class = 'col-2' style='margin-left: 10px;'>
-          <mat-radio-button value="allUsers" (change)="event($event)" >All Users</mat-radio-button>
-          <mat-radio-button value="verifiedUsers" (change)="event($event)" > All Verified Users</mat-radio-button>
-          <mat-radio-button value="notVerifiedUsers" (change)="event($event)" >All Not Verified Users</mat-radio-button>
-        </div>
-        <div class = 'col-md-8'>
+      <div class ='row'>
+        <div class = 'col-md-3' style='margin-left: 10px;'>
+          <p><mat-radio-button value="allUsers" (change)="event($event)" >All Users</mat-radio-button></p>
+          <p><mat-radio-button value="verifiedUsers" (change)="event($event)" > All Verified Users</mat-radio-button></p>
+          <p><mat-radio-button value="notVerifiedUsers" (change)="event($event)" >All Not Verified Users</mat-radio-button></p>
+          <!-- <p><button mat-flat-button (click)='viewInstitute(institute)'>Institutes</button></p> -->
 
-        <div *ngIf ='showAllUsers'>
-          <div *ngIf="!searchClicked" >
-            <ul *ngFor="let field of response">
-              <div class="profileDetails card-1">
-                <img class="header-image" src ={{field.data.propic}} >
-                <div class="click">
-                  <a (click) ='triggered(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
-                </div>
-                <div id="content">
-                  <img src={{field.data.verify}} class="verification"/>
-                </div>
-              </div>
-            </ul>
-          </div>
         </div>
+        <!-- <div class = 'col-md-8'> -->
 
-          <div *ngIf = "searchClicked">
-            <ul *ngFor="let field of searchedList">
-              <div class="profileDetails card-1">
-                <img class="header-image" src ={{field.data.propic}} >
-                <div class="click">
-                  <a (click) ='triggered(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
-                </div>
-                <div id="content">
-                  <img src={{field.data.verify}} class="verification"/>
-                </div>
+          <div *ngIf ='showAllUsers'>
+            <div *ngIf="!searchClicked">
+
+              <div class = 'col-md-4' *ngIf = allPerson>
+                <h2 class='text-center'>Teachers</h2>
+                <ul *ngFor="let field of allPerson">
+                  <div class="profileDetails card-1">
+                    <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
+                    <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                    <div class="click">
+                      <a (click) ='triggeredPerson(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                    </div>
+                    <div id="content">
+                      <img src={{field.data.verify}} class="verification"/>
+                    </div>
+                  </div>
+                </ul>
               </div>
-            </ul>
+              </div>
           </div>
 
-
-  <!-- show only verified users -->
-             <div class ='row' >
+              <div *ngIf ='showAllUsers'  #institute>
+                <div *ngIf="!searchClicked">
 
               <div class = 'col-md-4'>
+                <h2 class='text-center'>Institutes</h2>
+                <ul *ngFor="let field of allInstitute">
+                  <div class="profileDetails card-1">
+                    <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
+                    <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                    <div class="click">
+                      <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                    </div>
+                    <div id="content">
+                      <img src={{field.data.verify}} class="verification"/>
+                    </div>
+                  </div>
+                </ul>
+              </div>
+
+            <!-- </div> -->
+          </div>
+        </div>
+
+
+          <div *ngIf = "searchClicked">
+            <div class = 'col-md-4' *ngIf = 'searchedPersonList[0]'>
+            <h2 class='text-center '>Teachers</h2>
+            <ul *ngFor="let field of searchedPersonList">
+              <div class="profileDetails card-1">
+                <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
+                <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                <div class="click">
+                  <a (click) ='triggeredPerson(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                </div>
+                <div id="content">
+                  <img src={{field.data.verify}} class="verification"/>
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+
+        <div *ngIf = "searchClicked">
+          <div class = 'col-md-4' *ngIf = 'searchedInstituteList[0]'>
+          <h2 class='text-center '>Institutes</h2>
+          <ul *ngFor="let field of searchedInstituteList">
+            <div class="profileDetails card-1">
+              <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
+              <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+              <div class="click">
+                <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.name}}</a>
+              </div>
+              <div id="content">
+                <img src={{field.data.verify}} class="verification"/>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+  <!-- show only verified users -->
+             <!-- <div class ='row' > -->
+
+              <div *ngIf="!searchClicked">
+
                 <div *ngIf = "showVerifiedUsers">
+                  <div class = 'col-md-4' >
                   <h2 class='text-center'>Teachers</h2>
                   <ul *ngFor="let field of allVerifiedUsersPerson">
                     <div class="profileDetails card-1">
-                      <img class="header-image" src ={{field.data.propic}} >
+                      <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
+                      <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
                       <div class="click">
-                        <a (click) ='triggered(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                        <a (click) ='triggeredPerson(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
                       </div>
                       <div id="content">
                         <img src={{field.data.verify}} class="verification"/>
@@ -70,15 +125,19 @@
                   </ul>
                 </div>
               </div>
+            </div>
 
-              <div class = 'col-md-4'>
+              <div *ngIf="!searchClicked">
+
                 <div *ngIf = "showVerifiedUsers">
-                  <h2 class='text-center'>Institutes</h2>
+                  <div class = 'col-md-4 ' #institute>
+                  <h2 class='text-center '>Institutes</h2>
                   <ul *ngFor="let field of allVerifiedUsersInstitute">
                     <div class="profileDetails card-1">
-                      <img class="header-image" src ={{field.data.propic}} >
+                      <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
+                      <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
                       <div class="click">
-                        <a (click) ='triggered(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                        <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
                       </div>
                       <div id="content">
                         <img src={{field.data.verify}} class="verification"/>
@@ -87,38 +146,24 @@
                   </ul>
                 </div>
               </div>
-
-
             </div>
+            <!-- </div> -->
 
 
           <!-- show only not verified users -->
-          <div class = 'row'>
+          <!-- <div class = 'row'> -->
 
-            <div class = 'col-md-4'>
+            <div *ngIf="!searchClicked">
+
               <div *ngIf = "showNotVerifiedUsers">
+                <div class = 'col-md-4' *ngIf = 'allNotVerifiedUsersPerson[0]'>
+                  <h2 class='text-center '>Teachers</h2>
                 <ul *ngFor="let field of allNotVerifiedUsersPerson">
                   <div class="profileDetails card-1">
-                    <img class="header-image" src ={{field.data.propic}} >
+                    <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
+                    <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
                     <div class="click">
-                      <a (click) ='triggered(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
-                    </div>
-                    <div id="content">
-                      <img src={{field.data.verify}} class="verification"/>
-                    </div>
-                  </div>
-                </ul>
-              </div>
-
-            </div>
-
-            <div class = 'col-md-4'>
-              <div *ngIf = "showNotVerifiedUsers">
-                <ul *ngFor="let field of allNotVerifiedUsersInstitute">
-                  <div class="profileDetails card-1">
-                    <img class="header-image" src ={{field.data.propic}} >
-                    <div class="click">
-                      <a (click) ='triggered(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                      <a (click) ='triggeredPerson(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
                     </div>
                     <div id="content">
                       <img src={{field.data.verify}} class="verification"/>
@@ -129,24 +174,50 @@
             </div>
           </div>
 
+          <div *ngIf="!searchClicked">
+
+              <div *ngIf = "showNotVerifiedUsers">
+                <div class = 'col-md-4' #institute *ngIf = 'allNotVerifiedUsersInstitute[0]'>
+                  <h2 class='text-center '>Institutes</h2>
+                <ul *ngFor="let field of allNotVerifiedUsersInstitute">
+                  <div class="profileDetails card-1">
+                    <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
+                    <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                    <div class="click">
+                      <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                    </div>
+                    <div id="content">
+                      <img src={{field.data.verify}} class="verification"/>
+                    </div>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+
 
 
         </div>
 
-      </div>
-
-
   </div>
+
 </div>
+
 
 <ng-template #details>
   <div class ='subDetails'>
-    <app-view-person-posts [childMessage]="this.email"></app-view-person-posts>
+    <div *ngIf = 'personClicked'>
+      <app-view-person-posts [childMessage]="this.email"> </app-view-person-posts>
+    </div>
+    <div *ngIf = 'instituteClicked'>
+      <app-profile-details-institute [childMessage]="this.email"></app-profile-details-institute>
+    </div>
 </div>
-    <button mat-raised-button class="goBack-button" (click)="goBack()" >
+    <button mat-raised-button class="button"  color="primary" (click)="goBack()" >
       Go Back
     </button>
-    <button mat-raised-button class="goBack-button" (click)="verify()" >
+    <button mat-raised-button class="button" color="warn" (click)="verify()" >
       Verify Details
     </button>
 

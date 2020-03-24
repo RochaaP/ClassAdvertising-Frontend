@@ -68,28 +68,28 @@ export class InstituteProfileComponent implements OnInit {
       console.log('response from GET API is ', response[0]);
 
       this.id = response[0].id;
-      this.nameInput = response[0].data.name;
+      this.nameInput = response[0].data.firstname;
       this.emailInput = response[0].data.email;
       this.contactInput = response[0].data.contact;
-      this.downloadURL =  response[0].data.profileImagePath;
+      this.downloadURL =  response[0].data.img_url;
       if (!this.downloadURL) {
         this.uploadProfile = false;
       }
       else {
         this.uploadProfile = true;
       }
-      this.backgroundImageURL = response[0].data.backgroundImagePath;
+      this.backgroundImageURL = response[0].more.backgroundImagePath;
       if (!this.backgroundImageURL) {
         this.uploadBackground = false;
       }
       else {
         this.uploadBackground = true;
       }
-      this.street1Input = response[0].data.streetNo1;
-      this.street2Input = response[0].data.streetNo2;
-      this.cityInput = response[0].data.city;
-      this.districtInput = response[0].data.district;
-      this.provinceInput = response[0].data.province;
+      this.street1Input = response[0].more.streetNo1;
+      this.street2Input = response[0].more.streetNo2;
+      this.cityInput = response[0].more.city;
+      this.districtInput = response[0].more.district;
+      this.provinceInput = response[0].more.province;
     }, ( error) => {
       console.log('error is ', error);
     });
@@ -106,14 +106,14 @@ export class InstituteProfileComponent implements OnInit {
     userValues = {
         id: this.id,
         email : this.emailInput,
-        name: this.nameInput,
+        firstname: this.nameInput,
         contact:  this.contactInput,
         streetNo1: this.street1Input,
         streetNo2: this.street2Input,
         city: this.cityInput,
         district: this.districtInput,
         province: this.provinceInput,
-        profileImagePath: this.downloadURL,
+        img_url: this.downloadURL,
         backgroundImagePath: this.backgroundImageURL
       };
     this.postAPIData(userValues).subscribe((response) => {

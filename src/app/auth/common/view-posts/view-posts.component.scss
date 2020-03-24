@@ -502,3 +502,74 @@ width: 50px;
 text-indent: -999em;
 text-decoration: none;
 }
+
+.button {
+  margin: 10px;
+}
+
+
+
+
+
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: 200;
+  height: 150px;
+  border: 2px dashed #000000;
+  border-radius: 5px;
+  background: white;
+  margin: 10px 0;
+  overflow: hidden;
+}
+.hovering {
+  border: 2px solid #f16624;
+  color: #dadada !important;
+}
+
+.file-label {
+  font-size: 1.2em;
+}
+
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.img-thumbnail{
+  // height: 100px;
+  max-height: 100px;
+  max-width: 300px;
+  overflow: hidden;
+}
+
+a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.form{
+  overflow: hidden;
+  width: 100%;
+  margin: 20px;
+  padding: 20px;
+  // box-shadow: gray;
+  box-shadow: 1px 12px 20px rgba(22, 21, 21, 0.2);
+}
+
+.text-center{
+  width: 100%;
+  // margin: 20px;
+}
+.formInputs{
+  max-width: 500px;
+  width: 100%;
+  // margin: 20px;
+  margin: auto;
+  overflow: hidden
+}

@@ -161,7 +161,7 @@ export class RegisterComponent implements OnInit {
 
   getReg() {
     this.getUserRegData().subscribe((response) => {
-      console.log('response from is ', response[0].data);
+      // console.log('response from is ', response[0].data);
       this.registerItem = response[0].reg;
       this.name = response[0].name;
       localStorage.setItem('registerUserName', JSON.stringify(response[0].name));
@@ -215,6 +215,7 @@ export class RegisterComponent implements OnInit {
 registerPerson() {
   this.registerItem = 'person';
   this.onValChange('register');
+
   this.circleView = false;
   this.loginView = false;
 }
@@ -227,6 +228,18 @@ registerInstitute() {
   this.circleView  = false;
   this.loginView = false;
 }
+
+// circle click student
+registerStudent() {
+  this.onValChange('register');
+  this.registerItem = 'student';
+
+  this.circleView  = false;
+  this.loginView = false;
+}
+
+
+
 public onValChange(val: string) {
   this.showMessage('', '');
   this.selectedVal = val;
@@ -244,12 +257,13 @@ public onValChange(val: string) {
           console.log(res);
           this.isForgotPassword = false;
           this.showMessage('success', 'Registration Successful! Please Verify Your Email');
-          this.onSubmit();
+
           console.log(this.id);
 
         }, err => {
           this.showMessage('danger', err.message);
         });
+        this.onSubmit();
         this.isUserLoggedIn();
         this.navi();
       }, err => {
@@ -361,6 +375,18 @@ public onValChange(val: string) {
         registerItem: this.registerItem,
         email : this.emailInput.trim(),
         name: this.nameInput.trim(),
+        contact:  this.contactInput
+      };
+    }
+    else if (this.registerItem === 'student') {
+      localStorage.setItem('registerUserName', JSON.stringify(this.firstNameInput));
+
+      userValues = {
+        id: this.id,
+        registerItem: this.registerItem,
+        email : this.emailInput.trim(),
+        firstName: this.firstNameInput.trim(),
+        lastName: this.lastNameInput.trim(),
         contact:  this.contactInput
       };
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/service/share/data.service';
 import { ThrowStmt } from '@angular/compiler';
@@ -20,6 +20,9 @@ export class PersonSearchComponent implements OnInit {
   email: string;
   verifiedif: boolean;
 
+  // screenHeight: number;
+  // screenWidth: number;
+  smallerScreens: boolean;
 
   personResponse: any;
   classResponse: any;
@@ -51,7 +54,24 @@ export class PersonSearchComponent implements OnInit {
     public router: Router,
     private snackBar: MatSnackBar,
     private spinnerService: Ng4LoadingSpinnerService
-  ) { }
+  ) {
+    this.getScreenSize();
+   }
+
+   @HostListener('window:resize', ['$event'])
+   getScreenSize(event?) {
+        //  this.screenHeight = window.innerHeight;
+        //  this.screenWidth = window.innerWidth;
+
+         if (window.innerWidth < 768) {
+            this.smallerScreens = true;
+         }
+         else {
+           this.smallerScreens = false;
+         }
+        //  console.log(this.screenHeight, this.screenWidth);
+   }
+
 
   ngOnInit() {
     this.spinnerService.show();
@@ -60,18 +80,9 @@ export class PersonSearchComponent implements OnInit {
 
     this.showByName = false;
 
-    this.getAPIData().subscribe((instituteResponse) => {
-      console.log('response what response ', instituteResponse);
-      this.personResponse = instituteResponse;
+    this.getAPIData().subscribe((response) => {
+      this.personResponse = response;
       this.spinnerService.hide();
-      // this.spinnerService.hide();
-      // for (const index in this.response) {
-      //   if (this.response[index].data.registerItem === 'person') {
-      //     this.personResponse.push(this.response[index]);
-      //   } else if (this.response[index].data.registerItem === 'institute') {
-      //     this.instituteResponse.push(this.response[index]);
-      //   }
-      // }
     }, ( error) => {
       console.log('error is ', error);
     });
@@ -85,7 +96,6 @@ export class PersonSearchComponent implements OnInit {
 
   getClassDetails() {
     this.getAPIClassData().subscribe((classResponse) => {
-      console.log('response what response ', classResponse);
       this.classResponse = classResponse;
     }, ( error) => {
       console.log('error is ', error);
@@ -112,13 +122,13 @@ export class PersonSearchComponent implements OnInit {
       }
       for (const index in this.personResponse) {
         if (this.secondNamePart !== '' &&
-            this.personResponse[index].data.name.toLowerCase() === this.firstNamePart &&
-            this.personResponse[index].data.lastName.toLowerCase() === this.secondNamePart ) {
+            this.personResponse[index].data.firstname.toLowerCase() === this.firstNamePart &&
+            this.personResponse[index].data.lastname.toLowerCase() === this.secondNamePart ) {
 
               this.searchedList.push(this.personResponse[index]);
 
-        } else if (this.personResponse[index].data.name.toLowerCase() === this.searchNameInput.trim().toLowerCase() ||
-                 this.personResponse[index].data.lastName.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
+        } else if (this.personResponse[index].data.firstname.toLowerCase() === this.searchNameInput.trim().toLowerCase() ||
+                 this.personResponse[index].data.lastname.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
 
               this.searchedList.push(this.personResponse[index]);
 
@@ -126,6 +136,10 @@ export class PersonSearchComponent implements OnInit {
       }
     }
     this.spinnerService.hide();
+    if (this.smallerScreens) {
+      window.scrollTo({top: 600, behavior: 'smooth'});
+    }
+
   }
 
 
@@ -163,6 +177,10 @@ searchAllTogether() {
     }
   }
   this.spinnerService.hide();
+  if (this.smallerScreens) {
+    window.scrollTo({top: 600, behavior: 'smooth'});
+  }
+
 
 }
 
@@ -197,6 +215,10 @@ searchAllTogether() {
       }
     }
     this.spinnerService.hide();
+    if (this.smallerScreens) {
+      window.scrollTo({top: 600, behavior: 'smooth'});
+    }
+
   }
 
 

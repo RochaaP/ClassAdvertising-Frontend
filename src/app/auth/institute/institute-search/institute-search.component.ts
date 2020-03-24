@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/service/share/data.service';
 import { Router } from '@angular/router';
@@ -15,6 +15,8 @@ export class InstituteSearchComponent implements OnInit {
 
   response: any;
   classResponse: any;
+
+  smallerScreens: boolean;
 
   instituteResponse: any;
   searchedList = [];
@@ -40,7 +42,23 @@ export class InstituteSearchComponent implements OnInit {
     public router: Router,
     private snackBar: MatSnackBar,
     private spinnerService: Ng4LoadingSpinnerService
-  ) { }
+    ) {
+      this.getScreenSize();
+     }
+
+     @HostListener('window:resize', ['$event'])
+     getScreenSize(event?) {
+          //  this.screenHeight = window.innerHeight;
+          //  this.screenWidth = window.innerWidth;
+
+           if (window.innerWidth < 768) {
+              this.smallerScreens = true;
+           }
+           else {
+             this.smallerScreens = false;
+           }
+          //  console.log(this.screenHeight, this.screenWidth);
+     }
 
   ngOnInit() {
     this.spinnerService.show();
@@ -116,12 +134,15 @@ export class InstituteSearchComponent implements OnInit {
       this.nameSearchClicked = true;
       this.showByName = true;
       for (const index in this.instituteResponse) {
-        if (this.instituteResponse[index].data.name.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
+        if (this.instituteResponse[index].data.firstname.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
           this.searchedList.push(this.instituteResponse[index]);
         }
       }
     }
     this.spinnerService.hide();
+    if (this.smallerScreens) {
+      window.scrollTo({top: 600, behavior: 'smooth'});
+    }
   }
 
   searchClass() {
@@ -156,6 +177,9 @@ export class InstituteSearchComponent implements OnInit {
     }
     // console.log(this.searchedClassList);
     this.spinnerService.hide();
+    if (this.smallerScreens) {
+      window.scrollTo({top: 600, behavior: 'smooth'});
+    }
 
   }
 

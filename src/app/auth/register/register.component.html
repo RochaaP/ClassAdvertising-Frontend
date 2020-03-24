@@ -1,6 +1,6 @@
 
-<div class ="container-fluid">
-<div class="parallax">
+<div class ="container-fluid parallax">
+<!-- <div class="parallax"> -->
 <div class="row" *ngIf="!editUserProfile">
 
   <div class="text-center">
@@ -100,6 +100,40 @@
                 <button type="button" class="btn btn-primary"  (click)="registerUser()">Register</button>
               </div>
             </div>
+
+            <div *ngIf="registerItem == 'student'">
+              <h3>Student Registration</h3>
+
+              <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="firstname" class="form-control" [(ngModel)]="firstNameInput" id="firstname" placeholder="First Name">
+              </div>
+
+              <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="lastname" class="form-control" [(ngModel)]="lastNameInput" id="lastname" placeholder="Last Name">
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="emailInput" id="email" placeholder="Email">
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password" placeholder="Password">
+              </div>
+
+              <div class="form-group">
+                <label for="contact">Contact</label>
+                <input type="contact" class="form-control" [(ngModel)]="contactInput" id="contact" placeholder="Contact" (keydown.enter)='registerUser()'>
+              </div>
+
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="registerUser()">Register</button>
+              </div>
+            </div> 
+
             <div class= "createAccount" (click)="this.circleView = false; selectedVal='login'; loginView=true;"> Have an Account</div>
 
           </span>
@@ -196,11 +230,11 @@
     <div class="col-sm-4 col-md-4 col-lg-4">
 
       <!-- normal -->
-      <div class="ih-item circle effect6 scale_up"><a>
+      <div class="ih-item circle effect6 scale_up" (click)='registerStudent()'><a>
           <div class="img"><img src="assets/Classes/ArteGaleriade.jpg" alt="img"></div>
           <div class="info">
             <h3>STUDENT</h3>
-            <p>COMING SOON</p>
+            <p>LEARN YOUSELF</p>
           </div></a></div>
       <!-- end normal -->
 
@@ -209,7 +243,7 @@
 
 </div>
 
-</div>
+<!-- </div> -->
 </div>
 
 

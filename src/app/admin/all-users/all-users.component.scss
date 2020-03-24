@@ -37,7 +37,8 @@
 
 .subDetails {
   padding-top: 12px;
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
   margin:auto;
   filter:drop-shadow(4px 4px 4px gray);
   justify-content: center;
@@ -120,3 +121,7 @@
 // .radios{
 //   padding-left: 15px;
 // }
+
+.button {
+  margin-left: 15px;
+}

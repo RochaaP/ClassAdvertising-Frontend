@@ -2,11 +2,11 @@
   <div *ngFor="let field of response">
 
       <div class="flapImage col-12" id="idHot">
-        <img *ngIf="field.data.backgroundImagePath" src={{field.data.backgroundImagePath}}  class="img-fluid backgroundImage" />
-        <img *ngIf="!field.data.backgroundImagePath" src='assets/propic/noPphotoBackground.png'  class="img-fluid backgroundImage" />
+        <img *ngIf="field.more.backgroundImagePath" src={{field.more.backgroundImagePath}}  class="img-fluid backgroundImage" />
+        <img *ngIf="!field.more.backgroundImagePath" src='assets/propic/noPphotoBackground.png'  class="img-fluid backgroundImage" />
 
-        <img *ngIf="field.data.profileImagePath" src={{field.data.profileImagePath}}  class="avatar" />
-        <img *ngIf="!field.data.profileImagePath" src='assets/propic/propic.png'  class="avatar" />
+        <img *ngIf="field.data.img_url" src={{field.data.img_url}}  class="avatar" />
+        <img *ngIf="!field.data.img_url" src='assets/propic/propic.png'  class="avatar" />
      </div>
 
      <div class="text-center">

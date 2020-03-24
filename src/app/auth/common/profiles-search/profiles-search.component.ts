@@ -57,7 +57,7 @@ export class ProfilesSearchComponent implements OnInit {
     this.showByName = false;
 
     this.getAPIData().subscribe((response) => {
-      console.log('response what response ', response);
+      console.log('response what response in all responses ', response);
       this.response = response;
       for (const index in this.response) {
         if (this.response[index].data.registerItem === 'person') {
@@ -79,7 +79,7 @@ export class ProfilesSearchComponent implements OnInit {
 
   getClassDetails() {
     this.getAPIClassData().subscribe((classResponse) => {
-      console.log('response what response ', classResponse);
+      console.log('response what response in person classes', classResponse);
       this.classResponse = classResponse;
     }, ( error) => {
       console.log('error is ', error);

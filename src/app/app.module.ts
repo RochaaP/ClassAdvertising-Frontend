@@ -7,8 +7,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+
 import { AngularSplitModule } from 'angular-split';
 import {TranslateModule} from '@ngx-translate/core';
+import { NgaReadMoreModule } from 'nga-read-more';
+
 
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +32,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -65,6 +69,7 @@ import { ClassesViewInstituteComponent } from './auth/institute/classes-view-ins
 import { ProfilesSearchComponent } from './auth/common/profiles-search/profiles-search.component';
 import { PersonSearchComponent } from './auth/person/person-search/person-search.component';
 import { InstituteSearchComponent } from './auth/institute/institute-search/institute-search.component';
+
 import { EditPaperComponent } from './papers/editPaper/edit-paper.component';
 import { ViewPaperComponent } from './papers/viewPaper/view-paper.component';
 import { PaperComponent } from './papers/paper.component';
@@ -73,6 +78,9 @@ import { LoadingComponent } from './util/loading/loading.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill';
+
+import { fromEventPattern } from 'rxjs';
+
 
 
 const appRoutes: Routes = [
@@ -150,9 +158,13 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     ImageCropperModule,
     Ng4LoadingSpinnerModule.forRoot(),
+
     AngularSplitModule.forRoot(),
     TranslateModule.forRoot(),
     QuillModule.forRoot(),
+
+    NgaReadMoreModule,
+    
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -179,7 +191,9 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatProgressBarModule,
     MatIconModule,
-    MatRadioModule
+    MatRadioModule,
+    MatPaginatorModule
+
   ],
   entryComponents: [
     KeyboardComponent
