@@ -1,0 +1,11 @@
+.overlay-panel {
+    height: 100%;
+    width: 80%;
+    position: fixed;
+    z-index: 1052;
+}
+
+.overlay-panel-bg {
+    background-color: #212121;
+    opacity: 0.6;
+}

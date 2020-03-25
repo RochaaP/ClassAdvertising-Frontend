@@ -7,11 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+
+import { AngularSplitModule } from 'angular-split';
+import {TranslateModule} from '@ngx-translate/core';
 import { NgaReadMoreModule } from 'nga-read-more';
+
 
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule  } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table'
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -64,7 +69,18 @@ import { ClassesViewInstituteComponent } from './auth/institute/classes-view-ins
 import { ProfilesSearchComponent } from './auth/common/profiles-search/profiles-search.component';
 import { PersonSearchComponent } from './auth/person/person-search/person-search.component';
 import { InstituteSearchComponent } from './auth/institute/institute-search/institute-search.component';
+
+import { EditPaperComponent } from './papers/editPaper/edit-paper.component';
+import { ViewPaperComponent } from './papers/viewPaper/view-paper.component';
+import { PaperComponent } from './papers/paper.component';
+import { KeyboardComponent } from './util/keyboard/keyboard.component';
+import { LoadingComponent } from './util/loading/loading.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QuillModule } from 'ngx-quill';
+
 import { fromEventPattern } from 'rxjs';
+
 
 
 const appRoutes: Routes = [
@@ -81,6 +97,9 @@ const appRoutes: Routes = [
   { path: 'admin/getallusers', component: AllUsersComponent},
   { path: 'viewProfiles/person', component: PersonSearchComponent},
   { path: 'viewProfiles/institute', component: InstituteSearchComponent},
+
+  
+  { path: 'papers', component: PaperComponent},
 
 
 
@@ -120,6 +139,11 @@ const appRoutes: Routes = [
     ProfilesSearchComponent,
     PersonSearchComponent,
     InstituteSearchComponent,
+    EditPaperComponent,
+    ViewPaperComponent,
+    PaperComponent,
+    KeyboardComponent,
+    LoadingComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -128,11 +152,17 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FontAwesomeModule,
+    NgbModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     ImageCropperModule,
     Ng4LoadingSpinnerModule.forRoot(),
+
+    AngularSplitModule.forRoot(),
+    TranslateModule.forRoot(),
+    QuillModule.forRoot(),
+
     NgaReadMoreModule,
     
 
@@ -146,6 +176,7 @@ const appRoutes: Routes = [
 
     MatButtonModule,
     MatTabsModule,
+    MatTableModule,
     MatCardModule,
     MatExpansionModule,
     MatFormFieldModule,
@@ -164,7 +195,11 @@ const appRoutes: Routes = [
     MatPaginatorModule
 
   ],
+  entryComponents: [
+    KeyboardComponent
+  ],
   providers: [],
-  bootstrap: [RootComponent]
+  bootstrap: [RootComponent],
+  schemas: [ NO_ERRORS_SCHEMA]
 })
 export class AppModule { }
