@@ -16,64 +16,64 @@ export class QuestionService {
     private http: HttpClient,
     private loadingService: LoadingService) { }
 
-  getQuestions(callBack: WsCallback){
-    this.loadingService.showLoading("Loading", WsType.GET_ALL_QUESTIONS);
-    let url = ServiceUrls.GET_QUESTIONS;
-    this.http.get(url).subscribe(data =>{
-      var modified = JSON.parse(JSON.stringify(data));
-					var res = new WsResponse(modified);
-					callBack.onSuccess(res, WsType.GET_ALL_QUESTIONS);
+  getQuestions(callBack: WsCallback) {
+    this.loadingService.showLoading('Loading', WsType.GET_ALL_QUESTIONS);
+    const url = ServiceUrls.GET_QUESTIONS;
+    this.http.get(url).subscribe(data => {
+      const modified = JSON.parse(JSON.stringify(data));
+      const res = new WsResponse(modified);
+      callBack.onSuccess(res, WsType.GET_ALL_QUESTIONS);
     },
     error => {
-      var modified = JSON.parse(JSON.stringify(error));
-      var res = new WsResponse(modified);
+      const modified = JSON.parse(JSON.stringify(error));
+      const res = new WsResponse(modified);
       callBack.onFail(res, WsType.GET_ALL_QUESTIONS);
     });
   }
 
-  getQuestionByPaperId(id: string, callBack: WsCallback){     
+  getQuestionByPaperId(id: string, callBack: WsCallback) {
     // loading
-    let url = ServiceUrls.getQuestionByPaperId(id);
-    this.http.get(url).subscribe(data =>{
-      var modified = JSON.parse(JSON.stringify(data));
-					var res = new WsResponse(modified);
-					callBack.onSuccess(res, WsType.GET_QUESTIONS_BY_PAPER_ID);
+    const url = ServiceUrls.getQuestionByPaperId(id);
+    this.http.get(url).subscribe(data => {
+      const modified = JSON.parse(JSON.stringify(data));
+      const res = new WsResponse(modified);
+      callBack.onSuccess(res, WsType.GET_QUESTIONS_BY_PAPER_ID);
     },
     error => {
-      var modified = JSON.parse(JSON.stringify(error));
-      var res = new WsResponse(modified);
+      const modified = JSON.parse(JSON.stringify(error));
+      const res = new WsResponse(modified);
       callBack.onFail(res, WsType.GET_QUESTIONS_BY_PAPER_ID);
     });
   }
 
-  addQuestion(question: QuestionModel, callBack: WsCallback){
+  addQuestion(question: QuestionModel, callBack: WsCallback) {
     // loading
-    let url = ServiceUrls.CREATE_QUESTION;
+    const url = ServiceUrls.CREATE_QUESTION;
     this.http.post(url, question).subscribe(data => {
-      var modified = JSON.parse(JSON.stringify(data));
-					var res = new WsResponse(modified);
-					callBack.onSuccess(res, WsType.CREATE_QUESTION);
+      const modified = JSON.parse(JSON.stringify(data));
+      const res = new WsResponse(modified);
+      callBack.onSuccess(res, WsType.CREATE_QUESTION);
     },
     error => {
-      var modified = JSON.parse(JSON.stringify(error));
-      var res = new WsResponse(modified);
+      const modified = JSON.parse(JSON.stringify(error));
+      const res = new WsResponse(modified);
       callBack.onFail(res, WsType.CREATE_QUESTION);
     });
   }
 
-  public updateQuestion(question: {id: string, data: QuestionModel}){
-    console.log("___updateQuestion()___");
-    let url = ServiceUrls.UPDATE_QUESTION;
-    this.http.put(url, question).subscribe(data=>{
-      console.log("Question is updated");
+  public updateQuestion(question: {id: string, data: QuestionModel}) {
+    console.log('___updateQuestion()___');
+    const url = ServiceUrls.UPDATE_QUESTION;
+    this.http.put(url, question).subscribe(data => {
+      console.log('Question is updated');
     });
   }
 
-  public deleteQuestion(question: {id: string, data: QuestionModel}){
-    console.log("___deleteQuestion()___");
-    let url = ServiceUrls.deleteQuestion(question.id);
-    this.http.delete(url).subscribe(()=>{
-      console.log("Question is deleted");
+  public deleteQuestion(question: {id: string, data: QuestionModel}) {
+    console.log('___deleteQuestion()___');
+    const url = ServiceUrls.deleteQuestion(question.id);
+    this.http.delete(url).subscribe(() => {
+      console.log('Question is deleted');
     });
   }
 }

@@ -22,7 +22,7 @@ export class EditPaperComponent implements OnInit {
 
   private paper: {id: string, data: PaperModel};
 
-  private loggedInUser : {id: string, data: UserModel};
+  private loggedInUser: {id: string, data: UserModel};
 
   private questionList: {id: string, data: QuestionModel}[] = [];
   private deletedQuestionList: {id: string, data: QuestionModel}[] = [];
@@ -62,32 +62,32 @@ export class EditPaperComponent implements OnInit {
 
     let modalText: string;
 
-    let modalSubscription: Subscription = modalRef.componentInstance.modalText.subscribe(res =>{
+    let modalSubscription: Subscription = modalRef.componentInstance.modalText.subscribe(res => {
       console.log(res);
       modalText = res;
 
-      if(isArray){
-        if(path!=undefined){
+      if (isArray){
+        if (path != undefined){
           let path_var = path.split('.');
           let length = path_var.length;
-          switch(length){
-            case 1:{
-              modalText!=undefined? variable[index][path_var[0]] = modalText: variable = curentText;
+          switch (length){
+            case 1: {
+              modalText != undefined ? variable[index][path_var[0]] = modalText : variable = curentText;
               break;
             }
-            case 2:{
-              modalText!=undefined? variable[index][path_var[0]][path_var[1]] = modalText: variable = curentText;
+            case 2: {
+              modalText != undefined ? variable[index][path_var[0]][path_var[1]] = modalText : variable = curentText;
               break;
             }
-            case 3:{
-              modalText!=undefined? variable[index][path_var[0]][path_var[1]][path_var[2]] = modalText: variable = curentText;
+            case 3: {
+              modalText != undefined ? variable[index][path_var[0]][path_var[1]][path_var[2]] = modalText : variable = curentText;
               break;
             }
           }
         }
       }
       else{
-        modalText!=undefined? variable = modalText: variable = curentText;
+        modalText != undefined ? variable = modalText : variable = curentText;
       }
       modalSubscription.unsubscribe();
     });
@@ -152,7 +152,7 @@ export class EditPaperComponent implements OnInit {
   public addNewQuestion(){
     console.log("___addNewQuestion()___"); 
     // Checking whether more questions can be added or not
-    if(this.paper.data.no_of_questions > this.questionList.length){
+    if (this.paper.data.no_of_questions > this.questionList.length){
       this.createDummyQuestion();
       console.log("Question is added!!!");
     }
@@ -162,7 +162,7 @@ export class EditPaperComponent implements OnInit {
   }
 
   private createDummyQuestion(){
-    let question: {id: string, data: QuestionModel}= {
+    let question: {id: string, data: QuestionModel} = {
       "id": "0",
       "data": {
         subject: "Maths",
@@ -191,11 +191,11 @@ export class EditPaperComponent implements OnInit {
 
   public changePositionQuestion(question: QuestionModel, index: number, direction: string){
     console.log("___changePositionQuestion()___");
-    if(direction == "up"){
-      [this.questionList[index], this.questionList[index-1]] = [this.questionList[index-1], this.questionList[index]];
+    if (direction == "up"){
+      [this.questionList[index], this.questionList[index - 1]] = [this.questionList[index - 1], this.questionList[index]];
     }
     else{
-      [this.questionList[index], this.questionList[index+1]] = [this.questionList[index+1], this.questionList[index]];
+      [this.questionList[index], this.questionList[index + 1]] = [this.questionList[index + 1], this.questionList[index]];
     }
 
   }
@@ -254,22 +254,22 @@ export class EditPaperComponent implements OnInit {
   }
 
   onSuccess(data: WsResponse, serviceType: WsType){
-    if(serviceType == WsType.GET_QUESTIONS_BY_PAPER_ID){
+    if (serviceType == WsType.GET_QUESTIONS_BY_PAPER_ID){
       console.log("GET_QUESTIONS_BY_PAPER_ID");
       this.questionList = data.payload;
       this.spinnerService.hide();
     }
-    else if(serviceType == WsType.UPDATE_PAPER){
+    else if (serviceType == WsType.UPDATE_PAPER){
       console.log("UPDATE_PAPER");
       this.spinnerService.hide();
     }
   }
 
-  onFail(data: WsResponse, serviceType:WsType){
-    if(serviceType == WsType.GET_QUESTIONS_BY_PAPER_ID){
+  onFail(data: WsResponse, serviceType: WsType){
+    if (serviceType == WsType.GET_QUESTIONS_BY_PAPER_ID){
       this.spinnerService.hide();
     }
-    else if(serviceType == WsType.UPDATE_PAPER){
+    else if (serviceType == WsType.UPDATE_PAPER){
       console.log("UPDATE_PAPER");
       this.spinnerService.hide();
     }

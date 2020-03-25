@@ -13,11 +13,11 @@ export class QuestionModel {
 
         public answer: string,
 
-        public paper: string,  
+        public paper: string,
         public number: string,
 
         public image: boolean,
         public image_url: string,
         public metadata: string
-    ){}
+    ) {}
 }
