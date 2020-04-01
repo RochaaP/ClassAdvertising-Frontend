@@ -1,45 +1,10 @@
-<h3 class="text-center">Paper List</h3>
-<button class="btn btn-secondary mb-1" style="width: 100%;" (click)="createPaper(createPaperModal)">Create Paper<fa-icon class="ml-2" [icon]="faPlus"></fa-icon></button>
-<mat-table [dataSource]="papers" class="elevation-z8">
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.data.name}} </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="subject">
-    <th mat-header-cell *matHeaderCellDef> Subject </th>
-    <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
-  </ng-container>
-
-  <!-- Year Column -->
-  <ng-container matColumnDef="year">
-    <th mat-header-cell *matHeaderCellDef> Year </th>
-    <td mat-cell *matCellDef="let element"> {{element.data.year}} </td>
-  </ng-container>
-
-  <!-- Load Column -->
-  <ng-container matColumnDef="load">
-    <th mat-header-cell *matHeaderCellDef> View </th>
-    <td mat-cell *matCellDef="let element"><button class="btn btn-sm" (click)="loadPaper(element)"><i class="fas fa-hand-point-right"></i></button></td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</mat-table>
-
-
-<ng-template #createPaperModal let-modal>
-  <div class="modal-header">
+<div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Create Paper</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="disableSaveBtn=!disableSaveBtn;isSubmitted='true';savePaper(modal);">
   <div class="modal-body">
       
       <div class="form-group">
@@ -146,7 +111,6 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" type="submit" (click)="disableSaveBtn=!disableSaveBtn;isSubmitted='true';savePaper(modal);" [disabled]="disableSavebtn">Save</button>  
+    <button type="button" class="btn btn-outline-dark" type="submit" [disabled]="disableSavebtn">Save</button>  
   </div>
 </form>
-</ng-template>

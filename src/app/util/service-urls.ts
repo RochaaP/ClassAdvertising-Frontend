@@ -8,13 +8,19 @@ export class ServiceUrls {
     public static UPDATE_PAPER = ServiceUrls.paperExtension;
 
     public static getPaper(id: string){
-        return ServiceUrls.paperExtension + id;
+        return ServiceUrls.paperExtension + "id/:" + id;
     }
     public static updatePaper(id: string){
         return ServiceUrls.paperExtension + id;
     }
     public static deletePaper(id: string){
         return ServiceUrls.paperExtension + id;
+    }
+    public static getPapersByInstructorId(instructorId: string){
+        return ServiceUrls.paperExtension + "instructor/" + instructorId;
+    }
+    public static getPapersBySubject(){
+        return ServiceUrls.paperExtension + "subjects/";
     }
 
 

@@ -80,6 +80,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill';
 
 import { fromEventPattern } from 'rxjs';
+import { StudentPaperComponent } from './papers/studentPaper/student-paper/student-paper.component';
+import { CreatePaperComponent } from './papers/createPaper/create-paper/create-paper.component';
 
 
 
@@ -143,7 +145,9 @@ const appRoutes: Routes = [
     ViewPaperComponent,
     PaperComponent,
     KeyboardComponent,
-    LoadingComponent
+    LoadingComponent,
+    StudentPaperComponent,
+    CreatePaperComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -196,7 +200,8 @@ const appRoutes: Routes = [
 
   ],
   entryComponents: [
-    KeyboardComponent
+    KeyboardComponent,
+    CreatePaperComponent
   ],
   providers: [],
   bootstrap: [RootComponent],

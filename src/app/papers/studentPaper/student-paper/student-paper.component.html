@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="card mx-5 mb-1">
+        <div class="m-2">
+            <label>Subject :</label>
+            <select matNativeControl placeholder="Select" class="form-control" name="subject" [(ngModel)]="subjectFilter" (change)="filterPapersBySubject()">
+                <option *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="card mx-5">    
+        <div class="card-header">
+            <label>Subject</label>
+            <button class="btn btn-light" (click)="toggleHide()" style="float: right;">
+                <fa-icon *ngIf="showSubject" [icon]="faCaretUp"></fa-icon>            
+                <fa-icon *ngIf="!showSubject" [icon]="faCaretDown"></fa-icon>
+            </button>
+        </div>
+        <div *ngIf="showSubject" class="card-body">
+            <mat-table *ngIf="sub_papers?.length>0" [dataSource]="sub_papers" class="elevation-z8">
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.data.name}} </td>
+                </ng-container>
+              
+                <!-- Year Column -->
+                <ng-container matColumnDef="year">
+                  <th mat-header-cell *matHeaderCellDef> Year </th>
+                  <td mat-cell *matCellDef="let element"> {{element.data.year}} </td>
+                </ng-container>
+              
+                <!-- Grade/ Level Column -->
+                <ng-container matColumnDef="grade_level">
+                  <th mat-header-cell *matHeaderCellDef> Grade/ Level </th>
+                  <td mat-cell *matCellDef="let element"> {{element.data.grade_level}} </td>
+                </ng-container>
+              
+                <!-- Load Column -->
+                <ng-container matColumnDef="load">
+                  <th mat-header-cell *matHeaderCellDef> View </th>
+                  <td mat-cell *matCellDef="let element"><button class="btn btn-sm" (click)="loadPaper(element)"><i class="fas fa-hand-point-right"></i></button></td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </mat-table>
+        </div>
+    </div>
+</div>
+

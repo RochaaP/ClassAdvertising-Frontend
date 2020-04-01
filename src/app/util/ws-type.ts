@@ -10,4 +10,5 @@ export class WsType {
     public static GET_QUESTIONS_BY_PAPER_ID = 22;
     public static CREATE_QUESTION = 23;
     public static UPDATE_QUESTION = 23;
+    public static GET_SUBJECTS = 31;
 }
