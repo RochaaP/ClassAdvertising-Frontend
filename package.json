@@ -40,6 +40,7 @@
     "ng-bootstrap": "^1.6.3",
     "ng4-loading-spinner": "^1.2.3",
     "nga-read-more": "0.0.3",
+    "ngx-countdown": "^9.0.0",
     "ngx-image-cropper": "^2.0.4",
     "ngx-quill": "^8.0.0",
     "popper.js": "^1.16.0",

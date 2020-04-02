@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{paper.data.name}} Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <table class="table table-striped">
+        <tbody>
+          <tr>
+            <td><label>Name</label></td>
+            <td><label>{{paper.data.name}}</label></td>
+          </tr>
+          <tr>
+            <td><label>Year</label></td>
+            <td><label>{{paper.data.year}}</label></td>
+          </tr>
+          <tr>
+            <td><label>Subject</label></td>
+            <td><label>{{paper.data.subject}}</label></td>
+          </tr>
+          <tr>
+            <td><label>Grade/ Level</label></td>
+            <td><label>{{paper.data.grade_level}}</label></td>
+          </tr>
+          <tr>
+            <td><label>Instructor</label></td>
+            <td><label>{{paper.data.instructor}}</label></td>
+          </tr>
+          <tr>
+            <td><label>No. of Questions</label></td>
+            <td><label>{{paper.data.no_of_questions}}</label></td>
+          </tr>
+          <tr>
+            <td><label>No. of Added Questions</label></td>
+            <td><label>{{paper.data.added_questions}}</label></td>
+          </tr>
+          <tr>
+            <td><label>Time</label></td>
+            <td><label>{{paper.data.time}}</label></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div class="footer">
+    <button class="btn btn-primary m-2" style="float: right;" (click)="answerPaper()">Answer Paper</button>
+</div>

@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click');closeWindow();">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="row">            
+            <div class="card mb-2">
+                <div class="card-header">
+                    <label>Your score is {{score}}/100</label>
+                </div>
+                <div class="card-body">
+                    <div *ngFor="let answer of answers; let t= index;" class="mr-1 btn badge" [ngClass]="{'badge-success': answers[t]==questions[t].data.answer, 'badge-danger': answers[t]!=questions[t].data.answer}">{{t+1}}</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <label>{{paper.data.name}} {{paper.data.year}}</label>
+                </div>
+                <div class="card-body">
+                    <div *ngFor="let question of questions; let t = index" class="mb-4">
+                        <div class="badge" [ngClass]="{'badge-danger': answers[t]!=questions[t].data.answer, 'badge-success': answers[t]==questions[t].data.answer}" [innerHTML]="question.data.number"></div>
+                        <div [innerHTML]="question.data.question"></div>
+                        <div *ngIf="question.data.a!=undefined && question.data.a!=''" [innerHTML]="question.data.a" [ngStyle]="{'color': question.data.answer==answers[t] && question.data.answer=='A'?'green': question.data.answer!=answers[t] && question.data.answer=='A'?'yellow':''}"></div>
+                        <div *ngIf="question.data.b!=undefined && question.data.b!=''" [innerHTML]="question.data.b" [ngStyle]="{'color': question.data.answer==answers[t] && question.data.answer=='B'?'green': question.data.answer!=answers[t] && question.data.answer=='B'?'yellow':''}"></div>
+                        <div *ngIf="question.data.c!=undefined && question.data.c!=''" [innerHTML]="question.data.c" [ngStyle]="{'color': question.data.answer==answers[t] && question.data.answer=='C'?'green': question.data.answer!=answers[t] && question.data.answer=='C'?'yellow':''}"></div>
+                        <div *ngIf="question.data.d!=undefined && question.data.d!=''" [innerHTML]="question.data.d" [ngStyle]="{'color': question.data.answer==answers[t] && question.data.answer=='D'?'green': question.data.answer!=answers[t] && question.data.answer=='D'?'yellow':''}"></div>
+                        <div *ngIf="question.data.e!=undefined && question.data.e!=''" [innerHTML]="question.data.e" [ngStyle]="{'color': question.data.answer==answers[t] && question.data.answer=='E'?'green': question.data.answer!=answers[t] && question.data.answer=='E'?'yellow':''}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

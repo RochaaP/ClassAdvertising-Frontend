@@ -97,7 +97,7 @@ export class ViewPaperComponent implements OnInit {
   }
 
   // Will open the Create Paper modal
-  public createPaper(modalName){
+  public createPaper(){
     console.log("___createPaper()___");
     // this.modalService.open(modalName,{})
     const modalRef = this.modalService.open(CreatePaperComponent);

@@ -1,5 +1,5 @@
 <h3 class="text-center">Paper List</h3>
-<button class="btn btn-secondary mb-1" style="width: 100%;" (click)="createPaper(createPaperModal)">Create Paper<fa-icon class="ml-2" [icon]="faPlus"></fa-icon></button>
+<button class="btn btn-secondary mb-1" style="width: 100%;" (click)="createPaper()">Create Paper<fa-icon class="ml-2" [icon]="faPlus"></fa-icon></button>
 <mat-table [dataSource]="papers" class="elevation-z8">
 
   <!-- Name Column -->
@@ -31,7 +31,7 @@
 </mat-table>
 
 
-<ng-template #createPaperModal let-modal>
+<!-- <ng-template #createPaperModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Create Paper</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -128,7 +128,7 @@
         </div>
       </div>
 
-      <!-- <div class="form-group">
+      <div class="form-group">
         <label>Charging?<ion-text color="danger"> <sup class="ml-1"><fa-icon [icon]="faAsterisk" class="fa-xs"></fa-icon></sup></ion-text>   :</label>
         <select matNativeControl placeholder="Select" class="form-control" name="charging" #charging_="ngModel" [(ngModel)]="charging" required>
             <option [value]=true>Yes</option>
@@ -141,7 +141,7 @@
             Amount<ion-text color="danger"> <sup class="ml-1"><fa-icon [icon]="faAsterisk" class="fa-xs"></fa-icon></sup></ion-text>
         </label>
         <input class="form-control" type="number" name="price" #price="ngModel" [(ngModel)]="paper.price" required/><ion-text>LKR</ion-text>
-      </div> -->
+      </div>
 
 
   </div>
@@ -149,4 +149,4 @@
     <button type="button" class="btn btn-outline-dark" type="submit" (click)="disableSaveBtn=!disableSaveBtn;isSubmitted='true';savePaper(modal);" [disabled]="disableSavebtn">Save</button>  
   </div>
 </form>
-</ng-template>
+</ng-template> -->

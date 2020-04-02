@@ -54,7 +54,7 @@ export class EditPaperComponent implements OnInit {
     this.sharedService.loadPaperWithDataRespond().subscribe(res => {
       this.paper = res.paper;
       this.questionService.getQuestionByPaperId(this.paper.id, this);
-      this.subjectService.getSubjects(JSON.stringify(this.loggedInUser.data.units), this);
+      this.subjectService.getSubjects(this);
     });    
     // this.sharedService.changeCreatePaperWidthRespond().subscribe(res =>{
     //   this.width = res.data;
