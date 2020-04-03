@@ -10,6 +10,7 @@ import { PaperModel } from 'src/app/papers/paper-model';
 export class PaperDetailsModalComponent implements OnInit {
 
   @Input("paper") paper: {id: string, data: PaperModel};
+  @Input("subjectName") subjectname: string;
 
   constructor(
     private activeModal: NgbActiveModal

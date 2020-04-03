@@ -11,4 +11,7 @@ export class WsType {
     public static CREATE_QUESTION = 23;
     public static UPDATE_QUESTION = 23;
     public static GET_SUBJECTS = 31;
+    public static GET_ATTEMPTS = 41;
+    public static GET_ATTEMPTS_USER_PAPER = 42;
+    public static SAVE_ATTEMPT = 43;
 }

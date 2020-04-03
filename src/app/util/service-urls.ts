@@ -70,7 +70,7 @@ export class ServiceUrls {
 
     
     // User URLs
-    private static userExtension = ServiceUrls.servicePrefix + "users/"
+    private static userExtension = ServiceUrls.servicePrefix + "users/";
     public static GET_USERS = ServiceUrls.userExtension;
     public static CREATE_USER = ServiceUrls.userExtension;
 
@@ -82,5 +82,20 @@ export class ServiceUrls {
     }
     public static deleteUser(id: string){
         return ServiceUrls.userExtension + id;
+    }
+
+    
+
+
+    // Attempt URLs
+    private static attemptExtension = ServiceUrls.servicePrefix + "attempts/";    
+    public static SAVE_ATTEMPTS = ServiceUrls.attemptExtension;
+
+    public static getAttemptsByUserId(userId: string){
+        return this.attemptExtension + "byuser/" + userId;
+    }
+
+    public static getAttemptsByUserIdPaperId(userId: string, paperId: string){
+        return this.attemptExtension + "byuserpaper/" + userId + "/" + paperId;
     }
 }
