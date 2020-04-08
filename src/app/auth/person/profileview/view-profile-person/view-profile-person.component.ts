@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../service/share/data.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class ViewProfilePersonComponent implements OnInit {
 
   constructor(
     private data: DataService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -45,5 +47,9 @@ export class ViewProfilePersonComponent implements OnInit {
     return this.http.post('/api/getUserData/person', {email: this.email} );
   }
 
+  appointment() {
+    this.data.passEmail(this.email);
+    this.router.navigate(['/messages']);
+  }
 
 }

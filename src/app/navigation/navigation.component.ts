@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSearch, faBell, faUser, faSchool, faSignOutAlt, faIdBadge, faStickyNote, faDownload,
+import { faSearch, faBell, faUser, faSchool, faSignOutAlt, faIdBadge, faStickyNote, faDownload, faEnvelope,
          faChalkboardTeacher, faAd, faIdCard, faUserFriends, faBookReader } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from '../service/auth/authentication.service';
 import { DataService } from '../service/share/data.service';
@@ -42,6 +42,7 @@ export class NavigationComponent implements OnInit {
   faBookReader = faBookReader;
   faStickyNote = faStickyNote;
   faDownload = faDownload;
+  faEnvelope = faEnvelope;
 
   item: string[];
 
@@ -141,6 +142,13 @@ export class NavigationComponent implements OnInit {
 
   clickPapers() {
     this.router.navigate(['/papers']);
+  }
+  clickNotes() {
+    this.router.navigate(['/notes/addnote']);
+  }
+
+  clickMessages() {
+    this.router.navigate(['/messages']);
   }
 }
 

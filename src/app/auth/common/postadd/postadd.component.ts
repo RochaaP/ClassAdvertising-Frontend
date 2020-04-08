@@ -128,9 +128,10 @@ export class PostaddComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-postAPIData(userValues: object) {
-  return this.http.post('api/uploadposts', userValues);
-}
+  postAPIData(userValues: object) {
+    return this.http.post('api/uploadposts', userValues);
+  }
+
   deleteImage() {
     this.afStorage.ref(this.imagePathOnClick).delete();
     this.downloadURL = '';
