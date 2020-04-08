@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Place an Appointment</h1>
+<div mat-dialog-content>
+  <p>With ashk asdhgk</p>
+  <mat-form-field class="full-width">
+    <mat-label>Topic</mat-label>
+    <input matInput [(ngModel)]="data.topic" required> 
+  
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <textarea matInput placeholder="Description" [(ngModel)]="data.description" name='decription' required></textarea>
+    <mat-hint>Make this Short</mat-hint>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

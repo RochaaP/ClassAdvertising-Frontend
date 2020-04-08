@@ -1,0 +1,67 @@
+<div class = "container-fluid">
+    <form class = 'form'>
+      <div class="row">
+          <div class="text-center">
+              <h4>Upload Notes</h4>
+          </div>
+  
+          <div class = "col-10 formInputs">
+  
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Title" [(ngModel)]="titleInput" name='title' required>
+              </mat-form-field>
+  
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Grade" [(ngModel)]="gradeInput" name='grade' required>
+              </mat-form-field>
+
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Subject" [(ngModel)]="subjectInput" name='subject' required>
+              </mat-form-field>
+  
+              <mat-form-field class="full-width">
+                <textarea matInput placeholder="Description" [(ngModel)]="descriptionInput" name='decription' required></textarea>
+                <mat-hint>Make this Short</mat-hint>
+              </mat-form-field>
+  
+              <div class="form-group">
+                  <div class="dropzone" appdropzone  (hovered)="toggleHover($event)" (dropped)="onDrop($event)" [class.hovering]="isHovering">
+                    <!-- <div class="col-md-3"> -->
+                    <div class="text-center">
+                      <div *ngIf ='uploadFile'>
+                        <img src="{{this.downloadURL}}"  class="avatar img-circle" class="img-thumbnail" alt="">
+                        <a (click)="deleteFile()" >Delete</a>
+                        <div *ngIf="percentageposts | async as pct">
+                          Progress: {{ pct | number }}%
+                          <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+                        </div>
+                      </div>
+  
+                      <div *ngIf='!uploadFile'>
+                        <h6>Upload a .pdf file...*</h6>
+                        <input type="file" class="form-control" (change)="upload($event)" accept=".pdf" required />
+                      </div>
+  
+  
+                      <!-- <input type="file" class="form-control"> -->
+                    </div>
+                  <!-- </div> -->
+                  </div>
+              </div>
+  
+  
+              <div class="form-group">
+                  <div *ngFor="let file of files">
+                      <app-upload-task [file]="file" ></app-upload-task>
+                  </div>
+                  <!-- <h4>{{path}}</h4> -->
+              </div>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-success" (click)="onSubmit()">Post</button>
+                  if you have uploaded a file wait till progress become 100%.
+              </div>
+          </div>
+      </div>
+    </form>
+  </div>
+  
