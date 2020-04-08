@@ -1,38 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { DataService } from './../../../service/share/data.service';
-import { AuthenticationService } from '../../../service/auth/authentication.service';
-import * as firebase from 'firebase';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { DataService } from 'src/app/service/share/data.service';
+import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
-  selector: 'app-postadd',
-  templateUrl: './postadd.component.html',
-  styleUrls: ['./postadd.component.scss']
+  selector: 'app-add-notes',
+  templateUrl: './add-notes.component.html',
+  styleUrls: ['./add-notes.component.scss']
 })
-export class PostaddComponent implements OnInit {
+export class AddNotesComponent implements OnInit {
 
   fileposts: AngularFireUploadTask;
   percentageposts: Observable<number>;
 
   titleInput: string;
   descriptionInput: string;
-  cityInput: string;
-  districtInput: string;
-  contactInput: string;
+  subjectInput: string;
+  gradeInput: string;
+
 
   path: string;
   imagePathOnClick: string;
   message: string;
   ob: any;
   isHovering: boolean;
-  uploadImage: boolean;
+  uploadFile: boolean;
 
   files: File[] = [];
   userDetails: any;
@@ -56,24 +54,9 @@ export class PostaddComponent implements OnInit {
     private spinnerService: Ng4LoadingSpinnerService
   ) { }
 
-  toggleHover(event: boolean) {
-    this.isHovering = event;
-  }
-
   ngOnInit() {
     this.userDetails = this.authService.isUserLoggedIn();
-    console.log('userdetails' + this.userDetails);
-    this.registerItem = JSON.parse(localStorage.getItem('registerItem'));
-    console.log('registerItem Postadd ' + this.registerItem);
-    this.uploadImage = false;
-  }
-
-  onDrop(files: FileList) {
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < files.length; i++) {
-      this.files.push(files.item(0));
-      this.data.currentMessage.subscribe(message => this.path = message);
-    }
+    console.log('email '+ this.userDetails.email );
   }
 
   onSubmit() {
@@ -85,12 +68,10 @@ export class PostaddComponent implements OnInit {
 
     userValues = {
       id: this.id,
-      registerItem: this.registerItem,
       email: this.userDetails.email,
       title: this.titleInput,
-      city: this.cityInput,
-      district: this.districtInput,
-      contact: this.contactInput,
+      grade: this.gradeInput,
+      subject: this.subjectInput,
       description: this.descriptionInput,
       path: this.downloadURL,
     };
@@ -113,10 +94,8 @@ export class PostaddComponent implements OnInit {
       this.openSnackBar(this.MESSAGE_FAIL);
       this.spinnerService.hide();
     });
-
-    // this.descriptionInput = '';
-    // this.router.navigate(['/']);
   }
+
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Done', {
       duration: 5000,
@@ -124,24 +103,26 @@ export class PostaddComponent implements OnInit {
   }
 
   navi() {
-    localStorage.setItem('needToReloadPage', 'true');
+    // localStorage.setItem('needToReloadPage', 'true');
     this.router.navigate(['/']);
   }
 
   postAPIData(userValues: object) {
-    return this.http.post('api/uploadposts', userValues);
+    return this.http.post('api/uploadfiles', userValues);
   }
+
 
   deleteImage() {
     this.afStorage.ref(this.imagePathOnClick).delete();
     this.downloadURL = '';
-    this.uploadImage = false;
+    this.uploadFile = false;
   }
 
+
   upload(event) {
-    this.uploadImage = true;
+    this.uploadFile = true;
     const randomId = Math.random().toString(36).substring(2);
-    const path = `posts/${Date.now()}_${randomId}`;
+    const path = `notes/${Date.now()}_${randomId}`;
     this.imagePathOnClick = path;
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
@@ -158,9 +139,9 @@ export class PostaddComponent implements OnInit {
       this.downloadURL = url; // with this you can use it in the html
       console.log('downloadurl ' + this.downloadURL);
 
-      });
     });
+  });
 
-  }
+}
 
 }

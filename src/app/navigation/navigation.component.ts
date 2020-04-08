@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faSearch, faBell, faUser, faSchool, faSignOutAlt, faIdBadge,
-         faChalkboardTeacher, faAd, faIdCard, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faBell, faUser, faSchool, faSignOutAlt, faIdBadge, faStickyNote, faDownload, faEnvelope,
+         faChalkboardTeacher, faAd, faIdCard, faUserFriends, faBookReader } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from '../service/auth/authentication.service';
 import { DataService } from '../service/share/data.service';
 import { Router } from '@angular/router';
@@ -19,6 +19,7 @@ export class NavigationComponent implements OnInit {
   registerItem: string;
 
   isStudent: boolean;
+  isInstructor: boolean;
 
   constructor(
     private authService: AuthenticationService,
@@ -38,7 +39,10 @@ export class NavigationComponent implements OnInit {
   faUserFriends = faUserFriends;
   faSignOutAlt = faSignOutAlt;
   faIdBadge = faIdBadge;
-
+  faBookReader = faBookReader;
+  faStickyNote = faStickyNote;
+  faDownload = faDownload;
+  faEnvelope = faEnvelope;
 
   item: string[];
 
@@ -63,9 +67,15 @@ export class NavigationComponent implements OnInit {
       this.registerItem = this.authService.getRegisterItem();
       if (this.registerItem === 'student') {
         this.isStudent = true;
+        this.isInstructor = false;
+      }
+      else if (this.registerItem === 'person') {
+        this.isStudent = false;
+        this.isInstructor = true;
       }
       else {
         this.isStudent = false;
+        this.isInstructor = false;
       }
       // location.reload();
    } else {
@@ -128,6 +138,17 @@ export class NavigationComponent implements OnInit {
     else if (this.registerItem === 'institute'){
       this.router.navigate(['/addclasses/institute']);
     }
+  }
+
+  clickPapers() {
+    this.router.navigate(['/papers']);
+  }
+  clickNotes() {
+    this.router.navigate(['/notes/addnote']);
+  }
+
+  clickMessages() {
+    this.router.navigate(['/messages']);
   }
 }
 

@@ -12,11 +12,10 @@ import { AngularSplitModule } from 'angular-split';
 import {TranslateModule} from '@ngx-translate/core';
 import { NgaReadMoreModule } from 'nga-read-more';
 
-
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule  } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table'
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -33,6 +32,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -69,6 +69,11 @@ import { ClassesViewInstituteComponent } from './auth/institute/classes-view-ins
 import { ProfilesSearchComponent } from './auth/common/profiles-search/profiles-search.component';
 import { PersonSearchComponent } from './auth/person/person-search/person-search.component';
 import { InstituteSearchComponent } from './auth/institute/institute-search/institute-search.component';
+import { AddNotesComponent } from './notes/add-notes/add-notes.component';
+import { ViewNotesComponent } from './notes/view-notes/view-notes.component';
+import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
+import { DialogComponent } from './messages/dialog/dialog.component';
+import { ConfirmationComponent } from './messages/confirmation/confirmation.component';
 
 import { EditPaperComponent } from './papers/editPaper/edit-paper.component';
 import { ViewPaperComponent } from './papers/viewPaper/view-paper.component';
@@ -81,6 +86,7 @@ import { QuillModule } from 'ngx-quill';
 import { CountdownModule } from 'ngx-countdown';
 
 import { fromEventPattern } from 'rxjs';
+
 import { StudentPaperComponent } from './papers/studentPaper/student-paper/student-paper.component';
 import { CreatePaperComponent } from './papers/createPaper/create-paper/create-paper.component';
 import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
@@ -95,7 +101,7 @@ const appRoutes: Routes = [
   { path: 'account/login', component: RegisterComponent },
   { path: 'editprofile/person', canActivate: [GuardService], component: PersonProfileComponent },
   { path: 'editprofile/institute', canActivate: [GuardService], component: InstituteProfileComponent },
-  { path: 'postadd', canActivate:[GuardService], component: PostaddComponent },
+  { path: 'postadd', canActivate: [GuardService], component: PostaddComponent },
   { path: 'viewprofile/person/:id', component: ViewProfilePersonComponent},
   { path: 'viewprofile/institute/:id', component: ViewProfileInstituteComponent},
   { path: 'addclasses/person', canActivate: [GuardService], component: ClassesPersonComponent},
@@ -103,8 +109,11 @@ const appRoutes: Routes = [
   { path: 'admin/getallusers', component: AllUsersComponent},
   { path: 'viewProfiles/person', component: PersonSearchComponent},
   { path: 'viewProfiles/institute', component: InstituteSearchComponent},
+  { path: 'notes/addnote', canActivate: [GuardService], component: AddNotesComponent},
+  { path: 'notes', component: ViewNotesComponent},
+  { path: 'messages', component: MsgStudentComponent },
 
-  
+
   { path: 'papers', component: PaperComponent},
   { path: 'answerpaper', component: AnswerPaperComponent},
 
@@ -151,6 +160,11 @@ const appRoutes: Routes = [
     PaperComponent,
     KeyboardComponent,
     LoadingComponent,
+    AddNotesComponent,
+    ViewNotesComponent,
+    MsgStudentComponent,
+    DialogComponent,
+    ConfirmationComponent,
     StudentPaperComponent,
     CreatePaperComponent,
     PaperDetailsModalComponent,
@@ -204,11 +218,14 @@ const appRoutes: Routes = [
     MatProgressBarModule,
     MatIconModule,
     MatRadioModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
 
   ],
   entryComponents: [
     KeyboardComponent,
+    DialogComponent,
+    ConfirmationComponent,
     CreatePaperComponent,
     PaperDetailsModalComponent,
     PaperMarkingModelComponent

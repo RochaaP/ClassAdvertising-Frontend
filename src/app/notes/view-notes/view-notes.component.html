@@ -1,0 +1,114 @@
+
+<div class='container-fluid'>
+  <div class="row">
+
+
+    <div class = 'col-md-3'>
+   
+      <div class ='row radios '>
+
+        <!-- <mat-radio-button value="Class" (change)="eventByClass($event)">Class</mat-radio-button> -->
+
+        <!-- <div *ngIf="showByClass"> -->
+
+          <!-- <mat-form-field class="full-width">
+            <input matInput placeholder="Enter Lecture's Name" [(ngModel)]='searchPersonInput' name='searchClass' >
+          </mat-form-field> -->
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Enter Subject" [(ngModel)]='searchSubjectInput' name='searchClass' required >
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Enter Grade" [(ngModel)]='searchGradeInput' name='searchClass' required (keydown.enter)='searchNotes()'>
+          </mat-form-field>
+
+          <div class ='full-width'>
+            <button mat-flat-button (click)='searchNotes()'>Search</button>
+            <button mat-flat-button (click)='searchNotesClose()'>Clear</button>
+          </div>
+        <!-- </div> -->
+      </div>
+
+    </div>
+
+    <div class = 'col-md-9'>
+
+
+
+      <div class ="container-fluid postfield" *ngIf='!notesSearchClicked'>
+          <ul *ngFor ="let field of response">
+            <div class='postContainer'>
+
+              <div class="row">
+
+                <div class="verify">
+                  <img src={{field.data.verify}} class="verify-image" >
+                </div>
+
+                  <div class="proPicImage">
+                    <img *ngIf='field.data.proPic' class="header-image" src ={{field.data.proPic}} alt="">
+                    <img *ngIf='!field.data.proPic' class="header-image" src ='../../../assets/propic/propic.png' alt="">
+                  </div>
+
+                  <div class= "col">
+                    <p>By <a class="click" (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'> {{field.data.name}}</a></p>
+                    <!-- <p>{{field.data.create }}</p> -->
+                    <p class="title">{{field.data.title}}</p>
+                    {{field.data.create.toDate  | date: 'dd.mm.yyyy hh:MM:ss'}}
+                  </div>
+              </div>
+
+
+              <div class ="row">
+                <div class="col-md-4 col-lg">
+                  <p><nga-read-more [text]="field.data.description" [textLength]="170"></nga-read-more></p>
+                  <p class= 'click' (click)='viewNote(field.data.path)'>View Note</p>
+                </div>
+
+              </div>
+
+            </div>
+          </ul>
+
+
+      </div>
+
+      <div class ="container-fluid postfield" *ngIf='notesSearchClicked'>
+        <ul *ngFor ="let field of searchedNotesList">
+          <div class='postContainer'>
+
+            <div class="row">
+
+              <div class="verify">
+                <img src={{field.data.verify}} class="verify-image" >
+              </div>
+
+                <div class="proPicImage">
+                  <img *ngIf='field.data.proPic' class="header-image" src ={{field.data.proPic}} alt="">
+                  <img *ngIf='!field.data.proPic' class="header-image" src ='../../../assets/propic/propic.png' alt="">
+                </div>
+
+                <div class= "col">
+                  <p>By <a class="click" (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'> {{field.data.name}}</a></p>
+                  <!-- <p>{{field.data.create }}</p> -->
+                  <p class="title">{{field.data.title}}</p>
+                  {{field.data.create.toDate  | date: 'dd.mm.yyyy hh:MM:ss'}}
+                </div>
+            </div>
+
+
+            <div class ="row">
+              <div class="col-md-4 col-lg">
+                <p><nga-read-more [text]="field.data.description" [textLength]="170"></nga-read-more></p>
+                <p class= 'click' (click)='viewNote(field.data.path)'>View Note</p>
+              </div>
+
+            </div>
+
+          </div>
+        </ul>
+
+
+    </div>
+
+ </div>
+ </div>     
