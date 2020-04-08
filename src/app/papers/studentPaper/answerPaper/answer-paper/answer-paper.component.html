@@ -1,0 +1,86 @@
+<div *ngIf="!timeOver" class="container">
+    <div class="row mt-5">
+        <div class="col-md-9">
+            <div class="card mx-5">
+                <div class="card-header">
+                    <label>{{paper.data.name}} {{paper.data.year}}</label>
+                    <div style="float: right;">
+                        <label class="mr-2">Time left</label>
+                        <countdown #countdown [config]="config"(event)="handleEvent($event)"></countdown>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- <div *ngFor="let question of questions; let t = index" class="mb-4">
+                        <div class="badge" [ngClass]="{'badge-light': answers[t]==undefined, 'badge-success': answers[t]!=undefined}" [innerHTML]="question.data.number"></div>
+                        <div [innerHTML]="question.data.question"></div>
+                        <select matNativeControl placeholder="Select" class="form-control col-md-8" name="subject" [(ngModel)]="answers[t]" (change)="answerEvent()">
+                            <option *ngIf="question.data.a!=undefined && question.data.a!=''" value="a" [innerHTML]="question.data.a"></option>
+                            <option *ngIf="question.data.b!=undefined && question.data.b!=''" value="b" [innerHTML]="question.data.b"></option>
+                            <option *ngIf="question.data.c!=undefined && question.data.c!=''" value="c" [innerHTML]="question.data.c"></option>
+                            <option *ngIf="question.data.d!=undefined && question.data.d!=''" value="d" [innerHTML]="question.data.d"></option>
+                            <option *ngIf="question.data.e!=undefined && question.data.e!=''" value="e" [innerHTML]="question.data.e"></option>
+                        </select>
+                    </div> -->
+                    <div class="mb-4">
+                        <div [innerHTML]="questions[current_question_index]?.data.question"></div>
+                        <div *ngIf="questions[current_question_index]?.data.image" class="btn btn-light mb-1" (click)="viewImage(imageModal)">View Image<fa-icon class="ml-1" [icon]="faImage"></fa-icon></div>
+                        <select matNativeControl placeholder="Select" class="form-control col-md-8" name="subject" [(ngModel)]="answers[current_question_index]" (change)="answerEvent()">
+                            <option *ngIf="questions[current_question_index]?.data.a!=undefined && questions[current_question_index]?.data.a!=''" value="A" [innerHTML]="questions[current_question_index]?.data.a"></option>
+                            <option *ngIf="questions[current_question_index]?.data.b!=undefined && questions[current_question_index]?.data.b!=''" value="B" [innerHTML]="questions[current_question_index]?.data.b"></option>
+                            <option *ngIf="questions[current_question_index]?.data.c!=undefined && questions[current_question_index]?.data.c!=''" value="C" [innerHTML]="questions[current_question_index]?.data.c"></option>
+                            <option *ngIf="questions[current_question_index]?.data.d!=undefined && questions[current_question_index]?.data.d!=''" value="D" [innerHTML]="questions[current_question_index]?.data.d"></option>
+                            <option *ngIf="questions[current_question_index]?.data.e!=undefined && questions[current_question_index]?.data.e!=''" value="E" [innerHTML]="questions[current_question_index]?.data.e"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-footer" style="text-align: center;">
+                    <button *ngIf="current_question_index!=0" class="btn" style="float: left;" (click)="changeQuestion(current_question_index-1)"><fa-icon [icon]="faCaretLeft"></fa-icon></button>
+                    <div class="badge" [ngClass]="{'badge-light': answers[current_question_index]==undefined, 'badge-success': answers[current_question_index]!=undefined}" [innerHTML]="questions[current_question_index]?.data.number"></div>
+                    <button *ngIf="current_question_index!=questions?.length-1" class="btn" style="float: right;" (click)="changeQuestion(current_question_index+1)"><fa-icon [icon]="faCaretRight"></fa-icon></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">            
+            <div class="card mx-5">
+                <div class="card-header">
+                    <label>Left: {{questions_left}}</label>
+                </div>
+                <div class="card-body">
+                    <div *ngFor="let answer of answers; let t= index;" class="mr-1 btn badge" [ngClass]="{'badge-light': answers[t]==undefined && current_question_index!=t, 'badge-success': answers[t]!=undefined && current_question_index!=t, 'badge-warning': current_question_index==t}" (click)="changeQuestion(t)">{{t+1}}</div>
+                    <div class="mr-1 btn badge badge-success" (click)="changeQuestion(questions?.length-1)"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="current_question_index==questions?.length-1" class="row mt-2">
+        <button class="form-control btn btn-success mx-5" (click)="submit(submitConfirmModal)">Submit</button>
+    </div>
+</div>
+
+<ng-template #submitConfirmModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Are you sure you want to submit the paper?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="questions_left>0">
+            You have {{questions_left}} questions left
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="modal.close('Submit click');submitForMarking()">Submit</button>
+    </div>
+  </ng-template>
+
+  <ng-template #imageModal let-modal>
+    <div class="modal-header">     
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    <div class="modal-body">
+        <img [src]="questions[current_question_index]?.data.image_url">
+    </div>
+  </ng-template>

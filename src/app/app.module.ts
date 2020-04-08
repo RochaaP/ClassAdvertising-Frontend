@@ -71,6 +71,9 @@ import { PersonSearchComponent } from './auth/person/person-search/person-search
 import { InstituteSearchComponent } from './auth/institute/institute-search/institute-search.component';
 import { AddNotesComponent } from './notes/add-notes/add-notes.component';
 import { ViewNotesComponent } from './notes/view-notes/view-notes.component';
+import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
+import { DialogComponent } from './messages/dialog/dialog.component';
+import { ConfirmationComponent } from './messages/confirmation/confirmation.component';
 
 import { EditPaperComponent } from './papers/editPaper/edit-paper.component';
 import { ViewPaperComponent } from './papers/viewPaper/view-paper.component';
@@ -80,11 +83,16 @@ import { LoadingComponent } from './util/loading/loading.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill';
+import { CountdownModule } from 'ngx-countdown';
 
 import { fromEventPattern } from 'rxjs';
-import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
-import { DialogComponent } from './messages/dialog/dialog.component';
-import { ConfirmationComponent } from './messages/confirmation/confirmation.component';
+
+import { StudentPaperComponent } from './papers/studentPaper/student-paper/student-paper.component';
+import { CreatePaperComponent } from './papers/createPaper/create-paper/create-paper.component';
+import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
+import { AnswerPaperComponent } from './papers/studentPaper/answerPaper/answer-paper/answer-paper.component';
+import { PaperMarkingModelComponent } from './papers/studentPaper/answerPaper/paperMarkingModel/paper-marking-model/paper-marking-model.component';
+
 
 
 const appRoutes: Routes = [
@@ -107,6 +115,7 @@ const appRoutes: Routes = [
 
 
   { path: 'papers', component: PaperComponent},
+  { path: 'answerpaper', component: AnswerPaperComponent},
 
 
 
@@ -156,6 +165,11 @@ const appRoutes: Routes = [
     MsgStudentComponent,
     DialogComponent,
     ConfirmationComponent,
+    StudentPaperComponent,
+    CreatePaperComponent,
+    PaperDetailsModalComponent,
+    AnswerPaperComponent,
+    PaperMarkingModelComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -174,9 +188,9 @@ const appRoutes: Routes = [
     AngularSplitModule.forRoot(),
     TranslateModule.forRoot(),
     QuillModule.forRoot(),
+    CountdownModule,
 
     NgaReadMoreModule,
-
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -211,7 +225,10 @@ const appRoutes: Routes = [
   entryComponents: [
     KeyboardComponent,
     DialogComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    CreatePaperComponent,
+    PaperDetailsModalComponent,
+    PaperMarkingModelComponent
   ],
   providers: [],
   bootstrap: [RootComponent],

@@ -12,6 +12,8 @@ import { Subscription } from 'rxjs';
 import { PaperService } from '../paper.service';
 import { UserModel } from 'src/app/users/user-model';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { SubjectService } from 'src/app/subjects/subject.service';
+import { SubjectModel } from 'src/app/subjects/subject-model';
 
 @Component({
   selector: 'app-edit-paper',
@@ -21,6 +23,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 export class EditPaperComponent implements OnInit {
 
   private paper: {id: string, data: PaperModel};
+  private subjectName: string = "XXXXXXXXXX";
 
   private loggedInUser: {id: string, data: UserModel};
 
@@ -37,9 +40,12 @@ export class EditPaperComponent implements OnInit {
     private translate: TranslateService,
     private questionService: QuestionService, 
     private paperService: PaperService,
+    private subjectService: SubjectService,
     private spinnerService: Ng4LoadingSpinnerService,
     private modalService: NgbModal
-  ) { }
+  ) { 
+    this.loggedInUser = this.sharedService.getLoggedInUser();
+  }
 
   ngOnInit() {
 
@@ -48,7 +54,8 @@ export class EditPaperComponent implements OnInit {
     this.sharedService.loadPaperWithDataRespond().subscribe(res => {
       this.paper = res.paper;
       this.questionService.getQuestionByPaperId(this.paper.id, this);
-    })
+      this.subjectService.getSubjects(this);
+    });    
     // this.sharedService.changeCreatePaperWidthRespond().subscribe(res =>{
     //   this.width = res.data;
     // })
@@ -223,7 +230,7 @@ export class EditPaperComponent implements OnInit {
         "metadata": element.data.metadata
       };
       console.log(JSON.stringify(que));
-      if (element.id != "") {
+      if (element.id != "0") {
         this.questionService.updateQuestion({ id: element.id, data: que });
       }
       else {
@@ -259,7 +266,16 @@ export class EditPaperComponent implements OnInit {
       this.questionList = data.payload;
       this.spinnerService.hide();
     }
-    else if (serviceType == WsType.UPDATE_PAPER){
+    else if(serviceType == WsType.GET_SUBJECTS){
+      console.log("GET_SUBJECTS");
+      let subjects: {id: string, data: SubjectModel}[] = data.payload;
+      this.subjectName = "XXXXXXXXXX";
+      subjects.forEach(element => {
+        this.paper.data.subject == element.id? this.subjectName = element.data.name: ""
+      });
+      this.spinnerService.hide();
+    }
+    else if(serviceType == WsType.UPDATE_PAPER){
       console.log("UPDATE_PAPER");
       this.spinnerService.hide();
     }
@@ -269,7 +285,10 @@ export class EditPaperComponent implements OnInit {
     if (serviceType == WsType.GET_QUESTIONS_BY_PAPER_ID){
       this.spinnerService.hide();
     }
-    else if (serviceType == WsType.UPDATE_PAPER){
+    else if(serviceType == WsType.GET_SUBJECTS){
+      this.spinnerService.hide();
+    }
+    else if(serviceType == WsType.UPDATE_PAPER){
       console.log("UPDATE_PAPER");
       this.spinnerService.hide();
     }

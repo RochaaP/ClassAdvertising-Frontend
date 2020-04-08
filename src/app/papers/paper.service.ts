@@ -13,10 +13,28 @@ export class PaperService {
 
   constructor(private http: HttpClient) { }
 
-  public loadPapers(callBack: WsCallback){
-    console.log("___loadPapers()___");
-    let url = ServiceUrls.GET_PAPERS;
+  public getPapersByInstructorId(instructorId: string, callBack: WsCallback){
+    console.log("getPapersByInstructorId()___");
+    let url = ServiceUrls.getPapersByInstructorId(instructorId);
     this.http.get(url).subscribe(data =>{
+      var modified = JSON.parse(JSON.stringify(data));
+					var res = new WsResponse(modified);
+					callBack.onSuccess(res, WsType.GET_ALL_PAPERS);
+    },
+    error => {
+      var modified = JSON.parse(JSON.stringify(error));
+      var res = new WsResponse(modified);
+      callBack.onFail(res, WsType.GET_ALL_PAPERS);
+    });
+  }
+
+  public getPapersBySubject(subjectList: string[], callBack: WsCallback){
+    console.log("getPapersBySubject()___");
+    let url = ServiceUrls.getPapersBySubject();
+    let request = {
+      "subjectArray": subjectList
+    }
+    this.http.post(url, request).subscribe(data =>{
       var modified = JSON.parse(JSON.stringify(data));
 					var res = new WsResponse(modified);
 					callBack.onSuccess(res, WsType.GET_ALL_PAPERS);
