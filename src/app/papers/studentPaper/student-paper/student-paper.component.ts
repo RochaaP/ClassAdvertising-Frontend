@@ -11,6 +11,8 @@ import { WsResponse } from 'src/app/util/ws-response';
 import { WsType } from 'src/app/util/ws-type';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaperDetailsModalComponent } from '../paperDetailsModal/paper-details-modal/paper-details-modal.component';
+import { MatTableDataSource } from '@angular/material';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-student-paper',
@@ -29,11 +31,14 @@ export class StudentPaperComponent implements OnInit {
   private loggedInUser: {id: string, data: UserModel};
 
   private subjectFilter: string;
-  private sub_papers:{id: string, data: PaperModel, subject: string}[];
+  private sub_papers:{id: string, data: PaperModel, instructor: string}[];
 
   private subjectGroup: {id: string, data: SubjectModel}[] = [];
-  private papers: {subject: string, papers:{id: string, data: PaperModel, subject: string}[]}[];
-  private displayedColumns: string[] = ['name', 'year', 'grade_level', 'load'];
+  private userGroup: {id: string, name: string}[] = [];
+  private papers: {subject: string, papers:{id: string, data: PaperModel, instructor: string}[]}[];
+
+  private displayedColumns: string[] = ['name', 'year', 'instructor', 'grade_level', 'load'];
+  dataSource: MatTableDataSource<{id: string, data: PaperModel, instructor: string}>;
 
   constructor(
     private sharedService: SharedService,
@@ -47,8 +52,14 @@ export class StudentPaperComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.show();
-    this.subjectService.getSubjects(this);
+    this.subjectService.getSubjectsAndInstructors(this);
     // this.paperService.getPapersBySubject(this.loggedInUser.data.units, this);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue);
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   private toggleHide(){
@@ -62,6 +73,20 @@ export class StudentPaperComponent implements OnInit {
     this.paperService.getPapersBySubject(this.loggedInUser.data.units, this);
   }
 
+  private setDataSource(){    
+    this.dataSource = new MatTableDataSource(this.sub_papers);
+    this.dataSource.filterPredicate = (data: {id: string, data: PaperModel, instructor: string}, filter: string) => {
+      if(data.instructor!=undefined && (data.instructor).toLowerCase().includes(filter)){
+        return true;
+      }
+    }
+    // this.dataSource.filterPredicate = (data: {id: string, data: PaperModel, instructor: string}, filter: string) => {
+    //   if((data.data.name).toLowerCase().includes(filter)){
+    //     return true;
+    //   }
+    // }
+  }
+
   private filterPapersBySubject(){
     console.log(this.subjectFilter);
     this.sub_papers = [];
@@ -70,6 +95,7 @@ export class StudentPaperComponent implements OnInit {
       if(el.subject == this.subjectFilter){
         this.sub_papers = el.papers;
         console.log(el);
+        this.setDataSource();
       }
       else{
         // nothing to do
@@ -80,7 +106,7 @@ export class StudentPaperComponent implements OnInit {
 
   private loadPaper(paperInstance: {id: string, data: PaperModel}){
     let paper: {id: string, data: PaperModel} = paperInstance;
-    console.log("loadPaper()___");
+    console.log("___loadPaper()___");
     let subject: {id: string, data: SubjectModel} = this.subjectGroup.find(element => element.id == paper.data.subject);
     const modalRef = this.modalService.open(PaperDetailsModalComponent, { size: 'md', backdrop: 'static' });
     modalRef.componentInstance.paper = paper;
@@ -90,7 +116,8 @@ export class StudentPaperComponent implements OnInit {
   onSuccess(data: WsResponse, serviceType: WsType){
     if(serviceType == WsType.GET_SUBJECTS){
       console.log(data.payload);
-      data.payload.forEach(element => {
+      this.userGroup = data.payload['instructors'];
+      data.payload['subjects'].forEach(element => {
         this.loggedInUser.data.units.includes(element.id)? this.subjectGroup.push(element):"";
       });
       this.paperService.getPapersBySubject(this.loggedInUser.data.units, this);
@@ -98,6 +125,14 @@ export class StudentPaperComponent implements OnInit {
     else if(serviceType == WsType.GET_ALL_PAPERS){
       console.log(data.payload);
       this.papers = data.payload;
+      this.papers.forEach(element=>{
+        element.papers.forEach(childElement=>{
+          if(this.userGroup!=undefined){
+            let instructor: {id: string, name: string} = this.userGroup.find(result => result.id == childElement.data.instructor);
+            instructor!=undefined?childElement.instructor = instructor.name: "";
+          }
+        })
+      })
       this.spinnerService.hide();
     }
   }
