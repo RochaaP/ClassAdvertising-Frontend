@@ -1,11 +1,19 @@
 <div class="container">
     <div class="card mx-5 mb-1">
-        <div class="m-2 row">
-            <label class="col-md-3">Subject :</label>
-            <select matNativeControl placeholder="Select" class="form-control col-md-8" name="subject" [(ngModel)]="subjectFilter" (change)="filterPapersBySubject()">
+        <div class="m-2 row">          
+          <mat-form-field>
+            <mat-label>Subject :</mat-label>  
+            <select matNativeControl placeholder="Select" class="col-md-8" name="subject" [(ngModel)]="subjectFilter" (change)="filterPapersBySubject()">
                 <option *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</option>
-            </select>
+            </select>            
+          </mat-form-field>
             <button class="btn btn-sm col-md-1" (click)="refreshPapers()"><fa-icon [icon]="faRedo"></fa-icon></button>
+        </div>        
+        <div *ngIf="subjectFilter!=undefined" class="m-2 row">    
+          <mat-form-field>
+            <mat-label>Filter by Instructor</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+          </mat-form-field>
         </div>
     </div>
 
@@ -21,7 +29,7 @@
             <div *ngIf="subjectFilter!=undefined && !(sub_papers?.length>0)" class="alert alert-warning">
               No Papers in this subject.<br>If you want to check again press Refresh button
             </div>
-            <mat-table *ngIf="sub_papers?.length>0" [dataSource]="sub_papers" class="elevation-z8">
+            <mat-table *ngIf="sub_papers?.length>0" [dataSource]="dataSource" class="elevation-z8">
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
@@ -33,6 +41,12 @@
                 <ng-container matColumnDef="year">
                   <th mat-header-cell *matHeaderCellDef> Year </th>
                   <td mat-cell *matCellDef="let element"> {{element.data.year}} </td>
+                </ng-container>
+
+                <!-- Instructor Column -->
+                <ng-container matColumnDef="instructor">
+                  <th mat-header-cell *matHeaderCellDef> Instructor </th>
+                  <td mat-cell *matCellDef="let element"> {{element.instructor}} </td>
                 </ng-container>
               
                 <!-- Grade/ Level Column -->

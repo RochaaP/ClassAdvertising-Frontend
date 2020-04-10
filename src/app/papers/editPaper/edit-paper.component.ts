@@ -54,7 +54,7 @@ export class EditPaperComponent implements OnInit {
     this.sharedService.loadPaperWithDataRespond().subscribe(res => {
       this.paper = res.paper;
       this.questionService.getQuestionByPaperId(this.paper.id, this);
-      this.subjectService.getSubjects(this);
+      this.subjectService.getSubjectsAndInstructors(this);
     });    
     // this.sharedService.changeCreatePaperWidthRespond().subscribe(res =>{
     //   this.width = res.data;
@@ -268,7 +268,7 @@ export class EditPaperComponent implements OnInit {
     }
     else if(serviceType == WsType.GET_SUBJECTS){
       console.log("GET_SUBJECTS");
-      let subjects: {id: string, data: SubjectModel}[] = data.payload;
+      let subjects: {id: string, data: SubjectModel}[] = data.payload['subjects'];
       this.subjectName = "XXXXXXXXXX";
       subjects.forEach(element => {
         this.paper.data.subject == element.id? this.subjectName = element.data.name: ""

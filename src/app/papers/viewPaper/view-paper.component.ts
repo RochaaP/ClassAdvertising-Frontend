@@ -88,7 +88,7 @@ export class ViewPaperComponent implements OnInit {
     this.createDummyPaper();
     this.paperService.getPapersByInstructorId(this.loggedInUser.id, this);
     this.spinnerService.show();
-    this.subjectService.getSubjects(this);
+    this.subjectService.getSubjectsAndInstructors(this);
   }
 
   // Year will be extracted from the selected date
@@ -127,11 +127,11 @@ export class ViewPaperComponent implements OnInit {
     if(serviceType == WsType.GET_ALL_PAPERS){
       console.log(data.payload);
       this.papers = data.payload;    
-      this.subjectService.getSubjects(this);
+      this.subjectService.getSubjectsAndInstructors(this);
     }
     else if(serviceType == WsType.GET_SUBJECTS){
       console.log(data.payload);
-      let subjects: {id: string, data: SubjectModel}[] = data.payload;
+      let subjects: {id: string, data: SubjectModel}[] = data.payload['subjects'];
       subjects.forEach(element => {
         this.loggedInUser.data.units.includes(element.id)? this.subjectGroup.push(element):"";
         this.papers.forEach(paper_el => {
