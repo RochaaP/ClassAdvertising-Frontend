@@ -77,6 +77,9 @@ export class ServiceUrls {
     public static getUser(id: string){
         return ServiceUrls.userExtension + id;
     }
+    public static getUserByEmail(){
+        return ServiceUrls.userExtension + "byEmail/";
+    }
     public static updateUser(id: string){
         return ServiceUrls.userExtension + id;
     }

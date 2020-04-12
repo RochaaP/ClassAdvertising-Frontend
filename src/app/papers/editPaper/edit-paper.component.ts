@@ -115,7 +115,7 @@ export class EditPaperComponent implements OnInit {
         year: "2019",
         instructor: "XXXXXXXXXX",
         subject: "XXXXXXXXXX",
-        grade_level: "other",
+        grade_level: "Other",
         no_of_questions: 50,
         added_questions: 0,
         time: "60",

@@ -10,21 +10,22 @@ export class SharedService {
   public createPaperWidth = 75;
   public sidePanelWidth = 5;
 
-  private loggedInUser: {id: string, data: UserModel} = {
-    id: "NdFYp85MYbdFkmfY5YNs",
-    data: {
-      role: "i",
-      adminFeatures: true,
-      firstname: "Erantha",
-      lastname: "Welikala",
-      email: "eranthawelikala@gmail.com",
-      mobile: "+94775778979",
-      units: ['Ll2jgq7nhZ30rxgs7ebq','N55sFZIQ7hL8OmdPXMNv','mvs0WABbqRTXIlDoh1Hc'],
-      img_url: "https://firebasestorage.googleapis.com/v0/b/questionapp-42922.appspot.com/o/profilePictures%2F1569192345051_Teacher.jpg?alt=media&token=bd4dbe94-2d14-4f37-bde6-0e9b597fbac5",
-      metadata: "",
-      grade_level: ""
-    }
-  }
+  private loggedInUser: {id: string, data: UserModel};
+  // private loggedInUser: {id: string, data: UserModel} = {
+  //   id: "NdFYp85MYbdFkmfY5YNs",
+  //   data: {
+  //     role: "i",
+  //     adminFeatures: true,
+  //     firstname: "Erantha",
+  //     lastname: "Welikala",
+  //     email: "eranthawelikala@gmail.com",
+  //     mobile: "+94775778979",
+  //     units: ['Ll2jgq7nhZ30rxgs7ebq','N55sFZIQ7hL8OmdPXMNv','mvs0WABbqRTXIlDoh1Hc'],
+  //     img_url: "https://firebasestorage.googleapis.com/v0/b/questionapp-42922.appspot.com/o/profilePictures%2F1569192345051_Teacher.jpg?alt=media&token=bd4dbe94-2d14-4f37-bde6-0e9b597fbac5",
+  //     metadata: "",
+  //     grade_level: ""
+  //   }
+  // }
 
   @Output() language: EventEmitter<any> = new EventEmitter();
   @Output() addTabItem: EventEmitter<any> = new EventEmitter();
@@ -35,11 +36,13 @@ export class SharedService {
   constructor() { }
 
   public getLoggedInUser(){
-    return this.loggedInUser;
+    // return this.loggedInUser;
+    return JSON.parse(sessionStorage.getItem("loggedInUser"));
   }
 
   public setLoggedInUser(user: {id: string, data: UserModel}){
     this.loggedInUser = user;
+    sessionStorage.setItem("loggedInUser", JSON.stringify(user));
   }
 
   public languageRequest(language: string){

@@ -10,8 +10,9 @@ export class WsType {
     public static GET_QUESTIONS_BY_PAPER_ID = 22;
     public static CREATE_QUESTION = 23;
     public static UPDATE_QUESTION = 23;
-    public static GET_SUBJECTS = 31;
-    public static GET_ATTEMPTS = 41;
-    public static GET_ATTEMPTS_USER_PAPER = 42;
-    public static SAVE_ATTEMPT = 43;
+    public static GET_SUBJECTS = 3;
+    public static GET_ATTEMPTS = 4;
+    public static GET_ATTEMPTS_USER_PAPER = 41;
+    public static SAVE_ATTEMPT = 42;
+    public static GET_USER = 5;
 }

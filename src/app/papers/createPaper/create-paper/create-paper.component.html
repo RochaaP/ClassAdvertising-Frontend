@@ -52,13 +52,13 @@
         <div class="form-group col-md-6">
               <label>Grade/ Level<ion-text color="danger"><sup class="ml-1"><fa-icon [icon]="faAsterisk" class="fa-xs"></fa-icon></sup></ion-text>   :</label>
               <select matNativeControl placeholder="Select" class="form-control" name="grade_level" [(ngModel)]="paper.grade_level" formControlName="grade_level">
-                  <option value="g6">Grade 6</option>
-                  <option value="g7">Grade 7</option>
-                  <option value="g8">Grade 8</option>
-                  <option value="g9">Grade 9</option>
-                  <option value="ol">Ordinary Level</option>
-                  <option value="al">Advanced Level</option>
-                  <option value="other">Other</option>
+                  <option value="Grade_6">Grade 6</option>
+                  <option value="Grade_7">Grade 7</option>
+                  <option value="Grade_8">Grade 8</option>
+                  <option value="Grade_9">Grade 9</option>
+                  <option value="Ordinary_Level">Ordinary Level</option>
+                  <option value="Advanced_Level">Advanced Level</option>
+                  <option value="Other">Other</option>
               </select>
               <div *ngIf="isSubmitted && formControls.grade_level.invalid" class="alert alert-danger">
                 <div *ngIf="formControls.grade_level.errors.required">

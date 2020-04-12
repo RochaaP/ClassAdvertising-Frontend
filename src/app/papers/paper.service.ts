@@ -14,7 +14,7 @@ export class PaperService {
   constructor(private http: HttpClient) { }
 
   public getPapersByInstructorId(instructorId: string, callBack: WsCallback){
-    console.log("getPapersByInstructorId()___");
+    console.log("___getPapersByInstructorId()___");
     let url = ServiceUrls.getPapersByInstructorId(instructorId);
     this.http.get(url).subscribe(data =>{
       var modified = JSON.parse(JSON.stringify(data));

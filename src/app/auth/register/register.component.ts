@@ -10,6 +10,11 @@ import { map, retryWhen } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { UserService } from 'src/app/users/user.service';
+import { WsResponse } from 'src/app/util/ws-response';
+import { WsType } from 'src/app/util/ws-type';
+import { SharedService } from 'src/app/shared/shared.service';
+import { UserModel } from 'src/app/users/user-model';
 
 
 interface User {
@@ -84,6 +89,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
+    private userService: UserService,
+    private sharedService: SharedService,
     private afs: AngularFirestore,
     private http: HttpClient,
     public router: Router
@@ -152,6 +159,11 @@ export class RegisterComponent implements OnInit {
         console.log(res);
         this.showMessage('success', 'Successfully Logged In!');
         // this.isUserLoggedIn();
+        this.userService.getUserByEmail(this.emailInput).subscribe(data=>{
+          console.log(data);
+          let user: {id: string, data: UserModel} = JSON.parse(JSON.stringify(data));
+          this.sharedService.setLoggedInUser(user);
+        });
         this.getReg();
         // this.getid();
       }, err => {
