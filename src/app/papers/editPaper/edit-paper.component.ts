@@ -14,6 +14,7 @@ import { UserModel } from 'src/app/users/user-model';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { SubjectService } from 'src/app/subjects/subject.service';
 import { SubjectModel } from 'src/app/subjects/subject-model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-edit-paper',
@@ -42,7 +43,8 @@ export class EditPaperComponent implements OnInit {
     private paperService: PaperService,
     private subjectService: SubjectService,
     private spinnerService: Ng4LoadingSpinnerService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private snackBar: MatSnackBar
   ) { 
     this.loggedInUser = this.sharedService.getLoggedInUser();
   }
@@ -164,7 +166,11 @@ export class EditPaperComponent implements OnInit {
       console.log("Question is added!!!");
     }
     else{
-      // this.toastMessageService.showToastMessage("You have already defined all the questions for this paper", 2000, "top");
+      let notifyMsg: string = "You have already defined all the questions for this paper";
+      this.snackBar.open(notifyMsg, 'Done', {
+        duration: 2000,
+        verticalPosition: "top"
+      });
     }
   }
 
@@ -258,6 +264,10 @@ export class EditPaperComponent implements OnInit {
     console.log("___paperDetailSave()___");
     this.spinnerService.show();
     this.paperService.updatePaper(this.paper, this);
+  }
+
+  public openPublishModal(){
+    
   }
 
   onSuccess(data: WsResponse, serviceType: WsType){

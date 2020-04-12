@@ -13,7 +13,7 @@ export class SharedService {
   private loggedInUser: {id: string, data: UserModel} = {
     id: "NdFYp85MYbdFkmfY5YNs",
     data: {
-      role: "s",
+      role: "i",
       adminFeatures: true,
       firstname: "Erantha",
       lastname: "Welikala",

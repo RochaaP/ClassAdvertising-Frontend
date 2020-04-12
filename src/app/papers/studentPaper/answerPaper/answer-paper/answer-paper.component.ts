@@ -83,6 +83,7 @@ export class AnswerPaperComponent implements OnInit {
       console.log(notifyMsg);
       this.snackBar.open(notifyMsg, 'Done', {
         duration: 2000,
+        verticalPosition: "top"
       });
     }
     else if(event.action == "done"){
@@ -92,6 +93,7 @@ export class AnswerPaperComponent implements OnInit {
       console.log(notifyMsg);
       this.snackBar.open(notifyMsg, 'Done', {
         duration: 5000,
+        verticalPosition: "top"
       });
     }
   }
