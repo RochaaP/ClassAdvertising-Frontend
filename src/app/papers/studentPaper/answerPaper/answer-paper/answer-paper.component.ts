@@ -53,7 +53,11 @@ export class AnswerPaperComponent implements OnInit {
   ) { 
     this.loggedInUser = this.sharedService.getLoggedInUser();
     this.paper = JSON.parse(localStorage.getItem("paper"));
+    localStorage.removeItem("loggedInUser");
     localStorage.removeItem("paper");
+    if(this.loggedInUser==undefined){
+      window.close();
+    }
     this.adjustTime();
   }
 

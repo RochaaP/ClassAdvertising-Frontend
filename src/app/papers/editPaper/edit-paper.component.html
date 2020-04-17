@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-md-11 col-sm-11">
                         <p class="my-1 float-left h6"><label>Paper Details</label></p>        
-                        <button *ngIf="paper.data.no_of_questions == paper.data.added_questions" class="btn btn-primary my-1 float-right h6" (click)="openPublishModal()"><label>Publish</label></button>                        
+                        <button *ngIf="paper.data.no_of_questions == paper.data.added_questions" class="btn btn-sm btn-primary my-1 float-right h6" (click)="openPublishModal(publishConfirmModal)"><label>Publish</label></button>                        
                     </div>
                     <div class="col-md-1 col-sm-1">
                         <button type="button" class="btn btn-sm mx-0 close float-right" (click)="isShowPaperDetail = !isShowPaperDetail">
@@ -242,3 +242,24 @@
         </div>
     </div>
         
+<ng-template #publishConfirmModal let-modal>
+    <div class="card">
+        <div class="card-header">
+            Do you really want to publish the paper?
+        </div>
+        <div class="card-body"> 
+            <mat-radio-group class="mb-1" aria-label="Select an option" [(ngModel)]="publish">
+                <mat-radio-button class="mr-1" value="yes">Yes</mat-radio-button>
+                <mat-radio-button value="no">No</mat-radio-button>
+            </mat-radio-group><br>  
+            <mat-form-field class="mb-1" *ngIf="publish=='yes'">
+                <input matInput placeholder="Enter Description" [(ngModel)]='description' name='description'>
+            </mat-form-field><br>
+            <label class="mb-1"><small style="color: red;">Once you published a paper you can not edit/ delete the paper</small></label>
+        </div>
+        <div class="card-footer">
+            <button style="float: right;" mat-button (click)="modal.close('Close click')">Close</button>
+            <button style="float: right;" *ngIf="publish=='yes'" mat-button color="primary" (click)="modal.close('Publish click');publishPaper();">Publish</button>
+        </div>
+    </div>
+</ng-template>

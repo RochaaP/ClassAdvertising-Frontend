@@ -109,6 +109,7 @@ export class StudentPaperComponent implements OnInit {
     console.log("___loadPaper()___");
     let subject: {id: string, data: SubjectModel} = this.subjectGroup.find(element => element.id == paper.data.subject);
     const modalRef = this.modalService.open(PaperDetailsModalComponent, { size: 'md', backdrop: 'static' });
+    modalRef.componentInstance.loggedInUser = this.loggedInUser;
     modalRef.componentInstance.paper = paper;
     modalRef.componentInstance.subjectName = subject.data.name;
   }

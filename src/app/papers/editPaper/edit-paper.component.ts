@@ -14,7 +14,8 @@ import { UserModel } from 'src/app/users/user-model';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { SubjectService } from 'src/app/subjects/subject.service';
 import { SubjectModel } from 'src/app/subjects/subject-model';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-paper',
@@ -36,6 +37,8 @@ export class EditPaperComponent implements OnInit {
 
   private width;
 
+  private publish: string = 'no';
+
   constructor(
     private sharedService: SharedService,
     private translate: TranslateService,
@@ -44,7 +47,8 @@ export class EditPaperComponent implements OnInit {
     private subjectService: SubjectService,
     private spinnerService: Ng4LoadingSpinnerService,
     private modalService: NgbModal,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { 
     this.loggedInUser = this.sharedService.getLoggedInUser();
   }
@@ -61,6 +65,13 @@ export class EditPaperComponent implements OnInit {
     // this.sharedService.changeCreatePaperWidthRespond().subscribe(res =>{
     //   this.width = res.data;
     // })
+  }
+
+  showSnackBar(notifyMsg: string, duration: number = 2000){    
+    this.snackBar.open(notifyMsg, 'Done', {
+      duration: duration,
+      verticalPosition: 'top'
+    });
   }
 
   private openKeyboard(curentText: string, isArray: boolean, variable: any, index: number, path: string) {    
@@ -120,7 +131,8 @@ export class EditPaperComponent implements OnInit {
         added_questions: 0,
         time: "60",
         questions: "",
-        price: ""
+        price: "",
+        published: false
       }
     }
   }
@@ -164,13 +176,12 @@ export class EditPaperComponent implements OnInit {
     if (this.paper.data.no_of_questions > this.questionList.length){
       this.createDummyQuestion();
       console.log("Question is added!!!");
+      let notifyMsg: string = "Question is added";
+      this.showSnackBar(notifyMsg);
     }
     else{
       let notifyMsg: string = "You have already defined all the questions for this paper";
-      this.snackBar.open(notifyMsg, 'Done', {
-        duration: 2000,
-        verticalPosition: "top"
-      });
+      this.showSnackBar(notifyMsg);
     }
   }
 
@@ -206,14 +217,19 @@ export class EditPaperComponent implements OnInit {
     console.log("___changePositionQuestion()___");
     if (direction == "up"){
       [this.questionList[index], this.questionList[index - 1]] = [this.questionList[index - 1], this.questionList[index]];
+      let notifyMsg = "Question is moved up. Press save to keep changes";
+      this.showSnackBar(notifyMsg);
     }
     else{
       [this.questionList[index], this.questionList[index + 1]] = [this.questionList[index + 1], this.questionList[index]];
+      let notifyMsg = "Question is moved down. Press save to keep changes";
+      this.showSnackBar(notifyMsg);
     }
 
   }
 
   public saveQuestions(){
+    this.spinnerService.show();
     this.deletedQuestionList.forEach(async element => {
       this.questionService.deleteQuestion(element);
     })
@@ -252,12 +268,16 @@ export class EditPaperComponent implements OnInit {
       //   // this.filterQuestionsByPaper();
       // });
     });
+    this.paper.data.added_questions = this.questionList.length;
+    this.paperService.updatePaper(this.paper, this);
   }
 
   public deleteQuestion(question: {id: string, data: QuestionModel}, index: number){
     console.log("___deleteQuestion()___");
     this.questionList.splice(index, 1);
     this.deletedQuestionList.push(question);
+    let notifyMsg = "Question is moved to recycle bin";
+    this.showSnackBar(notifyMsg);
   }
 
   public paperDetailSave(){
@@ -266,8 +286,21 @@ export class EditPaperComponent implements OnInit {
     this.paperService.updatePaper(this.paper, this);
   }
 
-  public openPublishModal(){
-    
+  public openPublishModal(publishModal){
+    this.modalService.open(publishModal, { backdrop: "static"});
+  }
+
+  public publishPaper(){
+    if(this.paper.data.added_questions != this.questionList.length && this.paper.data.added_questions != this.paper.data.no_of_questions){
+      let notifyMsg = "There is an error in number of questions. Please check again";
+      this.showSnackBar(notifyMsg);
+      return;
+    }
+    else{
+      // nothing to do
+    }
+    this.paper.data.published = true;
+    this.paperService.publishPaper(this.paper, this);
   }
 
   onSuccess(data: WsResponse, serviceType: WsType){
@@ -288,6 +321,15 @@ export class EditPaperComponent implements OnInit {
     else if(serviceType == WsType.UPDATE_PAPER){
       console.log("UPDATE_PAPER");
       this.spinnerService.hide();
+      let notifyMsg = "Paper is successfully updated";
+      this.showSnackBar(notifyMsg);
+    }
+    else if(serviceType == WsType.PUBLISH_PAPER){
+      console.log("PUBLISH_PAPER");
+      this.spinnerService.hide();
+      let notifyMsg = "Paper is successfully published";
+      this.showSnackBar(notifyMsg);
+      this.router.navigate(["/papers/"]);
     }
   }
 
@@ -301,6 +343,14 @@ export class EditPaperComponent implements OnInit {
     else if(serviceType == WsType.UPDATE_PAPER){
       console.log("UPDATE_PAPER");
       this.spinnerService.hide();
+      let notifyMsg = "Paper is failed to update";
+      this.showSnackBar(notifyMsg);
+    }
+    else if(serviceType == WsType.PUBLISH_PAPER){
+      console.log("PUBLISH_PAPER");
+      this.spinnerService.hide();
+      let notifyMsg = "Paper is failed to publish";
+      this.showSnackBar(notifyMsg);
     }
   }
 

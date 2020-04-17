@@ -37,12 +37,20 @@ export class SharedService {
 
   public getLoggedInUser(){
     // return this.loggedInUser;
-    return JSON.parse(sessionStorage.getItem("loggedInUser"));
+    let user = this.loggedInUser;
+    user == undefined? user = JSON.parse(sessionStorage.getItem("loggedInUser")):"";
+    user == undefined? user = JSON.parse(localStorage.getItem("loggedInUser")):"";
+    return user;
   }
 
-  public setLoggedInUser(user: {id: string, data: UserModel}){
+  public setLoggedInUser(user: {id: string, data: UserModel}, storage: string = "SESSION"){
     this.loggedInUser = user;
-    sessionStorage.setItem("loggedInUser", JSON.stringify(user));
+    if(storage == "SESSION"){
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user));
+    }
+    else{
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+    }
   }
 
   public languageRequest(language: string){
