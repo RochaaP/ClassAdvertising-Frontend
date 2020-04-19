@@ -24,7 +24,7 @@ export class PersonSearchComponent implements OnInit {
   // screenWidth: number;
   smallerScreens: boolean;
 
-  personResponse: any;
+  instructorResponse: any;
   classResponse: any;
   searchedList = [];
   searchedClassList = [];
@@ -81,7 +81,7 @@ export class PersonSearchComponent implements OnInit {
     this.showByName = false;
 
     this.getAPIData().subscribe((response) => {
-      this.personResponse = response;
+      this.instructorResponse = response;
       this.spinnerService.hide();
     }, ( error) => {
       console.log('error is ', error);
@@ -120,17 +120,17 @@ export class PersonSearchComponent implements OnInit {
         this.secondNamePart = this.searchNameInput.split(' ')[1].toLowerCase();
         this.firstNamePart = this.searchNameInput.split(' ')[0].toLowerCase();
       }
-      for (const index in this.personResponse) {
+      for (const index in this.instructorResponse) {
         if (this.secondNamePart !== '' &&
-            this.personResponse[index].data.firstname.toLowerCase() === this.firstNamePart &&
-            this.personResponse[index].data.lastname.toLowerCase() === this.secondNamePart ) {
+            this.instructorResponse[index].data.firstname.toLowerCase() === this.firstNamePart &&
+            this.instructorResponse[index].data.lastname.toLowerCase() === this.secondNamePart ) {
 
-              this.searchedList.push(this.personResponse[index]);
+              this.searchedList.push(this.instructorResponse[index]);
 
-        } else if (this.personResponse[index].data.firstname.toLowerCase() === this.searchNameInput.trim().toLowerCase() ||
-                 this.personResponse[index].data.lastname.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
+        } else if (this.instructorResponse[index].data.firstname.toLowerCase() === this.searchNameInput.trim().toLowerCase() ||
+                 this.instructorResponse[index].data.lastname.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
 
-              this.searchedList.push(this.personResponse[index]);
+              this.searchedList.push(this.instructorResponse[index]);
 
         }
       }
@@ -261,13 +261,13 @@ searchAllTogether() {
   profileView(email: string, name: string, lastName: string) {
     this.dataService.passEmail(email);
     localStorage.setItem('navigateUser', email);
-    this.router.navigate(['/viewprofile/person/' + name + ' ' + lastName]);
+    this.router.navigate(['/viewprofile/instructor/' + name + ' ' + lastName]);
   }
 
   profileView2(email: string, name: string) {
     this.dataService.passEmail(email);
     localStorage.setItem('navigateUser', email);
-    this.router.navigate(['/viewprofile/person/' + name]);
+    this.router.navigate(['/viewprofile/instructor/' + name]);
   }
 
 }

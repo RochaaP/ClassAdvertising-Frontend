@@ -58,7 +58,7 @@ export class MsgStudentComponent implements OnInit {
     });
   }
   getAPIData() {
-    return this.http.post('api/appointments/getAppointments',  {email: this.studentEmail});
+    return this.http.post('api/appointments/getAppointments/student',  {email: this.studentEmail});
   }
 
 
