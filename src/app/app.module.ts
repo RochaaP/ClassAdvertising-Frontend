@@ -10,7 +10,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { OwlModule } from 'ngx-owl-carousel';
 
 import { AngularSplitModule } from 'angular-split';
-import {TranslateModule} from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { NgaReadMoreModule } from 'nga-read-more';
 
 import { environment } from '../environments/environment';
@@ -47,37 +47,39 @@ import { GuardService } from './service/guard/guard.service';
 import { DropzoneDirective } from './service/dropzone/dropzone.directive';
 
 import { RootComponent } from './root/root.component';
-import { RegisterComponent } from './auth/register/register.component';
+import { RegisterComponent } from './register/register.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { DirectProfileComponent } from './auth/common/profileview/direct-profile/direct-profile.component';
-import { PersonProfileComponent } from './auth/person/profileview/person-profile/person-profile.component';
-import { InstituteProfileComponent } from './auth/institute/profileview/institute-profile/institute-profile.component';
+import { EditProfileInstituteComponent } from './roles/institute/profile/edit-profile-institute/edit-profile-institute.component';
+
+import { EditProfileInstructorComponent } from './roles/instructor/profile/edit-profile-instructor/edit-profile-instructor.component';
+
 import { NewsfeedComponent } from './newsfeed/newsfeed/newsfeed.component';
-import { PostaddComponent } from './auth/common/postadd/postadd.component';
+import { PostaddComponent } from './roles/common/postadd/postadd.component';
 import { UploadTaskComponent } from './service/upload-task/upload-task.component';
-import { ViewProfilePersonComponent } from './auth/person/profileview/view-profile-person/view-profile-person.component';
-import { ViewPersonPostsComponent } from './auth/person/view-person-posts/view-person-posts.component';
-import { ViewPostsComponent } from './auth/common/view-posts/view-posts.component';
-import { ViewProfileInstituteComponent } from './auth/institute/profileview/view-profile-institute/view-profile-institute.component';
-import { ProfileDetailsInstituteComponent } from './auth/institute/profile-details-institute/profile-details-institute.component';
-import { ClassComponent } from './auth/common/class/class.component';
+import { ViewProfileInstructorComponent } from './roles/instructor/profile/view-profile-instructor/view-profile-instructor.component';
+
+import { ProfileDetailsInstructorComponent } from './roles/instructor/profile/profile-details-instructor/profile-details-instructor.component';
+
+import { ViewProfileInstituteComponent } from './roles/institute/profile/view-profile-institute/view-profile-institute.component';
+import { ProfileDetailsInstituteComponent } from './roles/institute/profile/profile-details-institute/profile-details-institute.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ClassesComponent } from './auth/person/classes/classes.component';
-import { PapersComponent } from './auth/common/papers/papers.component';
-import { AllUsersComponent } from './admin/all-users/all-users.component';
-import { ClassesInstituteComponent } from './auth/institute/classes-institute/classes-institute.component';
-import { ClassesPersonComponent } from './auth/person/classes-person/classes-person.component';
-import { ClassesViewInstituteComponent } from './auth/institute/classes-view-institute/classes-view-institute.component';
-import { ProfilesSearchComponent } from './auth/common/profiles-search/profiles-search.component';
-import { PersonSearchComponent } from './auth/person/person-search/person-search.component';
-import { InstituteSearchComponent } from './auth/institute/institute-search/institute-search.component';
+import { ViewClassesInstructorComponent } from './roles/instructor/classes/view-classes-instructor/view-classes-instructor.component';
+
+import { PapersComponent } from './roles/common/papers/papers.component';
+import { AllUsersComponent } from './roles/admin/all-users/all-users.component';
+import { AddClassesInstituteComponent } from './roles/institute/classes/add-classes-institute/add-classes-institute.component';
+import { AddClassesInstructorComponent } from './roles/instructor/classes/add-classes-instructor/add-classes-instructor.component';
+
+import { ViewClassesInstituteComponent } from './roles/institute/classes/view-classes-institute/view-classes-institute.component';
+import { PersonSearchComponent } from './roles/instructor/person-search/person-search.component';
+import { InstituteSearchComponent } from './roles/institute/institute-search/institute-search.component';
 import { AddNotesComponent } from './notes/add-notes/add-notes.component';
 import { ViewNotesComponent } from './notes/view-notes/view-notes.component';
 import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
 import { DialogComponent } from './messages/dialog/dialog.component';
 import { ConfirmationComponent } from './messages/confirmation/confirmation.component';
 import { MsgInstructorComponent } from './messages/msg-instructor/msg-instructor.component';
-import { ImagesChangeComponent } from './admin/images-change/images-change.component';
+import { ImagesChangeComponent } from './roles/admin/images-change/images-change.component';
 
 import { EditPaperComponent } from './papers/editPaper/edit-paper.component';
 import { ViewPaperComponent } from './papers/viewPaper/view-paper.component';
@@ -103,13 +105,13 @@ const appRoutes: Routes = [
   { path: '', component: NewsfeedComponent },
   { path: 'account/register', component: RegisterComponent },
   { path: 'account/login', component: RegisterComponent },
-  { path: 'editprofile/person', canActivate: [GuardService], component: PersonProfileComponent },
-  { path: 'editprofile/institute', canActivate: [GuardService], component: InstituteProfileComponent },
+  { path: 'editprofile/person', canActivate: [GuardService], component: EditProfileInstructorComponent },
+  { path: 'editprofile/institute', canActivate: [GuardService], component: EditProfileInstituteComponent },
   { path: 'postadd', canActivate: [GuardService], component: PostaddComponent },
-  { path: 'viewprofile/person/:id', component: ViewProfilePersonComponent},
+  { path: 'viewprofile/person/:id', component: ViewProfileInstructorComponent},
   { path: 'viewprofile/institute/:id', component: ViewProfileInstituteComponent},
-  { path: 'addclasses/person', canActivate: [GuardService], component: ClassesPersonComponent},
-  { path: 'addclasses/institute', canActivate: [GuardService], component: ClassesInstituteComponent},
+  { path: 'addclasses/person', canActivate: [GuardService], component: AddClassesInstructorComponent},
+  { path: 'addclasses/institute', canActivate: [GuardService], component: AddClassesInstituteComponent },
   { path: 'viewProfiles/person', component: PersonSearchComponent},
   { path: 'viewProfiles/institute', component: InstituteSearchComponent},
   { path: 'notes/addnote', canActivate: [GuardService], component: AddNotesComponent},
@@ -119,7 +121,7 @@ const appRoutes: Routes = [
   { path: 'admin/images', component: ImagesChangeComponent},
 
 
-  { path: 'papers',canActivate:[GuardService], component: PaperComponent},
+  { path: 'papers', canActivate: [GuardService], component: PaperComponent},
   { path: 'answerpaper', component: AnswerPaperComponent},
 
 
@@ -140,35 +142,36 @@ const appRoutes: Routes = [
     RootComponent,
     RegisterComponent,
     NavigationComponent,
-    PersonProfileComponent,
-    InstituteProfileComponent,
-    DirectProfileComponent,
+    EditProfileInstituteComponent,
     NewsfeedComponent,
     PostaddComponent,
     DropzoneDirective,
     UploadTaskComponent,
-    ViewProfilePersonComponent,
-    ViewPersonPostsComponent,
-    ViewPostsComponent,
+    ViewProfileInstructorComponent,
+    ProfileDetailsInstructorComponent,
     ViewProfileInstituteComponent,
     ProfileDetailsInstituteComponent,
-    ClassComponent,
-    ClassesComponent,
+    EditProfileInstructorComponent,
+
+    ViewClassesInstructorComponent,
     PapersComponent,
     AllUsersComponent,
-    ClassesInstituteComponent,
-    ClassesPersonComponent,
-    ClassesViewInstituteComponent,
-    ProfilesSearchComponent,
+    AddClassesInstituteComponent,
+    AddClassesInstructorComponent,
+    ViewClassesInstituteComponent,
     PersonSearchComponent,
     InstituteSearchComponent,
+
     EditPaperComponent,
     ViewPaperComponent,
     PaperComponent,
+
     KeyboardComponent,
     LoadingComponent,
+
     AddNotesComponent,
     ViewNotesComponent,
+
     MsgStudentComponent,
     DialogComponent,
     ConfirmationComponent,
@@ -178,7 +181,7 @@ const appRoutes: Routes = [
     AnswerPaperComponent,
     PaperMarkingModelComponent,
     MsgInstructorComponent,
-    ImagesChangeComponent
+    ImagesChangeComponent,
   ],
   imports: [
     RouterModule.forRoot(
@@ -209,7 +212,7 @@ const appRoutes: Routes = [
     AngularFireStorageModule,
 
     BrowserAnimationsModule,
-    
+
     MatButtonModule,
     MatTabsModule,
     MatTableModule,

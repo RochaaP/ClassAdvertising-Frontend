@@ -1,0 +1,128 @@
+<!-- <div class="conatiner">
+  <div class="row" *ngFor="let field of response">
+    <div class="details">
+      <div>{{field.data.firstName}}</div>
+      <div>{{field.data.degree}}</div>
+      <div>{{field.data.university}}</div>
+      <div>{{field.data.teachingSchool}}</div>
+      <div>contact {{field.data.email}}</div>
+    </div>
+  </div>
+</div> -->
+
+
+<div *ngFor="let field of response">
+    <div class="container">
+    
+    
+    
+    <mat-accordion>
+       <!-- <div *ngIf ="field.data.firstName"> -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Personal data
+          </mat-panel-title>
+          <!-- <mat-panel-description>
+            Type your name and age
+          </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <p>{{field.data.firstname}} {{field.data.lastname}}</p>
+        <p>{{field.data.email}}</p>
+        <p>{{field.data.contact}}</p>
+      </mat-expansion-panel>
+    <!-- </div> -->
+      <div *ngIf ="field.more.university">
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false" expanded>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+            University Details
+            </mat-panel-title>
+            <!-- <mat-panel-description>
+              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description> -->
+          </mat-expansion-panel-header>
+          <p>{{field.more.university}}</p>
+          <p>{{field.more.degree}}</p>
+          <p>{{field.more.grad}}</p>
+          <p>{{field.more.degreeYear}}</p>
+        </mat-expansion-panel>
+      </div>
+    
+        <div *ngIf = "field.more.universityMSc">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+            MSc Degree Details
+            </mat-panel-title>
+            <!-- <mat-panel-description>
+            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            <p>{{field.more.universityMSc}}</p>
+            <p>{{field.more.degreeMSc}}</p>
+            <p>{{field.more.yearMSc}}</p>
+          </mat-expansion-panel>
+        </div>
+    
+        <div *ngIf = "field.more.universityPhD">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+            PhD Degree Details
+            </mat-panel-title>
+            <p>{{field.more.universityPhD}}</p>
+            <p>{{field.more.degreePhD}}</p>
+            <p>{{field.more.yearPhD}}</p>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </div>
+    
+        <div *ngIf ="field.more.personalAchievement">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+              Personal Achievements
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul *ngFor="let list of field.more.personalAchievement">
+              <p>{{list}}</p>
+              <mat-divider></mat-divider>
+            </ul>
+            <mat-divider></mat-divider>
+          </mat-expansion-panel>
+        </div>
+    
+      <div *ngIf = "field.more.achievement">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+              Other Achievements
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul *ngFor="let list of field.more.achievement">
+              <p>
+                <img *ngIf = "list.rankedProfileURL" src={{list.rankedProfileURL}} class="avatar" alt="">
+                <img *ngIf = "!list.rankedProfileURL" src="assets/propic/propic.png" class="avatar" alt="">
+              </p>
+              <div>
+              <b>Name of the student</b><p>{{list.rankedName}}</p>
+              <b>Year</b><p>{{list.rankedYear}}</p>
+              <b>District</b><p>{{list.rankedDistrictName}}</p>
+              <b>District Rank</b><p>{{list.rankedDistrict}}</p>
+              <b>Island Rank</b><p>{{list.rankedIsland}}</p>
+              <mat-divider></mat-divider>
+              </div>
+    
+            </ul>
+    
+        </mat-expansion-panel>
+      </div>
+    
+    </mat-accordion>
+    
+    </div>
+    </div>
+    
+    

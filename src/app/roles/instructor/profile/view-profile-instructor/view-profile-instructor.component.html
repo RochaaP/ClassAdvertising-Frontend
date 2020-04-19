@@ -1,0 +1,44 @@
+
+<div class = 'container-fluid'>
+    <div *ngFor="let field of response">
+  
+        <div class="flapImage col-12" id="idHot">
+          <img *ngIf="field.more.backgroundImagePath" src={{field.more.backgroundImagePath}}  class="img-fluid backgroundImage" />
+          <img *ngIf="!field.more.backgroundImagePath" src='assets/propic/noPphotoBackground.png'  class="img-fluid backgroundImage" />
+  
+          <img *ngIf="field.data.img_url" src={{field.data.img_url}}  class="avatar" />
+          <img *ngIf="!field.data.img_url" src='assets/propic/propic.png'  class="avatar" />
+       </div>
+  
+       <div class="text-center">
+        <h4 >{{field.data.firstname}} {{field.data.lastname}}</h4>
+        <button mat-raised-button color="primary" class='btnAppointment' (click)='openDialog()'>Place an Appointment</button>
+       </div>  
+    </div>
+  </div>
+  
+  <!-- <div class="col-9"> -->
+    <div class="tabssub">
+        <mat-tab-group>
+  
+          <mat-tab label="About">
+            <app-profile-details-instructor [childMessage]="this.email"></app-profile-details-instructor>
+          </mat-tab>
+  
+          <mat-tab label="Posts">
+            <app-view-posts [childMessage]="this.email"></app-view-posts>
+          </mat-tab>
+  
+          <mat-tab label="Classes">
+            <app-view-classes-instructor [childMessage]="this.email"></app-view-classes-instructor>
+          </mat-tab>
+  
+          <mat-tab label="Papers" >
+            <app-papers [childMessage]="this.email"></app-papers>
+          </mat-tab>
+  
+      </mat-tab-group>
+    </div>
+  <!-- </div> -->
+  
+  

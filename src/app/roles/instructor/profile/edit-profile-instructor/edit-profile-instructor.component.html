@@ -1,0 +1,449 @@
+<!-- <button type="button" class="btn btn-primary" (click)="getDetails();" >Get Profile Details</button> -->
+
+<!-- <div class="container">
+  <div class="row" style="margin-top: 5%;">
+      <div class="text-center col-md-12">
+          <input type="file" (change)="fileChangeEvent($event)" />
+      </div>
+  </div>
+  <div class="row" style="margin-top: 5%;">
+      <div class="text-center col-md-8">
+          <h5>Crop Image</h5>
+          <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="4 / 4"
+          [resizeToWidth]="256"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"></image-cropper>
+      </div>
+      <div class="text-center col-md-4">
+          <h5>Preview</h5>
+          <img [src]="croppedImage" />
+          <button type="button" class="btn btn-primary" (click)="uploadImagecropped()" >Upload</button>
+
+      </div>
+  </div>
+</div> -->
+
+
+
+<div class="container">
+    <h3>Build Up the Profile</h3>
+    <hr>
+  <div class="row">
+      <div class="col-md-3">
+       <h5>Profile Picture</h5>
+  
+       <div class="text-center">
+  
+        <div *ngIf='uploadProfile'>
+          <img src="//placehold.it/100" src={{this.img_url}} class="avatar img-circle" class="img-thumbnail" alt="">
+          <a (click)="deleteProfile()" >Delete</a>
+          <div *ngIf="percentageProfile | async as pct">
+            Progress: {{ pct | number }}%
+            <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+          </div>
+        </div>
+  
+        <div *ngIf="!uploadProfile">
+  
+          <h6>Upload a different photo...</h6>
+          <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" />
+        <!-- <input type="file" class="form-control"> -->
+  
+      </div>
+      </div>
+  
+  
+        <div class="backgroundImage">
+          <h5>Background Image</h5>
+          <div class="text-center">
+  
+            <div *ngIf='uploadBackground'>
+              <img src="//placehold.it/100" src={{this.backgroundImageURL}} class="avatar img-circle" class="img-thumbnail" alt="">
+              <a (click)="deleteBackground()" >Delete</a>
+              <div *ngIf="percentageBackground | async as pct">
+                Progress: {{ pct | number }}%
+                <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+              </div>
+            </div>
+  
+            <div *ngIf='!uploadBackground'>
+  
+              <h6>Upload a different photo...</h6>
+              <input type="file" class="form-control" (change)="backgroundUpload($event)" accept=".png,.jpg" />
+              <!-- <input type="file" class="form-control"> -->
+            </div>
+  
+          </div>
+        </div>
+  
+      </div>
+  
+  
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <!-- <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a>
+          <i class="fa fa-coffee"></i>
+          This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        </div> -->
+        <h3>Personal info</h3>
+        <!-- *ngFor="let post of users | async" -->
+        <form class="form-horizontal" role="form"  >
+          <mat-vertical-stepper>
+  
+            <!-- personal Information -->
+            <mat-step label="Personal Information">
+  
+              <!-- <div class="form-group">
+                <label class="col-lg-3 control-label">Title:</label>
+                <div class="col-lg-8">
+                  <select class="form-control" placeholder='Title' [(ngModel)]='titleInput' name='title' >
+                    <option value="Mr">Mr.</option>
+                    <option value="Miss">Miss.</option>
+                    <option value="Mrs">Mrs.</option>
+                    <option value="Dr">Dr.</option>
+                    <option value="Prof">Prof.</option>
+                  </select>
+                  <input class="form-control" type="text"  placeholder="t" [(ngModel)]="firstNameInput" name='first'>
+                </div>
+              </div> -->
+  
+  
+              <div class="form-group">
+                <label class="col-lg-3 control-label">First name:</label>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text"  placeholder="First Name" [(ngModel)]="firstNameInput" name='first'>
+                </div>
+              </div>
+  
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Last name:</label>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" placeholder="Last Name" [(ngModel)]="lastNameInput" name="last">
+                </div>
+              </div>
+  
+              <div class="form-group">
+                  <label class="col-lg-3 control-label">Email:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text"  [(ngModel)]="emailInput"  name='email' readonly>
+                  </div>
+              </div>
+  
+              <div class="form-group">
+                  <label class="col-md-3 control-label">Contact:</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="Contact" [(ngModel)]="contactInput" name='contact'>
+                  </div>
+              </div>
+  
+            </mat-step>
+  
+            <!-- Education Qualifications -->
+            <mat-step label="Education Qualifications" optional>
+  
+              <div class="form-group">
+                <label><input type="checkbox" (change)="eventUniversity($event)"/> Degree Holder</label>
+  
+                    <div  *ngIf="showhideUniversity">
+                      <div class="form-group">
+                        <label class="col-md-3 control-label">University:</label>
+                        <div class="col-md-8">
+                          <input class="form-control" type="text" placeholder="University" [(ngModel)]="universityInput" name='university'>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-3 control-label">Degree:</label>
+                          <div class="col-md-8">
+                            <input class="form-control" type="text" placeholder="Degree" [(ngModel)]="degreeInput" name='degree'>
+                          </div>
+                      </div>
+                        <div class="form-group">
+                          <label class="col-md-3 control-label">Year:</label>
+                          <div class="col-md-8">
+                            <input class="form-control" type="text" placeholder="Year" [(ngModel)]="yearInput" name='year'>
+                          </div>
+                        </div>
+  
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [(ngModel)]="gradInput" name="radios" id="radios1" value="undergraduate" (change)="eventUnderGraduate($event)">
+                            <label class="form-check-label" for="radios1">
+                              Undergraduate
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" [(ngModel)]="gradInput" name="radios" id="radios2" value="Postgraduate" (change)="eventPostGraduate($event)">
+                            <label class="form-check-label" for="radios2">
+                              Postgraduate
+                            </label>
+                          </div>
+  
+                          <div *ngIf="showPostGraduation">
+  
+                            <div class="form-group">
+                              <label><input type="checkbox" (change)="eventMScHolder($event)"/> MSc Holder</label>
+  
+                              <div  *ngIf="showhideMSc">
+  
+                                <div class="form-group">
+                                  <label class="col-md-3 control-label">University:</label>
+                                  <div class="col-md-8">
+                                    <input class="form-control" type="text" placeholder="University" [(ngModel)]="universityMScInput" name='universityMSc'>
+                                  </div>
+                                </div>
+  
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">MSc Degree:</label>
+                                    <div class="col-md-8">
+                                      <input class="form-control" type="text" placeholder="Degree" [(ngModel)]="degreeMScInput" name='degreeMSc'>
+                                    </div>
+                                </div>
+  
+                                <div class="form-group">
+                                  <label class="col-md-3 control-label">Year:</label>
+                                  <div class="col-md-8">
+                                    <input class="form-control" type="text" placeholder="Year" [(ngModel)]="yearMScInput" name='yearMSc'>
+                                  </div>
+                                </div>
+  
+                              </div>
+                            </div>
+  
+                            <div class="form-group">
+                              <label><input type="checkbox" (change)="eventPhDHolder($event)"/> PhD Holder</label>
+  
+                              <div  *ngIf="showhidePhD">
+  
+                                <div class="form-group">
+                                  <label class="col-md-3 control-label">University:</label>
+                                  <div class="col-md-8">
+                                    <input class="form-control" type="text" placeholder="University" [(ngModel)]="universityPhDInput" name='universityPhD'>
+                                  </div>
+                                </div>
+  
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">PhD Degree:</label>
+                                    <div class="col-md-8">
+                                      <input class="form-control" type="text" placeholder="Degree" [(ngModel)]="degreePhDInput" name='degreePhD'>
+                                    </div>
+                                </div>
+  
+                                <div class="form-group">
+                                  <label class="col-md-3 control-label">Year:</label>
+                                  <div class="col-md-8">
+                                    <input class="form-control" type="text" placeholder="Year" [(ngModel)]="yearPhDInput" name='yearPhD'>
+                                  </div>
+                                </div>
+  
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+              </div>
+  
+            </mat-step>
+  
+            <!-- Teaching Qulifications -->
+            <mat-step label="Teaching Qualifications" optional>
+  
+                <div class="form-group">
+                    <label><input type="checkbox" (change)="eventOccupation($event)"/> Gov.Teaching</label>
+  
+                    <div  *ngIf="showhideOccupation">
+                        <div class="form-group">
+                          <label class="col-md-3 control-label">School Teaching:</label>
+                          <div class="col-md-8">
+                            <input class="form-control" type="text" placeholder="Schoool" [(ngModel)]="teachingSchoolInput" name='school'>
+                      </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Experience in teaching:</label>
+                            <div class="col-md-8">
+                              <input class="form-control" type="text" placeholder="Years" [(ngModel)]="yearExperienceInput" name='yearExperience'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-step>
+  
+            <!-- Overall Results Last Year -->
+            <mat-step label="Overall Results">
+  
+                <div class="form-group">
+                    <label class="col-md-3 control-label"> Subject Teaching:</label>
+                    <div class="col-md-8">
+                      <input class="form-control" type="text" placeholder="Subject" [(ngModel)]="subjectInput" name='subject'>
+                    </div>
+                </div>
+  
+                <div class="form-group">
+                  <label class="col-md-3 control-label"> Grades in last Year:</label>
+                </div>
+  
+                <div class="form-group">
+                  <label class="col-md-3 control-label"> Grade A:</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="No of Grade A s" [(ngModel)]="gradeAInput" name='gradeA'>
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label class="col-md-3 control-label"> Grade B:</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="No of Grade B s" [(ngModel)]="gradeBInput" name='gradeB'>
+                  </div>
+  
+                </div>
+  
+                <div class="form-group">
+                <label class="col-md-3 control-label"> Grade C:</label>
+                <div class="col-md-8">
+                  <input class="form-control" type="text" placeholder="No of Grade C s" [(ngModel)]="gradeCInput" name='gradeC'>
+                </div>
+  
+                </div>
+  
+                <div class="form-group">
+                  <label class="col-md-3 control-label"> Grade S:</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="No of Grade S s" [(ngModel)]="gradeSInput" name='gradeS'>
+                  </div>
+                </div>
+  
+            </mat-step>
+  
+            <!-- Results Achievements -->
+            <mat-step label="Results Achievements" optional>
+                <div class="form-group">
+                  <label class="col-md-4 control-label"> Ranked achieved in Past Years:</label>
+                </div>
+  
+                  <div>
+                    <div class="image">
+                      <div *ngIf = "this.rankedProfileURLInput">
+                        <img src="{{this.rankedProfileURLInput}}"  class="avatar img-circle" class="img-thumbnail" alt="" col-md-3>
+                      </div>
+                      <div *ngIf = "!this.rankedProfileURLInput">
+  
+                        <img  src="//placehold.it/100"   class="avatar img-circle" class="img-thumbnail" alt="" col-md-3>
+  
+                      </div>
+  
+                      <h6>Upload a photo of the student...</h6>
+                      <input type="file" class="form-control" (change)="uploadImageStudent($event)" accept=".png,.jpg" />
+                      <div *ngIf="percentageStudent | async as pct">
+                        Progress: {{ pct | number }}%
+                        <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+                      </div>
+                      <!-- <input type="file" class="form-control"> -->
+                    </div>
+  
+                    <div class="form-group">
+                      <label class="col-md-3 control-label"> Name</label>
+                        <div class="col-md-8">
+                          <input class="form-control" type="text" placeholder="Name of Student" [(ngModel)]="rankedNameInput" name='rankedName'>
+                        </div>
+                      </div>
+  
+                      <div class="form-group col-md-4">
+                        <label>Year</label>
+                        <input type="text" class="form-control" placeholder="Year" name="rankedYear" [(ngModel)]='rankedYearInput'>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Island Rank</label>
+                        <input  type="text" class="form-control" placeholder="Island Rank" name="Island Rank" [(ngModel)]='rankedIslandInput'>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>District</label>
+                        <input  type="text" class="form-control" placeholder="District" name="District" [(ngModel)]='rankedDistrictNameInput'>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>District Rank</label>
+                        <input  type="text" class="form-control" placeholder="District Rank" name="District Rank" [(ngModel)]='rankedDistrictInput'>
+                      </div>
+                  </div>
+  
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary"(click)="submit()">Add achievement</button>
+                    if you have uploaded a profile photo wait till photo is shown.
+                  </div>
+  
+                  <div class= "addedDetails col-md-8" *ngFor="let tab of cards; let index = index">
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                        {{tab.rankedName}}
+                        </mat-panel-title>
+  
+                        <mat-panel-description>
+                        {{tab.rankedYear}}
+                        </mat-panel-description>
+  
+                        </mat-expansion-panel-header>
+                          <div class="image">
+                            <div *ngIf = "tab.rankedProfileURL">
+                              <img src="{{tab.rankedProfileURL}}"  class="avatar img-circle" class="img-thumbnail" alt="" col-md-3>
+                            </div>
+                            <div *ngIf = "!tab.rankedProfileURL">
+                              <img  src="//placehold.it/100"   class="avatar img-circle" class="img-thumbnail" alt="" col-md-3>
+  
+                            </div>
+                            <!-- <img src="//placehold.it/100" src="{{tab.rankedProfileURL}}"  class="avatar img-circle" class="img-thumbnail" alt="" col-md-3> -->
+                          </div>
+                          <b>District</b> <p>{{tab.rankedDistrictName}}</p>
+                          <b>District Rank</b> <p>{{tab.rankedDistrict}}</p>
+                          <b>Island Rank</b> <p>{{tab.rankedIsland}}</p>
+                          <div class="form-group">
+                            <button type="button" class="btn btn-primary" (click)="deleteResultAchievement(index)" >Delete</button>
+                        </div>
+                        </mat-expansion-panel>
+                  </div>
+  
+            </mat-step>
+  
+            <!-- personal Achievements -->
+            <mat-step label="Personal Achievements" optional>
+  
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Personal Achievements</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" [(ngModel)]='personalAchievementInput' name="personalAchievement"
+                    placeholder="personal achievements (paper publications, Achievments in A/L Results, Awards etc..)">
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <button type="button" class="btn btn-primary" (click)="addPersonalAchievements()">Add Personal Achievements</button>
+                </div>
+  
+                <div class= "addedDetails col-md-8" *ngFor="let list of achievementslist; let index =  index">
+                  <mat-list role="list">
+                    <mat-list-item role="listitem">{{list}}</mat-list-item>
+                  </mat-list>
+  
+                      <div class="form-group">
+                        <button type="button" class="btn btn-primary" (click)="deletePersonalAchievements(index)">Delete</button>
+                    </div>
+                </div>
+            </mat-step>
+  
+            </mat-vertical-stepper>
+  
+             <div class="form-group">
+                <button type="button" class="btn btn-primary"(click)="updateValues()">Update</button>
+                if you have uploaded a profile photo wait till new photo is shown.
+              </div>
+  
+        </form>
+      </div>
+  </div>
+  </div>
+  <hr>
+  
+  

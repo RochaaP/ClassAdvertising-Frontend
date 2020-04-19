@@ -1,0 +1,186 @@
+<!-- <button type="button" class="btn btn-primary" (click)="getDetails();" >Get Profile Details</button> -->
+<div class="container">
+    <h2>Build Up Profile</h2>
+      <hr>
+      <!-- <div class="row"> -->
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <h5>Profile Picture</h5>
+          <div class="text-center">
+  
+            <div *ngIf='uploadProfile'>
+              <img src="//placehold.it/100" src={{this.downloadURL}} class="avatar img-circle" class="img-thumbnail" alt="">
+              <a (click)="deleteProfile()" >Delete</a>
+              <div *ngIf="percentageProfile | async as pct">
+                Progress: {{ pct | number }}%
+                <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+              </div>
+            </div>
+  
+            <div *ngIf="!uploadProfile">
+  
+              <h6>Upload a different photo...</h6>
+              <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" />
+            <!-- <input type="file" class="form-control"> -->
+  
+          </div>
+          </div>
+  
+      <div class="backgroundImage">
+        <h5>Background Image</h5>
+          <div class="text-center">
+  
+            <div *ngIf='uploadBackground'>
+              <img src="//placehold.it/100" src={{this.backgroundImageURL}} class="avatar img-circle" class="img-thumbnail" alt="">
+              <a (click)="deleteBackground()" >Delete</a>
+              <div *ngIf="percentageBackground | async as pct">
+                Progress: {{ pct | number }}%
+                <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+              </div>
+            </div>
+  
+            <div *ngIf='!uploadBackground'>
+  
+              <h6>Upload a different photo...</h6>
+              <input type="file" class="form-control" (change)="backgroundUpload($event)" accept=".png,.jpg" />
+              <!-- <input type="file" class="form-control"> -->
+            </div>
+  
+          </div>
+        </div>
+      </div>
+  
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <!-- <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a>
+          <i class="fa fa-coffee"></i>
+          This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        </div> -->
+        <h3>Info</h3>
+        <!-- *ngFor="let post of users | async" -->
+        <form class="form-horizontal" role="form"  >
+          <mat-vertical-stepper>
+  
+            <!-- Personal Information -->
+            <mat-step label="Personal Information">
+  
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Name:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text"  placeholder="Name" [(ngModel)]="nameInput" name='name'>
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Email:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text"  [(ngModel)]="emailInput"  name='email' readonly>
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Contact:</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="Contact" [(ngModel)]="contactInput" name='contact'>
+                  </div>
+                </div>
+  
+            </mat-step>
+  
+            <!-- Address -->
+            <mat-step label="Address">
+  
+              <div class="form-group">
+                <label class="col-md-3 control-label">Street No 1</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id="streetNo1" placeholder="Street address, P.O. box" [(ngModel)]="street1Input" [(ngModel)]="street1Input" name='streetNo1'>
+                </div>
+              </div>
+  
+  
+              <div class="form-group">
+                <label class="col-md-3 control-label">Street No 2</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id="streetNo2" placeholder="Apartment, suite , unit, building, floor"  [(ngModel)]="street2Input" name='streetNo2'>
+                </div>
+              </div>
+  
+  
+  
+  
+              <div class="form-group">
+                  <label class="col-md-3 control-label">City</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="City" [(ngModel)]="cityInput" name='city'>
+                  </div>
+              </div>
+  
+              <div class="form-group">
+                <label class="col-md-3 control-label">District</label>
+                <div>
+                  <mat-form-field class ='col-md-8'>
+                    <mat-select t placeholder="District"  [(ngModel)]="districtInput" name='District'>
+                      <mat-option value="Ampara">Ampara</mat-option>
+                      <mat-option value="Anuradhapura">Anuradhapura</mat-option>
+                      <mat-option value="Badulla">Badulla</mat-option>
+                      <mat-option value="Batticaloa">Batticaloa</mat-option>
+                      <mat-option value="Colombo">Colombo</mat-option>
+                      <mat-option value="Galle">Galle</mat-option>
+                      <mat-option value="Gampaha">Gampaha</mat-option>
+                      <mat-option value="Hambantota">Hambantota</mat-option>
+                      <mat-option value="Jaffna">Jaffna</mat-option>
+                      <mat-option value="Kandy">Kandy</mat-option>
+                      <mat-option value="Kalutara">Kalutara</mat-option>
+                      <mat-option value="Kegalle">Kegalle</mat-option>
+                      <mat-option value="Kilinochchi">Kilinochchi</mat-option>
+                      <mat-option value="Kurunegala">Kurunegala</mat-option>
+                      <mat-option value="Mannar">Mannar</mat-option>
+                      <mat-option value="Matale">Matale</mat-option>
+                      <mat-option value="Matara">Matara</mat-option>
+                      <mat-option value="Moneragala">Moneragala</mat-option>
+                      <mat-option value="Mullaitivu">Mullaitivu</mat-option>
+                      <mat-option value="Nuwara Eliya">Nuwara Eliya</mat-option>
+                      <mat-option value="Polonnaruwa">Polonnaruwa</mat-option>
+                      <mat-option value="Puttalam">Puttalam</mat-option>
+                      <mat-option value="Ratnapura">Ratnapura</mat-option>
+                      <mat-option value="Trincomalee">Trincomalee</mat-option>
+                      <mat-option value="Vavuniya">Vavuniya</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <div class="form-group">
+                <label class="col-md-3 control-label">Province</label>
+                <div>
+                  <mat-form-field class ='col-md-8'>
+                    <mat-select t placeholder="Province"  [(ngModel)]="provinceInput" name='Province'>
+                      <mat-option value="Central Province">Central Province</mat-option>
+                      <mat-option value="Eastern Province">Eastern Province</mat-option>
+                      <mat-option value="North Central Province">North Central Province</mat-option>
+                      <mat-option value="North Western Province">North Western Province</mat-option>
+                      <mat-option value="Nothern Province">Nothern Province</mat-option>
+                      <mat-option value="Sabaragamuwa Province">Sabaragamuwa Province</mat-option>
+                      <mat-option value="Southern Province">Southern Province</mat-option>
+                      <mat-option value="Uva Province">Uva Province</mat-option>
+                      <mat-option value="Western Province">Western Province</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-step>
+  
+          </mat-vertical-stepper>
+  
+            <div class="form-group">
+                <button type="button" class="btn btn-primary"(click)="updateValues()">Update</button>
+            </div>
+  
+      </form>
+      </div>
+  </div>
+  </div>
+  <hr>
+  
