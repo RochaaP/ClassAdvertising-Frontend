@@ -108,7 +108,7 @@ export class AddNotesComponent implements OnInit {
   }
 
   postAPIData(userValues: object) {
-    return this.http.post('api/uploadfiles', userValues);
+    return this.http.post('api/notes/uploadfiles', userValues);
   }
 
 

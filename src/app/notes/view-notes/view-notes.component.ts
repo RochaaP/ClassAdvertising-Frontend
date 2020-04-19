@@ -56,7 +56,7 @@ export class ViewNotesComponent implements OnInit {
   }
 
   getAPIData() {
-    return this.http.get('/api/getNotes');
+    return this.http.get('/api/notes/getNotes');
   }
 
   viewNote(url) {
