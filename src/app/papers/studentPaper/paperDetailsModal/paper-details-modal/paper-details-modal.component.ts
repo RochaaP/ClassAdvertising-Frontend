@@ -14,6 +14,7 @@ export class PaperDetailsModalComponent implements OnInit {
   @Input("loggedInUser") user: {id: string, data: UserModel};
   @Input("paper") paper: {id: string, data: PaperModel};
   @Input("subjectName") subjectname: string;
+  @Input("instructorName") instructorName: string;
 
   constructor(
     private activeModal: NgbActiveModal,

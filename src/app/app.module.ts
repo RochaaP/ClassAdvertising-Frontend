@@ -114,7 +114,7 @@ const appRoutes: Routes = [
   { path: 'messages', component: MsgStudentComponent },
 
 
-  { path: 'papers', component: PaperComponent},
+  { path: 'papers',canActivate:[GuardService], component: PaperComponent},
   { path: 'answerpaper', component: AnswerPaperComponent},
 
 

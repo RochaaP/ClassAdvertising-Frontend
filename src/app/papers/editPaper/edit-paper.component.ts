@@ -57,10 +57,12 @@ export class EditPaperComponent implements OnInit {
 
     // Add Dummy Details
     this.addDummyDetails();
-    this.sharedService.loadPaperWithDataRespond().subscribe(res => {
+    this.sharedService.loadPaperWithDataRespond().subscribe(res => {      
+      this.isShowPaperDetail = false;
       this.paper = res.paper;
       this.questionService.getQuestionByPaperId(this.paper.id, this);
       this.subjectService.getSubjectsAndInstructors(this);
+      this.isShowPaperDetail = true;
     });    
     // this.sharedService.changeCreatePaperWidthRespond().subscribe(res =>{
     //   this.width = res.data;

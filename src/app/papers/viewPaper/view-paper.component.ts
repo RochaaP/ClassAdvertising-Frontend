@@ -31,7 +31,7 @@ export class ViewPaperComponent implements OnInit {
 
   private papers: {id: string, data: PaperModel, subject: string}[];
   private created_date: string = null;
-  private displayedColumns: string[] = ['name', 'subject', 'year', 'load'];
+  private displayedColumns: string[] = ['name', 'subject', 'year'];
 
   private paper: PaperModel;
 
@@ -78,7 +78,8 @@ export class ViewPaperComponent implements OnInit {
       added_questions: 0,
       time: "60",
       questions: "",
-      price: ""
+      price: "",
+      published: false
     };
   }
 

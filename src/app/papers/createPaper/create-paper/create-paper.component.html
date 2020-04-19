@@ -7,11 +7,10 @@
   <form [formGroup]="form" (ngSubmit)="disableSaveBtn=!disableSaveBtn;isSubmitted='true';savePaper(modal);">
   <div class="modal-body">
       
-      <div class="form-group">
-        <label>
-            Paper Name<sup class="ml-1"><fa-icon [icon]="faAsterisk" class="fa-xs"></fa-icon></sup>
-        </label>
-        <input class="form-control" type="text" id="name" name="name" [(ngModel)]="paper.name" formControlName="name"/>
+      <div class="form-group">        
+        <mat-form-field class="full-width">
+          <input matInput class="form-control" type="text" id="name" name="name" [(ngModel)]="paper.name" formControlName="name"/>
+        </mat-form-field>
         <div *ngIf="isSubmitted && formControls.name.invalid" class="alert alert-danger">
           <div *ngIf="formControls.name.errors.required">
             Paper name is required.
@@ -22,57 +21,57 @@
 
 
       <div class="form-group">
-          <label>
-              Year
-          </label>
-          <input type="date" class="form-control" name="year" [(ngModel)]="created_date" formControlName="year" (change)="pickYear()" required/>
-          <div *ngIf="isSubmitted && formControls.year.invalid" class="alert alert-danger">
-            <div *ngIf="formControls.year.errors.required">
-              Year is required.
-            </div>
+        <mat-form-field class="full-width">
+          <input matInput type="date" class="form-control" name="year" [(ngModel)]="created_date" formControlName="year" (change)="pickYear()" required/>
+        </mat-form-field>
+        <div *ngIf="isSubmitted && formControls.year.invalid" class="alert alert-danger">
+          <div *ngIf="formControls.year.errors.required">
+            Year is required.
           </div>
-          <label class="ml-2">
+        </div>
+        <mat-label class="ml-2">
             {{paper.year}}
-        </label>
+        </mat-label>
       </div>
       
       <div class="form-group row">
         <div class="form-group col-md-6">
-            <label>Subject<ion-text color="danger"> <sup class="ml-1"><fa-icon [icon]="faAsterisk" class="fa-xs"></fa-icon></sup></ion-text>   :</label>
-            <select matNativeControl placeholder="Select" class="form-control" name="subject" [(ngModel)]="paper.subject" formControlName="subject">
-                <option class="pb-1" *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</option>
+          <mat-form-field class="full-width">
+            <select matNativeControl placeholder="Subject" class="form-control" name="subject" [(ngModel)]="paper.subject" formControlName="subject" required>
+                <option class="py-2" *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</option>
             </select>
-            <div *ngIf="isSubmitted && formControls.subject.invalid" class="alert alert-danger">
-              <div *ngIf="formControls.subject.errors.required">
-                Subject is required.
-              </div>
+          </mat-form-field>
+          <div *ngIf="isSubmitted && formControls.subject.invalid" class="alert alert-danger">
+            <div *ngIf="formControls.subject.errors.required">
+              Subject is required.
             </div>
+          </div>
         </div>
         
         <div class="form-group col-md-6">
-              <label>Grade/ Level<ion-text color="danger"><sup class="ml-1"><fa-icon [icon]="faAsterisk" class="fa-xs"></fa-icon></sup></ion-text>   :</label>
-              <select matNativeControl placeholder="Select" class="form-control" name="grade_level" [(ngModel)]="paper.grade_level" formControlName="grade_level">
-                  <option class="pb-1" value="Grade_6">Grade 6</option>
-                  <option class="pb-1" value="Grade_7">Grade 7</option>
-                  <option class="pb-1" value="Grade_8">Grade 8</option>
-                  <option class="pb-1" value="Grade_9">Grade 9</option>
-                  <option class="pb-1" value="Ordinary_Level">Ordinary Level</option>
-                  <option class="pb-1" value="Advanced_Level">Advanced Level</option>
-                  <option class="pb-1" value="Other">Other</option>
-              </select>
-              <div *ngIf="isSubmitted && formControls.grade_level.invalid" class="alert alert-danger">
-                <div *ngIf="formControls.grade_level.errors.required">
-                  Grade/ Level is required.
-                </div>
-              </div>
+          <mat-form-field class="full-width">
+            <select matNativeControl placeholder="Grade/ Level" class="form-control" name="grade_level" [(ngModel)]="paper.grade_level" formControlName="grade_level" required>
+                <option class="pb-1" value="Grade_6">Grade 6</option>
+                <option class="pb-1" value="Grade_7">Grade 7</option>
+                <option class="pb-1" value="Grade_8">Grade 8</option>
+                <option class="pb-1" value="Grade_9">Grade 9</option>
+                <option class="pb-1" value="Ordinary_Level">Ordinary Level</option>
+                <option class="pb-1" value="Advanced_Level">Advanced Level</option>
+                <option class="pb-1" value="Other">Other</option>
+            </select>
+          </mat-form-field>
+          <div *ngIf="isSubmitted && formControls.grade_level.invalid" class="alert alert-danger">
+            <div *ngIf="formControls.grade_level.errors.required">
+              Grade/ Level is required.
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group row">
         <div class="form-group col-md-6">
-          <label>
-              No. of Questions<ion-text color="danger"> <sup class="ml-1"><fa-icon [icon]="faAsterisk" class="fa-xs"></fa-icon></sup></ion-text>
-          </label>
-          <input class="form-control" type="number" name="no_of_questions" [(ngModel)]="paper.no_of_questions" formControlName="no_of_questions"/>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="No. of Questions" class="form-control" type="number" name="no_of_questions" [(ngModel)]="paper.no_of_questions" formControlName="no_of_questions" required/>
+          </mat-form-field>
           <div *ngIf="isSubmitted && formControls.no_of_questions.invalid" class="alert alert-danger">
             <div *ngIf="formControls.no_of_questions.errors.required">
               No. of questions is required.
@@ -81,15 +80,14 @@
         </div>  
 
         <div class="form-group col-md-6">
-            <label>
-                Allocated time in mins<ion-text color="danger"> <sup class="ml-1"><fa-icon [icon]="faAsterisk" class="fa-xs"></fa-icon></sup></ion-text>
-            </label>
-            <input class="form-control" type="number" name="time" [(ngModel)]="paper.time" formControlName="time"/>
-            <div *ngIf="isSubmitted && formControls.time.invalid" class="alert alert-danger">
-              <div *ngIf="formControls.time.errors.required">
-                Allocated time is required.
-              </div>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Allocating Time" class="form-control" type="number" name="time" [(ngModel)]="paper.time" formControlName="time" required/>
+          </mat-form-field>
+          <div *ngIf="isSubmitted && formControls.time.invalid" class="alert alert-danger">
+            <div *ngIf="formControls.time.errors.required">
+              Allocated time is required.
             </div>
+          </div>
         </div>
       </div>
 
@@ -111,6 +109,6 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" type="submit" [disabled]="disableSavebtn">Save</button>  
+    <button mat-raised-button color="primary" type="button" class="btn btn-outline-dark" type="submit" [disabled]="disableSavebtn">Save</button>  
   </div>
 </form>
