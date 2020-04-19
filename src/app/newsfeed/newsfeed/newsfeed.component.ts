@@ -50,7 +50,7 @@ export class NewsfeedComponent implements OnInit {
   }
 
   getAPIData() {
-    return this.http.get('/api/getPostsData/posts');
+    return this.http.get('/api/posts/getPostsData/posts');
   }
 
   triggered(email: string, registerItem: string, name: string) {
