@@ -129,7 +129,7 @@ export class PostaddComponent implements OnInit {
   }
 
   postAPIData(userValues: object) {
-    return this.http.post('api/uploadposts', userValues);
+    return this.http.post('api/posts/uploadposts', userValues);
   }
 
   deleteImage() {

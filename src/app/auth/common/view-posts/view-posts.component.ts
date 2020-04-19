@@ -68,7 +68,7 @@ export class ViewPostsComponent implements OnInit {
   }
 
   getAPIData() {
-    return this.http.post('/api/getUserPosts/user', {email: this.childMessage});
+    return this.http.post('/api/posts/getUserPosts/user', {email: this.childMessage});
   }
 
   delete(id: string, fileURL: string) {
@@ -93,7 +93,7 @@ export class ViewPostsComponent implements OnInit {
 
   deleteAPIData(id: string) {
     console.log(id);
-    return this.http.post('/api/deletePosts', {idValue: id});
+    return this.http.post('/api/posts/deletePosts', {idValue: id});
   }
 
   openSnackBar(message: string) {
@@ -163,7 +163,7 @@ export class ViewPostsComponent implements OnInit {
 }
 
 postAPIData(userValues: object) {
-  return this.http.post('api/uploadposts/update', userValues);
+  return this.http.post('api/posts/uploadposts/update', userValues);
 }
 
 clear() {
