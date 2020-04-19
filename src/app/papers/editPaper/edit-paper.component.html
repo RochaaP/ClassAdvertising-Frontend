@@ -1,18 +1,19 @@
 <!-- Overlay -->
 <!-- <div *ngIf="paper.id=='0'" class="overlay-panel overlay-panel-bg" ng-style="{ 'width' : width}"></div> -->
 
-<div>
-    <h3 class="text-center">Edit Paper</h3>
+<div class="container-fluid">
+    <h4 class="text-center">Edit Paper</h4>
     <div class="container-fluid px-0 pb-5">
         <h6 *ngIf="paper.id=='0'" class="text-center">(This is a dummy paper. Create and select the paper from the paper list)</h6>
         <!-- Paper Details -->
         <div class="card my-3">
             <div class="card-header py-1">
                 <div class="row">
-                    <div class="col-md-11 col-sm-11">
-                        <p class="my-1 float-left h6"><label>Paper Details</label></p>
+                    <div class="col-md-11 col-sm-11 col-xs-11">
+                        <p class="my-1 float-left h6"><label>Paper Details</label></p>        
+                        <button mat-raised-button color="primary" *ngIf="paper.data.no_of_questions == paper.data.added_questions" class="btn btn-sm my-1 float-right h6" (click)="openPublishModal(publishConfirmModal)"><mat-label>Publish</mat-label></button>                        
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-1 col-sm-1 col-xs-1">
                         <button type="button" class="btn btn-sm mx-0 close float-right" (click)="isShowPaperDetail = !isShowPaperDetail">
                             <i class="fas"
                                 [ngClass]="{'fa-angle-up': isShowPaperDetail, 'fa-angle-down': !isShowPaperDetail}"></i>
@@ -22,112 +23,71 @@
             </div>
             <div *ngIf="isShowPaperDetail" class="card-body py-1">
                 <form ngNativeValidate>
-            <div class="row">
-              <div class="col-md-8 col-sm-8">
-                  <div class="form-group">
-                    <label for="paperName">
-                      Paper Name
-                    </label>
-                    <div class="badge-required mx-2"></div>
-                    <input type="text" [(ngModel)]="paper.data.name" name="paperName" class="form-control form-control-sm"
-                      id="paperName" placeholder="Paper Name" required >
-                  </div>
-              </div>
-              <div class="col-md-4 col-sm-4">
-                  <div class="form-group">
-                    <label for="paperYear">
-                      Year
-                    </label>
-                    <div class="badge-required mx-2"></div>
-                    <input type="text" [(ngModel)]="paper.data.year" name="paperYear" class="form-control form-control-sm"
-                      id="paperYear" placeholder="Year" required >
-                  </div>
-              </div>
-            </div>
-            <div class="form-group">
-                        <label for="paperInstructor">
-                            Instructor
-                        </label>
-                        <div class="badge-required mx-2"></div>
-                        <input type="text" [(ngModel)]="paper.data.instructor" name="paperInstructor" class="form-control form-control-sm"
-                            id="paperInstructor" placeholder="Instructor" readonly>
-            </div>
-            <div class="form-group">
-                        <label for="paperSubject">
-                            Subject
-                        </label>
-                        <div class="badge-required mx-2"></div>
-                        <input type="text" [(ngModel)]="subjectName" name="paperSubject" class="form-control form-control-sm"
-                            id="paperSubject" placeholder="Subject" readonly>
-            </div>
-            <div class="row">
-            <div class="col-md-4 col-sm-4">
-                <div class="form-group">
-                <label for="grade_level">
-                    Grade/ Level
-                </label>
-                <div class="badge-required mx-2"></div>
-                <input type="text" [(ngModel)]="paper.data.grade_level" name="grade_level" class="form-control form-control-sm"
-                    id="paperPrice" placeholder="Grade/ Level" required >
-                </div>
-            </div>
-              <div class="col-md-4 col-sm-4">
-                <div class="form-group">
-                  <label for="paperTime">
-                    Allocated Time
-                  </label>
-                  <div class="badge-required mx-2"></div>
-                  <input type="text" [(ngModel)]="paper.data.time" name="paperTime" class="form-control form-control-sm"
-                    id="paperTime" placeholder="Time" required >
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-4">
-                <div class="form-group">
-                    <label for="paperNoOfQuestions">
-                        No. of Questions
-                    </label>
-                    <div class="badge-required mx-2"></div>
-                    <input type="text" [(ngModel)]="paper.data.no_of_questions" name="paperNoOfQuestions" class="form-control form-control-sm"
-                        id="paperNoOfQuestions" placeholder="No. of Questions" required >
-                </div>		
-              </div>
-            </div>
-            
-                    <!-- <div class="form-row">
-                        <div class="col-sm-8">
-                            <label for="courseImage">{{ 'ICE_COURSE.COURSE.IMAGE_LABEL' | translate }}</label>
-                            <div class="badge-required mx-2"></div>
-                            <input (keydown)="returnTyping()" *ngIf="course.courseImage == null" type="text"
-                                class="form-control form-control-sm" [(ngModel)]="course.courseImage" name="courseImage"
-                                id="courseImage" placeholder="{{ 'ICE_COURSE.COURSE.IMAGE_PLACEHOLDER' | translate }}"
-                                (click)="addCourseImage()" required >
-                            <div *ngIf="course.courseImage != null" class="card" style="width: 8rem;">
-                                <button class="float-left" (click)="removeCourseImage()" style="width: 2rem;" >
-                                    <i class="fas fa-times fa-sm" aria-hidden="true"></i>
-                                </button>
-                                <img class="img-fluid" src="data:image/jpeg;base64,{{course.courseImage.thumbnailImage}}"
-                                    alt="{{course.courseImage.title}}">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                            <div class="form-group">
+                                <mat-form-field class="full-width">
+                                    <input matInput type="text" [(ngModel)]="paper.data.name" name="paperName" class="form-control form-control-sm"
+                                id="paperName" placeholder="Paper Name" required >
+                                </mat-form-field>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <label for="courseIcon">{{ 'ICE_COURSE.COURSE.ICON_LABEL' | translate }}</label>
-                            <div class="badge-required mx-2"></div>
-                            <input (keydown)="returnTyping()" *ngIf="course.courseIcon == null" type="text"
-                                class="form-control form-control-sm" id="courseTitle"
-                                placeholder="{{ 'ICE_COURSE.COURSE.ICON_PLACEHOLDER' | translate }}"
-                                (click)="addCourseIcon()" required >
-                            <div *ngIf="course.courseIcon != null" class="card" style="width: 8rem;">
-                                <button class="float-left" (click)="removeCourseIcon()" style="width: 2rem;" >
-                                    <i class="fas fa-times fa-sm" aria-hidden="true"></i>
-                                </button>
-                                <img class="img-fluid" src="data:image/jpeg;base64,{{course.courseIcon.thumbnailImage}}"
-                                    alt="{{course.courseIcon.title}}">
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <mat-form-field class="full-width">
+                                    <input matInput type="text" [(ngModel)]="paper.data.year" name="paperYear" class="form-control form-control-sm"
+                                id="paperYear" placeholder="Year" required >
+                                </mat-form-field>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">                        
+                                <mat-form-field class="full-width">
+                                    <input matInput type="text" name="paperInstructor" class="form-control form-control-sm"
+                                        id="paperInstructor" placeholder="Instructor" readonly [value]="loggedInUser.data.firstname + ' ' + loggedInUser.data.lastname">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">                        
+                                <mat-form-field class="full-width">
+                                    <input matInput type="text" [(ngModel)]="subjectName" name="paperSubject" class="form-control form-control-sm"
+                                        id="paperSubject" placeholder="Subject" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                            <mat-form-field class="full-width">
+                                <input matInput type="text" [(ngModel)]="paper.data.grade_level" name="grade_level" class="form-control form-control-sm"
+                                id="paperPrice" placeholder="Grade/ Level"  readonly>
+                            </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <mat-form-field class="full-width"> 
+                                    <input matInput type="text" [(ngModel)]="paper.data.time" name="paperTime" class="form-control form-control-sm"
+                                id="paperTime" placeholder="Time"  readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="form-group">
+                                <mat-form-field class="full-width">
+                                    <input matInput type="text" [(ngModel)]="paper.data.no_of_questions" name="paperNoOfQuestions" class="form-control form-control-sm"
+                                    id="paperNoOfQuestions" placeholder="No. of Questions"  readonly>
+                                </mat-form-field>
+                            </div>		
+                        </div>
+                    </div>
                     <hr class="mt-3 mb-2" />
                     <div class="form-group">
-                        <button class="btn btn-sm btn-primary float-right" (click)="paperDetailSave()" [disabled]="paper.id=='0'">Save</button>
+                        <button mat-raised-button color="primary" class="btn btn-sm float-right" (click)="paperDetailSave()" [disabled]="paper.id=='0'">Save</button>
                     </div>
                 </form>
             </div>
@@ -241,3 +201,24 @@
         </div>
     </div>
         
+<ng-template #publishConfirmModal let-modal>
+    <div class="card">
+        <div class="card-header">
+            Do you really want to publish the paper?
+        </div>
+        <div class="card-body"> 
+            <mat-radio-group class="mb-1" aria-label="Select an option" [(ngModel)]="publish">
+                <mat-radio-button class="mr-1" value="yes">Yes</mat-radio-button>
+                <mat-radio-button value="no">No</mat-radio-button>
+            </mat-radio-group><br>  
+            <mat-form-field class="mb-1" *ngIf="publish=='yes'">
+                <input matInput placeholder="Enter Description" [(ngModel)]='description' name='description'>
+            </mat-form-field><br>
+            <label class="mb-1"><small style="color: red;">Once you published a paper you can not edit/ delete the paper</small></label>
+        </div>
+        <div class="card-footer">
+            <button style="float: right;" mat-button (click)="modal.close('Close click')">Close</button>
+            <button style="float: right;" *ngIf="publish=='yes'" mat-button color="primary" (click)="modal.close('Publish click');publishPaper();">Publish</button>
+        </div>
+    </div>
+</ng-template>

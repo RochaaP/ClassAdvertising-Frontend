@@ -119,7 +119,7 @@ const appRoutes: Routes = [
   { path: 'admin/images', component: ImagesChangeComponent},
 
 
-  { path: 'papers', component: PaperComponent},
+  { path: 'papers',canActivate:[GuardService], component: PaperComponent},
   { path: 'answerpaper', component: AnswerPaperComponent},
 
 
@@ -209,7 +209,7 @@ const appRoutes: Routes = [
     AngularFireStorageModule,
 
     BrowserAnimationsModule,
-
+    
     MatButtonModule,
     MatTabsModule,
     MatTableModule,

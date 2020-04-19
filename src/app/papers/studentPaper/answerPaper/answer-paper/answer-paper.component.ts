@@ -53,6 +53,11 @@ export class AnswerPaperComponent implements OnInit {
   ) { 
     this.loggedInUser = this.sharedService.getLoggedInUser();
     this.paper = JSON.parse(localStorage.getItem("paper"));
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("paper");
+    if(this.loggedInUser==undefined){
+      window.close();
+    }
     this.adjustTime();
   }
 
@@ -83,6 +88,7 @@ export class AnswerPaperComponent implements OnInit {
       console.log(notifyMsg);
       this.snackBar.open(notifyMsg, 'Done', {
         duration: 2000,
+        verticalPosition: "top"
       });
     }
     else if(event.action == "done"){
@@ -92,6 +98,7 @@ export class AnswerPaperComponent implements OnInit {
       console.log(notifyMsg);
       this.snackBar.open(notifyMsg, 'Done', {
         duration: 5000,
+        verticalPosition: "top"
       });
     }
   }

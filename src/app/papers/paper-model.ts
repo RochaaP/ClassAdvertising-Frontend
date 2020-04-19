@@ -9,6 +9,7 @@ export class PaperModel {
         public added_questions: number,
         public time: string,
         public questions: string,
-        public price: string
+        public price: string,
+        public published: boolean
     ){}
 }

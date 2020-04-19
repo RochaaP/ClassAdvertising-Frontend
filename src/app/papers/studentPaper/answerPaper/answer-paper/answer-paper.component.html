@@ -14,22 +14,22 @@
                         <div class="badge" [ngClass]="{'badge-light': answers[t]==undefined, 'badge-success': answers[t]!=undefined}" [innerHTML]="question.data.number"></div>
                         <div [innerHTML]="question.data.question"></div>
                         <select matNativeControl placeholder="Select" class="form-control col-md-8" name="subject" [(ngModel)]="answers[t]" (change)="answerEvent()">
-                            <option *ngIf="question.data.a!=undefined && question.data.a!=''" value="a" [innerHTML]="question.data.a"></option>
-                            <option *ngIf="question.data.b!=undefined && question.data.b!=''" value="b" [innerHTML]="question.data.b"></option>
-                            <option *ngIf="question.data.c!=undefined && question.data.c!=''" value="c" [innerHTML]="question.data.c"></option>
-                            <option *ngIf="question.data.d!=undefined && question.data.d!=''" value="d" [innerHTML]="question.data.d"></option>
-                            <option *ngIf="question.data.e!=undefined && question.data.e!=''" value="e" [innerHTML]="question.data.e"></option>
+                            <option class="pb-1" *ngIf="question.data.a!=undefined && question.data.a!=''" value="a" [innerHTML]="question.data.a"></option>
+                            <option class="pb-1" *ngIf="question.data.b!=undefined && question.data.b!=''" value="b" [innerHTML]="question.data.b"></option>
+                            <option class="pb-1" *ngIf="question.data.c!=undefined && question.data.c!=''" value="c" [innerHTML]="question.data.c"></option>
+                            <option class="pb-1" *ngIf="question.data.d!=undefined && question.data.d!=''" value="d" [innerHTML]="question.data.d"></option>
+                            <option class="pb-1" *ngIf="question.data.e!=undefined && question.data.e!=''" value="e" [innerHTML]="question.data.e"></option>
                         </select>
                     </div> -->
                     <div class="mb-4">
                         <div [innerHTML]="questions[current_question_index]?.data.question"></div>
                         <div *ngIf="questions[current_question_index]?.data.image" class="btn btn-light mb-1" (click)="viewImage(imageModal)">View Image<fa-icon class="ml-1" [icon]="faImage"></fa-icon></div>
                         <select matNativeControl placeholder="Select" class="form-control col-md-8" name="subject" [(ngModel)]="answers[current_question_index]" (change)="answerEvent()">
-                            <option *ngIf="questions[current_question_index]?.data.a!=undefined && questions[current_question_index]?.data.a!=''" value="A" [innerHTML]="questions[current_question_index]?.data.a"></option>
-                            <option *ngIf="questions[current_question_index]?.data.b!=undefined && questions[current_question_index]?.data.b!=''" value="B" [innerHTML]="questions[current_question_index]?.data.b"></option>
-                            <option *ngIf="questions[current_question_index]?.data.c!=undefined && questions[current_question_index]?.data.c!=''" value="C" [innerHTML]="questions[current_question_index]?.data.c"></option>
-                            <option *ngIf="questions[current_question_index]?.data.d!=undefined && questions[current_question_index]?.data.d!=''" value="D" [innerHTML]="questions[current_question_index]?.data.d"></option>
-                            <option *ngIf="questions[current_question_index]?.data.e!=undefined && questions[current_question_index]?.data.e!=''" value="E" [innerHTML]="questions[current_question_index]?.data.e"></option>
+                            <option class="pb-1" *ngIf="questions[current_question_index]?.data.a!=undefined && questions[current_question_index]?.data.a!=''" value="A" [innerHTML]="questions[current_question_index]?.data.a"></option>
+                            <option class="pb-1" *ngIf="questions[current_question_index]?.data.b!=undefined && questions[current_question_index]?.data.b!=''" value="B" [innerHTML]="questions[current_question_index]?.data.b"></option>
+                            <option class="pb-1" *ngIf="questions[current_question_index]?.data.c!=undefined && questions[current_question_index]?.data.c!=''" value="C" [innerHTML]="questions[current_question_index]?.data.c"></option>
+                            <option class="pb-1" *ngIf="questions[current_question_index]?.data.d!=undefined && questions[current_question_index]?.data.d!=''" value="D" [innerHTML]="questions[current_question_index]?.data.d"></option>
+                            <option class="pb-1" *ngIf="questions[current_question_index]?.data.e!=undefined && questions[current_question_index]?.data.e!=''" value="E" [innerHTML]="questions[current_question_index]?.data.e"></option>
                         </select>
                     </div>
                 </div>

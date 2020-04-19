@@ -104,13 +104,15 @@ export class StudentPaperComponent implements OnInit {
     console.log(this.sub_papers);
   }
 
-  private loadPaper(paperInstance: {id: string, data: PaperModel}){
-    let paper: {id: string, data: PaperModel} = paperInstance;
+  private loadPaper(paperInstance: {id: string, data: PaperModel, instructor: string}){
+    let paper: {id: string, data: PaperModel, instructor: string} = paperInstance;
     console.log("___loadPaper()___");
     let subject: {id: string, data: SubjectModel} = this.subjectGroup.find(element => element.id == paper.data.subject);
     const modalRef = this.modalService.open(PaperDetailsModalComponent, { size: 'md', backdrop: 'static' });
+    modalRef.componentInstance.loggedInUser = this.loggedInUser;
     modalRef.componentInstance.paper = paper;
     modalRef.componentInstance.subjectName = subject.data.name;
+    modalRef.componentInstance.instructorName = paper.instructor;
   }
 
   onSuccess(data: WsResponse, serviceType: WsType){
@@ -130,6 +132,7 @@ export class StudentPaperComponent implements OnInit {
           if(this.userGroup!=undefined){
             let instructor: {id: string, name: string} = this.userGroup.find(result => result.id == childElement.data.instructor);
             instructor!=undefined?childElement.instructor = instructor.name: "";
+            console.log(instructor);
           }
         })
       })
