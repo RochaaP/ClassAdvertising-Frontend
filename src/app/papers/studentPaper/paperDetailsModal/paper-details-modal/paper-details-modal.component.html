@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h4 class="modal-title">{{paper.data.name}} Details</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <button mat-button type="button" class="btn btn-sm" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -43,5 +43,5 @@
       </table>
 </div>
 <div class="footer">
-    <button class="btn btn-primary m-2" style="float: right;" (click)="answerPaper()">Answer Paper</button>
+    <button mat-raised-button color="primary" class="btn m-2" style="float: right;" (click)="answerPaper()">Answer Paper</button>
 </div>

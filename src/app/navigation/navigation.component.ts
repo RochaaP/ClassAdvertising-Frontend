@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faSearch, faBell, faUser, faSchool, faSignOutAlt, faIdBadge, faStickyNote, faDownload, faEnvelope,
-         faChalkboardTeacher, faAd, faIdCard, faUserFriends, faBookReader } from '@fortawesome/free-solid-svg-icons';
+         faChalkboardTeacher, faAd, faIdCard, faUserFriends, faBookReader, faCopy } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from '../service/auth/authentication.service';
 import { DataService } from '../service/share/data.service';
 import { Router } from '@angular/router';
@@ -43,6 +43,7 @@ export class NavigationComponent implements OnInit {
   faStickyNote = faStickyNote;
   faDownload = faDownload;
   faEnvelope = faEnvelope;
+  faCopy = faCopy;
 
   item: string[];
 
