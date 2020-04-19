@@ -1,0 +1,141 @@
+.dropzone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 200;
+    height: 150px;
+    border: 2px dashed #000000;
+    border-radius: 5px;
+    background: white;
+    margin: 10px 0;
+    overflow: hidden;
+  }
+  .hovering {
+    border: 2px solid #f16624;
+    color: #dadada !important;
+  }
+
+
+.img-thumbnail{
+    // height: 100px;
+    max-height: 100px;
+    max-width: 300px;
+    overflow: hidden;
+  }
+
+  .formInputs{
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    overflow: hidden
+  }
+  
+  .carousel{
+    overflow: hidden;
+    width: 100%;
+    max-height: 500px;
+}
+
+.parallax {
+  /* The image used */
+  // background-image:url('../../../assets/background1.jpeg');
+  width:100%;
+  height:30em;
+  filter:drop-shadow(4px 8px 10px gray);
+  filter:opacity(70%);
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.wrapper {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+	h1 {
+		color: #fff;
+    font-size: 92px;
+    margin-top: 150px;
+		font-family: "ubuntu";
+		text-transform: lowercase;
+		font-weight: 700;
+		font-family: "Josefin Sans", sans-serif;
+		background: linear-gradient(to right, #d11121 10%, rgb(216, 129, 129) 50%, #ce0505 60%);
+		background-size: auto auto;
+		background-clip: border-box;
+		background-size: 200% auto;
+		color: #fff;
+		background-clip: text;
+		text-fill-color: transparent;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		animation: textclip 3.5s linear infinite;
+		display: inline-block;
+	}
+}
+@keyframes textclip {
+	to {
+		background-position: 200% center;
+	}
+}
+
+.new{
+  @import url('https://fonts.googleapis.com/css?family=Roboto:300');
+
+
+div {
+  display:inline-block;
+  overflow:hidden;
+  white-space:nowrap;
+  font-size: 2vw;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color:black;
+}
+
+div:first-of-type {    /* For increasing performance
+                       ID/Class should've been used.
+                       For a small demo
+                       it's okaish for now */
+  animation: showup 7s infinite;
+}
+
+div:last-of-type {
+  width:0px;
+  animation: reveal 7s infinite;
+}
+
+div:last-of-type span {
+  margin-left:-355px;
+  animation: slidein 7s infinite;
+}
+
+@keyframes showup {
+    0% {opacity:0;}
+    20% {opacity:1;}
+    80% {opacity:1;}
+    100% {opacity:0;}
+}
+
+@keyframes slidein {
+    0% { margin-left:-800px; }
+    20% { margin-left:-800px; }
+    35% { margin-left:0px; }
+    100% { margin-left:0px; }
+}
+
+@keyframes reveal {
+    0% {opacity:0;width:0px;}
+    20% {opacity:1;width:0px;}
+    30% {width:355px;}
+    80% {opacity:1;}
+    100% {opacity:0;width:355px;}
+}
+}

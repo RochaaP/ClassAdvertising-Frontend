@@ -1,0 +1,50 @@
+<div class='carousel' *ngFor="let imgs of response">
+    <ngb-carousel #carousel [interval]="3000" [pauseOnHover]="pauseOnHover" (slide)="onSlide($event)">
+        <ng-template ngbSlide *ngFor="let img of imgs.data.url; index as index">
+            <div class="picsum-img-wrapper">
+               <img [src]="img"> 
+            </div>
+        </ng-template>
+      </ngb-carousel>
+      
+      <div class="form-group">
+        <button type="submit" class="btn btn-success" (click)="delete(index)">Delete Set</button>
+    </div>
+      <hr>
+</div>
+  <div class = "col-10 formInputs">
+
+    <div class="form-group">
+        <div class="dropzone" appdropzone  (hovered)="toggleHover($event)" (dropped)="onDrop($event)" [class.hovering]="isHovering">
+        <!-- <div class="col-md-3"> -->
+        <div class="text-center">
+            <div *ngIf ='uploadImage'>
+            <img src="{{this.downloadURL}}"  class="avatar img-circle" class="img-thumbnail" alt="">
+            <a (click)="deleteImage()" >Delete</a>
+            <div *ngIf="percentageposts | async as pct">
+                Progress: {{ pct | number }}%
+                <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
+            </div>
+            </div>
+
+            <div *ngIf='!uploadImage'>
+            <h6>Upload a photo...*</h6>
+            <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" required />
+            </div>
+
+
+            <!-- <input type="file" class="form-control"> -->
+        </div>
+        <!-- </div> -->
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" (click)="onSubmit()">Post</button>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" (click)="test()">test</button>
+    </div>
+
+</div>

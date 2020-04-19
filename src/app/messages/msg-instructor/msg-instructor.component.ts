@@ -7,17 +7,12 @@ import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 import { ThrowStmt } from '@angular/compiler';
 
-export interface DialogData {
-  topic: string;
-  description: string;
-}
-
 @Component({
-  selector: 'app-msg-student',
-  templateUrl: './msg-student.component.html',
-  styleUrls: ['./msg-student.component.scss']
+  selector: 'app-msg-instructor',
+  templateUrl: './msg-instructor.component.html',
+  styleUrls: ['./msg-instructor.component.scss']
 })
-export class MsgStudentComponent implements OnInit {
+export class MsgInstructorComponent implements OnInit {
 
   instructorEmail: string;
   studentEmail: string;
@@ -41,8 +36,8 @@ export class MsgStudentComponent implements OnInit {
 
   ngOnInit() {
 
-    this.data.currentEmail.subscribe(message => this.instructorEmail = message);
-    this.studentEmail = this.authService.isUserLoggedIn().email;
+    // this.data.currentEmail.subscribe(message => this.instructorEmail = message);
+    this.instructorEmail = this.authService.isUserLoggedIn().email;
     this.getMessages();
     this.numbers = 0;
     // this.openDialog();
@@ -58,7 +53,7 @@ export class MsgStudentComponent implements OnInit {
     });
   }
   getAPIData() {
-    return this.http.post('api/appointments/getAppointments',  {email: this.studentEmail});
+    return this.http.post('api/appointments/getAppointments/instructor',  {email: this.instructorEmail});
   }
 
 
@@ -109,7 +104,7 @@ export class MsgStudentComponent implements OnInit {
   }
 
   postAPIData(userValues: object) {
-    return this.http.post('api/appointments/makeAppointment/student', userValues);
+    return this.http.post('api/appointments/makeAppointment', userValues);
   }
 
   details(index: number) {

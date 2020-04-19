@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { OwlModule } from 'ngx-owl-carousel';
 
 import { AngularSplitModule } from 'angular-split';
 import {TranslateModule} from '@ngx-translate/core';
@@ -33,6 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -74,6 +76,8 @@ import { ViewNotesComponent } from './notes/view-notes/view-notes.component';
 import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
 import { DialogComponent } from './messages/dialog/dialog.component';
 import { ConfirmationComponent } from './messages/confirmation/confirmation.component';
+import { MsgInstructorComponent } from './messages/msg-instructor/msg-instructor.component';
+import { ImagesChangeComponent } from './admin/images-change/images-change.component';
 
 import { EditPaperComponent } from './papers/editPaper/edit-paper.component';
 import { ViewPaperComponent } from './papers/viewPaper/view-paper.component';
@@ -106,18 +110,21 @@ const appRoutes: Routes = [
   { path: 'viewprofile/institute/:id', component: ViewProfileInstituteComponent},
   { path: 'addclasses/person', canActivate: [GuardService], component: ClassesPersonComponent},
   { path: 'addclasses/institute', canActivate: [GuardService], component: ClassesInstituteComponent},
-  { path: 'admin/getallusers', component: AllUsersComponent},
   { path: 'viewProfiles/person', component: PersonSearchComponent},
   { path: 'viewProfiles/institute', component: InstituteSearchComponent},
   { path: 'notes/addnote', canActivate: [GuardService], component: AddNotesComponent},
   { path: 'notes', component: ViewNotesComponent},
-  { path: 'messages', component: MsgStudentComponent },
+
+  { path: 'admin/getallusers', component: AllUsersComponent},
+  { path: 'admin/images', component: ImagesChangeComponent},
 
 
   { path: 'papers', component: PaperComponent},
   { path: 'answerpaper', component: AnswerPaperComponent},
 
 
+  { path: 'messages/student', component: MsgStudentComponent },
+  { path: 'messages/instructor', component: MsgInstructorComponent },
 
   // { path: 'postadd', component: PostaddComponent },
   // { path: 'profileview/:id', component: ProfileViewComponent },
@@ -169,7 +176,9 @@ const appRoutes: Routes = [
     CreatePaperComponent,
     PaperDetailsModalComponent,
     AnswerPaperComponent,
-    PaperMarkingModelComponent
+    PaperMarkingModelComponent,
+    MsgInstructorComponent,
+    ImagesChangeComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -184,6 +193,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     ImageCropperModule,
     Ng4LoadingSpinnerModule.forRoot(),
+    OwlModule,
 
     AngularSplitModule.forRoot(),
     TranslateModule.forRoot(),
@@ -219,7 +229,9 @@ const appRoutes: Routes = [
     MatIconModule,
     MatRadioModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+
+    ScrollingModule
 
   ],
   entryComponents: [
