@@ -17,16 +17,16 @@ export class AllUsersComponent implements OnInit {
   email: string;
   verifiedif: boolean;
 
-  allPerson = [];
+  allInstructor = [];
   allInstitute = [];
 
-  allVerifiedUsersPerson = [];
+  allVerifiedUsersInstructor = [];
   allVerifiedUsersInstitute = [];
 
-  allNotVerifiedUsersPerson = [];
+  allNotVerifiedUsersInstructor = [];
   allNotVerifiedUsersInstitute = [];
 
-  searchedPersonList = [];
+  searchedInstructorList = [];
   searchedInstituteList = [];
   searchClicked: boolean;
   searchInput: string;
@@ -39,7 +39,7 @@ export class AllUsersComponent implements OnInit {
   verifiedTriggered: boolean;
   notVerifiedTriggered: boolean;
 
-  personClicked: boolean;
+  instructorClicked: boolean;
   instituteClicked: boolean;
 
   constructor(
@@ -59,8 +59,8 @@ export class AllUsersComponent implements OnInit {
       console.log('response with all users ', response);
       this.response = response;
       for (const index in this.response) {
-        if (this.response[index].data.registerItem === 'person') {
-          this.allPerson.push(this.response[index]);
+        if (this.response[index].data.registerItem === 'instructor') {
+          this.allInstructor.push(this.response[index]);
         }
         else if (this.response[index].data.registerItem === 'institute') {
           this.allInstitute.push(this.response[index]);
@@ -78,16 +78,16 @@ export class AllUsersComponent implements OnInit {
   getAPIData() {
     return this.http.get('/api/userDetails/common/getAll');
   }
-  triggeredPerson(email: string) {
+  triggeredInstructor(email: string) {
     this.notTriggeredClick = false;
     this.email = email;
-    this.personClicked = true;
+    this.instructorClicked = true;
     this.instituteClicked = false;
   }
   triggeredInstitute(email: string) {
     this.notTriggeredClick = false;
     this.email = email;
-    this.personClicked = false;
+    this.instructorClicked = false;
     this.instituteClicked = true;
   }
   goBack() {
@@ -108,28 +108,28 @@ export class AllUsersComponent implements OnInit {
   }
 
   search() {
-    this.searchedPersonList.splice(0, this.searchedPersonList.length);
+    this.searchedInstructorList.splice(0, this.searchedInstructorList.length);
     this.searchedInstituteList.splice(0, this.searchedInstituteList.length);
 
     if (this.searchInput) {
       this.searchClicked = true;
-      // for (const val in this.allPerson) {
-      //   if (this.allPerson[val].data.name )
+      // for (const val in this.allInstructor) {
+      //   if (this.allInstructor[val].data.name )
       // }
       if (this.searchInput.split(' ').length === 2) {
         this.secondNamePart = this.searchInput.split(' ')[1].toLowerCase();
         this.firstNamePart = this.searchInput.split(' ')[0].toLowerCase();
       }
-      for (const index in this.allPerson) {
+      for (const index in this.allInstructor) {
         if (this.secondNamePart !== '' &&
-        this.allPerson[index].data.name.toLowerCase() === this.firstNamePart &&
-        this.allPerson[index].data.lastName.toLowerCase() === this.secondNamePart ) {
-          this.searchedPersonList.push(this.allPerson[index]);
+        this.allInstructor[index].data.name.toLowerCase() === this.firstNamePart &&
+        this.allInstructor[index].data.lastName.toLowerCase() === this.secondNamePart ) {
+          this.searchedInstructorList.push(this.allInstructor[index]);
       }
 
-        else if (this.allPerson[index].data.name.toLowerCase() === this.searchInput.toLowerCase().trim() ||
-           (this.allPerson[index].data.lastName.toLowerCase() === this.searchInput.toLowerCase().trim())) {
-            this.searchedPersonList.push(this.allPerson[index]);
+        else if (this.allInstructor[index].data.name.toLowerCase() === this.searchInput.toLowerCase().trim() ||
+           (this.allInstructor[index].data.lastName.toLowerCase() === this.searchInput.toLowerCase().trim())) {
+            this.searchedInstructorList.push(this.allInstructor[index]);
         }
       }
 
@@ -142,7 +142,7 @@ export class AllUsersComponent implements OnInit {
   }
 
   searchClose(el: HTMLElement) {
-    this.searchedPersonList.splice(0, this.searchedPersonList.length);
+    this.searchedInstructorList.splice(0, this.searchedInstructorList.length);
     this.searchClicked = false;
     this.searchInput = '';
   }
@@ -169,8 +169,8 @@ export class AllUsersComponent implements OnInit {
         for (const index in this.response) {
           // if you are upgrading this please change this to better way
           if (this.response[index].data.verify === 'assets/verification/verified.png') {
-            if (this.response[index].data.registerItem === 'person') {
-              this.allVerifiedUsersPerson.push(this.response[index]);
+            if (this.response[index].data.registerItem === 'instructor') {
+              this.allVerifiedUsersInstructor.push(this.response[index]);
             }
             else if (this.response[index].data.registerItem === 'institute'){
               this.allVerifiedUsersInstitute.push(this.response[index]);
@@ -190,8 +190,8 @@ export class AllUsersComponent implements OnInit {
         for (const index in this.response) {
           // if you are upgrading this please change this to better way
           if (this.response[index].data.verify === 'assets/verification/not_verified.png') {
-            if (this.response[index].data.registerItem === 'person'){
-              this.allNotVerifiedUsersPerson.push(this.response[index]);
+            if (this.response[index].data.registerItem === 'instructor'){
+              this.allNotVerifiedUsersInstructor.push(this.response[index]);
             }
             else if (this.response[index].data.registerItem === 'institute'){
               this.allNotVerifiedUsersInstitute.push(this.response[index]);

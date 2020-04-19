@@ -70,7 +70,7 @@ export class NavigationComponent implements OnInit {
         this.isStudent = true;
         this.isInstructor = false;
       }
-      else if (this.registerItem === 'person') {
+      else if (this.registerItem === 'instructor') {
         this.isStudent = false;
         this.isInstructor = true;
       }
@@ -99,10 +99,10 @@ export class NavigationComponent implements OnInit {
 
   clickViewProfile() {
     localStorage.setItem('emailtemp', this.userDetails.email);
-    if (this.registerItem === 'person') {
+    if (this.registerItem === 'instructor') {
       this.dataService.passEmail(this.userDetails.email);
       localStorage.setItem('navigateUser', this.userDetails.email);
-      this.router.navigate(['viewprofile/person/' + this.userName]);
+      this.router.navigate(['viewprofile/instructor/' + this.userName]);
     }
     else if (this.registerItem === 'institute') {
       this.dataService.passEmail(this.userDetails.email);
@@ -121,8 +121,8 @@ export class NavigationComponent implements OnInit {
   }
 
   clickProfile() {
-    if (this.registerItem === 'person'){
-      this.router.navigate(['/editprofile/person']);
+    if (this.registerItem === 'instructor'){
+      this.router.navigate(['/editprofile/instructor']);
     }
     else if (this.registerItem === 'institute'){
       this.router.navigate(['/editprofile/institute']);
@@ -133,8 +133,8 @@ export class NavigationComponent implements OnInit {
   }
 
   clickClasses() {
-    if (this.registerItem === 'person'){
-      this.router.navigate(['/addclasses/person']);
+    if (this.registerItem === 'instructor'){
+      this.router.navigate(['/addclasses/instructor']);
     }
     else if (this.registerItem === 'institute'){
       this.router.navigate(['/addclasses/institute']);

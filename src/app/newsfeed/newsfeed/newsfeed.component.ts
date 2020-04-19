@@ -56,9 +56,9 @@ export class NewsfeedComponent implements OnInit {
   triggered(email: string, registerItem: string, name: string) {
     localStorage.setItem('emailtemp', email);
     localStorage.setItem('navigateUser', email);
-    if (registerItem === 'person') {
+    if (registerItem === 'instructor') {
       this.data.passEmail(email);
-      this.router.navigate(['/viewprofile/person/' + name]);
+      this.router.navigate(['/viewprofile/instructor/' + name]);
     } 
     else if (registerItem === 'institute') {
       this.data.passEmail(email);
@@ -70,7 +70,7 @@ export class NewsfeedComponent implements OnInit {
     }
   }
 
-  personDetails(response) {
+  instructorsDetails(response) {
     this.firstName = response.firstName;
     this.lastName = response.lastName;
     this.postURL = response.profileImagePath;

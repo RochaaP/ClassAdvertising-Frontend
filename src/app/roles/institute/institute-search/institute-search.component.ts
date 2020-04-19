@@ -32,7 +32,7 @@ export class InstituteSearchComponent implements OnInit {
   searchNameInput: string;
   searchSubjectInput: string;
   searchDistrictInput: string;
-  searchPersonInput: string;
+  searchInstructorInput: string;
 
   email: string;
 
@@ -72,8 +72,8 @@ export class InstituteSearchComponent implements OnInit {
       this.instituteResponse = instituteResponse;
       this.spinnerService.hide();
       // for (const index in this.response) {
-      //   if (this.response[index].data.registerItem === 'person') {
-      //     // this.personResponse.push(this.response[index]);
+      //   if (this.response[index].data.registerItem === 'instructor') {
+      //     // this.instructorResponse.push(this.response[index]);
       //   } else if (this.response[index].data.registerItem === 'institute') {
       //     this.instituteResponse.push(this.response[index]);
       //   }
@@ -159,9 +159,9 @@ export class InstituteSearchComponent implements OnInit {
         const name = this.classResponse[index].data.content;
         for (const val in name) {
           // console.log("hit there");
-          if (this.searchPersonInput) {
+          if (this.searchInstructorInput) {
 
-            if (name[val].primary.toLowerCase() === this.searchPersonInput.trim().toLowerCase() &&
+            if (name[val].primary.toLowerCase() === this.searchInstructorInput.trim().toLowerCase() &&
                 name[val].district.toLowerCase() === this.searchDistrictInput.trim().toLowerCase() &&
                 name[val].subject.toLowerCase() === this.searchSubjectInput.trim().toLowerCase() ) {
                   this.searchedClassList.push(name[val]);
@@ -190,7 +190,7 @@ export class InstituteSearchComponent implements OnInit {
   }
   searchClassClose() {
     this.classSearchClicked = false;
-    this.searchPersonInput = '';
+    this.searchInstructorInput = '';
     this.searchSubjectInput = '';
     this.searchDistrictInput = '';
     this.searchedClassList.splice(0, this.searchedClassList.length);

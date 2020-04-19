@@ -40,8 +40,8 @@
           <!-- register -->
           <span *ngIf="selectedVal == 'register'">
 
-            <div *ngIf="registerItem == 'person'">
-              <h3>Person Registration</h3>
+            <div *ngIf="registerItem == 'instructor'">
+              <h3>instructor Registration</h3>
 
               <div class="form-group">
                 <label for="firstname">First Name</label>
@@ -180,12 +180,12 @@
                   <button type="button" class="btn btn-primary"  (click)="editClassesInstitute()" >Add Classes Details</button>
                 </li>
               </div>
-              <div *ngIf="registerItem == 'person'">
+              <div *ngIf="registerItem == 'instructor'">
                 <li class="list-group-item">
-                  <button type="button" class="btn btn-primary"  (click)="editProfilePerson()" >Create Profile Details</button>
+                  <button type="button" class="btn btn-primary"  (click)="editProfileInstructor()" >Create Profile Details</button>
                 </li>
                 <li class="list-group-item">
-                  <button type="button" class="btn btn-primary"  (click)="editClassesPerson()" >Add Classes Details</button>
+                  <button type="button" class="btn btn-primary"  (click)="editClassesInstructor()" >Add Classes Details</button>
                 </li>
               </div>
             </ul>
@@ -205,7 +205,7 @@
     <div class="col-sm-4 col-md-4 col-lg-4">
 
       <!-- normal -->
-      <div class="ih-item circle effect6 scale_up" (click)='registerPerson()'><a>
+      <div class="ih-item circle effect6 scale_up" (click)='registerInstructor()'><a>
           <div class="img"><img src="assets/Classes/ArteGaleriade.jpg" alt="img"></div>
           <div class="info">
             <h3>TEACHER</h3>

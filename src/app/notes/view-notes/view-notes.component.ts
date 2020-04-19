@@ -17,7 +17,6 @@ export class ViewNotesComponent implements OnInit {
 
   searchSubjectInput: string;
   searchGradeInput: string;
-  searchPersonInput: string;
 
   notesSearchClicked: boolean;
 

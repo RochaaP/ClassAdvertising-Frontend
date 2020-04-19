@@ -100,7 +100,7 @@ export class RegisterComponent implements OnInit {
     this.selectedVal = 'login';
     this.isForgotPassword = false;
     this.editUserProfile = false;
-    this.registerItem = 'person';
+    this.registerItem = 'instructor';
     this.loginView = true;
     // this.items = db.list('items').valueChanges();
   }
@@ -223,9 +223,9 @@ export class RegisterComponent implements OnInit {
     this.postDoc = this.afs.collection('users').doc(postId);
     this.post = this.postDoc.valueChanges();
   }
-//// circle click on Person
-registerPerson() {
-  this.registerItem = 'person';
+//// circle click on instructor
+registerInstructor() {
+  this.registerItem = 'instructor';
   this.onValChange('register');
 
   this.circleView = false;
@@ -368,7 +368,7 @@ public onValChange(val: string) {
     let userValues = {};
     localStorage.setItem('registerItem', JSON.stringify(this.registerItem));
 
-    if (this.registerItem === 'person') {
+    if (this.registerItem === 'instructor') {
       localStorage.setItem('registerUserName', JSON.stringify(this.firstNameInput));
 
       userValues = {
@@ -422,12 +422,12 @@ public onValChange(val: string) {
   editClassesInstitute() {
     this.router.navigate(['/addclasses/institute']);
   }
-  editProfilePerson() {
+  editProfileInstructor() {
     console.log('thisuser item ' + this.registerItem);
-    this.router.navigate(['/editprofile/person']);
+    this.router.navigate(['/editprofile/instructor']);
   }
-  editClassesPerson() {
-    this.router.navigate(['/addclasses/person']);
+  editClassesInstructor() {
+    this.router.navigate(['/addclasses/instructor']);
   }
   navi() {
     this.router.navigate(['/']);

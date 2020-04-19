@@ -54,7 +54,7 @@
 
       <div *ngIf="!nameSearchClicked">
         <div *ngIf="!classSearchClicked">
-      <ul *ngFor="let field of personResponse">
+      <ul *ngFor="let field of instructorResponse">
         <div class="profileDetails card-1">
           <img *ngIf= "field.data.img_url" class="header-image" src ={{field.data.img_url}} >
             <img *ngIf= "!field.data.img_url" class="header-image" src =  'assets/propic/propic.png'>
