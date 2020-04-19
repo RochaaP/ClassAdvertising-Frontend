@@ -148,7 +148,11 @@ export class NavigationComponent implements OnInit {
   }
 
   clickMessages() {
-    this.router.navigate(['/messages']);
+    this.router.navigate(['/messages/student']);
+  }
+
+  clickMessagesinst() {
+    this.router.navigate(['/messages/instructor']);
   }
 }
 
