@@ -168,7 +168,7 @@ export class RegisterComponent implements OnInit {
 
   getReg() {
     this.getUserRegData().subscribe((response) => {
-      // console.log('response from is ', response[0].data);
+      console.log('register / getReg / response ', response);
       this.registerItem = response[0].reg;
       this.name = response[0].name;
       localStorage.setItem('registerUserName', JSON.stringify(response[0].name));
@@ -325,7 +325,7 @@ export class RegisterComponent implements OnInit {
     // this.circleView = false;
     // this.loginView = true;
     // this.selectedVal = 'login';
-    // this.loginUser();
+    this.loginUser();
 
   }
 
