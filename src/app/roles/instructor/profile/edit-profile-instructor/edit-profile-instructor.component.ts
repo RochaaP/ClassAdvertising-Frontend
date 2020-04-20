@@ -238,6 +238,10 @@ export class EditProfileInstructorComponent implements OnInit {
     this.uploadProfilePath = path;
     // The main task
     this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
+    //   .then(data  => {
+    //     data.downloadURL
+    //   }
+    // );
     this.percentageProfile = this.fileProfile.percentageChanges();
     // console.log(this.task.img_url());
     // this.img_url = this.task.img_url();
