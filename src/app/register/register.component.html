@@ -134,8 +134,9 @@
               </div>
             </div> 
 
-            <div class= "createAccount" (click)="this.circleView = false; selectedVal='login'; loginView=true;"> Have an Account</div>
-
+            <!-- <div  > -->
+              <div *ngIf='!visibleHaveAccount' class= "createAccount" (click)="this.circleView = false; selectedVal='login'; loginView=true;"> Have an Account</div>
+            <!-- </div> -->
           </span>
         </div>
 
