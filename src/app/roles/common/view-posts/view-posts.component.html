@@ -1,0 +1,151 @@
+<div class ="container-fluid">
+
+  <div *ngIf = 'editDetails' >
+    <div class = "container-fluid">
+      <form class = 'form' id='editPost'>
+        <div class="row">
+            <div class="text-center" >
+                <h4>Edit Details</h4>
+            </div>
+
+            <div class = "col-12 formInputs">
+
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Title" [(ngModel)]="titleInput" name='title' required>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <textarea matInput placeholder="Description" [(ngModel)]="descriptionInput" name='decription' required></textarea>
+                  <mat-hint>Make this Short</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="City" [(ngModel)]="cityInput" name='city' required>
+                </mat-form-field>
+
+                <mat-form-field class ='full-width'>
+                  <mat-select placeholder="District" [(ngModel)]="districtInput" name='District' required>
+                    <mat-option value="Ampara">Ampara</mat-option>
+                    <mat-option value="Anuradhapura">Anuradhapura</mat-option>
+                    <mat-option value="Badulla">Badulla</mat-option>
+                    <mat-option value="Batticaloa">Batticaloa</mat-option>
+                    <mat-option value="Colombo">Colombo</mat-option>
+                    <mat-option value="Galle">Galle</mat-option>
+                    <mat-option value="Gampaha">Gampaha</mat-option>
+                    <mat-option value="Hambantota">Hambantota</mat-option>
+                    <mat-option value="Jaffna">Jaffna</mat-option>
+                    <mat-option value="Kalutara">Kalutara</mat-option>
+                    <mat-option value="Kandy">Kandy</mat-option>
+                    <mat-option value="Kegalle">Kegalle</mat-option>
+                    <mat-option value="Kilinochchi">Kilinochchi</mat-option>
+                    <mat-option value="Kurunegala">Kurunegala</mat-option>
+                    <mat-option value="Mannar">Mannar</mat-option>
+                    <mat-option value="Matale">Matale</mat-option>
+                    <mat-option value="Matara">Matara</mat-option>
+                    <mat-option value="Moneragala">Moneragala</mat-option>
+                    <mat-option value="Mullaitivu">Mullaitivu</mat-option>
+                    <mat-option value="Nuwara Eliya">Nuwara Eliya</mat-option>
+                    <mat-option value="Polonnaruwa">Polonnaruwa</mat-option>
+                    <mat-option value="Puttalam">Puttalam</mat-option>
+                    <mat-option value="Ratnapura">Ratnapura</mat-option>
+                    <mat-option value="Trincomalee">Trincomalee</mat-option>
+                    <mat-option value="Vavuniya">Vavuniya</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Contact" [(ngModel)]="contactInput" name='contact' required>
+                </mat-form-field>
+
+                <!-- <div class="form-group">
+                    <div class="dropzone" appdropzone>
+                      <div class="col-md-3">
+                      <div class="text-center">
+                        <div *ngIf ='uploadImage'>
+                          <img src="{{this.imagePath}}"  class="avatar img-circle" class="img-thumbnail" alt="">
+                          <a (click)="deleteImage()" >Delete</a>
+                          <div *ngIf="percentageposts | async as pct">
+                            Progress: {{ pct | number }}%
+                            <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar>
+                          </div>
+                        </div>
+
+                        <div *ngIf='!uploadImage'>
+                          <h6>Upload a photo...*</h6>
+                          <input type="file" class="form-control" (change)="upload($event)" accept=".png,.jpg" required />
+                        </div>
+
+
+                        <input type="file" class="form-control">
+                      </div>
+                    </div>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <button mat-raised-button color="primary" class='button' (click)="onSubmit()">Update</button>
+                    <button mat-raised-button color="primary" class='button' (click)="clear()">Hide</button>
+                </div>
+            </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <ul *ngFor ="let field of response; let index = index">
+    <div class='postContainer col-md-9'>
+
+      <div class="row">
+
+        <div class="verify">
+          <img src={{field.data.verify}} class="verify-image" >
+        </div>
+
+          <div class="proPicImage">
+            <img *ngIf='field.data.proPic' class="header-image" src ={{field.data.proPic}} alt="">
+            <img *ngIf='!field.data.proPic' class="header-image" src ='../../../assets/propic/propic.png' alt="">
+          </div>
+
+          <div class= "col">
+            <p>By {{field.data.name}}</p>
+            <p class="title">{{field.data.title}}</p>
+          </div>
+      </div>
+
+
+      <div class ="row">
+
+        <div class="col-md-4 col-lg">
+
+
+          <p>{{field.data.description}}</p>
+          <p>{{field.data.contact}}</p>
+          <p>{{field.data.distict}}</p>
+
+        </div>
+        <div class="col">
+          <img src={{field.data.path}} alt="" class="zoom">
+        </div>
+      </div>
+
+      <!-- <button type="button" class="btn btn-warning"  (click)="delete(field.id,field.data.path)" *ngIf ='activeUserCustomization'>Delete</button> -->
+      <button mat-raised-button color="warn" class='button' (click)="delete(field.id,field.data.path)" *ngIf ='activeUserCustomization'>Delete</button>
+      <button mat-raised-button color="primary" class='button' (click)="edit(index)" (click)='viewEdit()' *ngIf ='activeUserCustomization'>edit</button>
+
+    </div>
+
+
+  </ul>
+
+
+</div>
+
