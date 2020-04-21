@@ -11,6 +11,11 @@ export class SharedService {
   public sidePanelWidth = 5;
 
   private loggedInUser: {id: string, data: UserModel};
+  
+  private studentPicUrl: string = "https://firebasestorage.googleapis.com/v0/b/mtute-sl.appspot.com/o/profilePictures%2FDefault%2Fstudent.jpg?alt=media&token=f61b56c0-f737-45d4-bfc3-3dba1de9683f";
+  
+  private teacherPicUrl: string = "https://firebasestorage.googleapis.com/v0/b/mtute-sl.appspot.com/o/profilePictures%2FDefault%2FInstructor.jpg?alt=media&token=217f5045-c06a-4ce4-a21b-5efc533171b2";
+
   // private loggedInUser: {id: string, data: UserModel} = {
   //   id: "NdFYp85MYbdFkmfY5YNs",
   //   data: {
@@ -44,7 +49,7 @@ export class SharedService {
     return user;
   }
 
-  public setLoggedInUser(user: {id: string, data: UserModel}, storage: string = "SESSION"){
+  public setLoggedInUser(user: {id: string, data: UserModel}, storage: string = "LOCAL"){
     this.loggedInUser = user;
     if(storage == "SESSION"){
       sessionStorage.setItem("loggedInUser", JSON.stringify(user));
@@ -52,6 +57,14 @@ export class SharedService {
     else{
       localStorage.setItem("loggedInUser", JSON.stringify(user));
     }
+  }
+
+  public getStudentPicUrl(){
+    return this.studentPicUrl;
+  }
+
+  public getTeacherPicUrl(){
+    return this.teacherPicUrl;
   }
 
   public languageRequest(language: string){

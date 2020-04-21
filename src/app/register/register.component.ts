@@ -153,12 +153,12 @@ export class RegisterComponent implements OnInit {
       .then(res => {
         console.log(res);
         this.showMessage('success', 'Successfully Logged In!');
-        // this.isUserLoggedIn();
-        this.userService.getUserByEmail(this.emailInput).subscribe(data=>{
-          console.log(data);
-          let user: {id: string, data: UserModel} = JSON.parse(JSON.stringify(data));
-          this.sharedService.setLoggedInUser(user);
-        });
+        this.isUserLoggedIn();
+        // this.userService.getUserByEmail(this.emailInput).subscribe(data=>{
+        //   console.log(data);
+        //   let user: {id: string, data: UserModel} = JSON.parse(JSON.stringify(data));
+        //   this.sharedService.setLoggedInUser(user);
+        // });
         this.getReg();
         // this.getid();
       }, err => {
