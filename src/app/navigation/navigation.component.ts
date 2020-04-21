@@ -4,6 +4,7 @@ import { faSearch, faBell, faUser, faSchool, faSignOutAlt, faIdBadge, faStickyNo
 import { AuthenticationService } from '../service/auth/authentication.service';
 import { DataService } from '../service/share/data.service';
 import { Router } from '@angular/router';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-navigation',
@@ -24,7 +25,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService
   ) {
         // dataService.getLoggedInName.subscribe(name => this.changeName(name));
   }
@@ -57,31 +59,72 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
     this.isUserLoggedIn();
     this.searchClicked = false;
+    this.sharedService.navigationRespond().subscribe(() => {
+      this.userDetails = this.authService.isUserLoggedIn();
+      console.log('navigation / isuserLoggedIn / this.userDetails inside shared service');
+      this.achieveData();
+    });
 
   }
 
   isUserLoggedIn() {
+
     this.userDetails = this.authService.isUserLoggedIn();
     if (this.userDetails) {
-      this.userLogged = true;
-      this.userName = this.authService.getEmitterUserName();
-      this.registerItem = this.authService.getRegisterItem();
-      if (this.registerItem === 'student') {
-        this.isStudent = true;
-        this.isInstructor = false;
-      }
-      else if (this.registerItem === 'instructor') {
-        this.isStudent = false;
-        this.isInstructor = true;
-      }
-      else {
-        this.isStudent = false;
-        this.isInstructor = false;
-      }
-      // location.reload();
-   } else {
-      this.userLogged = false;
-   }
+      this.achieveData();
+      console.log('navigation / isuserLoggedIn / this.userDetails = true');
+    }
+    // else {
+    //   this.sharedService.navigationRespond().subscribe(() => {
+    //     this.userDetails = this.authService.isUserLoggedIn();
+    //     console.log('navigation / isuserLoggedIn / this.userDetails inside shared service');
+    //     this.achieveData();
+    //   });
+    // }
+
+    // this.sharedService.navigationRespond().subscribe(() => {
+    //     this.userDetails = this.authService.isUserLoggedIn();
+    //     console.log("this.userdetails " +this.userDetails);
+    //     if (this.userDetails) {
+    //         this.userLogged = true;
+    //         this.userName = this.authService.getEmitterUserName();
+    //         this.registerItem = this.authService.getRegisterItem();
+
+    //         if (this.registerItem === 'student') {
+    //           this.isStudent = true;
+    //           this.isInstructor = false;
+    //         }
+    //         else if (this.registerItem === 'instructor') {
+    //           this.isStudent = false;
+    //           this.isInstructor = true;
+    //         }
+    //         else {
+    //           this.isStudent = false;
+    //           this.isInstructor = false;
+    //         }
+    //     }
+    //     else {
+    //         this.userLogged = false;
+    //     }
+    //  });
+  }
+  achieveData() {
+    this.userLogged = true;
+    this.userName = this.authService.getEmitterUserName();
+    this.registerItem = this.authService.getRegisterItem();
+
+    if (this.registerItem === 'student') {
+      this.isStudent = true;
+      this.isInstructor = false;
+    }
+    else if (this.registerItem === 'instructor') {
+      this.isStudent = false;
+      this.isInstructor = true;
+    }
+    else {
+      this.isStudent = false;
+      this.isInstructor = false;
+    }
   }
 
   logoutUser() {

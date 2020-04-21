@@ -37,6 +37,7 @@ export class SharedService {
   @Output() createPaperWidthEvent: EventEmitter<any> = new EventEmitter();
   @Output() loadPaperWithData: EventEmitter<any> = new EventEmitter();
   @Output() viewPaperRefresh: EventEmitter<any> = new EventEmitter();
+  @Output() navigationRefresh: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -72,46 +73,55 @@ export class SharedService {
     })
   }
 
-  public languageRespond(){
+  public languageRespond() {
     return this.language;
   }
 
-  public addTabItemRequest(data){
+  public addTabItemRequest(data) {
     this.addTabItem.emit({
       data: data 
     })
   }
 
-  public addTabItemRespond(){
+  public addTabItemRespond() {
     return this.addTabItem;
   }
 
-  public changeCreatePaperWidthRequest(){
+  public changeCreatePaperWidthRequest() {
     this.createPaperWidthEvent.emit({
       data: this.createPaperWidth
     })
   }
   
-  public changeCreatePaperWidthRespond(){
-    return this.createPaperWidthEvent
+  public changeCreatePaperWidthRespond() {
+    return this.createPaperWidthEvent;
   }
 
-  public loadPaperWithDataRequest(data: any){
+  public loadPaperWithDataRequest(data: any) {
     this.loadPaperWithData.emit({
       paper: data
-    })
+    });
   }
 
-  public loadPaperWithDataRespond(){
+  public loadPaperWithDataRespond() {
     return this.loadPaperWithData;
   }
 
-  public viewPaperRefreshRequest(){
-    this.viewPaperRefresh.emit()
+  public viewPaperRefreshRequest() {
+    this.viewPaperRefresh.emit();
   }
 
-  public viewPaperRefreshRespond(){
+  public viewPaperRefreshRespond() {
     return this.viewPaperRefresh;
+  }
+
+  public navigationRequest() {
+    this.navigationRefresh.emit();
+    console.log('sharedService navigation emit called');
+  }
+
+  public navigationRespond() {
+    return this.navigationRefresh;
   }
 
 }

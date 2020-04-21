@@ -54,7 +54,10 @@ import { EditProfileInstituteComponent } from './roles/institute/profile/edit-pr
 import { EditProfileInstructorComponent } from './roles/instructor/profile/edit-profile-instructor/edit-profile-instructor.component';
 
 import { NewsfeedComponent } from './newsfeed/newsfeed/newsfeed.component';
+
 import { PostaddComponent } from './roles/common/postadd/postadd.component';
+import { ViewPostsComponent } from './roles/common/view-posts/view-posts.component';
+
 import { UploadTaskComponent } from './service/upload-task/upload-task.component';
 import { ViewProfileInstructorComponent } from './roles/instructor/profile/view-profile-instructor/view-profile-instructor.component';
 
@@ -91,14 +94,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill';
 import { CountdownModule } from 'ngx-countdown';
 
-import { fromEventPattern } from 'rxjs';
+import { fromEventPattern, from } from 'rxjs';
 
 import { StudentPaperComponent } from './papers/studentPaper/student-paper/student-paper.component';
 import { CreatePaperComponent } from './papers/createPaper/create-paper/create-paper.component';
 import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
 import { AnswerPaperComponent } from './papers/studentPaper/answerPaper/answer-paper/answer-paper.component';
 import { PaperMarkingModelComponent } from './papers/studentPaper/answerPaper/paperMarkingModel/paper-marking-model/paper-marking-model.component';
-
 
 
 const appRoutes: Routes = [
@@ -182,6 +184,9 @@ const appRoutes: Routes = [
     PaperMarkingModelComponent,
     MsgInstructorComponent,
     ImagesChangeComponent,
+
+    ViewPostsComponent
+
   ],
   imports: [
     RouterModule.forRoot(

@@ -31,11 +31,11 @@ export class NewsfeedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.firstReload = localStorage.getItem('needToReloadPage');
-    if (this.firstReload) {
-      window.location.reload();
-      localStorage.removeItem('needToReloadPage');
-    }
+    // this.firstReload = localStorage.getItem('needToReloadPage');
+    // if (this.firstReload) {
+    //   window.location.reload();
+    //   localStorage.removeItem('needToReloadPage');
+    // }
     this.getAPIData().subscribe((response) => {
       console.log('response from GET API is ', response);
       this.response = response;

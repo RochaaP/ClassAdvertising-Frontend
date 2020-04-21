@@ -63,6 +63,7 @@ export class RegisterComponent implements OnInit {
   registerItem: string;
   circleView: boolean;
   loginView: boolean;
+  visibleHaveAccount: boolean;
 
   userCol: AngularFirestoreCollection<User>;
   users: any;
@@ -82,19 +83,13 @@ export class RegisterComponent implements OnInit {
     })
   };
 
-
-
-
-  // items : Observable<any[]>;
-
   constructor(
     private authService: AuthenticationService,
     private userService: UserService,
     private sharedService: SharedService,
     private afs: AngularFirestore,
     private http: HttpClient,
-    public router: Router
-    // private data: DataService
+    public router: Router,
     ) {
 
     this.selectedVal = 'login';
@@ -102,7 +97,7 @@ export class RegisterComponent implements OnInit {
     this.editUserProfile = false;
     this.registerItem = 'instructor';
     this.loginView = true;
-    // this.items = db.list('items').valueChanges();
+    this.visibleHaveAccount = true;
   }
 
   // Common Method to Show Message and Hide after 2 seconds
@@ -173,7 +168,7 @@ export class RegisterComponent implements OnInit {
 
   getReg() {
     this.getUserRegData().subscribe((response) => {
-      // console.log('response from is ', response[0].data);
+      console.log('register / getReg / response ', response);
       this.registerItem = response[0].reg;
       this.name = response[0].name;
       localStorage.setItem('registerUserName', JSON.stringify(response[0].name));
@@ -185,38 +180,14 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-    getUserRegData() {
-      return this.http.post('api/userDetails/common/getUserRegData', {email: this.emailInput});
-    }
-  // getid() {
-  //   this.userCol = this.afs.collection('users', ref => ref.where('email', '==', this.emailInput));
-  //   this.users = this.userCol.snapshotChanges().pipe(
-  //     map(actions => {
-  //       return actions.map(a => {
-  //         const data = a.payload.doc.data() as User;
-  //         const id = a.payload.doc.id;
-  //         this.id = id;
-  //         return {id, data};
-  //       });
-  //   })
-  //   );
+  getUserRegData() {
+    return this.http.post('api/userDetails/common/getUserRegData', {email: this.emailInput});
+  }
 
-  // }
   ngOnInit() {
     this.isUserLoggedIn();
     this.registerItem =  JSON.parse(localStorage.getItem('registerItem'));
     this.circleView = false;
-
-    // this.userCol = this.afs.collection('users');
-    // this.users = this.userCol.snapshotChanges().pipe(
-    //   map(actions =>{
-    //     return actions.map(a=>{
-    //       const data = a.payload.doc.data() as User;
-    //       const id = a.payload.doc.id;
-    //       return {id,data};
-    //     })
-    // })
-    // )
   }
 
   getPost(postId) {
@@ -224,40 +195,36 @@ export class RegisterComponent implements OnInit {
     this.post = this.postDoc.valueChanges();
   }
 //// circle click on instructor
-registerInstructor() {
-  this.registerItem = 'instructor';
-  this.onValChange('register');
+  registerInstructor() {
+    this.registerItem = 'instructor';
+    this.onValChange('register');
 
-  this.circleView = false;
-  this.loginView = false;
-}
+    this.circleView = false;
+    this.loginView = false;
+  }
 
-/// circle click Institute
-registerInstitute() {
-  this.onValChange('register');
-  this.registerItem = 'institute';
+  /// circle click Institute
+  registerInstitute() {
+    this.onValChange('register');
+    this.registerItem = 'institute';
 
-  this.circleView  = false;
-  this.loginView = false;
-}
+    this.circleView  = false;
+    this.loginView = false;
+  }
 
-// circle click student
-registerStudent() {
-  this.onValChange('register');
-  this.registerItem = 'student';
+  // circle click student
+  registerStudent() {
+    this.onValChange('register');
+    this.registerItem = 'student';
 
-  this.circleView  = false;
-  this.loginView = false;
-}
+    this.circleView  = false;
+    this.loginView = false;
+  }
 
-
-
-public onValChange(val: string) {
-  this.showMessage('', '');
-  this.selectedVal = val;
-}
-
-
+  public onValChange(val: string) {
+    this.showMessage('', '');
+    this.selectedVal = val;
+  }
 
   // Register user with  provided Email/ Password
   registerUser() {
@@ -268,6 +235,8 @@ public onValChange(val: string) {
         this.authService.sendEmailVerification().then(res => {
           console.log(res);
           this.isForgotPassword = false;
+          this.visibleHaveAccount = false;
+
           this.showMessage('success', 'Registration Successful! Please Verify Your Email');
 
           console.log(this.id);
@@ -277,66 +246,10 @@ public onValChange(val: string) {
         });
         this.onSubmit();
         this.isUserLoggedIn();
-        this.navi();
       }, err => {
         this.showMessage('danger', err.message);
       });
   }
-
-  // onSubmit() {
-  //   const id = this.afs.createId();
-  //   this.id = id.toString();
-
-  //   localStorage.setItem('registerItem', this.registerItem);
-
-  //   this.afs.collection('emailAddresses').doc(id).set({
-  //     email: this.emailInput,
-  //     registerItem: this.registerItem,
-  //     create: firebase.firestore.FieldValue.serverTimestamp()
-  //   })
-  //   .then(function() {
-  //     console.log('Document successfully written!');
-  //   })
-  //   .catch(function(error) {
-  //       console.error('Error writing document: ', error);
-  //  });
-
-  //   if (this.registerItem == 'person') {
-  //     this.afs.collection('users').doc(id).set({
-  //       email: this.emailInput,
-  //       firstname: this.firstNameInput,
-  //       lastname: this.lastNameInput,
-  //       contact: this.contactInput,
-  //       university: this.universityInput,
-  //       profileimagepath: this.profileimagepathInput
-  //     })
-  //     .then(function() {
-  //       console.log('Document successfully written!');
-  //     })
-  //     .catch(function(error) {
-  //         console.error('Error writing document: ', error);
-  //    });
-  //   } else if (this.registerItem = 'institute') {
-  //     this.afs.collection('institute').doc(id).set({
-  //       profileImagePath: this.downloadURL,
-  //       email: this.emailInput,
-  //       name: this.nameInput,
-  //       contact: this.contactInput,
-  //       streetNo1: this.street1Input,
-  //       streetNo2: this.street2Input,
-  //       city: this.cityInput,
-  //       town: this.townInput,
-  //       province: this.provinceInput
-  //     })
-  //     .then(function() {
-  //       console.log('Document successfully written!');
-  //     })
-  //     .catch(function(error) {
-  //         console.error('Error writing document: ', error);
-  //    });
-  //   }
-
-  // }
 
   // Send link on given email to reset password
   forgotPassword() {
@@ -404,10 +317,15 @@ public onValChange(val: string) {
     }
 
     this.postAPIData(userValues).subscribe((response) => {
-      console.log('response from POST API is ', response);
+      console.log('register user with', response);
     }, (error) => {
       console.log('error during post is ', error);
     });
+    // this.navi();
+    // this.circleView = false;
+    // this.loginView = true;
+    // this.selectedVal = 'login';
+    this.loginUser();
 
   }
 
@@ -431,7 +349,9 @@ public onValChange(val: string) {
   }
   navi() {
     this.router.navigate(['/']);
-    localStorage.setItem('needToReloadPage', 'true');
+    // localStorage.setItem('needToReloadPage', 'true');
+    this.sharedService.navigationRequest();
+
 
   }
 }
