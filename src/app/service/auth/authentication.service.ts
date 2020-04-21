@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { JsonPipe } from '@angular/common';
+import { UserService } from 'src/app/users/user.service';
+import { SharedService } from 'src/app/shared/shared.service';
+import { UserModel } from 'src/app/users/user-model';
+import { share } from 'rxjs/operators';
 // import { loadavg } from 'os';
 
 @Injectable({
@@ -13,13 +17,21 @@ export class AuthenticationService {
 
   constructor(
     public angularFireAuth: AngularFireAuth,
-    public router: Router
+    public router: Router,
+    private userService: UserService,
+    private sharedService: SharedService
   ) {
     this.angularFireAuth.authState.subscribe(userResponse => {
       if (userResponse) {
         localStorage.setItem('user', JSON.stringify(userResponse));
+        this.userService.getUserByEmail(userResponse.email).subscribe(data=>{
+          console.log(data);
+          let user: {id: string, data: UserModel} = JSON.parse(JSON.stringify(data));
+          this.sharedService.setLoggedInUser(user);
+        });
       } else {
-        localStorage.setItem('user', null);
+        localStorage.setItem('user', null);        
+        sharedService.setLoggedInUser(null);
       }
     });
   }
