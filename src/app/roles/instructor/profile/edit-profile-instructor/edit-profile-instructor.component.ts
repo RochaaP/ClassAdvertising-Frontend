@@ -29,10 +29,10 @@ export class EditProfileInstructorComponent implements OnInit {
   fileStudent: AngularFireUploadTask;
   percentageStudent: Observable<number>;
 
-  uploadProfilePath = '';
+  profileMetaData: any;
   uploadProfile: boolean;
 
-  uploadBackgroundPath = '';
+  backgroundMetaData: any;
   uploadBackground: boolean;
 
   email: string;
@@ -130,7 +130,7 @@ export class EditProfileInstructorComponent implements OnInit {
       this.firstNameInput = response[0].data.firstname;
       this.lastNameInput = response[0].data.lastname;
       this.img_url =  response[0].data.img_url;
-
+      this.profileMetaData = response[0].data.metaData;
       if (!this.img_url) {
         this.uploadProfile = false;
       } else {
@@ -138,6 +138,7 @@ export class EditProfileInstructorComponent implements OnInit {
       }
 
       this.backgroundImageURL = response[0].more.backgroundImagePath;
+      this.backgroundMetaData = response[0].more.metaData;
       if (!this.backgroundImageURL) {
         this.uploadBackground = false;
       } else {
@@ -235,13 +236,11 @@ export class EditProfileInstructorComponent implements OnInit {
     const path = `profilePictures/${Date.now()}_${randomId}`;
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
-    this.uploadProfilePath = path;
     // The main task
     this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
-    //   .then(data  => {
-    //     data.downloadURL
-    //   }
-    // );
+    this.fileProfile.then(data => {
+      this.profileMetaData = JSON.stringify(data.metadata);
+    });
     this.percentageProfile = this.fileProfile.percentageChanges();
     // console.log(this.task.img_url());
     // this.img_url = this.task.img_url();
@@ -257,12 +256,15 @@ export class EditProfileInstructorComponent implements OnInit {
   }
 
   deleteProfile() {
-    if (this.uploadProfilePath) {
-      this.afStorage.ref(this.uploadProfilePath).delete().subscribe(() => {
+    if (this.profileMetaData) {
+      console.log('edit profile inst / delete profile / '+ this.profileMetaData );
+      this.afStorage.ref(JSON.parse(this.profileMetaData).fullPath).delete().subscribe(() => {
       }, (error) => {
         console.log(error);
       }, () => {
         console.log('successfully deleted');
+        this.profileMetaData = '';
+        this.img_url = '';
       });
     }
     this.uploadProfile = false;
@@ -273,11 +275,13 @@ export class EditProfileInstructorComponent implements OnInit {
     this.uploadBackground = true;
     const randomId = Math.random().toString(36).substring(2);
     const path = `backgroundImages/${Date.now()}_${randomId}`;
-    this.uploadBackgroundPath = path;
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
 
     this.fileBackground = this.afStorage.upload(path, event.target.files[0]);
+    this.fileBackground.then(data => {
+      this.backgroundMetaData = JSON.stringify(data.metadata);
+    });
     this.percentageBackground = this.fileBackground.percentageChanges();
     // The main task
     // this.task = this.afStorage.upload(path, event.target.files[0]);
@@ -296,13 +300,15 @@ export class EditProfileInstructorComponent implements OnInit {
   }
 
   deleteBackground() {
-    if (this.uploadBackgroundPath) {
-      this.afStorage.ref(this.uploadBackgroundPath).delete().subscribe(() => {
+    if (this.backgroundMetaData) {
+      this.afStorage.ref(JSON.parse(this.backgroundMetaData).fullPath).delete().subscribe(() => {
 
-      }, () => {
+      }, (error) => {
         console.log('deleted Failed');
       }, () => {
         console.log('successfully deleted');
+        this.backgroundMetaData = '';
+        this.backgroundImageURL = '';
       });
     }
 
@@ -326,7 +332,9 @@ export class EditProfileInstructorComponent implements OnInit {
         degreeYear: this.yearInput,
         grad: this.gradInput,
         img_url: this.img_url,
+        metaData: this.profileMetaData,
         backgroundImagePath: this.backgroundImageURL,
+        backgroundMetaData: this.backgroundMetaData,
         yearExperiences: this.yearExperienceInput,
         teachingSchool: this.teachingSchoolInput,
 

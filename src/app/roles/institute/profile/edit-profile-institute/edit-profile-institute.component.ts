@@ -34,9 +34,11 @@ export class EditProfileInstituteComponent implements OnInit {
 
   uploadProfile: boolean;
   uploadProfilePath = '';
+  profileMetaData: any;
 
   uploadBackground: boolean;
   uploadBackgroundPath = '';
+  backgroundMetaData: any;
 
   response: any;
 
@@ -68,6 +70,7 @@ export class EditProfileInstituteComponent implements OnInit {
       this.emailInput = response[0].data.email;
       this.contactInput = response[0].data.contact;
       this.downloadURL =  response[0].data.img_url;
+      this.profileMetaData = response[0].data.metaData;
       if (!this.downloadURL) {
         this.uploadProfile = false;
       }
@@ -75,6 +78,7 @@ export class EditProfileInstituteComponent implements OnInit {
         this.uploadProfile = true;
       }
       this.backgroundImageURL = response[0].more.backgroundImagePath;
+      this.backgroundMetaData = response[0].more.backgroundMetaData;
       if (!this.backgroundImageURL) {
         this.uploadBackground = false;
       }
@@ -110,7 +114,9 @@ export class EditProfileInstituteComponent implements OnInit {
         district: this.districtInput,
         province: this.provinceInput,
         img_url: this.downloadURL,
-        backgroundImagePath: this.backgroundImageURL
+        metaData: this.profileMetaData,
+        backgroundImagePath: this.backgroundImageURL,
+        backgroundMetaData: this.backgroundMetaData
       };
     this.postAPIData(userValues).subscribe((response) => {
         console.log('response from POST API is ', response);
@@ -144,6 +150,9 @@ export class EditProfileInstituteComponent implements OnInit {
     // Reference to storage bucket
     const ref = this.afStorage.ref(path);
     this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
+    this.fileProfile.then(data => {
+      this.profileMetaData = JSON.stringify(data.metadata);
+    });
     this.percentageProfile = this.fileProfile.percentageChanges();
     // The main task
     // this.task = this.afStorage.upload(path, event.target.files[0]);
@@ -160,12 +169,14 @@ export class EditProfileInstituteComponent implements OnInit {
   }
 
   deleteProfile() {
-    if (this.uploadProfilePath) {
-      this.afStorage.ref(this.uploadProfilePath).delete().subscribe(() => {
+    if (this.profileMetaData) {
+      this.afStorage.ref(JSON.parse(this.profileMetaData).fullPath).delete().subscribe(() => {
       }, (error) => {
         console.log(error);
       }, () => {
         console.log('successfully deleted');
+        this.profileMetaData = '';
+        this.downloadURL = '';
       });
     }
     this.uploadProfile = false;
@@ -182,6 +193,9 @@ export class EditProfileInstituteComponent implements OnInit {
     const ref = this.afStorage.ref(path);
 
     this.fileBackground = this.afStorage.upload(path, event.target.files[0]);
+    this.fileBackground.then(data => {
+      this.backgroundMetaData = JSON.stringify(data.metadata);
+    });
     this.percentageBackground = this.fileBackground.percentageChanges();
     // The main task
     // this.task = this.afStorage.upload(path, event.target.files[0]);
@@ -198,13 +212,14 @@ export class EditProfileInstituteComponent implements OnInit {
   }
 
   deleteBackground() {
-    if (this.uploadBackgroundPath) {
-      this.afStorage.ref(this.uploadBackgroundPath).delete().subscribe(() => {
-
+    if (this.backgroundMetaData) {
+      this.afStorage.ref(JSON.parse(this.backgroundMetaData).fullPath).delete().subscribe(() => {
       }, () => {
-        console.log("deleted Failed");
+        console.log('deleted Failed');
       }, () => {
-        console.log("successfully deleted");
+        console.log('successfully deleted');
+        this.backgroundImageURL = '';
+        this.backgroundMetaData = '';
       });
     }
 
