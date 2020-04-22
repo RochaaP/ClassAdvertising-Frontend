@@ -63,7 +63,7 @@ export class EditProfileInstituteComponent implements OnInit {
       console.log('asdkfjka email ' + this.emailInput);
     }
     this.getAPIData().subscribe((response) => {
-      console.log('response from GET API is ', response[0]);
+      console.log('response from get all details individual ', response[0]);
 
       this.id = response[0].id;
       this.nameInput = response[0].data.firstname;
