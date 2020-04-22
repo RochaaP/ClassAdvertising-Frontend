@@ -49,7 +49,7 @@ export class MsgInstructorComponent implements OnInit {
       this.response = response;
       this.value = this.response[0].data.content;
       
-      console.log(response);
+      // console.log('msgInst / get message' , response[0].data);
     });
   }
   getAPIData() {
