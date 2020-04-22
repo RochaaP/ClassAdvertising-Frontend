@@ -141,7 +141,7 @@ export class AllUsersComponent implements OnInit {
     }
   }
 
-  searchClose(el: HTMLElement) {
+  searchClose() {
     this.searchedInstructorList.splice(0, this.searchedInstructorList.length);
     this.searchClicked = false;
     this.searchInput = '';

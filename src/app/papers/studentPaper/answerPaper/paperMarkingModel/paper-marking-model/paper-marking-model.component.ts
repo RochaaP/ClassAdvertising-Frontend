@@ -16,7 +16,7 @@ export class PaperMarkingModelComponent implements OnInit {
   @Input("score") score: number = 0;
 
   constructor(
-    private activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal
   ) { }
 
   ngOnInit() {

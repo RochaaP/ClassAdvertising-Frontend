@@ -26,18 +26,18 @@ export class StudentPaperComponent implements OnInit {
   faRedo = faRedo;
 
   private buttonStatus: string = "Hide";
-  private showSubject: boolean = true;
+  public showSubject: boolean = true;
   
   private loggedInUser: {id: string, data: UserModel};
 
-  private subjectFilter: string;
-  private sub_papers:{id: string, data: PaperModel, instructor: string}[];
+  public subjectFilter: string;
+  public sub_papers:{id: string, data: PaperModel, instructor: string}[];
 
-  private subjectGroup: {id: string, data: SubjectModel}[] = [];
+  public subjectGroup: {id: string, data: SubjectModel}[] = [];
   private userGroup: {id: string, name: string}[] = [];
   private papers: {subject: string, papers:{id: string, data: PaperModel, instructor: string}[]}[];
 
-  private displayedColumns: string[] = ['name', 'year', 'instructor', 'grade_level', 'load'];
+  public displayedColumns: string[] = ['name', 'year', 'instructor', 'grade_level', 'load'];
   dataSource: MatTableDataSource<{id: string, data: PaperModel, instructor: string}>;
 
   constructor(
@@ -62,11 +62,11 @@ export class StudentPaperComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  private toggleHide(){
+  public toggleHide(){
     this.showSubject = !this.showSubject;
   }
 
-  private refreshPapers(){
+  public refreshPapers(){
     this.spinnerService.show();
     this.subjectFilter = undefined;
     this.sub_papers = [];
@@ -87,7 +87,7 @@ export class StudentPaperComponent implements OnInit {
     // }
   }
 
-  private filterPapersBySubject(){
+  public filterPapersBySubject(){
     console.log(this.subjectFilter);
     this.sub_papers = [];
     this.papers.forEach(el=>{
@@ -104,7 +104,7 @@ export class StudentPaperComponent implements OnInit {
     console.log(this.sub_papers);
   }
 
-  private loadPaper(paperInstance: {id: string, data: PaperModel, instructor: string}){
+  public loadPaper(paperInstance: {id: string, data: PaperModel, instructor: string}){
     let paper: {id: string, data: PaperModel, instructor: string} = paperInstance;
     console.log("___loadPaper()___");
     let subject: {id: string, data: SubjectModel} = this.subjectGroup.find(element => element.id == paper.data.subject);

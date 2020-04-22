@@ -118,6 +118,18 @@ export class AddNotesComponent implements OnInit {
     this.uploadFile = false;
   }
 
+  deleteFile(){
+    console.log("___deleteFile()___");
+  }
+
+  toggleHover(event: any){
+    console.log("___toggleHover()___");
+  }
+
+  onDrop(event: any){
+    console.log("___onDrop()___");
+  }
+
 
   upload(event) {
     this.uploadFile = true;

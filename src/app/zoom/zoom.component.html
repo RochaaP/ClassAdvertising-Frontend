@@ -1,0 +1,59 @@
+<div  *ngIf="!loggedIn" class="card m-5" style="align-items: center;">
+    <div class="card-body">
+        <button mat-raised-button (click)="zoomLogin()" color="primary">
+            <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/512/Zoom-icon.png" height="32" alt="Add to ZOOM" />Zoom Login
+        </button>
+    </div>
+</div>
+<div  *ngIf="loggedIn && zoomUser!=undefined" class="card m-5" style="align-items: center;">
+    <div class="card-header">
+        {{zoomUser.first_name}} {{zoomUser.last_name}}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Email: </mat-label></div>
+            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.email}}</mat-label></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Language: </mat-label></div>
+            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.language}}</mat-label></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Status: </mat-label></div>
+            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.status}}</mat-label></div>
+        </div>
+        
+    </div>
+</div>
+
+<div  *ngIf="loggedIn && zoomUser!=undefined && viewZoomMeetingList" class="card m-5" style="align-items: center;">
+    <div class="card-header">
+        Meeting List
+    </div>
+    <div class="card-body">
+        <div *ngFor="let meeting of zoomMeetingList" class="form-group">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Topic: </mat-label></div>
+                <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.topic}}</mat-label></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Type: </mat-label></div>
+                <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.type}}</mat-label></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Start Time: </mat-label></div>
+                <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.start_time}}</mat-label></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Duration: </mat-label></div>
+                <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.duration}}</mat-label></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Join Url: </mat-label></div>
+                <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.join_url}}</mat-label></div>
+            </div>
+            <hr class="mb-2">
+        </div>
+        
+    </div>
+</div>

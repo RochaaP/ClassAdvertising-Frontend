@@ -24,12 +24,13 @@ export class CreatePaperComponent implements OnInit {
   @Input("paper") paper: PaperModel;
   @Input("subjectGroup") subjectGroup: {id: string, data: SubjectModel}[] = [];
   
-  private created_date: string = null;
+  public created_date: string = null;
 
-  private isSubmitted: boolean = false;
+  public isSubmitted: boolean = false;
+  public disableSaveBtn: boolean = false;
 
   constructor(
-    private activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private fb: FormBuilder,
     private spinnerService: Ng4LoadingSpinnerService,
     private paperService: PaperService,
@@ -58,6 +59,7 @@ export class CreatePaperComponent implements OnInit {
   // Will save the created paper
   public savePaper(){
     if(this.form.invalid){
+      this.disableSaveBtn = false;
       return;
     }
     else{
@@ -65,6 +67,7 @@ export class CreatePaperComponent implements OnInit {
     }
     this.spinnerService.show();
     this.paperService.addPaper(this.paper, this);
+    this.activeModal.dismiss();
   }
 
   onSuccess(data: WsResponse, serviceType: WsType){

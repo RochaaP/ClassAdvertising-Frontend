@@ -30,18 +30,18 @@ export class AnswerPaperComponent implements OnInit {
 
   @ViewChild('countdown', { static: false }) private countdown: CountdownComponent;
 
-  private config;
+  public config;
 
   private loggedInUser: {id: string, data: UserModel}
 
-  private paper: {id: string, data: PaperModel};
-  private questions: {id: string, data: QuestionModel}[] = []
-  private answers: string[] = [];
+  public paper: {id: string, data: PaperModel};
+  public questions: {id: string, data: QuestionModel}[] = []
+  public answers: string[] = [];
 
-  private timeOver: boolean = false;
+  public timeOver: boolean = false;
   private score: number = 0;
-  private questions_left: number = 0;
-  private current_question_index: number = 0;
+  public questions_left: number = 0;
+  public current_question_index: number = 0;
 
   constructor(
     private questionService: QuestionService,
@@ -66,7 +66,7 @@ export class AnswerPaperComponent implements OnInit {
     this.questionService.getQuestionByPaperId(this.paper.id, this);
   }
 
-  private answerEvent(){
+  public answerEvent(){
     console.log(this.answers);
     let tmp_arr = this.answers.filter(element=>{return element != undefined});
     console.log(tmp_arr)
@@ -81,7 +81,7 @@ export class AnswerPaperComponent implements OnInit {
     }
   }
 
-  private handleEvent(event){
+  public handleEvent(event){
     console.log(event)
     if(event.action == "notify"){
       let notifyMsg = "You have only " + event.left/1000 + " secs";
@@ -108,7 +108,7 @@ export class AnswerPaperComponent implements OnInit {
     this.questions_left = length;
   }
 
-  private changeQuestion(index: number){
+  public changeQuestion(index: number){
     if(index<0 || index>this.questions.length){
       return
     }
@@ -118,7 +118,7 @@ export class AnswerPaperComponent implements OnInit {
     this.current_question_index = index;
   }
 
-  private viewImage(imageModal){
+  public viewImage(imageModal){
     this.modalService.open(imageModal);
   }
 
@@ -130,11 +130,11 @@ export class AnswerPaperComponent implements OnInit {
     return Number(((correctAnswers/this.questions.length) * 100).toFixed(2));
   }
 
-  private submit(submitConfirmModal){
+  public submit(submitConfirmModal){
     this.modalService.open(submitConfirmModal);
   }
 
-  private submitForMarking(){
+  public submitForMarking(){
     console.log("___submitForMarking()___");
     this.loadingService.show();
     this.timeOver = true;

@@ -13,18 +13,18 @@ export class PaperDetailsModalComponent implements OnInit {
 
   @Input("loggedInUser") user: {id: string, data: UserModel};
   @Input("paper") paper: {id: string, data: PaperModel};
-  @Input("subjectName") subjectname: string;
+  @Input("subjectName") subjectName: string;
   @Input("instructorName") instructorName: string;
 
   constructor(
-    private activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private sharedService: SharedService
     ) { }
 
   ngOnInit() {
   }
 
-  private answerPaper(){
+  public answerPaper(){
     this.sharedService.setLoggedInUser(this.user, "LOCAL");
     localStorage.setItem("paper", JSON.stringify(this.paper));
     window.open("/answerpaper");
