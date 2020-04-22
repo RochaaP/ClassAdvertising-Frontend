@@ -63,6 +63,22 @@ export class ImagesChangeComponent implements OnInit {
     this.getImages();
   }
 
+  onSlide(event){
+    console.log("___onSLide()___");
+  }
+
+  delete(event){
+    console.log("___onSLide()___");
+  }
+
+  toggleHover(event){
+    console.log("___onSLide()___");
+  }
+
+  onDrop(event){
+    console.log("___onSLide()___");
+  }
+
   getImages() {
     this.getAPIData().subscribe((response) => {
       console.log('response from images ', response);

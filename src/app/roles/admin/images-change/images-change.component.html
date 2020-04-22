@@ -4,12 +4,13 @@
             <div class="picsum-img-wrapper">
                <img [src]="img"> 
             </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success" (click)="delete(index)">Delete Set</button>
+            </div>
         </ng-template>
       </ngb-carousel>
       
-      <div class="form-group">
-        <button type="submit" class="btn btn-success" (click)="delete(index)">Delete Set</button>
-    </div>
+      
       <hr>
 </div>
   <div class = "col-10 formInputs">

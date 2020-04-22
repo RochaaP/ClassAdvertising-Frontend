@@ -17,7 +17,7 @@ export class KeyboardComponent implements OnInit {
   ngOnInit() {
   }
 
-  private sendTextBack(){
+  public sendTextBack(){
     this.modalText.emit(this.text);
   }
 

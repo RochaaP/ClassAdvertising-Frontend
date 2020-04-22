@@ -24,20 +24,21 @@ import { Router } from '@angular/router';
 })
 export class EditPaperComponent implements OnInit {
 
-  private paper: {id: string, data: PaperModel};
-  private subjectName: string = "XXXXXXXXXX";
+  public paper: {id: string, data: PaperModel};
+  public subjectName: string = "XXXXXXXXXX";
 
-  private loggedInUser: {id: string, data: UserModel};
+  public loggedInUser: {id: string, data: UserModel};
 
-  private questionList: {id: string, data: QuestionModel}[] = [];
+  public questionList: {id: string, data: QuestionModel}[] = [];
   private deletedQuestionList: {id: string, data: QuestionModel}[] = [];
 
-  private isShowPaperDetail: boolean = false;
-  private isShowQuestion: boolean = false;
+  public isShowPaperDetail: boolean = false;
+  public isShowQuestion: boolean = false;
 
   private width;
 
-  private publish: string = 'no';
+  public publish: string = 'no';
+  public description: string = "";
 
   constructor(
     private sharedService: SharedService,
@@ -76,7 +77,7 @@ export class EditPaperComponent implements OnInit {
     });
   }
 
-  private openKeyboard(curentText: string, isArray: boolean, variable: any, index: number, path: string) {    
+  public openKeyboard(curentText: string, isArray: boolean, variable: any, index: number, path: string) {    
     console.log("___openKeyboard()___");
     const modalRef = this.modalService.open(KeyboardComponent);
 
@@ -303,6 +304,7 @@ export class EditPaperComponent implements OnInit {
     }
     this.paper.data.published = true;
     this.paperService.publishPaper(this.paper, this);
+    // adding to newsfeed is needed
   }
 
   onSuccess(data: WsResponse, serviceType: WsType){

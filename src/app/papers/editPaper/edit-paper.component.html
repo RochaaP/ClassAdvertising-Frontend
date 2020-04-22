@@ -176,10 +176,6 @@
                                 </div>
                         </div>
                         <div class="col-sm-4 float-right px-0">
-                            <button id="btnGotoTopic" type="button" class="my-1 mx-3 close float-right"
-                                (click)="showInfoQuestion(question)" [disabled]="paper.id=='0'">
-                                <i class="fas fa-angle-right"></i>
-                            </button>
                             <button id="btnDeleteTopic" type="button" class="my-1 mx-2 close float-right"
                                 (click)="deleteQuestion(question, t)" [disabled]="paper.id=='0'">
                                 <i class="fas fa-trash-alt"></i>
@@ -188,7 +184,7 @@
                                 class="my-1 mx-2 close float-right" (click)="changePositionQuestion(question, t, 'up')" [disabled]="paper.id=='0'">
                                 <i class="fas fa-arrow-up"></i>
                             </button>
-                            <button *ngIf="(questionList.length > 1) && (t != (questionList.length - 1)) && questionList.id!='0' && !(t + 1 >= questionList.length) && (questionList[t+1].id!='0')"
+                            <button *ngIf="(questionList.length > 1) && (t != (questionList.length - 1)) && !(t + 1 >= questionList.length) && (questionList[t+1].id!='0')"
                                 id="btnMoveDownTopic" type="button" class="my-1 mx-2 close float-right"
                                 (click)="changePositionQuestion(question, t, 'down')" [disabled]="paper.id=='0'">
                                 <i class="fas fa-arrow-down"></i>

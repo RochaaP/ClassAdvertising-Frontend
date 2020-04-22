@@ -10,7 +10,7 @@ export class PaperComponent implements OnInit {
 
   public divHeight: number = window.innerHeight;
   
-  constructor(private sharedService: SharedService) { }
+  constructor(public sharedService: SharedService) { }
 
   ngOnInit() {
   }

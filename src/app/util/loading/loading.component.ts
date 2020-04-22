@@ -8,8 +8,8 @@ import { LoadingService } from './loading.service';
 })
 export class LoadingComponent implements OnInit {
 
-  private message: string;
-  private showLoading: boolean = false;
+  public message: string;
+  public showLoading: boolean = false;
 
   constructor(private loadingService: LoadingService) { 
     console.log("Loaded");

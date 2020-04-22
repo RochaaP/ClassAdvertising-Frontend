@@ -29,9 +29,9 @@ export class ViewPaperComponent implements OnInit {
 
   private loggedInUser: {id: string, data: UserModel};
 
-  private papers: {id: string, data: PaperModel, subject: string}[];
+  public papers: {id: string, data: PaperModel, subject: string}[];
   private created_date: string = null;
-  private displayedColumns: string[] = ['name', 'subject', 'year'];
+  public displayedColumns: string[] = ['name', 'subject', 'year'];
 
   private paper: PaperModel;
 

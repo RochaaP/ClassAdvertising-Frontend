@@ -101,6 +101,7 @@ import { CreatePaperComponent } from './papers/createPaper/create-paper/create-p
 import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
 import { AnswerPaperComponent } from './papers/studentPaper/answerPaper/answer-paper/answer-paper.component';
 import { PaperMarkingModelComponent } from './papers/studentPaper/answerPaper/paperMarkingModel/paper-marking-model/paper-marking-model.component';
+import { ZoomComponent } from './zoom/zoom.component';
 
 
 const appRoutes: Routes = [
@@ -124,7 +125,8 @@ const appRoutes: Routes = [
 
 
   { path: 'papers', canActivate: [GuardService], component: PaperComponent},
-  { path: 'answerpaper', component: AnswerPaperComponent},
+  { path: 'answerpaper', canActivate: [GuardService], component: AnswerPaperComponent},
+  { path: 'zoom', canActivate: [GuardService], component: ZoomComponent},
 
 
   { path: 'messages/student', component: MsgStudentComponent },
@@ -168,6 +170,7 @@ const appRoutes: Routes = [
     ViewPaperComponent,
     PaperComponent,
 
+    ZoomComponent,
     KeyboardComponent,
     LoadingComponent,
 

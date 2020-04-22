@@ -54,6 +54,10 @@ export class ViewNotesComponent implements OnInit {
 
   }
 
+  triggered(email, registerItem, name){
+    console.log("___triggered()___");
+  }
+
   getAPIData() {
     return this.http.get('/api/notes/getNotes');
   }

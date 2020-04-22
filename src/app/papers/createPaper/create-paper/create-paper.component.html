@@ -4,7 +4,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <form [formGroup]="form" (ngSubmit)="disableSaveBtn=!disableSaveBtn;isSubmitted='true';savePaper(modal);">
+  <form [formGroup]="form" (ngSubmit)="disableSaveBtn=!disableSaveBtn;isSubmitted=true;savePaper();">
   <div class="modal-body">
       
       <div class="form-group">        
@@ -109,6 +109,6 @@
 
   </div>
   <div class="modal-footer">
-    <button mat-raised-button color="primary" type="button" class="btn btn-outline-dark" type="submit" [disabled]="disableSavebtn">Save</button>  
+    <button mat-raised-button color="primary" type="button" class="btn btn-outline-dark" type="submit" [disabled]="disableSaveBtn">Save</button>  
   </div>
 </form>
