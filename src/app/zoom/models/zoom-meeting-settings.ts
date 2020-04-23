@@ -15,5 +15,8 @@ export class ZoomMeetingSettings {
     "enforce_login_domains": string;
     "alternative_hosts": string;
     "global_dial_in_countries": string[];
-    "registrants_email_notification": boolean
+    "registrants_email_notification": boolean;
+    "meeting_authentication": boolean;
+    "authentication_option": string;
+    "authentication_domains": string;
 }

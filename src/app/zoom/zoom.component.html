@@ -1,59 +1,125 @@
-<div  *ngIf="!loggedIn" class="card m-5" style="align-items: center;">
-    <div class="card-body">
-        <button mat-raised-button (click)="zoomLogin()" color="primary">
-            <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/512/Zoom-icon.png" height="32" alt="Add to ZOOM" />Zoom Login
-        </button>
-    </div>
-</div>
-<div  *ngIf="loggedIn && zoomUser!=undefined" class="card m-5" style="align-items: center;">
-    <div class="card-header">
-        {{zoomUser.first_name}} {{zoomUser.last_name}}
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Email: </mat-label></div>
-            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.email}}</mat-label></div>
+<div class="container-fluid">
+    <div  *ngIf="!loggedIn" class="card m-5" style="align-items: center;">
+        <div class="card-body">
+            <button mat-raised-button (click)="zoomLogin()" color="primary">
+                <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/512/Zoom-icon.png" height="32" alt="Add to ZOOM" />Zoom Login
+            </button>
         </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Language: </mat-label></div>
-            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.language}}</mat-label></div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Status: </mat-label></div>
-            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.status}}</mat-label></div>
-        </div>
-        
     </div>
+    <div *ngIf="loggedIn && zoomUser!=undefined" class="container-fluid">
+        <div class="card m-5">
+            <div class="card-header">
+                {{zoomUser.first_name}} {{zoomUser.last_name}}
+            </div>
+            <div class="card-body" style="align-items: center;">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Email: </mat-label></div>
+                    <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.email}}</mat-label></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Language: </mat-label></div>
+                    <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.language}}</mat-label></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Timezone: </mat-label></div>
+                    <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.timezone}}</mat-label></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Status: </mat-label></div>
+                    <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.status}}</mat-label></div>
+                </div>    
+                <div class="row">
+                    <button mat-raised-button color="primary" (click)="openModal(createMeeting)">Create a Meeting</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="loggedIn && zoomUser!=undefined" class="container-fluid">
+        <div class="card m-5">
+            <div class="card-header">
+                <label *ngIf="viewZoomMeetingList">Meeting List</label>
+                <label *ngIf="!viewZoomMeetingList">No Meetings</label>
+            </div>
+            <div *ngIf="viewZoomMeetingList" class="card-body" style="align-items: center;">
+                <mat-card *ngFor="let meeting of zoomMeetingList" class="example-card">
+                    <mat-card-header>
+                        <mat-card-title>{{meeting.topic}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Description: </mat-label></div>
+                            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.agenda}}</mat-label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Type: </mat-label></div>
+                            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{filterMeetingType(meeting.type)}}</mat-label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Start Time: </mat-label></div>
+                            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.start_time}}</mat-label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Timezone: </mat-label></div>
+                            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.timezone}}</mat-label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Duration: </mat-label></div>
+                            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.duration}} mins</mat-label></div>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="joinCall(meeting.join_url)">Join Meeting</button>
+                    </mat-card-actions>
+                  </mat-card>                
+            </div>
+        </div>
+    </div>    
 </div>
 
-<div  *ngIf="loggedIn && zoomUser!=undefined && viewZoomMeetingList" class="card m-5" style="align-items: center;">
-    <div class="card-header">
-        Meeting List
+<ng-template #createMeeting let-modal>
+    <div class="modal-header">
+        Create A Meeting
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-    <div class="card-body">
-        <div *ngFor="let meeting of zoomMeetingList" class="form-group">
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Topic: </mat-label></div>
-                <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.topic}}</mat-label></div>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="modal-body m-2">
+            <div class="form-group">
+                <mat-form-field class="full-width mb-1" style="width: 100%;">
+                    <input matInput placeholder="Topic" name='topic' required >
+                </mat-form-field>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Type: </mat-label></div>
-                <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.type}}</mat-label></div>
+            <div class="form-group">
+                <mat-form-field class="full-width mb-1" style="width: 100%;">
+                    <input matInput placeholder="Description" name='agenda' required >
+                </mat-form-field>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Start Time: </mat-label></div>
-                <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.start_time}}</mat-label></div>
+            <div class="form-group">                
+                <mat-form-field class="full-width mb-1" style="width: 100%;">
+                    <select matNativeControl placeholder="Type" name="type" required>
+                        <option class="pb-1" value=1>Instant meeting</option>
+                        <option class="pb-1" value=2>Scheduled meeting</option>
+                        <option class="pb-1" value=3>Recurring meeting with no fixed time</option>
+                        <option class="pb-1" value=8>Recurring meeting with a fixed time</option>
+                    </select>
+                </mat-form-field>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Duration: </mat-label></div>
-                <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.duration}}</mat-label></div>
+            <div class="form-group">
+                <mat-form-field class="full-width mb-1" style="width: 100%;">
+                  <input matInput type="datetime-local" name="time" required/>
+                </mat-form-field>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Join Url: </mat-label></div>
-                <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{meeting.join_url}}</mat-label></div>
+            <div class="form-group">
+                <mat-form-field class="full-width mb-1" style="width: 100%;">
+                    <input matInput placeholder="Duration" name='duration' type="number" required >
+                    <span matSuffix>mins</span>
+                </mat-form-field>
             </div>
-            <hr class="mb-2">
         </div>
-        
-    </div>
-</div>
+        <div class="modal-footer">
+            <button mat-raised-button color="primary" type="submit">Create</button>
+        </div>
+    </form>
+</ng-template>

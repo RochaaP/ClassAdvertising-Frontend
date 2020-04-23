@@ -102,6 +102,7 @@ import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsMo
 import { AnswerPaperComponent } from './papers/studentPaper/answerPaper/answer-paper/answer-paper.component';
 import { PaperMarkingModelComponent } from './papers/studentPaper/answerPaper/paperMarkingModel/paper-marking-model/paper-marking-model.component';
 import { ZoomComponent } from './zoom/zoom.component';
+import { SupportComponent } from './support/support.component';
 
 
 const appRoutes: Routes = [
@@ -128,6 +129,7 @@ const appRoutes: Routes = [
   { path: 'answerpaper', canActivate: [GuardService], component: AnswerPaperComponent},
   { path: 'zoom', canActivate: [GuardService], component: ZoomComponent},
 
+  { path: 'support', component: SupportComponent},
 
   { path: 'messages/student', component: MsgStudentComponent },
   { path: 'messages/instructor', component: MsgInstructorComponent },
@@ -188,7 +190,9 @@ const appRoutes: Routes = [
     MsgInstructorComponent,
     ImagesChangeComponent,
 
-    ViewPostsComponent
+    ViewPostsComponent,
+
+    SupportComponent
 
   ],
   imports: [
