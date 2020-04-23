@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ZoomService } from './zoom.service';
-import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-zoom',
@@ -13,8 +12,6 @@ export class ZoomComponent implements OnInit {
   public loggedIn = false;
   private code;
   private accessToken;
-  private decoded_accessToken;
-  private accountId;
   public viewZoomMeetingList: boolean = false;
   private createZoomMeeting: boolean = false;
   public zoomUser;
@@ -27,11 +24,13 @@ export class ZoomComponent implements OnInit {
       console.log(this.code);
       if(this.code!=undefined){
         this.zoomService.getAccessToken(this.code).subscribe(token=>{
+          console.log("___getAccessToken() was called___");
+          console.log(token);
           this.accessToken = token;
-          this.decoded_accessToken = jwt_decode(token);
-          this.accountId = this.decoded_accessToken.accountId;
           this.loggedIn = true;  
           this.zoomService.getUserData(this.accessToken.access_token).subscribe(user=>{
+            console.log("___getUserData() was called___");
+            console.log(user);
             this.zoomUser = user;
             this.createZoomMeeting = true;
           });
