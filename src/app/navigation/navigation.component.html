@@ -15,6 +15,9 @@
               </a>
         </li> -->
         <li class="nav-item ">
+          <a class="nav-link"  [routerLink]="'/zoom'"><fa-icon [icon]='faVideo'></fa-icon> Zoom</a>
+        </li>
+        <li class="nav-item ">
           <a class="nav-link"  [routerLink]="'/papers'" ><fa-icon [icon]='faCopy'></fa-icon> Papers</a>
         </li>
         <li class="nav-item ">
@@ -38,16 +41,24 @@
             <a class="dropdown-item" (click)='clickPostAd()'><fa-icon [icon]='faAd'></fa-icon> Post Ad</a>
             <a class="dropdown-item" (click)='clickProfile()'><fa-icon [icon]='faIdCard'></fa-icon> Change Details</a>
             <a class="dropdown-item" (click)='clickClasses()'><fa-icon [icon]='faUserFriends'></fa-icon> Classes</a>
-            <div class="dropdown-divider"></div>
+            <div class="dropdown-divider" *ngIf='isInstructor'></div>
             <a class="dropdown-item" (click)='clickPapers()' *ngIf='isInstructor'><fa-icon [icon]='faBookReader'></fa-icon> Papers</a>
             <a class="dropdown-item" (click)='clickNotes()' *ngIf='isInstructor'><fa-icon [icon]='faStickyNote'></fa-icon> Notes</a>
             <a class="dropdown-item" (click)='clickMessagesinst()' *ngIf='isInstructor'><fa-icon [icon]='faEnvelope'></fa-icon> Messages</a>
             
             <div class="dropdown-divider"></div>
+            <a class="dropdown-item"  [routerLink]="'/support'"><fa-icon [icon]='faQuestionCircle'></fa-icon> Help & Support</a>
+
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)='logoutUser()'><fa-icon [icon]='faSignOutAlt'></fa-icon> LOGOUT</a>
           </div>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf='isStudent'>
+            <a class="dropdown-item" (click)='clickPapers()'><fa-icon [icon]='faBookReader'></fa-icon> Papers</a>
             <a class="dropdown-item" (click)='clickMessages()'><fa-icon [icon]='faEnvelope'></fa-icon> Messages</a>
+
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item"  [routerLink]="'/support'"><fa-icon [icon]='faQuestionCircle'></fa-icon> Help & Support</a>
+
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)='logoutUser()'><fa-icon [icon]='faSignOutAlt'></fa-icon> LOGOUT</a>
           </div>

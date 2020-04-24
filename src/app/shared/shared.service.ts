@@ -16,22 +16,6 @@ export class SharedService {
   
   private teacherPicUrl: string = "https://firebasestorage.googleapis.com/v0/b/mtute-sl.appspot.com/o/profilePictures%2FDefault%2FInstructor.jpg?alt=media&token=217f5045-c06a-4ce4-a21b-5efc533171b2";
 
-  // private loggedInUser: {id: string, data: UserModel} = {
-  //   id: "NdFYp85MYbdFkmfY5YNs",
-  //   data: {
-  //     role: "i",
-  //     adminFeatures: true,
-  //     firstname: "Erantha",
-  //     lastname: "Welikala",
-  //     email: "eranthawelikala@gmail.com",
-  //     mobile: "+94775778979",
-  //     units: ['Ll2jgq7nhZ30rxgs7ebq','N55sFZIQ7hL8OmdPXMNv','mvs0WABbqRTXIlDoh1Hc'],
-  //     img_url: "https://firebasestorage.googleapis.com/v0/b/questionapp-42922.appspot.com/o/profilePictures%2F1569192345051_Teacher.jpg?alt=media&token=bd4dbe94-2d14-4f37-bde6-0e9b597fbac5",
-  //     metadata: "",
-  //     grade_level: ""
-  //   }
-  // }
-
   @Output() language: EventEmitter<any> = new EventEmitter();
   @Output() addTabItem: EventEmitter<any> = new EventEmitter();
   @Output() createPaperWidthEvent: EventEmitter<any> = new EventEmitter();
@@ -44,19 +28,33 @@ export class SharedService {
   public getLoggedInUser(){
     // return this.loggedInUser;
     let user = this.loggedInUser;
-    user == undefined? user = JSON.parse(sessionStorage.getItem("loggedInUser")):"";
-    user == undefined? user = JSON.parse(localStorage.getItem("loggedInUser")):"";
+    // user == undefined? user = JSON.parse(sessionStorage.getItem("loggedInUser")):"";
+    user == undefined? user = JSON.parse(localStorage.getItem("loggedInUser")): 
+                              JSON.parse(localStorage.getItem("loggedInUser")) == undefined? this.setLoggedInUser(user):"";
     return user;
   }
 
   public setLoggedInUser(user: {id: string, data: UserModel}, storage: string = "LOCAL"){
     this.loggedInUser = user;
-    if(storage == "SESSION"){
-      sessionStorage.setItem("loggedInUser", JSON.stringify(user));
-    }
-    else{
+    if(storage == "LOCAL"){
       localStorage.setItem("loggedInUser", JSON.stringify(user));
     }
+    else{
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user));
+    }
+  }
+
+  public getZoomAccessToken(){
+    return JSON.parse(localStorage.getItem("zoomAccessToken"));
+  }
+
+  public setZoomAccessToken(token: any){
+    localStorage.setItem("zoomAccessToken", JSON.stringify(token));
+    return token;
+  }
+
+  public clearZoomAccessToken(){
+    return localStorage.removeItem("zoomAccessToken");;
   }
 
   public getStudentPicUrl(){

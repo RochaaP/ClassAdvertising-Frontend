@@ -134,7 +134,9 @@ export class ViewPaperComponent implements OnInit {
       console.log(data.payload);
       let subjects: {id: string, data: SubjectModel}[] = data.payload['subjects'];
       subjects.forEach(element => {
-        this.loggedInUser.data.units.includes(element.id)? this.subjectGroup.push(element):"";
+        if(this.loggedInUser.data.units != undefined && this.loggedInUser.data.units.length != 0){
+          this.loggedInUser.data.units.includes(element.id)? this.subjectGroup.push(element):"";
+        }
         this.papers.forEach(paper_el => {
           element.id == paper_el.data.subject? paper_el.subject = element.data.name: ""
         });
