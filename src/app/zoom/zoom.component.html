@@ -10,27 +10,32 @@
         <div class="card m-5">
             <div class="card-header">
                 {{zoomUser.first_name}} {{zoomUser.last_name}}
+                <img [src]="zoomUser.pic_url" width="25" height="25" alt="No Profile Pic" style="border-radius: 50%;float: right;">
             </div>
             <div class="card-body" style="align-items: center;">
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Email: </mat-label></div>
-                    <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.email}}</mat-label></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Language: </mat-label></div>
-                    <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.language}}</mat-label></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Timezone: </mat-label></div>
-                    <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.timezone}}</mat-label></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Status: </mat-label></div>
-                    <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.status}}</mat-label></div>
-                </div>    
-                <div class="row">
-                    <button mat-raised-button color="primary" (click)="openModal(createMeeting)">Create a Meeting</button>
-                </div>
+                <mat-card>
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Email: </mat-label></div>
+                            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.email}}</mat-label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Language: </mat-label></div>
+                            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.language}}</mat-label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Timezone: </mat-label></div>
+                            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.timezone}}</mat-label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4"><mat-label>Status: </mat-label></div>
+                            <div class="col-md-8 col-sm-8 col-xs-8"><mat-label>{{zoomUser.status}}</mat-label></div>
+                        </div> 
+                    </mat-card-content>
+                    <mat-card-action *ngIf="createZoomMeeting">
+                        <button mat-raised-button color="primary" (click)="openModal(createMeeting)">Create a Meeting</button>
+                    </mat-card-action>   
+                </mat-card>
             </div>
         </div>
     </div>
@@ -77,49 +82,104 @@
     </div>    
 </div>
 
+
+
+
+
+
+
+
+
 <ng-template #createMeeting let-modal>
     <div class="modal-header">
-        Create A Meeting
+        <h4 class="modal-title" id="modal-basic-title">Create A Meeting</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-        <div class="modal-body m-2">
-            <div class="form-group">
-                <mat-form-field class="full-width mb-1" style="width: 100%;">
-                    <input matInput placeholder="Topic" name='topic' required >
-                </mat-form-field>
-            </div>
-            <div class="form-group">
-                <mat-form-field class="full-width mb-1" style="width: 100%;">
-                    <input matInput placeholder="Description" name='agenda' required >
-                </mat-form-field>
-            </div>
-            <div class="form-group">                
-                <mat-form-field class="full-width mb-1" style="width: 100%;">
-                    <select matNativeControl placeholder="Type" name="type" required>
-                        <option class="pb-1" value=1>Instant meeting</option>
-                        <option class="pb-1" value=2>Scheduled meeting</option>
-                        <option class="pb-1" value=3>Recurring meeting with no fixed time</option>
-                        <option class="pb-1" value=8>Recurring meeting with a fixed time</option>
-                    </select>
-                </mat-form-field>
-            </div>
-            <div class="form-group">
-                <mat-form-field class="full-width mb-1" style="width: 100%;">
-                  <input matInput type="datetime-local" name="time" required/>
-                </mat-form-field>
-            </div>
-            <div class="form-group">
-                <mat-form-field class="full-width mb-1" style="width: 100%;">
-                    <input matInput placeholder="Duration" name='duration' type="number" required >
-                    <span matSuffix>mins</span>
-                </mat-form-field>
+    <form [formGroup]="form" (ngSubmit)="isSubmitted=true;onSubmit(createMeeting);">
+    <div class="modal-body m-2">
+        <div class="form-group">
+            <mat-form-field class="full-width mb-1" style="width: 100%;">
+                <input matInput placeholder="Topic" name='topic' formControlName="topic" class="form-control" required >
+            </mat-form-field>
+            <div *ngIf="isSubmitted && formControls.topic.invalid" class="alert alert-danger">
+              <div *ngIf="formControls.topic.errors.required">
+                Topic is required.
+              </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button mat-raised-button color="primary" type="submit">Create</button>
+        <div class="form-group">
+            <mat-form-field class="full-width mb-1" style="width: 100%;">
+                <input matInput placeholder="Description" name='agenda' formControlName="agenda" class="form-control" required >
+            </mat-form-field>
+            <div *ngIf="isSubmitted && formControls.agenda.invalid" class="alert alert-danger">
+              <div *ngIf="formControls.agenda.errors.required">
+                Agenda is required.
+              </div>
+            </div>
         </div>
+        <div class="form-group">
+            <mat-radio-group name="password" formControlName="password" (change)="togglePassword()">
+                <mat-radio-button value="false" style="float: left;">No Password</mat-radio-button>
+                <mat-radio-button value="true" style="float: right;">Use Password</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field *ngIf="password=='true'" class="full-width mb-1" style="width: 100%;">
+                <input matInput placeholder="Password" name="password" formControlName="passwordValue" class="form-control"/>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="full-width mb-1" style="width: 100%;">
+                <input matInput type="datetime-local" placeholder="Starting Time" name="start_time" formControlName="start_time" class="form-control" required/>
+            </mat-form-field>
+            <div *ngIf="isSubmitted && formControls.start_time.invalid" class="alert alert-danger">
+              <div *ngIf="formControls.start_time.errors.required">
+                Starting time is required.
+              </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="full-width mb-1" style="width: 100%;">
+                <input matInput placeholder="Duration" name='duration' formControlName="duration" type="number" class="form-control" required >
+                <span matSuffix>mins</span>
+            </mat-form-field>
+            <div *ngIf="isSubmitted && formControls.duration.invalid" class="alert alert-danger">
+              <div *ngIf="formControls.duration.errors.required">
+                Duration is required.
+              </div>
+            </div>
+        </div>
+        <div class="container">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div  class="col-md-11 col-sm-11 col-xs-11">
+                        <mat-card-title>Meeting Settings</mat-card-title>
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-1">
+                        <button type="button" class="btn btn-sm mx-0 close float-right" (click)="showSettings = !showSettings">
+                            <fa-icon [icon]="showSettings?faAngleUp : faAngleDown"></fa-icon>
+                        </button>
+                    </div>
+                </mat-card-header>
+                <mat-card-content *ngIf="showSettings">
+                    <div class="row">
+                        <mat-checkbox color="primary" name="host_video" formControlName="host_video">Start video when host joins</mat-checkbox>
+                    </div>
+                    <div class="row">
+                        <mat-checkbox color="primary" name="participant_video" formControlName="participant_video">Start video when participants join</mat-checkbox>
+                    </div>
+                    <div class="row">
+                        <mat-checkbox color="primary" name="join_before_host" formControlName="join_before_host">Allow participants to join before start</mat-checkbox>
+                    </div>
+                    <div class="row">
+                        <mat-checkbox color="primary" name="mute_upon_entry" formControlName="mute_upon_entry">Mute participants upon entry</mat-checkbox>
+                    </div>
+                </mat-card-content>
+            </mat-card>  
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button mat-raised-button color="primary" class="btn btn-sm">Create</button>
+    </div>
     </form>
 </ng-template>

@@ -11,4 +11,5 @@ export class ZoomMeeting {
     "agenda": string;
     "recurrence": ZoomMeetingRecurrence;
     "settings": ZoomMeetingSettings
+    
 }
