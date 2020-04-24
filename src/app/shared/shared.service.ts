@@ -22,6 +22,7 @@ export class SharedService {
   @Output() loadPaperWithData: EventEmitter<any> = new EventEmitter();
   @Output() viewPaperRefresh: EventEmitter<any> = new EventEmitter();
   @Output() navigationRefresh: EventEmitter<any> = new EventEmitter();
+  @Output() userLoggedIn: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -45,10 +46,12 @@ export class SharedService {
   }
 
   public getZoomAccessToken(){
-    return JSON.parse(localStorage.getItem("zoomAccessToken"));
+      return JSON.parse(localStorage.getItem("zoomAccessToken"));
   }
 
   public setZoomAccessToken(token: any){
+    let expiryTime = (new Date()).getUTCSeconds() + 3500;
+    localStorage.setItem("zoomAccessTokenExpiry", expiryTime.toString());
     localStorage.setItem("zoomAccessToken", JSON.stringify(token));
     return token;
   }
@@ -63,6 +66,14 @@ export class SharedService {
 
   public getTeacherPicUrl(){
     return this.teacherPicUrl;
+  }
+
+  public userLoggedInRequest(){
+    this.userLoggedIn.emit();
+  }
+
+  public userLoggedInRespond() {
+    return this.userLoggedIn;
   }
 
   public languageRequest(language: string){

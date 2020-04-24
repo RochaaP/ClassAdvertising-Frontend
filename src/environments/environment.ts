@@ -4,6 +4,10 @@
 
 export const environment = {
   production: false,
+  zoom : {
+    zoomClientId: "eezr713VT0u99HLZYP6wng",
+    redirect_url: "https%3A%2F%2Fmtute.herokuapp.com%2Fzoom"
+  },
   // firebase : {
   //   apiKey: "AIzaSyAVyXc1Tqi46-xY1RJ_UjyUBujyIP6n5R0",
   //   authDomain: "questionproject-58e1c.firebaseapp.com",

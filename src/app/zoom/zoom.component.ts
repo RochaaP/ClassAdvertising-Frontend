@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ZoomService } from './zoom.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -43,6 +43,7 @@ export class ZoomComponent implements OnInit {
     private snackBar: MatSnackBar,
     private modalService: NgbModal,
     private sharedService: SharedService) {
+      console.log(this.router.url);
      }
 
 
@@ -50,10 +51,10 @@ export class ZoomComponent implements OnInit {
     if(this.sharedService.getZoomAccessToken()!=undefined){
       this.loggedIn = true; 
       this.accessToken = this.sharedService.getZoomAccessToken();
-      this.zoomService.refreshAccessToken(this.accessToken.refresh_token).subscribe(token=>{
+      this.zoomService.isTokenExpired()?this.zoomService.refreshAccessToken(this.accessToken.refresh_token).subscribe(token=>{
         this.accessToken = this.sharedService.setZoomAccessToken(token);        
         this.loadZoomData(this.accessToken);
-      });
+      }):"";
     }
     else{
       // Reading Zoom Code
@@ -234,7 +235,7 @@ export class ZoomComponent implements OnInit {
       console.log(res);
       this.spinnerService.hide();
       this.loadZoomData(this.accessToken,"meeting");
-      modal.dismiss();
+      this.modalService.dismissAll();
     },
     ()=>{
       this.spinnerService.hide();

@@ -27,9 +27,9 @@ export class GuardService {
     else{      
       this.showSnackBar("Please login before continue");
     }
-
+    console.log(state.url);
     // navigate to login page
-    this.router.navigate(['/account/login']);
+    this.router.navigate(['/account/login', {previousUrl: state.url}]);
     // you can save redirect url so after authing we can move them back to the page they requested
     return false;
   }

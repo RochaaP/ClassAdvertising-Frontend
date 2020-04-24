@@ -28,6 +28,8 @@ export class AuthenticationService {
           console.log(data);
           let user: {id: string, data: UserModel} = JSON.parse(JSON.stringify(data));
           this.sharedService.setLoggedInUser(user);
+        },()=>{},()=>{
+          this.sharedService.userLoggedInRequest();
         });
       } else {
         localStorage.setItem('user', null);        

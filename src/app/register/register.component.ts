@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 // import { DataService } from "../../service/share/data.service";
 import { map, retryWhen } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { UserService } from 'src/app/users/user.service';
 import { WsResponse } from 'src/app/util/ws-response';
@@ -76,6 +76,8 @@ export class RegisterComponent implements OnInit {
   itemTemp: string[];
   name: string;
 
+  previousUrl;
+
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -90,6 +92,7 @@ export class RegisterComponent implements OnInit {
     private afs: AngularFirestore,
     private http: HttpClient,
     public router: Router,
+    public route: ActivatedRoute
     ) {
 
     this.selectedVal = 'login';
@@ -159,7 +162,9 @@ export class RegisterComponent implements OnInit {
         //   let user: {id: string, data: UserModel} = JSON.parse(JSON.stringify(data));
         //   this.sharedService.setLoggedInUser(user);
         // });
-        this.getReg();
+        this.sharedService.userLoggedInRespond().subscribe(()=>{
+          this.getReg();
+        });
         // this.getid();
       }, err => {
         this.showMessage('danger', err.message);
@@ -188,6 +193,7 @@ export class RegisterComponent implements OnInit {
     this.isUserLoggedIn();
     this.registerItem =  JSON.parse(localStorage.getItem('registerItem'));
     this.circleView = false;
+    this.previousUrl = this.route.snapshot.paramMap.get('previousUrl')
   }
 
   getPost(postId) {
@@ -348,7 +354,12 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/addclasses/instructor']);
   }
   navi() {
-    this.router.navigate(['/']);
+    if(this.previousUrl!=undefined){
+      this.router.navigate([this.previousUrl]);
+    }
+    else{
+      this.router.navigate(['/']);
+    }
     // localStorage.setItem('needToReloadPage', 'true');
     this.sharedService.navigationRequest();
 
