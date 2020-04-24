@@ -5,6 +5,8 @@ export interface DialogData {
   topic: string;
   description: string;
   email: string;
+  selected: string;
+  link: string;
 }
 
 @Component({
@@ -19,7 +21,7 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
     ngOnInit() {
-
+      // console.log(this.data.topic);
     }
 
     onNoClick(): void {

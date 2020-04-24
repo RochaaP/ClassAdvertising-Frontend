@@ -1,31 +1,50 @@
 <div class="container">
-    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-    <div class="row">
-      <div class="col col-md-4 all">
+  <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+  <div class="row">
+    <div class="col col-md-4 all">
 
-        
-        <ul *ngFor="let field of value; let index = index" >
-          <div class="profileDetails card-1">
-
-            <img *ngIf= "field.img_url" class="header-image" src ={{field.img_url}} >
-            <img *ngIf= "!field.img_url" class="header-image" src =  'assets/propic/propic.png'>
-
-            <!-- <div class="click"> -->
-              <a class='click' (click) ='details(index)'>{{field.name}}</a>
-            <!-- </div> -->
-          </div>
-        </ul>
-        
-      </div>
       
-      <div class="col-6 col-md-8 messages" *ngIf ='value'>
+      <ul *ngFor="let field of response; let index = index" >
+        <!-- <ul *ngFor="let fields of field.data.content; let subIndex = index" > -->
 
-        <p>Topic - {{value[numbers].topic}} </p>
-        <p>Description - {{value[numbers].description}} </p>
-      </div>
+        <div class="profileDetails card-1">
 
+          <img *ngIf= "field.data.img_urlStu" class="header-image" src ={{field.data.img_urlStu}} >
+          <img *ngIf= "!field.data.img_urlStu" class="header-image" src =  'assets/propic/propic.png'>
+
+          <!-- <div class="click"> -->
+            <a class='click' (click) ='details(index,subIndex)'>{{field.data.nameStu}}</a>
+          <!-- </div> -->
+        </div>
+        </ul>
+      <!-- </ul>     -->
     </div>
+    <!-- {{response[0].data.content[0].description}} -->
+    <div class="col-6 col-md-8 messages" *ngIf ='value'>
+      <!-- <ul *ngFor="let field of response[]; let index = index" > -->
+        <p><b>Topic - {{response[mainIndex].data.content[subIndex].topic}}</b> </p>
+        <ul *ngFor="let fields of response[mainIndex].data.content" >
+        <div *ngIf = "!fields.isFor">
+          <p>Description - {{fields.description}} </p>
+        </div>  
+        <div *ngIf = "fields.isFor">
+          <p><b>Description - {{fields.description}}</b></p>
+          <p>link - {{fields.link}} </p>
+        </div>
+      </ul>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-success" (click)="reply(number)">Reply</button>
+      </div>
+      <!-- </ul> -->
+    </div>
+
+  </div>
 </div>
+
+
+
+
 
 
 

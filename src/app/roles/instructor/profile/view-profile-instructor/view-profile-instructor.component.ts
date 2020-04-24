@@ -23,6 +23,7 @@ export class ViewProfileInstructorComponent implements OnInit {
   topic: string;
   description: string;
   result: any;
+  isFor: string;
 
   constructor(
     private data: DataService,
@@ -72,7 +73,7 @@ export class ViewProfileInstructorComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, {
       height: '400px',
       width: '600px',
-      data: {topic: this.topic, description: this.description}
+      data: {topic: this.topic, description: this.description, isFor: 'instructor'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -86,12 +87,13 @@ export class ViewProfileInstructorComponent implements OnInit {
 
   openConfirmation(): void {
     const dialogConf = this.dialog.open(ConfirmationComponent, {
-      data: {topic: this.result.topic, description: this.result.description}
+      data: {topic: this.result.topic, description: this.result.description,  isFor: 'instructor'}
     });
 
     dialogConf.afterClosed().subscribe(result => {
       if (result) {
-        this.postData();
+        // this.postData();
+        this.makeAppointment();
       }
     });
   }
@@ -123,5 +125,30 @@ export class ViewProfileInstructorComponent implements OnInit {
     return this.http.post('api/appointments/makeAppointment', userValues);
   }
 
+  makeAppointment() {
+    let userValues = {};
+    let content1 = {};
+    content1 = {
+      topic: this.result.topic,
+      description: this.result.description,
+    };
+
+    userValues = {
+      instructorEmail: this.instructorEmail,
+      content: content1,
+      studentEmail: this.studentEmail
+    };
+
+    console.log(userValues)
+
+    this.postAppointmentData(userValues).subscribe((response) => {
+      console.log('response ffrom appointments ', response);
+      this.response = response;
+    });
+  }
+
+  postAppointmentData(userValues: object) {
+    return this.http.post('api/temp/appointments/makeAppointment', userValues);
+  }
 
 }

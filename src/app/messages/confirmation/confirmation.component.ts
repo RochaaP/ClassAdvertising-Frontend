@@ -4,7 +4,10 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 export interface DialogData {
   topic: string;
   description: string;
-  email: string
+  email: string;
+  isFor: string;
+  selected: string;
+  link: string;
 }
 
 @Component({
@@ -21,7 +24,6 @@ export class ConfirmationComponent implements OnInit {
 
 
     ngOnInit() {
-     
     }
 
     onNoClick(): void {

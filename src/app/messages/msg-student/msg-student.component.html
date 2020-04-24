@@ -4,24 +4,37 @@
       <div class="col col-md-4 all">
 
         
-        <ul *ngFor="let field of value; let index = index" >
+        <ul *ngFor="let field of response; let index = index" >
+          <!-- <ul *ngFor="let fields of field.data.content; let subIndex = index" > -->
+
           <div class="profileDetails card-1">
 
-            <img *ngIf= "field.img_url" class="header-image" src ={{field.img_url}} >
-            <img *ngIf= "!field.img_url" class="header-image" src =  'assets/propic/propic.png'>
+            <img *ngIf= "field.data.img_urlInst" class="header-image" src ={{field.data.img_urlInst}} >
+            <img *ngIf= "!field.data.img_urlInst" class="header-image" src =  'assets/propic/propic.png'>
 
             <!-- <div class="click"> -->
-              <a class='click' (click) ='details(index)'>{{field.name}}</a>
+              <a class='click' (click) ='details(index,subIndex)'>{{field.data.nameInst}}</a>
             <!-- </div> -->
           </div>
-        </ul>
-        
+          </ul>
+        <!-- </ul>     -->
       </div>
-      
+      <!-- {{response[0].data.content[0].description}} -->
       <div class="col-6 col-md-8 messages" *ngIf ='value'>
-
-        <p>Topic - {{value[numbers].topic}} </p>
-        <p>Description - {{value[numbers].description}} </p>
+        <!-- <ul *ngFor="let field of response[]; let index = index" > -->
+        <p><b>Topic - {{response[mainIndex].data.content[subIndex].topic}}</b> </p>
+        <ul *ngFor="let fields of response[mainIndex].data.content" >
+        
+          <div *ngIf = "!fields.isFor">
+            <p>Description - {{fields.description}} </p>
+          </div>  
+          <div *ngIf = "fields.isFor">
+            <p><b>Description - {{fields.description}}</b></p>
+            <p>link - {{fields.link}} </p>
+          </div>
+          
+        </ul>
+        <!-- </ul> -->
       </div>
 
     </div>

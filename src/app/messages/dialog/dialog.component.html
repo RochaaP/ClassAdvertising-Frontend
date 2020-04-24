@@ -1,17 +1,51 @@
-<h1 mat-dialog-title>Place an Appointment</h1>
-<div mat-dialog-content>
-  <p>With ashk asdhgk</p>
-  <mat-form-field class="full-width">
-    <mat-label>Topic</mat-label>
-    <input matInput [(ngModel)]="data.topic" required> 
-  
-  </mat-form-field>
-  <mat-form-field class="full-width">
-    <textarea matInput placeholder="Description" [(ngModel)]="data.description" name='decription' required></textarea>
-    <mat-hint>Make this Short</mat-hint>
-  </mat-form-field>
+<div *ngIf = "data.isFor == 'instructor'">
+  <h1 mat-dialog-title>Place an Appointment</h1>
+  <div mat-dialog-content>
+    <p>With ashk asdhgk</p>
+    <mat-form-field class="full-width">
+      <mat-label>Topic</mat-label>
+      <input matInput [(ngModel)]="data.topic" required> 
+    
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <textarea matInput placeholder="Description" [(ngModel)]="data.description" name='decription' required></textarea>
+      <mat-hint>Make this Short</mat-hint>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+
+
+<div *ngIf = "data.isFor == 'replyFromInstructor'">
+  <h1 mat-dialog-title>Reply for the Appointment</h1>
+  <div mat-dialog-content>
+    <p>With ashk asdhgk</p>
+    <h5>{{this.data.topic}}</h5>
+    <mat-form-field class="full-width">
+      <textarea matInput placeholder="Description" [(ngModel)]="data.description" name='decription' required></textarea>
+      <mat-hint>Make this Short</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select an option</mat-label>
+      <mat-select [(value)]="data.selected">
+        <mat-option value="Yes">Yes</mat-option>
+        <mat-option value="No">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field class="full-width" *ngIf="data.selected == 'Yes'">
+      <textarea matInput placeholder="Zoom Link" [(ngModel)]="data.link" name='Zoom Link' required></textarea>
+      <mat-hint>Paste Zoom Link Here</mat-hint>
+    </mat-form-field>
+
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  </div>
 </div>

@@ -30,7 +30,8 @@ export class MsgStudentComponent implements OnInit {
   value: any;
   responseList = [];
   moreDetails: any;
-  numbers: number;
+  mainIndex: number;
+  subIndex: number;
 
   constructor(
     private data: DataService,
@@ -43,8 +44,10 @@ export class MsgStudentComponent implements OnInit {
 
     this.data.currentEmail.subscribe(message => this.instructorEmail = message);
     this.studentEmail = this.authService.isUserLoggedIn().email;
-    this.getMessages();
-    this.numbers = 0;
+    // this.getMessages();
+    this.getTempMessages();
+    this.mainIndex = 0;
+    this.subIndex = 0;
     // this.openDialog();
   }
 
@@ -52,13 +55,25 @@ export class MsgStudentComponent implements OnInit {
     this.getAPIData().subscribe((response) => {
       console.log('response from POST API is ', response);
       this.response = response;
-      this.value = this.response[0].data.content;
-      
+      // this.value = this.response[0].data.content;
       console.log(response);
     });
   }
   getAPIData() {
     return this.http.post('api/appointments/getAppointments/student',  {email: this.studentEmail});
+  }
+
+  getTempMessages() {
+    this.getTempMsgData().subscribe((response) => {
+      console.log('response from POST API is ', response);
+      this.response = response;
+      // this.value = this.response.data.content;
+
+      console.log(response);
+    });
+  }
+  getTempMsgData() {
+    return this.http.post('api/temp/appointments/getAppointments/student',  {email: this.studentEmail});
   }
 
 
@@ -112,8 +127,11 @@ export class MsgStudentComponent implements OnInit {
     return this.http.post('api/appointments/makeAppointment/student', userValues);
   }
 
-  details(index: number) {
-   this.numbers = index;
+  details(index: number, subIndex: number) {
+   this.mainIndex = index;
+   this.subIndex = subIndex;
+   this.value = this.response[this.mainIndex].data.content[subIndex];
+   console.log('index', index, ' subIndex', subIndex);
   }
 
 }

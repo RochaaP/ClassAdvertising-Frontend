@@ -1,16 +1,45 @@
-<h1 mat-dialog-title></h1>
-<div mat-dialog-content>
-  <p> Do you want to place the appointment with {{this.data.email}}?</p>
-    <div class='full-width'>
-        <mat-label><b>topic</b></mat-label>
-        <P>{{this.data.topic}}
+<div *ngIf ="data.isFor == 'instructor'">
+  <h1 mat-dialog-title></h1>
+    <div mat-dialog-content>
+      <p> Do you want to place the appointment with {{this.data.email}}?</p>
+        <div class='full-width'>
+            <mat-label><b>topic</b></mat-label>
+            <P>{{this.data.topic}}
+        </div>
+        <div class='full-width'>
+            <mat-label><b>Description</b></mat-label>
+            <p>{{this.data.description}}</p>
+        </div>    
     </div>
-    <div class='full-width'>
-        <mat-label><b>Description</b></mat-label>
-        <p>{{this.data.description}}</p>
-    </div>    
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
-</div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
+    </div>
+</div>    
+
+<div *ngIf ="data.isFor == 'replyFromInstructor'">
+  <h1 mat-dialog-title></h1>
+    <div mat-dialog-content>
+      <p> Do you want to place the appointment with {{this.data.email}}?</p>
+        <div class='full-width'>
+            <mat-label><b>topic</b></mat-label>
+            <P>{{this.data.topic}}
+        </div>
+        <div class='full-width'>
+            <mat-label><b>Description</b></mat-label>
+            <p>{{this.data.description}}</p>
+        </div>
+        <div class='full-width'>
+          <mat-label><b>Approval</b></mat-label>
+          <p>{{this.data.selected}}</p>
+        </div>
+        <div class='full-width' *ngIf = "this.data.selected == 'Yes'">
+          <mat-label><b>Zoom Link</b></mat-label>
+          <p>{{this.data.link}}</p>
+        </div>    
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
+    </div>
+</div>    
