@@ -33,7 +33,8 @@ export class AuthenticationService {
         });
       } else {
         localStorage.setItem('user', null);        
-        sharedService.setLoggedInUser(null);
+        sharedService.setLoggedInUser(null);        
+        sharedService.clearZoomAccessToken();
       }
     });
   }

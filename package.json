@@ -44,6 +44,7 @@
     "ng-bootstrap": "^1.6.3",
     "ng4-loading-spinner": "^1.2.3",
     "nga-read-more": "0.0.3",
+    "ngx-clipboard": "^12.2.1",
     "ngx-countdown": "^8.0.3",
     "ngx-image-cropper": "^2.0.4",
     "ngx-owl-carousel": "^2.0.7",

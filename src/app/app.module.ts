@@ -93,6 +93,8 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill';
 import { CountdownModule } from 'ngx-countdown';
+import { ClipboardModule } from 'ngx-clipboard';
+
 
 import { fromEventPattern, from } from 'rxjs';
 
@@ -214,6 +216,7 @@ const appRoutes: Routes = [
     TranslateModule.forRoot(),
     QuillModule.forRoot(),
     CountdownModule,
+    ClipboardModule,
 
     NgaReadMoreModule,
 
