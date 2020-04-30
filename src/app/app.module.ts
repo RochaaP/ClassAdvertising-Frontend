@@ -105,6 +105,7 @@ import { AnswerPaperComponent } from './papers/studentPaper/answerPaper/answer-p
 import { PaperMarkingModelComponent } from './papers/studentPaper/answerPaper/paperMarkingModel/paper-marking-model/paper-marking-model.component';
 import { ZoomComponent } from './zoom/zoom.component';
 import { SupportComponent } from './support/support.component';
+import { AboutComponent } from './support/about/about.component';
 
 
 const appRoutes: Routes = [
@@ -132,6 +133,7 @@ const appRoutes: Routes = [
   { path: 'zoom', canActivate: [GuardService], component: ZoomComponent},
 
   { path: 'support', component: SupportComponent},
+  { path: 'about', component: AboutComponent},
 
   { path: 'messages/student', component: MsgStudentComponent },
   { path: 'messages/instructor', component: MsgInstructorComponent },
@@ -194,7 +196,9 @@ const appRoutes: Routes = [
 
     ViewPostsComponent,
 
-    SupportComponent
+    SupportComponent,
+
+    AboutComponent
 
   ],
   imports: [
