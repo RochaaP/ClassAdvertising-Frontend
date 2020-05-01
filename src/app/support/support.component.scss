@@ -1,0 +1,17 @@
+ul.mtute{
+    padding-left: 2rem;
+    list-style-type: none;
+}
+ul li.mtute{
+    padding-left: 2rem;
+    background-image: url("../../assets/mtuteSVG.svg");
+    background-position: 0 0;
+    background-size: 1.5rem 1.5rem;
+    background-repeat: no-repeat;
+}
+
+.menu{
+    height: 100%;
+    position: sticky;
+    top: 0;
+}

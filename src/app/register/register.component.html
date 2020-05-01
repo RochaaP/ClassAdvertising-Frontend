@@ -41,7 +41,7 @@
           <span *ngIf="selectedVal == 'register'">
 
             <div *ngIf="registerItem == 'instructor'">
-              <h3>instructor Registration</h3>
+              <h3>Instructor Registration</h3>
 
               <div class="form-group">
                 <label for="firstname">First Name</label>
@@ -135,7 +135,7 @@
             </div> 
 
             <!-- <div  > -->
-              <div *ngIf='!visibleHaveAccount' class= "createAccount" (click)="this.circleView = false; selectedVal='login'; loginView=true;"> Have an Account</div>
+              <div *ngIf='visibleHaveAccount' class= "createAccount" (click)="this.circleView = false; selectedVal='login'; loginView=true;"> Have an Account</div>
             <!-- </div> -->
           </span>
         </div>

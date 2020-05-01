@@ -24,7 +24,8 @@ export class AuthenticationService {
     this.angularFireAuth.authState.subscribe(userResponse => {
       if (userResponse) {
         localStorage.setItem('user', JSON.stringify(userResponse));
-        if(this.sharedService.getLoggedInUser() != undefined || userResponse.email != this.sharedService.getLoggedInUser().data.email){
+        if(this.sharedService.getLoggedInUser() == undefined || 
+        (this.sharedService.getLoggedInUser() != undefined && userResponse.email != this.sharedService.getLoggedInUser().data.email)){
           this.userService.getUserByEmail(userResponse.email).subscribe(data=>{
             console.log(data);
             let user: {id: string, data: UserModel} = JSON.parse(JSON.stringify(data));
