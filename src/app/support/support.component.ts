@@ -9,7 +9,7 @@ export class SupportComponent implements OnInit {
 
   public viewTermsConditions: boolean = false;
   public viewPrivacy: boolean = false;
-  public viewDoc: boolean = false;
+  public viewDoc: boolean = true;
 
   constructor() { }
 

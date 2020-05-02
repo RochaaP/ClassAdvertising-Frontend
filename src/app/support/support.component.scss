@@ -14,4 +14,26 @@ ul li.mtute{
     height: 100%;
     position: sticky;
     top: 0;
+    overflow: hidden;
+}
+
+small{
+    align-self: center;
+}
+
+img{
+    height: 50%;
+    width: 50%;  
+    border-bottom: solid;
+    border-left: solid;
+    border-right: solid;
+    border-color: black;
+    border-width: 2px;
+}
+
+.footer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: lightgray;
 }
