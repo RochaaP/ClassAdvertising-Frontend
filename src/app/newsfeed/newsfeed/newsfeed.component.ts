@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/share/data.service';
+import { timeout, retry, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-newsfeed',
@@ -50,8 +51,10 @@ export class NewsfeedComponent implements OnInit {
   }
 
   getAPIData() {
-    return this.http.get('/api/posts/all');
-  }
+    return this.http.get('/api/posts/all').pipe(
+      timeout(3000),
+      retry(4)
+  )};
 
   triggered(email: string, registerItem: string, name: string) {
     localStorage.setItem('emailtemp', email);
