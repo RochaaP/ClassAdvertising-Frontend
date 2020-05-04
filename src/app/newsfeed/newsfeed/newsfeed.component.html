@@ -1,8 +1,5 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
-<div id="note">
-  You smell good.
-</div>
 
 <!-- (click)='triggered(field.data.email)' -->
 <!-- .toDate() | date: 'yyyy MMM dd hh:mm' -->
@@ -14,7 +11,7 @@
       <h1>mtute.lk</h1>
     </div>
   </div>
-
+  <notification-bar></notification-bar>
   <section class="section_content">
     <div class="container">
 
@@ -64,7 +61,7 @@
     </div>
   </section>
 
-
+  
   <div class ="container-fluid postfield">
       <ul *ngFor ="let field of response">
         <div class='postContainer col-md-7'>
@@ -106,18 +103,35 @@
 
 
   </div>
-
-  <mat-paginator [length]='postsLength'
+  <!-- <mat-paginator [length]='postsLength'
               [pageSize]="pageSize"
               [pageSizeOptions]="[5, 10, 25, 100]">
 </mat-paginator>
+  </div>  -->
+  
+
+  <svg id="stroke" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+    <defs>
+      <path id="line" d="M2 2c49.7 2.6 100 3.1 150 1.7-46.5 2-93 4.4-139.2 7.3 45.2-1.5 90.6-1.8 135.8-.6" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+    </defs>
+  </svg>
+  
+  <div class="container">
+    <a class="btn" (click)="nextPage()" *ngIf='moreNextPosts'>Find out more
+      <svg class="button-stroke" viewBox="0 0 154 13">
+        <use href="#line"></use>
+      </svg>
+      <svg class="button-stroke" viewBox="0 0 154 13">
+        <use href="#line"></use>
+      </svg>
+    </a>
+
+    <a class="btn" (click)="previousPage()" *ngIf='morePreviousPosts'>Go back
+      <svg class="button-stroke" viewBox="0 0 154 13">
+        <use href="#line"></use>
+      </svg>
+      <svg class="button-stroke" viewBox="0 0 154 13">
+        <use href="#line"></use>
+      </svg>
+    </a>
   </div>
-
-
-  <!-- <script>
-    close = document.getElementById("close");
-    close.addEventListener('click', function() {
-      note = document.getElementById("note");
-      note.style.display = 'none';
-    }, false);
-   </script> -->

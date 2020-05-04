@@ -46,6 +46,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { GuardService } from './service/guard/guard.service';
 import { DropzoneDirective } from './service/dropzone/dropzone.directive';
 
+// notification
+import { NotificationBarModule } from 'ngx-notification-bar';
+
 import { RootComponent } from './root/root.component';
 import { RegisterComponent } from './register/register.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -94,6 +97,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill';
 import { CountdownModule } from 'ngx-countdown';
 import { ClipboardModule } from 'ngx-clipboard';
+
 
 
 import { fromEventPattern, from } from 'rxjs';
@@ -155,7 +159,9 @@ const appRoutes: Routes = [
     EditProfileInstituteComponent,
     NewsfeedComponent,
     PostaddComponent,
+
     DropzoneDirective,
+
     UploadTaskComponent,
     ViewProfileInstructorComponent,
     ProfileDetailsInstructorComponent,
@@ -198,7 +204,7 @@ const appRoutes: Routes = [
 
     SupportComponent,
 
-    AboutComponent
+    AboutComponent,
 
   ],
   imports: [
@@ -253,7 +259,8 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     MatDialogModule,
 
-    ScrollingModule
+    ScrollingModule,
+    NotificationBarModule,
 
   ],
   entryComponents: [
