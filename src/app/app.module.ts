@@ -110,6 +110,7 @@ import { PaperMarkingModelComponent } from './papers/studentPaper/answerPaper/pa
 import { ZoomComponent } from './zoom/zoom.component';
 import { SupportComponent } from './support/support.component';
 import { AboutComponent } from './support/about/about.component';
+import { FooterComponent } from './support/footer/footer.component';
 
 
 const appRoutes: Routes = [
@@ -205,6 +206,8 @@ const appRoutes: Routes = [
     SupportComponent,
 
     AboutComponent,
+
+    FooterComponent,
 
   ],
   imports: [
