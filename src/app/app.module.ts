@@ -99,9 +99,6 @@ import { CountdownModule } from 'ngx-countdown';
 import { ClipboardModule } from 'ngx-clipboard';
 
 
-
-import { fromEventPattern, from } from 'rxjs';
-
 import { StudentPaperComponent } from './papers/studentPaper/student-paper/student-paper.component';
 import { CreatePaperComponent } from './papers/createPaper/create-paper/create-paper.component';
 import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
@@ -209,7 +206,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(
-      appRoutes, {onSameUrlNavigation: 'reload'}
+      appRoutes, {onSameUrlNavigation: 'reload'}//, useHash: true, enableTracing: true
     ),
     BrowserModule,
     HttpClientModule,
