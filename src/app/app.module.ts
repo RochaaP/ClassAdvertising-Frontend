@@ -67,10 +67,6 @@ import { MsgInstructorComponent } from './messages/msg-instructor/msg-instructor
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ClipboardModule } from 'ngx-clipboard';
-
-
-import { ZoomComponent } from './zoom/zoom.component';
 
 import { FooterComponent } from './support/footer/footer.component';
 import { QuillModule } from 'ngx-quill';
@@ -88,7 +84,6 @@ import { QuillModule } from 'ngx-quill';
     DropzoneDirective,
 
     UploadTaskComponent,
-    ZoomComponent,
 
     AddNotesComponent,
     ViewNotesComponent,
@@ -119,7 +114,6 @@ import { QuillModule } from 'ngx-quill';
 
     QuillModule.forRoot(),
     TranslateModule.forRoot(),
-    ClipboardModule,
 
     NgaReadMoreModule,
 

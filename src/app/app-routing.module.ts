@@ -18,6 +18,7 @@ import { GuardService } from './service/guard/guard.service';
 import { PaperModule } from './papers/paper.module';
 import { SupportModule } from './support/support.module';
 import { RolesModule } from './roles/roles.module';
+import { ZoomModule } from './zoom/zoom.module';
 
 
 const routes: Routes = [
@@ -30,14 +31,14 @@ const routes: Routes = [
   { path: 'notes/addnote', canActivate: [GuardService], component: AddNotesComponent},
   { path: 'notes', component: ViewNotesComponent},
 
-  { path: 'zoom', canActivate: [GuardService], component: ZoomComponent},
 
   { path: 'messages/student', component: MsgStudentComponent },
   { path: 'messages/instructor', component: MsgInstructorComponent },
 
   { path: 'papers', canActivate: [GuardService], loadChildren: () => PaperModule },
   { path: 'support', loadChildren: () => SupportModule },
-  { path: 'profile', loadChildren: () => RolesModule }
+  { path: 'profile', loadChildren: () => RolesModule },
+  { path: 'zoom', canActivate: [GuardService], loadChildren: () => ZoomModule }
 
   // { path: 'postadd', component: PostaddComponent },
   // { path: 'profileview/:id', component: ProfileViewComponent },
