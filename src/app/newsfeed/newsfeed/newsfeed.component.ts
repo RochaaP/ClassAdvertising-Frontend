@@ -33,7 +33,6 @@ export class NewsfeedComponent implements OnInit {
   pageSize: number;
   pageLimit: number;
   pageCount: number;
-
   moreNextPosts: boolean;
   morePreviousPosts: boolean;
 
@@ -50,13 +49,13 @@ export class NewsfeedComponent implements OnInit {
 
   ngOnInit() {
     this.pageCount = 0;
-    this.pageLimit = 5;
+    this.pageLimit = 25;
     this.moreNextPosts = true;
     this.morePreviousPosts = false;
 
 
     this.notificationBarService.create({
-                          message: 'Welcome to mtute.lk.. Enjoy the facilities',
+                          message: 'Welcome to mtute.lk.. Enjoy..',
                           type: NotificationType.Warning,
                           autoHide: true,
                           hideDelay: 5000,
@@ -120,9 +119,6 @@ export class NewsfeedComponent implements OnInit {
       console.log('next clicked, page count', this.pageCount);
       this.api();
     }
-    // else {
-  
-    // }
   }
 
  
