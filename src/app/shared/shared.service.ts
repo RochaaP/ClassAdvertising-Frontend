@@ -30,8 +30,7 @@ export class SharedService {
     // return this.loggedInUser;
     let user = this.loggedInUser;
     // user == undefined? user = JSON.parse(sessionStorage.getItem("loggedInUser")):"";
-    user == undefined? user = JSON.parse(localStorage.getItem("loggedInUser")): 
-                              JSON.parse(localStorage.getItem("loggedInUser")) == undefined? this.setLoggedInUser(user):"";
+    user == undefined? user = JSON.parse(localStorage.getItem("loggedInUser")): "";
     return user;
   }
 

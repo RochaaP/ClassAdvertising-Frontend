@@ -45,7 +45,7 @@ export class AnswerPaperComponent implements OnInit {
 
   constructor(
     private questionService: QuestionService,
-    private loadingService: Ng4LoadingSpinnerService,
+    private spinnerService: Ng4LoadingSpinnerService,
     private sharedService: SharedService,
     private attemptService: AttemptsService,
     private modalService: NgbModal,
@@ -62,7 +62,7 @@ export class AnswerPaperComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadingService.show();
+    this.spinnerService.show();
     this.questionService.getQuestionByPaperId(this.paper.id, this);
   }
 
@@ -136,7 +136,7 @@ export class AnswerPaperComponent implements OnInit {
 
   public submitForMarking(){
     console.log("___submitForMarking()___");
-    this.loadingService.show();
+    this.spinnerService.show();
     this.timeOver = true;
     this.score = this.calculateMarks();
     let attempt: AttemptModel = {
@@ -164,19 +164,19 @@ export class AnswerPaperComponent implements OnInit {
       console.log("GET_QUESTIONS_BY_PAPER_ID");
       this.questions = data.payload;
       this.configAnswerSettings(this.questions.length);
-      this.loadingService.hide();
+      this.spinnerService.hide();
       this.countdown.begin();
     }
     else if(serviceType==WsType.SAVE_ATTEMPT){
       console.log("SAVE_ATTEMPT");
-      this.loadingService.hide();
+      this.spinnerService.hide();
       this.openMarkingModal();
     }
   }
 
   onFail(data: WsResponse, serviceType: WsType){
     if(serviceType==WsType.GET_QUESTIONS_BY_PAPER_ID){
-      this.loadingService.hide();
+      this.spinnerService.hide();
     }
     else if(serviceType==WsType.SAVE_ATTEMPT){
       this.submitForMarking();

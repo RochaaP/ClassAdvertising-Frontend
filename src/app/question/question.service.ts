@@ -4,7 +4,6 @@ import { ServiceUrls } from 'src/app/util/service-urls';
 import { WsResponse } from 'src/app/util/ws-response';
 import { HttpClient } from '@angular/common/http';
 import { WsType } from 'src/app/util/ws-type';
-import { LoadingService } from 'src/app/util/loading/loading.service';
 import { QuestionModel } from './question-model';
 
 @Injectable({
@@ -13,11 +12,9 @@ import { QuestionModel } from './question-model';
 export class QuestionService {
 
   constructor(
-    private http: HttpClient,
-    private loadingService: LoadingService) { }
+    private http: HttpClient) { }
 
   getQuestions(callBack: WsCallback) {
-    this.loadingService.showLoading('Loading', WsType.GET_ALL_QUESTIONS);
     const url = ServiceUrls.GET_QUESTIONS;
     this.http.get(url).subscribe(data => {
       const modified = JSON.parse(JSON.stringify(data));

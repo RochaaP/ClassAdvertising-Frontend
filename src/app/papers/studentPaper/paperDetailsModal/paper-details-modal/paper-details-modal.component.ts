@@ -25,9 +25,9 @@ export class PaperDetailsModalComponent implements OnInit {
   }
 
   public answerPaper(){
-    this.sharedService.setLoggedInUser(this.user, "LOCAL");
+    // this.sharedService.setLoggedInUser(this.user, "LOCAL");
     localStorage.setItem("paper", JSON.stringify(this.paper));
-    window.open("/answerpaper");
+    window.open("/papers/answer");
     this.activeModal.dismiss();
   }
 

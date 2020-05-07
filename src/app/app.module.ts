@@ -4,12 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes } from '@angular/router';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { OwlModule } from 'ngx-owl-carousel';
 
-import { AngularSplitModule } from 'angular-split';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgaReadMoreModule } from 'nga-read-more';
 
@@ -43,7 +41,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
-import { GuardService } from './service/guard/guard.service';
 import { DropzoneDirective } from './service/dropzone/dropzone.directive';
 
 // notification
@@ -87,65 +84,15 @@ import { ConfirmationComponent } from './messages/confirmation/confirmation.comp
 import { MsgInstructorComponent } from './messages/msg-instructor/msg-instructor.component';
 import { ImagesChangeComponent } from './roles/admin/images-change/images-change.component';
 
-import { EditPaperComponent } from './papers/editPaper/edit-paper.component';
-import { ViewPaperComponent } from './papers/viewPaper/view-paper.component';
-import { PaperComponent } from './papers/paper.component';
-import { KeyboardComponent } from './util/keyboard/keyboard.component';
-import { LoadingComponent } from './util/loading/loading.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { QuillModule } from 'ngx-quill';
-import { CountdownModule } from 'ngx-countdown';
 import { ClipboardModule } from 'ngx-clipboard';
 
 
-import { StudentPaperComponent } from './papers/studentPaper/student-paper/student-paper.component';
-import { CreatePaperComponent } from './papers/createPaper/create-paper/create-paper.component';
-import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
-import { AnswerPaperComponent } from './papers/studentPaper/answerPaper/answer-paper/answer-paper.component';
-import { PaperMarkingModelComponent } from './papers/studentPaper/answerPaper/paperMarkingModel/paper-marking-model/paper-marking-model.component';
 import { ZoomComponent } from './zoom/zoom.component';
 import { SupportComponent } from './support/support.component';
 import { AboutComponent } from './support/about/about.component';
-
-
-const appRoutes: Routes = [
-  { path: '', component: NewsfeedComponent },
-  { path: 'account/register', component: RegisterComponent },
-  { path: 'account/login', component: RegisterComponent },
-  { path: 'editprofile/instructor', canActivate: [GuardService], component: EditProfileInstructorComponent },
-  { path: 'editprofile/institute', canActivate: [GuardService], component: EditProfileInstituteComponent },
-  { path: 'postadd', canActivate: [GuardService], component: PostaddComponent },
-  { path: 'viewprofile/instructor/:id', component: ViewProfileInstructorComponent},
-  { path: 'viewprofile/institute/:id', component: ViewProfileInstituteComponent},
-  { path: 'addclasses/instructor', canActivate: [GuardService], component: AddClassesInstructorComponent},
-  { path: 'addclasses/institute', canActivate: [GuardService], component: AddClassesInstituteComponent },
-  { path: 'viewProfiles/instructor', component: PersonSearchComponent},
-  { path: 'viewProfiles/institute', component: InstituteSearchComponent},
-  { path: 'notes/addnote', canActivate: [GuardService], component: AddNotesComponent},
-  { path: 'notes', component: ViewNotesComponent},
-
-  { path: 'admin/getallusers', component: AllUsersComponent},
-  { path: 'admin/images', component: ImagesChangeComponent},
-
-
-  { path: 'papers', canActivate: [GuardService], component: PaperComponent},
-  { path: 'answerpaper', canActivate: [GuardService], component: AnswerPaperComponent},
-  { path: 'zoom', canActivate: [GuardService], component: ZoomComponent},
-
-  { path: 'support', component: SupportComponent},
-  { path: 'about', component: AboutComponent},
-
-  { path: 'messages/student', component: MsgStudentComponent },
-  { path: 'messages/instructor', component: MsgInstructorComponent },
-
-  // { path: 'postadd', component: PostaddComponent },
-  // { path: 'profileview/:id', component: ProfileViewComponent },
-
-  // // { path: 'profile', component: ProfileComponent },
-  // { path: '',component:NewsfeedComponent }
-
-];
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -175,13 +122,9 @@ const appRoutes: Routes = [
     PersonSearchComponent,
     InstituteSearchComponent,
 
-    EditPaperComponent,
-    ViewPaperComponent,
-    PaperComponent,
+    
 
     ZoomComponent,
-    KeyboardComponent,
-    LoadingComponent,
 
     AddNotesComponent,
     ViewNotesComponent,
@@ -189,40 +132,30 @@ const appRoutes: Routes = [
     MsgStudentComponent,
     DialogComponent,
     ConfirmationComponent,
-    StudentPaperComponent,
-    CreatePaperComponent,
-    PaperDetailsModalComponent,
-    AnswerPaperComponent,
-    PaperMarkingModelComponent,
     MsgInstructorComponent,
     ImagesChangeComponent,
 
-    ViewPostsComponent,
-
-    SupportComponent,
-
-    AboutComponent,
+    ViewPostsComponent
 
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes, {onSameUrlNavigation: 'reload'}//, useHash: true, enableTracing: true
-    ),
+    AppRoutingModule,
+    // RouterModule.forRoot(
+    //   appRoutes, {onSameUrlNavigation: 'reload'}//, useHash: true, enableTracing: true
+    // ),
     BrowserModule,
     HttpClientModule,
     FontAwesomeModule,
     NgbModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     ImageCropperModule,
     Ng4LoadingSpinnerModule.forRoot(),
     OwlModule,
 
-    AngularSplitModule.forRoot(),
-    TranslateModule.forRoot(),
+    
     QuillModule.forRoot(),
-    CountdownModule,
+    TranslateModule.forRoot(),
     ClipboardModule,
 
     NgaReadMoreModule,
@@ -257,16 +190,11 @@ const appRoutes: Routes = [
     MatDialogModule,
 
     ScrollingModule,
-    NotificationBarModule,
-
+    NotificationBarModule
   ],
   entryComponents: [
-    KeyboardComponent,
     DialogComponent,
-    ConfirmationComponent,
-    CreatePaperComponent,
-    PaperDetailsModalComponent,
-    PaperMarkingModelComponent
+    ConfirmationComponent
   ],
   providers: [],
   bootstrap: [RootComponent],
