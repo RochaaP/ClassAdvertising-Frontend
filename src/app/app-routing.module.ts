@@ -6,8 +6,8 @@ import { PostaddComponent } from './roles/common/postadd/postadd.component';
 
 import { ZoomComponent } from './zoom/zoom.component';
 
-import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
-import { MsgInstructorComponent } from './messages/msg-instructor/msg-instructor.component';
+// import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
+// import { MsgInstructorComponent } from './messages/msg-instructor/msg-instructor.component';
 
 
 import { GuardService } from './service/guard/guard.service';
@@ -17,6 +17,7 @@ import { SupportModule } from './support/support.module';
 import { RolesModule } from './roles/roles.module';
 import { ZoomModule } from './zoom/zoom.module';
 import { NotesModule } from './notes/notes.module';
+import { MessageModule } from './messages/message.module';
 
 const routes: Routes = [
   { path: '', component: NewsfeedComponent },
@@ -25,24 +26,12 @@ const routes: Routes = [
 
   { path: 'postadd', canActivate: [GuardService], component: PostaddComponent },
 
-  // { path: 'notes/addnote', canActivate: [GuardService], component: AddNotesComponent},
-  // { path: 'notes', component: ViewNotesComponent},
-
-
-  { path: 'messages/student', component: MsgStudentComponent },
-  { path: 'messages/instructor', component: MsgInstructorComponent },
-
   { path: 'papers', canActivate: [GuardService], loadChildren: () => PaperModule },
+  { path: 'zoom', canActivate: [GuardService], loadChildren: () => ZoomModule },
+  { path: 'messages', canActivate: [GuardService], loadChildren: () => MessageModule },
   { path: 'support', loadChildren: () => SupportModule },
   { path: 'profile', loadChildren: () => RolesModule },
   { path: 'notes', loadChildren: () => NotesModule },
-  { path: 'zoom', canActivate: [GuardService], loadChildren: () => ZoomModule }
-
-  // { path: 'postadd', component: PostaddComponent },
-  // { path: 'profileview/:id', component: ProfileViewComponent },
-
-  // // { path: 'profile', component: ProfileComponent },
-  // { path: '',component:NewsfeedComponent }
 
 ];
 

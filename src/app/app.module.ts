@@ -59,10 +59,8 @@ import { UploadTaskComponent } from './service/upload-task/upload-task.component
 import { MatGridListModule } from '@angular/material/grid-list';
 
 
-import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
 import { DialogComponent } from './messages/dialog/dialog.component';
 import { ConfirmationComponent } from './messages/confirmation/confirmation.component';
-import { MsgInstructorComponent } from './messages/msg-instructor/msg-instructor.component';
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -84,10 +82,8 @@ import { QuillModule } from 'ngx-quill';
 
     UploadTaskComponent,
 
-    MsgStudentComponent,
     DialogComponent,
     ConfirmationComponent,
-    MsgInstructorComponent,
 
     FooterComponent,
 
@@ -143,11 +139,11 @@ import { QuillModule } from 'ngx-quill';
     MatDialogModule,
 
     ScrollingModule,
-    NotificationBarModule
+    NotificationBarModule,
   ],
   entryComponents: [
     DialogComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
   ],
   providers: [],
   bootstrap: [RootComponent],
