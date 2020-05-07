@@ -14,7 +14,7 @@ import { MatButtonModule, MatTabsModule, MatTableModule, MatCardModule, MatExpan
   ],
   imports: [
     CommonModule,
-    SupportRoutingModule,    
+    SupportRoutingModule,
 
     MatButtonModule,
     MatTabsModule,

@@ -5,7 +5,7 @@ import { SupportComponent } from './support.component';
 import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
-  { path: '', component: SupportComponent },  
+  { path: '', component: SupportComponent },
   { path: 'about', component: AboutComponent},
 ];
 

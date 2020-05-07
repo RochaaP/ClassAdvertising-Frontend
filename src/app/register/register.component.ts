@@ -341,20 +341,20 @@ export class RegisterComponent implements OnInit {
 
   editProfileInstitute() {
     console.log('thisuser item ' + this.registerItem);
-    this.router.navigate(['/editprofile/institute']);
+    this.router.navigate(['/profile/institute/edit']);
   }
   editClassesInstitute() {
-    this.router.navigate(['/addclasses/institute']);
+    this.router.navigate(['/profile/institute/classes']);
   }
   editProfileInstructor() {
     console.log('thisuser item ' + this.registerItem);
-    this.router.navigate(['/editprofile/instructor']);
+    this.router.navigate(['/profile/instructor/edit']);
   }
   editClassesInstructor() {
-    this.router.navigate(['/addclasses/instructor']);
+    this.router.navigate(['/profile/instructor/classes']);
   }
   navi() {
-    if(this.previousUrl!=undefined){
+    if(this.previousUrl !== undefined) {
       this.router.navigate([this.previousUrl]);
     }
     else{

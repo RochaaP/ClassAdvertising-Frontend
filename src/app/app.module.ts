@@ -49,40 +49,21 @@ import { NotificationBarModule } from 'ngx-notification-bar';
 import { RootComponent } from './root/root.component';
 import { RegisterComponent } from './register/register.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { EditProfileInstituteComponent } from './roles/institute/profile/edit-profile-institute/edit-profile-institute.component';
-
-import { EditProfileInstructorComponent } from './roles/instructor/profile/edit-profile-instructor/edit-profile-instructor.component';
 
 import { NewsfeedComponent } from './newsfeed/newsfeed/newsfeed.component';
 
 import { PostaddComponent } from './roles/common/postadd/postadd.component';
-import { ViewPostsComponent } from './roles/common/view-posts/view-posts.component';
 
 import { UploadTaskComponent } from './service/upload-task/upload-task.component';
-import { ViewProfileInstructorComponent } from './roles/instructor/profile/view-profile-instructor/view-profile-instructor.component';
 
-import { ProfileDetailsInstructorComponent } from './roles/instructor/profile/profile-details-instructor/profile-details-instructor.component';
-
-import { ViewProfileInstituteComponent } from './roles/institute/profile/view-profile-institute/view-profile-institute.component';
-import { ProfileDetailsInstituteComponent } from './roles/institute/profile/profile-details-institute/profile-details-institute.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ViewClassesInstructorComponent } from './roles/instructor/classes/view-classes-instructor/view-classes-instructor.component';
 
-import { PapersComponent } from './roles/common/papers/papers.component';
-import { AllUsersComponent } from './roles/admin/all-users/all-users.component';
-import { AddClassesInstituteComponent } from './roles/institute/classes/add-classes-institute/add-classes-institute.component';
-import { AddClassesInstructorComponent } from './roles/instructor/classes/add-classes-instructor/add-classes-instructor.component';
-
-import { ViewClassesInstituteComponent } from './roles/institute/classes/view-classes-institute/view-classes-institute.component';
-import { PersonSearchComponent } from './roles/instructor/person-search/person-search.component';
-import { InstituteSearchComponent } from './roles/institute/institute-search/institute-search.component';
 import { AddNotesComponent } from './notes/add-notes/add-notes.component';
 import { ViewNotesComponent } from './notes/view-notes/view-notes.component';
 import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
 import { DialogComponent } from './messages/dialog/dialog.component';
 import { ConfirmationComponent } from './messages/confirmation/confirmation.component';
 import { MsgInstructorComponent } from './messages/msg-instructor/msg-instructor.component';
-import { ImagesChangeComponent } from './roles/admin/images-change/images-change.component';
 
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -90,8 +71,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 
 import { ZoomComponent } from './zoom/zoom.component';
-import { SupportComponent } from './support/support.component';
-import { AboutComponent } from './support/about/about.component';
+
 import { FooterComponent } from './support/footer/footer.component';
 import { QuillModule } from 'ngx-quill';
 
@@ -102,30 +82,12 @@ import { QuillModule } from 'ngx-quill';
     RootComponent,
     RegisterComponent,
     NavigationComponent,
-    EditProfileInstituteComponent,
     NewsfeedComponent,
     PostaddComponent,
 
     DropzoneDirective,
 
     UploadTaskComponent,
-    ViewProfileInstructorComponent,
-    ProfileDetailsInstructorComponent,
-    ViewProfileInstituteComponent,
-    ProfileDetailsInstituteComponent,
-    EditProfileInstructorComponent,
-
-    ViewClassesInstructorComponent,
-    PapersComponent,
-    AllUsersComponent,
-    AddClassesInstituteComponent,
-    AddClassesInstructorComponent,
-    ViewClassesInstituteComponent,
-    PersonSearchComponent,
-    InstituteSearchComponent,
-
-
-
     ZoomComponent,
 
     AddNotesComponent,
@@ -135,9 +97,6 @@ import { QuillModule } from 'ngx-quill';
     DialogComponent,
     ConfirmationComponent,
     MsgInstructorComponent,
-    ImagesChangeComponent,
-
-    ViewPostsComponent,
 
     FooterComponent,
 

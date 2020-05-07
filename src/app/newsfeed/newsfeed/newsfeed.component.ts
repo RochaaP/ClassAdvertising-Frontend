@@ -49,7 +49,7 @@ export class NewsfeedComponent implements OnInit {
 
   ngOnInit() {
     this.pageCount = 0;
-    this.pageLimit = 25;
+    this.pageLimit = 1;
     this.moreNextPosts = true;
     this.morePreviousPosts = false;
 
@@ -85,15 +85,15 @@ export class NewsfeedComponent implements OnInit {
     localStorage.setItem('navigateUser', email);
     if (registerItem === 'instructor') {
       this.data.passEmail(email);
-      this.router.navigate(['/viewprofile/instructor/' + name]);
+      this.router.navigate(['/profile/instructor/' + name]);
     } 
     else if (registerItem === 'institute') {
       this.data.passEmail(email);
-      this.router.navigate(['/viewprofile/institute/' + name]);
+      this.router.navigate(['/profile/institute/' + name]);
     }
     else if (registerItem === 'student') {
       this.data.passEmail(email);
-      this.router.navigate(['/viewprofile/student/' + name]);
+      this.router.navigate(['/profile/student/' + name]);
     }
   }
 

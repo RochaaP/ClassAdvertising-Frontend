@@ -42,7 +42,7 @@ import { BrowserModule } from '@angular/platform-browser';
     NgbModule,
     AngularSplitModule,
     CountdownModule,
-    
+
     MatButtonModule,
     MatTabsModule,
     MatTableModule,

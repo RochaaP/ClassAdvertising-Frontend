@@ -148,17 +148,17 @@ export class NavigationComponent implements OnInit {
     if (this.registerItem === 'instructor') {
       this.dataService.passEmail(this.userDetails.email);
       localStorage.setItem('navigateUser', this.userDetails.email);
-      this.router.navigate(['viewprofile/instructor/' + this.userName]);
+      this.router.navigate(['/profile/instructor/view/' + this.userName]);
     }
     else if (this.registerItem === 'institute') {
       this.dataService.passEmail(this.userDetails.email);
       localStorage.setItem('navigateUser', this.userDetails.email);
-      this.router.navigate(['viewprofile/institute/' + this.userName]);
+      this.router.navigate(['/profile/institute/view/' + this.userName]);
     }
     else if (this.registerItem === 'student') {
       this.dataService.passEmail(this.userDetails.email);
       localStorage.setItem('navigateUser', this.userDetails.email);
-      this.router.navigate(['viewprofile/student/' + this.userName]);
+      this.router.navigate(['/profile/student/view/' + this.userName]);
     }
   }
 
@@ -167,23 +167,23 @@ export class NavigationComponent implements OnInit {
   }
 
   clickProfile() {
-    if (this.registerItem === 'instructor'){
-      this.router.navigate(['/editprofile/instructor']);
+    if (this.registerItem === 'instructor') {
+      this.router.navigate(['/profile/instructor/edit']);
     }
-    else if (this.registerItem === 'institute'){
-      this.router.navigate(['/editprofile/institute']);
+    else if (this.registerItem === 'institute') {
+      this.router.navigate(['/profile/institute/edit']);
     }
-    else if (this.registerItem === 'student'){
-      this.router.navigate(['/editprofile/student']);
+    else if (this.registerItem === 'student') {
+      this.router.navigate(['/profile/student/edit']);
     }
   }
 
   clickClasses() {
-    if (this.registerItem === 'instructor'){
-      this.router.navigate(['/addclasses/instructor']);
+    if (this.registerItem === 'instructor') {
+      this.router.navigate(['/profile/instructor/classes']);
     }
-    else if (this.registerItem === 'institute'){
-      this.router.navigate(['/addclasses/institute']);
+    else if (this.registerItem === 'institute') {
+      this.router.navigate(['/profile/institute/classes']);
     }
   }
 
