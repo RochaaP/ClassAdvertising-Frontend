@@ -4,9 +4,6 @@ import { NewsfeedComponent } from './newsfeed/newsfeed/newsfeed.component';
 import { RegisterComponent } from './register/register.component';
 import { PostaddComponent } from './roles/common/postadd/postadd.component';
 
-import { AddNotesComponent } from './notes/add-notes/add-notes.component';
-import { ViewNotesComponent } from './notes/view-notes/view-notes.component';
-
 import { ZoomComponent } from './zoom/zoom.component';
 
 import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
@@ -19,7 +16,7 @@ import { PaperModule } from './papers/paper.module';
 import { SupportModule } from './support/support.module';
 import { RolesModule } from './roles/roles.module';
 import { ZoomModule } from './zoom/zoom.module';
-
+import { NotesModule } from './notes/notes.module';
 
 const routes: Routes = [
   { path: '', component: NewsfeedComponent },
@@ -28,8 +25,8 @@ const routes: Routes = [
 
   { path: 'postadd', canActivate: [GuardService], component: PostaddComponent },
 
-  { path: 'notes/addnote', canActivate: [GuardService], component: AddNotesComponent},
-  { path: 'notes', component: ViewNotesComponent},
+  // { path: 'notes/addnote', canActivate: [GuardService], component: AddNotesComponent},
+  // { path: 'notes', component: ViewNotesComponent},
 
 
   { path: 'messages/student', component: MsgStudentComponent },
@@ -38,6 +35,7 @@ const routes: Routes = [
   { path: 'papers', canActivate: [GuardService], loadChildren: () => PaperModule },
   { path: 'support', loadChildren: () => SupportModule },
   { path: 'profile', loadChildren: () => RolesModule },
+  { path: 'notes', loadChildren: () => NotesModule },
   { path: 'zoom', canActivate: [GuardService], loadChildren: () => ZoomModule }
 
   // { path: 'postadd', component: PostaddComponent },

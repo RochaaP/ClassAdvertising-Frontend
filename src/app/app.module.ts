@@ -58,8 +58,7 @@ import { UploadTaskComponent } from './service/upload-task/upload-task.component
 
 import { MatGridListModule } from '@angular/material/grid-list';
 
-import { AddNotesComponent } from './notes/add-notes/add-notes.component';
-import { ViewNotesComponent } from './notes/view-notes/view-notes.component';
+
 import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
 import { DialogComponent } from './messages/dialog/dialog.component';
 import { ConfirmationComponent } from './messages/confirmation/confirmation.component';
@@ -84,9 +83,6 @@ import { QuillModule } from 'ngx-quill';
     DropzoneDirective,
 
     UploadTaskComponent,
-
-    AddNotesComponent,
-    ViewNotesComponent,
 
     MsgStudentComponent,
     DialogComponent,

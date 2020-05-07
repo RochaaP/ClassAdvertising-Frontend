@@ -191,7 +191,7 @@ export class NavigationComponent implements OnInit {
     this.router.navigate(['/papers']);
   }
   clickNotes() {
-    this.router.navigate(['/notes/addnote']);
+    this.router.navigate(['/notes/add']);
   }
 
   clickMessages() {
