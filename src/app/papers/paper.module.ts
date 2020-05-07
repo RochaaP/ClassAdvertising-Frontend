@@ -13,12 +13,11 @@ import { PaperMarkingModelComponent } from './studentPaper/answerPaper/paperMark
 import { KeyboardComponent } from '../util/keyboard/keyboard.component';
 import { AngularSplitModule } from 'angular-split';
 import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule, MatTabsModule, MatCardModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, MatGridListModule, MatListModule, MatSnackBarModule, MatDividerModule, MatStepperModule, MatSidenavModule, MatProgressBarModule, MatIconModule, MatRadioModule, MatPaginatorModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatRadioModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
-import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -44,25 +43,11 @@ import { BrowserModule } from '@angular/platform-browser';
     CountdownModule,
     
     MatButtonModule,
-    MatTabsModule,
     MatTableModule,
-    MatCardModule,
-    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatListModule,
     MatSnackBarModule,
-    MatDividerModule,
-    MatStepperModule,
-    MatSidenavModule,
-    MatProgressBarModule,
-    MatIconModule,
-    MatRadioModule,
-    MatPaginatorModule,
-    MatDialogModule,
+    MatRadioModule
   ],
   entryComponents: [
     KeyboardComponent,
