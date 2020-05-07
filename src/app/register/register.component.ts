@@ -354,7 +354,7 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/profile/instructor/classes']);
   }
   navi() {
-    if(this.previousUrl !== undefined) {
+    if(this.previousUrl != undefined) {
       this.router.navigate([this.previousUrl]);
     }
     else{
