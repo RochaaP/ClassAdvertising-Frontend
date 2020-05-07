@@ -11,10 +11,10 @@
                         <div class="btn btn-sm btn-outline-dark mb-1 mr-2" (click)="handleToggles('doc')" style="width: 100%;">Documentation</div>
                     </div>
                     <div class="row" *ngIf="viewDoc">
-                        <a class="btn btn-sm btn-outline-dark mb-1 mr-2 ml-3" style="width: 100%;" (click)="navigateToSection('mtuteDoc_sm')">Mtute</a>
-                    </div>    
-                    <div class="row" *ngIf="viewDoc">
-                        <a class="btn btn-sm btn-outline-dark mb-1 mr-2 ml-3" style="width: 100%;" (click)="navigateToSection('zoomDoc_sm')">Zoom</a>
+                        <ul>
+                            <li>mtute</li>
+                            <li>Zoom</li>
+                        </ul>
                     </div>             
                     <div class="row">
                         <div class="btn btn-sm btn-outline-dark mb-1 mr-2" (click)="handleToggles('terms')" style="width: 100%;">Terms & Conditions</div>
@@ -724,12 +724,12 @@
                 <div class="menu col-md-2 col-sm-12 col-xs-12 border-right border-dark">   
                     <div class="row">
                         <div class="btn btn-sm btn-outline-dark mb-1 mr-2" (click)="handleToggles('doc')" style="width: 100%;">Documentation</div>
-                    </div>
+                    </div>                    
                     <div class="row" *ngIf="viewDoc">
-                        <a class="btn btn-sm btn-outline-dark mb-1 mr-2 ml-3" style="width: 100%;" (click)="navigateToSection('mtuteDoc')">Mtute</a>
-                    </div>    
-                    <div class="row" *ngIf="viewDoc">
-                        <a class="btn btn-sm btn-outline-dark mb-1 mr-2 ml-3" style="width: 100%;" (click)="navigateToSection('zoomDoc')">Zoom</a>
+                        <ul>
+                            <li>mtute</li>
+                            <li>Zoom</li>
+                        </ul>
                     </div>             
                     <div class="row">
                         <div class="btn btn-sm btn-outline-dark mb-1 mr-2" (click)="handleToggles('terms')" style="width: 100%;">Terms & Conditions</div>

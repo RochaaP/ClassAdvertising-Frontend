@@ -16,10 +16,6 @@ export class SupportComponent implements OnInit {
   ngOnInit() {
   }
 
-  public navigateToSection(section: string) {
-    window.location.hash = section;
-  }
-
   public handleToggles(buttonType: string){
     switch (buttonType) {
       case 'terms':{  

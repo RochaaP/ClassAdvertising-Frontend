@@ -39,7 +39,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item"  [routerLink]="'/support'"><fa-icon [icon]='faQuestionCircle'></fa-icon> Help & Support</a>
-            <a class="dropdown-item"  [routerLink]="'/about'"><fa-icon [icon]='faInfoCircle'></fa-icon> About</a>
+            <a class="dropdown-item"  [routerLink]="'/support/about'"><fa-icon [icon]='faInfoCircle'></fa-icon> About</a>
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf='userLogged'>
@@ -58,7 +58,7 @@
             
             <div class="dropdown-divider"></div>
             <a class="dropdown-item"  [routerLink]="'/support'"><fa-icon [icon]='faQuestionCircle'></fa-icon> Help & Support</a>
-            <a class="dropdown-item"  [routerLink]="'/about'"><fa-icon [icon]='faInfoCircle'></fa-icon> About</a>
+            <a class="dropdown-item"  [routerLink]="'/support/about'"><fa-icon [icon]='faInfoCircle'></fa-icon> About</a>
 
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)='logoutUser()'><fa-icon [icon]='faSignOutAlt'></fa-icon> LOGOUT</a>
@@ -69,7 +69,7 @@
 
             <div class="dropdown-divider"></div>
             <a class="dropdown-item"  [routerLink]="'/support'"><fa-icon [icon]='faQuestionCircle'></fa-icon> Help & Support</a>
-            <a class="dropdown-item"  [routerLink]="'/about'"><fa-icon [icon]='faInfoCircle'></fa-icon> About</a>
+            <a class="dropdown-item"  [routerLink]="'/support/about'"><fa-icon [icon]='faInfoCircle'></fa-icon> About</a>
 
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)='logoutUser()'><fa-icon [icon]='faSignOutAlt'></fa-icon> LOGOUT</a>
