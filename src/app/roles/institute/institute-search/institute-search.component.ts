@@ -201,6 +201,6 @@ export class InstituteSearchComponent implements OnInit {
     // console.log("yes")
     this.dataService.passEmail(email);
     localStorage.setItem('navigateUser', email);
-    this.router.navigate(['/profile/institute/view' + name]);
+    this.router.navigate(['/profile/institute/view/' + name]);
   }
 }

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <mat-accordion class="m-5">
+  <mat-accordion *ngIf="isLoggedInUser" class="m-5">
      <mat-expansion-panel *ngFor="let paper of papers" class="mb-2">
          <mat-expansion-panel-header>
          <mat-panel-title>
@@ -14,7 +14,11 @@
             </div>
          </div>
  
-     </mat-expansion-panel>
- 
+     </mat-expansion-panel> 
  </mat-accordion>
+ <div *ngIf="!isLoggedInUser" class="card m-5">
+   <div class="card-body">
+     Please login to view papers
+   </div>
+ </div>
 </div>

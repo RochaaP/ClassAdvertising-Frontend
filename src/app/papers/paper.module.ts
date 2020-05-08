@@ -7,7 +7,6 @@ import { EditPaperComponent } from './editPaper/edit-paper.component';
 import { ViewPaperComponent } from './viewPaper/view-paper.component';
 import { StudentPaperComponent } from './studentPaper/student-paper/student-paper.component';
 import { CreatePaperComponent } from './createPaper/create-paper/create-paper.component';
-import { PaperDetailsModalComponent } from './studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
 import { AnswerPaperComponent } from './studentPaper/answerPaper/answer-paper/answer-paper.component';
 import { PaperMarkingModelComponent } from './studentPaper/answerPaper/paperMarkingModel/paper-marking-model/paper-marking-model.component';
 import { KeyboardComponent } from '../util/keyboard/keyboard.component';
@@ -18,7 +17,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({

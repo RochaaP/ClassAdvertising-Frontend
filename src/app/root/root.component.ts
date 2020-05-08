@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+declare var gtag;
 
 @Component({
   selector: 'app-root',
@@ -9,8 +13,18 @@ import { HttpClient } from '@angular/common/http';
 export class RootComponent implements OnInit {
 
   constructor(
-    private http: HttpClient
-    ) { }
+    private http: HttpClient,
+    private router: Router
+    ) { 
+      const navEndEvents = router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      );
+      navEndEvents.subscribe((event: NavigationEnd)=>{
+        gtag('config', 'UA-155158514-1', {
+          'page_path': event.urlAfterRedirects
+        });
+      });
+    }
 
   ngOnInit() {
   	// this.getAPIData().subscribe((response) => {

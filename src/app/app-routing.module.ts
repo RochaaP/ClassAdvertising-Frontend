@@ -4,12 +4,6 @@ import { NewsfeedComponent } from './newsfeed/newsfeed/newsfeed.component';
 import { RegisterComponent } from './register/register.component';
 import { PostaddComponent } from './roles/common/postadd/postadd.component';
 
-import { ZoomComponent } from './zoom/zoom.component';
-
-// import { MsgStudentComponent } from './messages/msg-student/msg-student.component';
-// import { MsgInstructorComponent } from './messages/msg-instructor/msg-instructor.component';
-
-
 import { GuardService } from './service/guard/guard.service';
 
 import { PaperModule } from './papers/paper.module';
@@ -26,12 +20,20 @@ const routes: Routes = [
 
   { path: 'postadd', canActivate: [GuardService], component: PostaddComponent },
 
-  { path: 'papers', canActivate: [GuardService], loadChildren: () => PaperModule },
-  { path: 'zoom', canActivate: [GuardService], loadChildren: () => ZoomModule },
-  { path: 'messages', canActivate: [GuardService], loadChildren: () => MessageModule },
-  { path: 'support', loadChildren: () => SupportModule },
-  { path: 'profile', loadChildren: () => RolesModule },
-  { path: 'notes', loadChildren: () => NotesModule },
+  // { path: 'papers', canActivate: [GuardService], loadChildren: () => PaperModule },
+  // { path: 'zoom', canActivate: [GuardService], loadChildren: () => ZoomModule },
+  // { path: 'messages', canActivate: [GuardService], loadChildren: () => MessageModule },
+  // { path: 'support', loadChildren: () => SupportModule },
+  // { path: 'profile', loadChildren: () => RolesModule },
+  // { path: 'notes', loadChildren: () => NotesModule },
+
+  // While building
+  { path: 'papers', canActivate: [GuardService], loadChildren: './papers/paper.module#PaperModule' },
+  { path: 'zoom', canActivate: [GuardService], loadChildren: './zoom/zoom.module#ZoomModule' },
+  { path: 'messages', canActivate: [GuardService], loadChildren: './messages/message.module#MessageModule' },
+  { path: 'support', loadChildren: './support/support.module#SupportModule' },
+  { path: 'profile', loadChildren: './roles/roles.module#RolesModule' },
+  { path: 'notes', loadChildren: './notes/notes.module#NotesModule' }
 
 ];
 

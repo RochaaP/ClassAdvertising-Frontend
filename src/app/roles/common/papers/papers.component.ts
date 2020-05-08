@@ -20,6 +20,7 @@ export class PapersComponent implements OnInit {
   @Input() childMessage: string;
   
   private loggedInUser: {id: string, data: UserModel};
+  public isLoggedInUser: boolean = false;
   public isStudent: boolean = false;
 
   public papers: {id: string, data: PaperModel}[] = [];
@@ -32,7 +33,13 @@ export class PapersComponent implements OnInit {
     private modalService: NgbModal
     ) { 
       this.loggedInUser = this.sharedService.getLoggedInUser();
-      this.loggedInUser.data.role=="student"? this.isStudent = true:"";
+      if(this.loggedInUser!=undefined){
+        this.isLoggedInUser = true;
+        this.loggedInUser.data.role=="student"? this.isStudent = true:"";
+      }
+      else{
+        // nothing to do
+      }
      }
 
   ngOnInit() {
