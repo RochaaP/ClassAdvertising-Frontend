@@ -67,6 +67,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FooterComponent } from './support/footer/footer.component';
 import { QuillModule } from 'ngx-quill';
+import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
 
 
 
@@ -84,6 +85,7 @@ import { QuillModule } from 'ngx-quill';
 
     DialogComponent,
     ConfirmationComponent,
+    PaperDetailsModalComponent,
 
     FooterComponent,
 
@@ -139,11 +141,12 @@ import { QuillModule } from 'ngx-quill';
     MatDialogModule,
 
     ScrollingModule,
-    NotificationBarModule,
+    NotificationBarModule
   ],
   entryComponents: [
     DialogComponent,
     ConfirmationComponent,
+    PaperDetailsModalComponent
   ],
   providers: [],
   bootstrap: [RootComponent],

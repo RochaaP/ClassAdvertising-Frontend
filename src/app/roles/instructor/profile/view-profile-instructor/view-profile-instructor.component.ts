@@ -116,7 +116,7 @@ export class ViewProfileInstructorComponent implements OnInit {
     };
 
     this.postAPIData(userValues).subscribe((response) => {
-      console.log('response ffrom appointments ', response);
+      console.log('response from appointments ', response);
       this.response = response;
     });
   }
@@ -142,7 +142,7 @@ export class ViewProfileInstructorComponent implements OnInit {
     console.log(userValues)
 
     this.postAppointmentData(userValues).subscribe((response) => {
-      console.log('response ffrom appointments ', response);
+      console.log('response from appointments ', response);
       this.response = response;
     });
   }

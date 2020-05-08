@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -27,7 +28,6 @@ import { CountdownModule } from 'ngx-countdown';
     ViewPaperComponent,
     StudentPaperComponent,
     CreatePaperComponent,
-    PaperDetailsModalComponent,
     AnswerPaperComponent,
     PaperMarkingModelComponent,
     KeyboardComponent,
@@ -52,7 +52,6 @@ import { CountdownModule } from 'ngx-countdown';
   entryComponents: [
     KeyboardComponent,
     CreatePaperComponent,
-    PaperDetailsModalComponent,
     PaperMarkingModelComponent
   ],
   schemas: [NO_ERRORS_SCHEMA]

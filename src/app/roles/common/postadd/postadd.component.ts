@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { DataService } from '../../../service/share/data.service';
 import { AuthenticationService } from '../../../service/auth/authentication.service';
-import * as firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -148,18 +147,6 @@ export class PostaddComponent implements OnInit {
     // The main task
     this.fileposts = this.afStorage.upload(path, event.target.files[0]);
     this.percentageposts = this.fileposts.percentageChanges();    // this.task = this.afStorage.upload(path, event.target.files[0]);
-    // console.log(this.task.downloadURL());
-    // this.downloadURL = this.task.downloadURL();
-    // console.log(this.downloadURL);
-    const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
-      // const ref = this.afStorage.ref(path);
-      const downloadURL = ref.getDownloadURL().subscribe(url => {
-      const Url = url; // for ts
-      this.downloadURL = url; // with this you can use it in the html
-      console.log('downloadurl ' + this.downloadURL);
-
-      });
-    });
 
   }
 

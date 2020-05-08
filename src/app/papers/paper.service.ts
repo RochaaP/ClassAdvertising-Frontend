@@ -28,6 +28,21 @@ export class PaperService {
     });
   }
 
+  public getSubjects_PapersByInstructorEmail(email: string, callBack: WsCallback){
+    console.log("___getPapersByInstructorEmail()___");
+    let url = ServiceUrls.getSubjects_PapersByInstructorEmail(email);
+    this.http.get(url).subscribe(data =>{
+      var modified = JSON.parse(JSON.stringify(data));
+					var res = new WsResponse(modified);
+					callBack.onSuccess(res, WsType.GET_ALL_PAPERS);
+    },
+    error => {
+      var modified = JSON.parse(JSON.stringify(error));
+      var res = new WsResponse(modified);
+      callBack.onFail(res, WsType.GET_ALL_PAPERS);
+    });
+  }
+
   public getPapersBySubject(subjectList: string[], callBack: WsCallback){
     console.log("getPapersBySubject()___");
     let url = ServiceUrls.getPapersBySubject();

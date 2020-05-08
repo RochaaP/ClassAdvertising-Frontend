@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { JsonPipe } from '@angular/common';
 import { UserService } from 'src/app/users/user.service';
 import { SharedService } from 'src/app/shared/shared.service';
 import { UserModel } from 'src/app/users/user-model';
-import { share } from 'rxjs/operators';
 // import { loadavg } from 'os';
 
 @Injectable({

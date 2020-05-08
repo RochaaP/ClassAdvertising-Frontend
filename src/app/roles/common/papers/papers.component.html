@@ -1,5 +1,20 @@
-<div class = "container">
-  <div class="text-center" style="width: 100%;">
-    <h3>Coming soon</h3>
-  </div>
+<div class="container-fluid">
+  <mat-accordion class="m-5">
+     <mat-expansion-panel *ngFor="let paper of papers" class="mb-2">
+         <mat-expansion-panel-header>
+         <mat-panel-title>
+           {{paper.data.name}} - {{paper.data.year}}
+         </mat-panel-title>
+         </mat-expansion-panel-header>
+         <div class="container-fluid">
+            <div class="row" *ngIf="isStudent && canAnswerPaper(paper.data.subject)">
+              <div class="col-md-12">
+                <button mat-raised-button class="btn btn-sm" color="primary" (click)="loadPaper(paper)">Answer Paper</button>
+              </div>
+            </div>
+         </div>
+ 
+     </mat-expansion-panel>
+ 
+ </mat-accordion>
 </div>

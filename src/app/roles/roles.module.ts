@@ -37,6 +37,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { PaperDetailsModalComponent } from '../papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 
     ViewPostsComponent,
 
-    PapersComponent,
+    PapersComponent
 
     ],
     imports: [

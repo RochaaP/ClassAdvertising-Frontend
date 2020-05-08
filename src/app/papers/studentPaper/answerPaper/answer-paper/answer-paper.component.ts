@@ -14,7 +14,7 @@ import { AttemptModel } from 'src/app/attempts/attempt-model';
 import { UserModel } from 'src/app/users/user-model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { AttemptsService } from 'src/app/attempts/attempts.service';
-import * as firebase from 'firebase';
+import { firestore } from 'firebase/app';
 
 @Component({
   selector: 'app-answer-paper',
@@ -144,7 +144,7 @@ export class AnswerPaperComponent implements OnInit {
       highest: this.score,
       lowest: this.score, 
       no_of_attempts: 1,
-      timestamp: firebase.firestore.Timestamp.now(),
+      timestamp: firestore.Timestamp.now(),
       paper: this.paper.id,
       user: this.loggedInUser.id
     }

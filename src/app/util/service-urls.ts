@@ -19,6 +19,9 @@ export class ServiceUrls {
     public static getPapersByInstructorId(instructorId: string){
         return ServiceUrls.paperExtension + "instructor/" + instructorId;
     }
+    public static getSubjects_PapersByInstructorEmail(email: string){
+        return ServiceUrls.paperExtension + "instructoremail/" + email;
+    }
     public static getPapersBySubject(){
         return ServiceUrls.paperExtension + "subjects/";
     }

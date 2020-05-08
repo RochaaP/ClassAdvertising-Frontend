@@ -1,20 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
 
 import { AuthenticationService } from '../service/auth/authentication.service';
 import { Observable } from 'rxjs';
-// import { DataService } from "../../service/share/data.service";
-import { map, retryWhen } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { UserService } from 'src/app/users/user.service';
-import { WsResponse } from 'src/app/util/ws-response';
-import { WsType } from 'src/app/util/ws-type';
 import { SharedService } from 'src/app/shared/shared.service';
-import { UserModel } from 'src/app/users/user-model';
 
 
 interface User {
@@ -24,9 +15,6 @@ interface User {
   contact: string;
   university: string;
   profileImagePath: string;
-}
-interface UserId extends User {
-  id: string;
 }
 
 
@@ -87,7 +75,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    private userService: UserService,
     private sharedService: SharedService,
     private afs: AngularFirestore,
     private http: HttpClient,
@@ -235,7 +222,7 @@ export class RegisterComponent implements OnInit {
   // Register user with  provided Email/ Password
   registerUser() {
     this.authService.register(this.emailInput, this.passwordInput)
-      .then(res => {
+      .then(() => {
 
         // Send Varification link in email
         this.authService.sendEmailVerification().then(res => {
