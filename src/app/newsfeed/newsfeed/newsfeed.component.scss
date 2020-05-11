@@ -13,46 +13,26 @@
   box-shadow:         0 0 5px black;
 }
 
-// @keyframes slideDown {
-//   0%, 100% { -webkit-transform: translateY(-50px); }
-//   10%, 90% { -webkit-transform: translateY(0px); }
-// }
-// @keyframes slideDown {
-//   0%, 100% { -moz-transform: translateY(-50px); }
-//   10%, 90% { -moz-transform: translateY(0px); }
-// }
-
-// .cssanimations.csstransforms .note {
-//   -webkit-transform: translateY(-50px);
-//   -webkit-animation: slideDown 2.5s 1.0s 1 ease forwards;
-//   -moz-transform:    translateY(-50px);
-//   -moz-animation:    slideDown 2.5s 1.0s 1 ease forwards;
-// }
-
-// .cssanimations.csstransforms .close {
-//   display: none;
-// }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 .card {
     width: 500px;
-    padding: -5px;
     margin-top: 15px;
     filter:drop-shadow(4px 4px 4px gray);
   }
-  .val{
-    // max-width: 20px;
-    max-height: 20px;
-    object-position: right;
-    // background-image: url('../../../assets/propic/propic.png');
-  }
+.val{
+  max-height: 20px;
+  object-position: right;
+  // background-image: url('../../../assets/propic/propic.png');
+}
 
 
-  .container {
-    height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px
+.container {
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  
 }
 
 .parallax {
@@ -296,42 +276,23 @@ div:last-of-type span {
   max-height: 500px;
 }
 .postContainer{
-  // height: 90%;
-  // display: flex;
-  // width: 700px;
   margin-top: 20px;
   border-radius: 20px;
-  // padding-top: 20px;
-  // justify-content: center;
-  // align-items: center;
   padding: 15px;
-  // background-color: #80d474;
-//   background: #00B4DB;  /* fallback for old browsers */
-// background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
-// background: linear-gradient(to right, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
   background: #1f4037;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #99f2c8, #2a4c43);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
   box-shadow: 1px 12px 54px rgba(22, 21, 21, 0.2);
-
   margin:0 auto;
-
-
 }
 
 .postContainer:hover{
-  // box-shadow: 1px 12px 54px rgba(22, 21, 21, 0.2);
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-
   position:relative;
   z-index: 3;
 }
 
 .header-image {
-
   // background-image: url('../../../assets/propic/propic.png');
   background-size: cover;
   border-radius: 70%;
@@ -342,24 +303,12 @@ div:last-of-type span {
 
 
 .proPicImage{
-  // margin: 10px;
-  // padding: 10px;
   margin-bottom: 30px;
   height: 60px;
   width: 60px;
 }
-//  .image{
-//   margin-top: 20px;
-//   margin-bottom: 10px;
-//   max-width: 30px ;
-//   height: auto;
-//   max-height: 200px;
-//   transition: transform .2s;
-//   // height: auto;
-// }
+
 .title{
-  // margin-top: 15px;
-  // margin-left: 20px;
   align-items: center;
   font-size: large;
   color: #110d7a;
@@ -367,8 +316,6 @@ div:last-of-type span {
 
 .zoom {
   max-width: 300px;
-  // width: 100%;
-  // height: auto;
   max-height: 250px;
   width: 100%;
   transition: transform .5s;
@@ -383,22 +330,14 @@ div:last-of-type span {
   position: relative;
 }
 
-.verify {
-  // position: relative;
-  // right: -10px;
-//   object-position: right;
-//   // top: 10px;
-//   // display: block;
-//   justify-content: right;
-}
 .verify-image{
-width: 50px;
-right: 0;
-top: 0;
-display: block;
-width: 50px;
-text-indent: -999em;
-text-decoration: none;
+  width: 50px;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 50px;
+  text-indent: -999em;
+  text-decoration: none;
 }
 //////////////////////////
 .click{

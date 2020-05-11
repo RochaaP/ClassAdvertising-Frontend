@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-support',
@@ -11,9 +12,21 @@ export class SupportComponent implements OnInit {
   public viewPrivacy: boolean = false;
   public viewDoc: boolean = true;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.route
+      .queryParams
+      .subscribe(params => {
+        console.log(params);
+        //  Defaults to 0 if no query param provided.
+        this.viewPrivacy = params.viewPrivacy;
+        this.viewTermsConditions = params.viewTermsConditions;
+        // this.page = +params['page'] || 0;
+      });
   }
 
   public handleToggles(buttonType: string){

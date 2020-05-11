@@ -4,11 +4,11 @@
   
 
   .footer {
-    // display: flex;
-    // flex-flow: row wrap;
+    display: flex;
+    flex-flow: row wrap;
     padding: 30px 30px 20px 30px;
     color: #2f2f2f;
-    background-color: rgb(154, 221, 167);
+    background-color: #2a3052;
     border-top: 1px solid #e5e5e5;
   }
   
@@ -37,11 +37,12 @@
   .nav__title {
     font-weight: 400;
     font-size: 15px;
+    color:  #E98024;
   }
   
   .footer address {
     font-style: normal;
-    color: rgb(0, 0, 0);
+    color:  #E98024;
   }
   
   .footer__btn {
@@ -50,9 +51,9 @@
     justify-content: center;
     height: 36px;
     max-width: max-content;
-    background-color: rgb(33, 33, 33, 0.07);
+    background-color: rgba(44, 41, 41, 0.07);
     border-radius: 100px;
-    color: #2c2b2b;
+    color: #E98024;
     line-height: 0;
     margin: 0.6em 0;
     font-size: 1rem;
@@ -83,7 +84,7 @@
   }
   
   .nav__ul a {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
   }
   
   .nav__ul--extra {
@@ -94,7 +95,7 @@
   .legal {
     display: flex;
     flex-wrap: wrap;
-    color: rgb(0, 0, 0);
+    color:  #E98024;
   }
     
   .legal__links {

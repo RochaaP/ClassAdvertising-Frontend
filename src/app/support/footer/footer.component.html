@@ -66,21 +66,26 @@
         
         <ul class="nav__ul">
           <li>
-            <a href="#">Privacy Policy</a>
+            <a [routerLink]="'/support/about'">About</a>
+          </li>
+          <li>
+            <a [routerLink]="'/support'">Support</a>
           </li>
           
           <li>
-            <a href="#">Terms of Use</a>
+            <a [routerLink]="'/support'"  [queryParams]="{viewPrivacy: true}">Privacy Policy</a>
           </li>
           
           <li>
-            <a href="#">Sitemap</a>
+            <a [routerLink]="'/support'"  [queryParams]="{viewTermsConditions: true}">Terms of Use</a>
           </li>
+          
+       
         </ul>
       </li>
     </ul>
     
     <div class="legal">
-      <p>&copy; 2020 Something. All rights reserved.</p>
+      <p>&copy; 2020 mtute.lk. All rights reserved.</p>
     </div>
   </footer>
