@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   zoom : {
     zoomClientId: "eezr713VT0u99HLZYP6wng",
-    redirect_url: "https%3A%2F%2Fmtute.herokuapp.com%2Fzoom"
+    redirect_url: "https%3A%2F%2Fwww.mtute.com%2Fzoom"
   },
   firebase : {
     apiKey: "AIzaSyD04gUUUibi9QCt47geqWxi9AX7k28zRHk",

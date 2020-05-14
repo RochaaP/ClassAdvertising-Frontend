@@ -1,12 +1,14 @@
 export class UserModel {
-    role: string;
     adminFeatures: boolean;
-    firstname: string;
-    lastname: string;
-    email: string;
-    mobile: string;
-    units:  string [];
-    img_url: string;
-    metadata: string;
-    grade_level: string;
+  contact: string;
+  create: firebase.firestore.Timestamp;
+  email: string;
+  firstname: string;
+  img_url: string;
+  lastname: string;
+  role: string;
+  verify: string;
+  grade_level: string;
+  metadata: string;
+  units: string[];
 }
