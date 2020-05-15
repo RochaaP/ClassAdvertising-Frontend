@@ -31,7 +31,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  // padding: 10px;
   
 }
 
@@ -248,7 +248,7 @@ div:last-of-type span {
 
 .section_content{
   margin: auto;
-  padding-top: 30px;
+  padding-top: 50px;
 }
 
 .imageContainer{
@@ -394,4 +394,8 @@ body {
 		stroke-width: 5;
 		transition: stroke-dashoffset 800ms ease-out;
 	}
+}
+
+.image_dest {
+  padding-bottom: 12px;
 }

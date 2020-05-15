@@ -3,9 +3,10 @@
 
 
     <div class = 'col-md-3'>
+      Filter by Instructor Name 
       <div class='row radios'>
         <!-- <mat-radio-button value="Name" (change)="eventByName($event)" >Name</mat-radio-button> -->
-
+       
         <!-- <div *ngIf="!showByName"> -->
           <mat-form-field class="full-width">
             <input matInput placeholder="Enter Name" [(ngModel)]='searchNameInput' name='searchName' required (keydown.enter)='searchName()'>
@@ -17,12 +18,14 @@
 
         <!-- </div> -->
       </div>
+
+      Filter by Classes
       <div class ='row radios '>
 
         <!-- <mat-radio-button value="Class" (change)="eventByClass($event)">Class</mat-radio-button> -->
 
         <!-- <div *ngIf="showByClass"> -->
-
+         
           <mat-form-field class="full-width">
             <input matInput placeholder="Enter Lecture's Name" [(ngModel)]='searchInstructorInput' name='searchClass' >
           </mat-form-field>

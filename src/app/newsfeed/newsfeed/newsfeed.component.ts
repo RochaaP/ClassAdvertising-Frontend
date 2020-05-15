@@ -6,9 +6,7 @@ import { timeout, retry, catchError } from 'rxjs/operators';
 import { NotificationBarService, NotificationType } from 'ngx-notification-bar';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-// import { InfiniteScroll } from '../../service/scrollable/infinite-scroll.directive';
-// import { PaginationService } from './papination.service';
+import { faFilm, faChild, faDollarSign, faComment, faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-newsfeed',
@@ -37,6 +35,11 @@ export class NewsfeedComponent implements OnInit {
   morePreviousPosts: boolean;
 
   MESSAGE_NO_POSTS = 'You have reached to the end';
+
+  childIcon = faChild;
+  moneyIcon = faDollarSign;
+  commentIcon = faComment;
+  envilopIcon = faEnvelopeOpenText;
 
   constructor(
     private http: HttpClient,
