@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   zoom : {
     zoomClientId: "eezr713VT0u99HLZYP6wng",
-    redirect_url: "https%3A%2F%2Fwww.mtute.com%2Fzoom"
+    redirect_url: "https%3A%2F%2Fwww.mtute.lk%2Fzoom"
   },
   // firebase : {
   //   apiKey: "AIzaSyAVyXc1Tqi46-xY1RJ_UjyUBujyIP6n5R0",
