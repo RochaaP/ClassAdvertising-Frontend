@@ -8,19 +8,23 @@
           <div class = "col-10 formInputs">
   
               <mat-form-field class="full-width">
-                <input matInput placeholder="Title" [(ngModel)]="titleInput" name='title' required>
+                <input matInput placeholder="Title" [(ngModel)]="this.note.name" name='name' required>
               </mat-form-field>
   
               <mat-form-field class="full-width">
-                <input matInput placeholder="Grade" [(ngModel)]="gradeInput" name='grade' required>
+                <input matInput placeholder="Grade" [(ngModel)]="note.gradeLevel" name='grade' required>
               </mat-form-field>
 
               <mat-form-field class="full-width">
-                <input matInput placeholder="Subject" [(ngModel)]="subjectInput" name='subject' required>
+                <input matInput placeholder="Subject" [(ngModel)]="note.subject" name='subject' required>
+              </mat-form-field>
+
+              <mat-form-field class="full-width">
+                <textarea matInput placeholder="Year" [(ngModel)]="note.year" name='year' required></textarea>
               </mat-form-field>
   
               <mat-form-field class="full-width">
-                <textarea matInput placeholder="Description" [(ngModel)]="descriptionInput" name='decription' required></textarea>
+                <textarea matInput placeholder="Description" [(ngModel)]="note.description" name='decription' required></textarea>
                 <mat-hint>Make this Short</mat-hint>
               </mat-form-field>
   

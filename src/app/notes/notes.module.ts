@@ -7,13 +7,10 @@ import { ViewNotesComponent } from './view-notes/view-notes.component';
 import { NotesRoutingModule } from './notes-routing.module';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatButtonModule, MatTabsModule, MatTableModule, MatCardModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, MatGridListModule, MatListModule, MatSnackBarModule, MatDividerModule, MatStepperModule, MatSidenavModule, MatProgressBarModule, MatIconModule, MatRadioModule, MatPaginatorModule, MatDialogModule } from '@angular/material';
-
-
-
 
 
 @NgModule({
@@ -52,6 +49,9 @@ import { MatButtonModule, MatTabsModule, MatTableModule, MatCardModule, MatExpan
       MatPaginatorModule,
       MatDialogModule,
     ],
-    schemas: [NO_ERRORS_SCHEMA]
+    schemas: [NO_ERRORS_SCHEMA],
+    providers: [
+      NgbActiveModal,
+    ]
   })
   export class NotesModule { }

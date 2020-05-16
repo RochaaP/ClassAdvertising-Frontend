@@ -35,7 +35,7 @@
 
 
       <div class ="container-fluid postfield" *ngIf='!notesSearchClicked'>
-          <ul *ngFor ="let field of response">
+          <ul *ngFor ="let field of response ">
             <div class='postContainer'>
 
               <div class="row">
@@ -52,8 +52,8 @@
                   <div class= "col">
                     <p>By <a class="click" (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'> {{field.data.name}}</a></p>
                     <!-- <p>{{field.data.create }}</p> -->
-                    <p class="title">{{field.data.title}}</p>
-                    {{field.data.create.toDate  | date: 'dd.mm.yyyy hh:MM:ss'}}
+                    <p class="title">{{field.data.name}}</p>
+                    <!-- {{field.data.timestamp  | date: 'dd.mm.yyyy hh:MM:ss'}} -->
                   </div>
               </div>
 
@@ -61,7 +61,7 @@
               <div class ="row">
                 <div class="col-md-4 col-lg">
                   <p><nga-read-more [text]="field.data.description" [textLength]="170"></nga-read-more></p>
-                  <p class= 'click' (click)='viewNote(field.data.path)'>View Note</p>
+                  <p class= 'click' (click)='viewNote(field.data.contentURL)'>View Note</p>
                 </div>
 
               </div>
