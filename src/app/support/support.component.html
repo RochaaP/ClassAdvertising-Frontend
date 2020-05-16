@@ -1,10 +1,10 @@
 <!-- Body -->
-<div class="container-fluid">
-    <div class="card m-5">
-        <div class="card-header text-center" style="align-items: center;">
-            <h4 class="mb-2">Support</h4>
-        </div>
-        <div class="d-block d-sm-block d-md-none d-lg-none">
+<div class="d-block d-sm-block d-md-none d-lg-none">
+    <div class="container-fluid">
+        <div class="card m">
+            <div class="card-header text-center" style="align-items: center;">
+                <h4 class="mb-2">Support</h4>
+            </div>
             <div class=" card-body row">      
                 <div class="col-sm-12 col-xs-12 border-right border-dark">   
                     <div class="row">
@@ -23,7 +23,7 @@
                         <div class="btn btn-sm btn-outline-dark mb-1 mr-2" (click)="handleToggles('privacy')" style="width: 100%;">Privacy</div>
                     </div>
                 </div>
-                <div class="ol-sm-12 col-xs-12">
+                <div class="col-sm-12 col-xs-12">
                     <div *ngIf="viewTermsConditions">
                         <h1>TERMS AND CONDITIONS</h1>  
                         Last updated: 2020-04-01<br>
@@ -606,9 +606,9 @@
                         </ol>
                     </div>
                     <div *ngIf="viewDoc">
-                        <ul class="mtute">
+                        <ul class="mtute sm">
                             <a id="mtuteDoc_sm"></a>
-                            <li class="mtute mb-4">
+                            <li class="mtute sm mb-4">
                                 <b>Join with mtute.lk</b>
                                 <p>
                                     If you are still wonering whether you want join the mtute community or not follow this documentation and go ahead we are waiting for you.
@@ -625,16 +625,22 @@
                                         <ol>
                                             <li>
                                                 Click "Account" on the navigation menu.<br>
-                                                <img src="../../assets/support/Signup 01.JPG">
+                                                <a href="../../assets/support/Signup 01.JPG">
+                                                    <img src="../../assets/support/Signup 01.JPG">
+                                                </a>
                                             </li>
                                             <li>
                                                 Click the "Create an Account" tag below the "Login" button.<br>
-                                                <img src="../../assets/support/Signup 02.JPG">
+                                                <a href="../../assets/support/Signup 02.JPG">
+                                                    <img src="../../assets/support/Signup 02.JPG">
+                                                </a>
                                             </li>
                                             <li>
                                                 Select the corresponding user-type. 
                                                 <p>ex: If you are an instructor go and select "Teacher" button in the left corner.</p>
-                                                <img src="../../assets/support/Signup 03.JPG">
+                                                <a href="../../assets/support/Signup 03.JPG">
+                                                    <img src="../../assets/support/Signup 03.JPG">
+                                                </a>
                                             </li>
                                             <li>
                                                 Fill the required fields and click register.
@@ -680,7 +686,7 @@
                                 </ul>
                             </li>
                             <hr>
-                            <li class="mtute" id="zoomDoc_sm">
+                            <li class="mtute sm" id="zoomDoc_sm">
                                 <a id="zoomDoc"></a>
                                 <b>Use ZOOM with mtute.lk</b>
                                 <p>
@@ -719,7 +725,18 @@
                 </div>
             </div> 
         </div>
-        <div class="d-none d-sm-none d-md-block d-lg-block">
+    </div>
+    <div class="footer">
+        <small>For more support contact developer Name: Erantha Welikala, Email: eranthawelikala@gmail.com, "Mobile": +94775778979</small>
+    </div>
+</div>
+
+<div class="d-none d-sm-none d-md-block d-lg-block">
+    <div class="container-fluid">
+        <div class="card m-5">
+            <div class="card-header text-center" style="align-items: center;">
+                <h4 class="mb-2">Support</h4>
+            </div>
             <div class="card-body row">      
                 <div class="menu col-md-2 col-sm-12 col-xs-12 border-right border-dark">   
                     <div class="row">
@@ -1340,16 +1357,22 @@
                                         <ol>
                                             <li>
                                                 Click "Account" on the navigation menu.<br>
-                                                <img src="../../assets/support/Signup 01.JPG">
+                                                <a href="../../assets/support/Signup 01.JPG">
+                                                    <img src="../../assets/support/Signup 01.JPG">
+                                                </a>
                                             </li>
                                             <li>
                                                 Click the "Create an Account" tag below the "Login" button.<br>
-                                                <img src="../../assets/support/Signup 02.JPG">
+                                                <a href="../../assets/support/Signup 02.JPG">
+                                                    <img src="../../assets/support/Signup 02.JPG">
+                                                </a>
                                             </li>
                                             <li>
                                                 Select the corresponding user-type. 
                                                 <p>ex: If you are an instructor go and select "Teacher" button in the left corner.</p>
-                                                <img src="../../assets/support/Signup 03.JPG">
+                                                <a href="../../assets/support/Signup 03.JPG">
+                                                    <img src="../../assets/support/Signup 03.JPG">
+                                                </a>
                                             </li>
                                             <li>
                                                 Fill the required fields and click register.
@@ -1506,7 +1529,7 @@
             </div> 
         </div>
     </div>
-</div>
-<div class="footer mr-3">
-    <small>For more support contact developer Name: Erantha Welikala, Email: eranthawelikala@gmail.com, "Mobile": +94775778979</small>
+    <div class="footer mr-3">
+        <small>For more support contact developer Name: Erantha Welikala, Email: eranthawelikala@gmail.com, "Mobile": +94775778979</small>
+    </div>
 </div>

@@ -67,9 +67,7 @@ export class AnswerPaperComponent implements OnInit {
   }
 
   public answerEvent(){
-    console.log(this.answers);
     let tmp_arr = this.answers.filter(element=>{return element != undefined});
-    console.log(tmp_arr)
     this.questions_left = this.answers.length - tmp_arr.length;
   }
 

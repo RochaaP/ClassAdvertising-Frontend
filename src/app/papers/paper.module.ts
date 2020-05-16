@@ -12,11 +12,12 @@ import { PaperMarkingModelComponent } from './studentPaper/answerPaper/paperMark
 import { KeyboardComponent } from '../util/keyboard/keyboard.component';
 import { AngularSplitModule } from 'angular-split';
 import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatRadioModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatRadioModule, MatExpansionModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountdownModule } from 'ngx-countdown';
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { CountdownModule } from 'ngx-countdown';
     NgbModule,
     AngularSplitModule,
     CountdownModule,
-
+    QuillModule,
+    MatExpansionModule,
     MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
