@@ -2,7 +2,8 @@
 export class notesServiceURL {
     private static servicePrefix = 'api/';
 
-    private static notesExtension = notesServiceURL.servicePrefix + 'notes/';
+    private static notesExtension = notesServiceURL.
+    servicePrefix + 'notes/';
     // public static GET_PAPERS = ServiceUrls.paperExtension;
     public static CREAT_NOTE = notesServiceURL.notesExtension;
 
@@ -10,4 +11,7 @@ export class notesServiceURL {
         return notesServiceURL.notesExtension + 'uploadfiles';
     }
 
+    public static viewNote() {
+        return notesServiceURL.notesExtension + 'viewNotes';
+    }
 }
