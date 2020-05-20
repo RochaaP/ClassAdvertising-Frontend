@@ -16,4 +16,5 @@ export class WsType {
     public static GET_ATTEMPTS_USER_PAPER = 41;
     public static SAVE_ATTEMPT = 42;
     public static GET_USER = 5;
+    public static GET_SUBJECTS_INSTRUCTORS = 6;
 }

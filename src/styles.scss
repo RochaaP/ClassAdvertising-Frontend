@@ -13,3 +13,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; color: blue
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #5537a8;
+  border-radius: 0.75rem;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #2a3052;
+    border-radius: 0.75rem;
+  }
+
+body::-webkit-scrollbar {
+    width: 0.75rem;
+  }

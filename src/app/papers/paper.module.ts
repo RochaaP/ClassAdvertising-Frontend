@@ -12,7 +12,7 @@ import { PaperMarkingModelComponent } from './studentPaper/answerPaper/paperMark
 import { KeyboardComponent } from '../util/keyboard/keyboard.component';
 import { AngularSplitModule } from 'angular-split';
 import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatRadioModule, MatExpansionModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatRadioModule, MatExpansionModule, MatSelectModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -45,6 +45,7 @@ import { QuillModule } from 'ngx-quill';
     MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatInputModule,
     MatSnackBarModule,
     MatRadioModule

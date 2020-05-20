@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { faAsterisk, faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faAsterisk, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PaperModel } from '../paper-model';
 import { PaperService } from '../paper.service';
 import { SharedService } from 'src/app/shared/shared.service';
@@ -9,9 +9,9 @@ import { WsType } from 'src/app/util/ws-type';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { UserModel } from 'src/app/users/user-model';
 import { SubjectModel } from 'src/app/subjects/subject-model';
-import { SubjectService } from 'src/app/subjects/subject.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CreatePaperComponent } from '../createPaper/create-paper/create-paper.component';
+import { CommonService } from 'src/app/service/common.service';
 
 @Component({
   selector: 'app-view-paper',
@@ -23,7 +23,6 @@ export class ViewPaperComponent implements OnInit {
   faAsterisk = faAsterisk;
   faPlus = faPlus;
 
-  private isSubmitted: boolean = false;
 
   private subjectGroup: {id: string, data: SubjectModel}[] = [];
 
@@ -39,7 +38,7 @@ export class ViewPaperComponent implements OnInit {
     public fb: FormBuilder,
     private modalService: NgbModal, 
     private paperService: PaperService,
-    private subjectService: SubjectService,
+    private commonService: CommonService,
     private spinnerService: Ng4LoadingSpinnerService,
     private sharedService: SharedService) { 
       this.loggedInUser = this.sharedService.getLoggedInUser();
@@ -89,7 +88,7 @@ export class ViewPaperComponent implements OnInit {
     this.createDummyPaper();
     this.paperService.getPapersByInstructorId(this.loggedInUser.id, this);
     this.spinnerService.show();
-    this.subjectService.getSubjectsAndInstructors(this);
+    this.commonService.getSubjectsAndInstructors(this);
   }
 
   // Year will be extracted from the selected date
@@ -128,7 +127,7 @@ export class ViewPaperComponent implements OnInit {
     if(serviceType == WsType.GET_ALL_PAPERS){
       console.log(data.payload);
       this.papers = data.payload;    
-      this.subjectService.getSubjectsAndInstructors(this);
+      this.commonService.getSubjectsAndInstructors(this);
     }
     else if(serviceType == WsType.GET_SUBJECTS){
       console.log(data.payload);
@@ -148,7 +147,7 @@ export class ViewPaperComponent implements OnInit {
     }
   }
 
-  onFail(data: WsResponse, serviceType: WsType){
+  onFail(serviceType: WsType){
     if(serviceType == WsType.GET_ALL_PAPERS){
       this.spinnerService.hide();
     }

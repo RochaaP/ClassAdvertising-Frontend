@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PaperModel } from '../paper-model';
 import { QuestionModel } from '../../question/question-model';
 import { SharedService } from 'src/app/shared/shared.service';
-import { TranslateService } from '@ngx-translate/core';
 import { QuestionService } from '../../question/question.service';
 import { WsResponse } from 'src/app/util/ws-response';
 import { WsType } from 'src/app/util/ws-type';
@@ -12,10 +11,10 @@ import { Subscription } from 'rxjs';
 import { PaperService } from '../paper.service';
 import { UserModel } from 'src/app/users/user-model';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { SubjectService } from 'src/app/subjects/subject.service';
 import { SubjectModel } from 'src/app/subjects/subject-model';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/service/common.service';
 
 @Component({
   selector: 'app-edit-paper',
@@ -35,17 +34,15 @@ export class EditPaperComponent implements OnInit {
   public isShowPaperDetail: boolean = false;
   public isShowQuestion: boolean = false;
 
-  private width;
 
   public publish: string = 'no';
   public description: string = "";
 
   constructor(
     private sharedService: SharedService,
-    private translate: TranslateService,
     private questionService: QuestionService, 
     private paperService: PaperService,
-    private subjectService: SubjectService,
+    private commonService: CommonService,
     private spinnerService: Ng4LoadingSpinnerService,
     private modalService: NgbModal,
     private snackBar: MatSnackBar,
@@ -62,7 +59,7 @@ export class EditPaperComponent implements OnInit {
       this.isShowPaperDetail = false;
       this.paper = res.paper;
       this.questionService.getQuestionByPaperId(this.paper.id, this);
-      this.subjectService.getSubjectsAndInstructors(this);
+      this.commonService.getSubjectsAndInstructors(this);
       this.isShowPaperDetail = true;
     });    
     // this.sharedService.changeCreatePaperWidthRespond().subscribe(res =>{
@@ -216,7 +213,7 @@ export class EditPaperComponent implements OnInit {
     this.questionList.push(question);
   }
 
-  public changePositionQuestion(question: QuestionModel, index: number, direction: string){
+  public changePositionQuestion(index: number, direction: string){
     console.log("___changePositionQuestion()___");
     if (direction == "up"){
       [this.questionList[index], this.questionList[index - 1]] = [this.questionList[index - 1], this.questionList[index]];
@@ -337,7 +334,7 @@ export class EditPaperComponent implements OnInit {
     }
   }
 
-  onFail(data: WsResponse, serviceType: WsType){
+  onFail(serviceType: WsType){
     if (serviceType == WsType.GET_QUESTIONS_BY_PAPER_ID){
       this.spinnerService.hide();
     }
