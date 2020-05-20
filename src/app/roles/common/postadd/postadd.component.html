@@ -8,20 +8,20 @@
         <div class = "col-10 formInputs">
 
             <mat-form-field class="full-width">
-              <input matInput placeholder="Title" [(ngModel)]="titleInput" name='title' required>
+              <input matInput placeholder="Title" [(ngModel)]="post.title" name='title' required>
             </mat-form-field>
 
             <mat-form-field class="full-width">
-              <textarea matInput placeholder="Description" [(ngModel)]="descriptionInput" name='decription' required></textarea>
+              <textarea matInput placeholder="Description" [(ngModel)]="post.description" name='decription' required></textarea>
               <mat-hint>Make this Short</mat-hint>
             </mat-form-field>
 
             <mat-form-field class="full-width">
-              <input matInput placeholder="City" [(ngModel)]="cityInput" name='city' required>
+              <input matInput placeholder="City" [(ngModel)]="post.city" name='city' required>
             </mat-form-field>
 
             <mat-form-field class ='full-width'>
-              <mat-select placeholder="District" [(ngModel)]="districtInput" name='District' required>
+              <mat-select placeholder="District" [(ngModel)]="post.district" name='District' required>
                 <mat-option value="Ampara">Ampara</mat-option>
                 <mat-option value="Anuradhapura">Anuradhapura</mat-option>
                 <mat-option value="Badulla">Badulla</mat-option>
@@ -51,7 +51,7 @@
             </mat-form-field>
 
             <mat-form-field class="full-width">
-              <input matInput placeholder="Contact" [(ngModel)]="contactInput" name='contact' required>
+              <input matInput placeholder="Contact" [(ngModel)]="post.contact" name='contact' required>
             </mat-form-field>
 
             <div class="form-group">

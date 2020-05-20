@@ -240,6 +240,8 @@ export class EditProfileInstructorComponent implements OnInit {
     this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
     this.fileProfile.then(data => {
       this.profileMetaData = JSON.stringify(data.metadata);
+    console.log(this.profileMetaData);
+        
     });
     this.percentageProfile = this.fileProfile.percentageChanges();
     // console.log(this.task.img_url());
@@ -256,6 +258,7 @@ export class EditProfileInstructorComponent implements OnInit {
   }
 
   deleteProfile() {
+    console.log(this.profileMetaData);
     if (this.profileMetaData) {
       console.log('edit profile inst / delete profile / '+ this.profileMetaData );
       this.afStorage.ref(JSON.parse(this.profileMetaData).fullPath).delete().subscribe(() => {

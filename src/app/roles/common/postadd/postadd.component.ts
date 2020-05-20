@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { PostsService } from '../posts.service';
+import { UploadFilesService } from 'src/app/service/Upload-files/upload-files.service';
 
 
 @Component({
@@ -39,10 +41,21 @@ export class PostaddComponent implements OnInit {
   id: string;
   registerItem: string;
   response: any;
+  metaData: any;
 
+
+  post: any = {
+    title: '',
+    description: '',
+    city: '',
+    district: '',
+    contact: '',
+  };
 
   MESSAGE_SUCCESS = 'POST UPDATED';
   MESSAGE_FAIL = 'POST FAILED';
+  sub: any;
+  status: any;
 
   constructor(
     private afStorage: AngularFireStorage,
@@ -52,7 +65,10 @@ export class PostaddComponent implements OnInit {
     private http: HttpClient,
     public router: Router,
     private snackBar: MatSnackBar,
-    private spinnerService: Ng4LoadingSpinnerService
+    private postsService: PostsService,
+    private spinnerService: Ng4LoadingSpinnerService,
+    private uploadFilesService: UploadFilesService,
+
   ) { }
 
   toggleHover(event: boolean) {
@@ -61,7 +77,7 @@ export class PostaddComponent implements OnInit {
 
   ngOnInit() {
     this.userDetails = this.authService.isUserLoggedIn();
-    console.log('userdetails' + this.userDetails);
+    console.log('userdetails' + this.userDetails.email);
     this.registerItem = JSON.parse(localStorage.getItem('registerItem'));
     console.log('registerItem Postadd ' + this.registerItem);
     this.uploadImage = false;
@@ -78,44 +94,31 @@ export class PostaddComponent implements OnInit {
   onSubmit() {
     this.spinnerService.show();
 
-    let userValues = {};
+    // let userValues = {};
     const id = this.afs.createId();
     this.id = id.toString();
-
-    userValues = {
-      id: this.id,
-      registerItem: this.registerItem,
-      email: this.userDetails.email,
-      title: this.titleInput,
-      city: this.cityInput,
-      district: this.districtInput,
-      contact: this.contactInput,
-      description: this.descriptionInput,
-      path: this.downloadURL,
-    };
-
-    this.postAPIData(userValues).subscribe((response) => {
-      console.log('response from POST API is ', response);
-      this.response = response;
-      console.log(this.response.status);
-      if (this.response.status === 200) {
+    this.post.metaData = this.metaData;
+    this.post.contentURL = this.downloadURL;
+    this.post.registerItem = this.registerItem;
+    this.post.email = this.userDetails.email;
+  
+    this.status = this.postsService.addPost(this.post, this.id);
+    this.sub = this.postsService.getStatus().subscribe(status => {
+      if (status.status === 200) {
+        console.log('herer ',status.status)
         this.openSnackBar(this.MESSAGE_SUCCESS);
         this.spinnerService.hide();
         this.navi();
       }
-      else if (this.response.status === 400) {
+      else {
         this.openSnackBar(this.MESSAGE_FAIL);
         this.spinnerService.hide();
       }
-    }, (error) => {
-      console.log('error during post is ', error);
-      this.openSnackBar(this.MESSAGE_FAIL);
-      this.spinnerService.hide();
+      this.sub.unsubscribe();
     });
-
-    // this.descriptionInput = '';
-    // this.router.navigate(['/']);
+   
   }
+
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Done', {
       duration: 5000,
@@ -137,7 +140,7 @@ export class PostaddComponent implements OnInit {
     this.uploadImage = false;
   }
 
-  upload(event) {
+  lupload(event) {
     this.uploadImage = true;
     const randomId = Math.random().toString(36).substring(2);
     const path = `posts/${Date.now()}_${randomId}`;
@@ -148,6 +151,26 @@ export class PostaddComponent implements OnInit {
     this.fileposts = this.afStorage.upload(path, event.target.files[0]);
     this.percentageposts = this.fileposts.percentageChanges();    // this.task = this.afStorage.upload(path, event.target.files[0]);
 
+  }
+  upload(event) {
+    this.uploadImage = true;
+    const tableName = 'posts';
+    this.uploadFilesService.upload(event, tableName);
+    this.percentageposts = this.uploadFilesService.getPercentage(); // observe percentage
+    console.log(this.percentageposts);
+    this.uploadFilesService.getDownloadURL().subscribe(url => {
+        this.downloadURL = url.downloadURL;
+    });
+    this.uploadFilesService.getMetadata().subscribe(meta => {
+      this.metaData = meta.metadata;
+      // console.log('add note ',JSON.parse(this.metaData).fullPath);
+    });
+  }
+  deleteFile() {
+    this.spinnerService.show();
+    const state = this.uploadFilesService.delete(JSON.parse(this.metaData).fullPath);
+    console.log(state);
+    this.spinnerService.hide();
   }
 
 }

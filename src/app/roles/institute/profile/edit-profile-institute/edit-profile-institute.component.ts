@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { type } from 'os';
 
 
 @Component({
@@ -169,6 +170,7 @@ export class EditProfileInstituteComponent implements OnInit {
   }
 
   deleteProfile() {
+   
     if (this.profileMetaData) {
       this.afStorage.ref(JSON.parse(this.profileMetaData).fullPath).delete().subscribe(() => {
       }, (error) => {
