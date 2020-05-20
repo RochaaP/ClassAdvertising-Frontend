@@ -20,15 +20,14 @@ export class NotesService {
 
     public addNote(notesDetails: object, id: string) {
 
-        this.http.post(notesServiceURL.addNote(), {notesDetails, id}).subscribe((response) => {
+        this.http.post(notesServiceURL.addNote(), {notesDetails, id}).subscribe((response: any) => {
             console.log('notes service/ addNote() / response ', response);
-            this.setResponse(response);
-            console.log(this.response.status);
-            return this.response.status;
+            // this.setResponse(response);
+            // console.log(this.response.status);
+            this.setStatus(response.status);
 
         }, (error) => {
             console.log('error during post is ', error);
-            return 0;
         });
 
     }

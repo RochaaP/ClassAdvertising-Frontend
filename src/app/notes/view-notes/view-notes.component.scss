@@ -1,7 +1,4 @@
 ///////notes///////
-.container-fluid{
-    // margin-top: 20px;
-  }
   .postfield{
     // background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
     // https://www.scottlib.org/ImageRepository/Document?documentID=3348
@@ -98,23 +95,15 @@
     z-index: 99 !important;
     position: relative;
   }
-  
-  .verify {
-    // position: relative;
-    // right: -10px;
-  //   object-position: right;
-  //   // top: 10px;
-  //   // display: block;
-  //   justify-content: right;
-  }
+ 
   .verify-image{
-  width: 50px;
-  right: 0;
-  top: 0;
-  display: block;
-  width: 50px;
-  text-indent: -999em;
-  text-decoration: none;
+    width: 50px;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 50px;
+    text-indent: -999em;
+    text-decoration: none;
   }
   //////////////////////////
   .click{

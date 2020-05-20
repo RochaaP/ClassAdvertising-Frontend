@@ -29,7 +29,7 @@
               </mat-form-field>
   
               <div class="form-group">
-                  <div class="dropzone" appdropzone  (hovered)="toggleHover($event)" (dropped)="onDrop($event)" [class.hovering]="isHovering">
+                  <div class="dropzone"[class.hovering]="isHovering">
                     <!-- <div class="col-md-3"> -->
                     <div class="text-center">
                       <div *ngIf ='uploadFile'>

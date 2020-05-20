@@ -108,7 +108,7 @@ export class ViewNotesComponent implements OnInit {
 
 //   searchNotesClose() {
 //     this.searchedNotesList.splice(0, this.searchedNotesList.length);
-//     this.searchGradeInput = ''; 
+//     this.searchGradeInput = '';
 //     this.searchSubjectInput = '';
 //     this.notesSearchClicked = false;
 //     // (document.getElementById('nameRadioButton') as HTMLInputElement).checked = false;

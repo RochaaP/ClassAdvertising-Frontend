@@ -58,6 +58,7 @@ export class AddNotesComponent implements OnInit {
 
   MESSAGE_SUCCESS = 'POST UPDATED';
   MESSAGE_FAIL = 'POST FAILED';
+  sub: any;
 
   constructor(
     private afStorage: AngularFireStorage,
@@ -75,10 +76,7 @@ export class AddNotesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.userDetails = this.authService.isUserLoggedIn();
-    console.log('email '+ this.userDetails.email );
-
   }
 
   onSubmit() {
@@ -102,21 +100,25 @@ export class AddNotesComponent implements OnInit {
     // };
     console.log(this.note);
     this.status = this.notesService.addNote(this.note, this.id);
+    this.sub = this.notesService.getStatus().subscribe(status => {
 
-    if (this.status === 200) {
-      this.response = this.notesService.getResponse();
-      this.openSnackBar(this.MESSAGE_SUCCESS);
-      this.spinnerService.hide();
-      this.navi();
-    }
-    else if (this.status === 400 || this.status === 0) {
-      this.openSnackBar(this.MESSAGE_FAIL);
-      this.spinnerService.hide();
-    }
-    else {
-      this.openSnackBar(this.MESSAGE_FAIL);
-      this.spinnerService.hide();
-    }
+      if (status.status === 200) {
+        this.response = this.notesService.getResponse();
+        this.openSnackBar(this.MESSAGE_SUCCESS);
+        this.spinnerService.hide();
+        this.navi();
+      }
+      else if (status.status === 400 || status.status === 0) {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      else {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      
+      this.sub.unsubscribe();
+    });
   }
 
   openSnackBar(message: string) {
@@ -129,9 +131,6 @@ export class AddNotesComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  // postAPIData(userValues: object) {
-  //   return this.http.post('api/notes/uploadfiles', userValues);
-  // }
 
 
   deleteImage() {
@@ -140,17 +139,6 @@ export class AddNotesComponent implements OnInit {
     this.uploadFile = false;
   }
 
-  // deleteFile(){
-  //   console.log("___deleteFile()___");
-  // }
-
-  toggleHover(event: any){
-    console.log("___toggleHover()___");
-  }
-
-  onDrop(event: any){
-    console.log("___onDrop()___");
-  }
 
   upload(event) {
     this.uploadFile = true;
@@ -163,7 +151,6 @@ export class AddNotesComponent implements OnInit {
     });
     this.uploadFilesService.getMetadata().subscribe(meta => {
       this.metaData = meta.metadata;
-      // console.log('add note ',JSON.parse(this.metaData).fullPath);
     });
   }
   deleteFile() {
