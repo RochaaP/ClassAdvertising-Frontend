@@ -50,11 +50,14 @@ export class ServiceUrls {
     }
 
 
+    // Common URLs
+    private static commonExtension = ServiceUrls.servicePrefix + "common/";    
+    public static GET_SUBJECTS_INSTRUCTORS = ServiceUrls.commonExtension + "subjects_instructors/";
 
 
 
     // Subject URLs
-    private static subjectExtension = ServiceUrls.servicePrefix + "subjects/"
+    private static subjectExtension = ServiceUrls.servicePrefix + "subjects/";
     public static GET_SUBJECTS = ServiceUrls.subjectExtension;
     public static CREATE_SUBJECT = ServiceUrls.subjectExtension;
 

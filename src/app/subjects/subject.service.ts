@@ -12,8 +12,8 @@ export class SubjectService {
 
   constructor(private http: HttpClient) { }
 
-  public getSubjectsAndInstructors(callBack: WsCallback){
-    console.log("___getSubjectsAndUsers()___");
+  public getSubjects(callBack: WsCallback){
+    console.log("___getSubjects()___");
     let url = ServiceUrls.GET_SUBJECTS;
     this.http.get(url).subscribe(data =>{
       var modified = JSON.parse(JSON.stringify(data));
