@@ -402,7 +402,12 @@ body {
 .image_dest {
   padding-bottom: 12px;
 }
-section {
-  // display: table;
-  // margin: 8px;
+
+
+.floatingButton:focus {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  outline: none !important;
+    border: none !important;
 }
