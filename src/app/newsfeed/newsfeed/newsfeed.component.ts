@@ -55,7 +55,7 @@ export class NewsfeedComponent implements OnInit {
     this.pageLimit = 1;
     this.moreNextPosts = true;
     this.morePreviousPosts = false;
-
+    
 
     this.notificationBarService.create({
                           message: 'Welcome to mtute.lk.. Enjoy..',

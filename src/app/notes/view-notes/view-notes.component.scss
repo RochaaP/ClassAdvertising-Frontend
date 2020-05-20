@@ -25,9 +25,10 @@
   // background: linear-gradient(to right, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   
     background: #1f4037;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #99f2c8, #2a4c43);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    // background: -webkit-linear-gradient(to right, #99f2c8, #2a4c43);  /* Chrome 10-25, Safari 5.1-6 */
+    // background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   
+    background-image: url('../../../assets/notes/blackboard.jpg');
   
     box-shadow: 1px 12px 54px rgba(22, 21, 21, 0.2);
   
@@ -38,6 +39,7 @@
   .postContainer:hover{
     // box-shadow: 1px 12px 54px rgba(22, 21, 21, 0.2);
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    // background-image: url('../../../assets/propic/propic.png');
   
     position:relative;
     z-index: 3;
@@ -75,7 +77,7 @@
     // margin-left: 20px;
     align-items: center;
     font-size: large;
-    color: #110d7a;
+    color: #0fee29;
   }
   
   .zoom {
@@ -108,7 +110,7 @@
   //////////////////////////
   .click{
     cursor:pointer;
-    color: #110d7a;
+    color: #0fee29;
   
   
   }

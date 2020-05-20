@@ -11,7 +11,7 @@
       <h1>mtute.lk</h1>
     </div>
   </div>
-  <notification-bar></notification-bar>
+  <!-- <notification-bar></notification-bar> -->
   <section class="section_content">
     <div class="container">
       <div class='row'>
@@ -116,19 +116,19 @@
   <div class="container">
     <a class="btn" (click)="nextPage()" *ngIf='moreNextPosts'>Find out more
       <svg class="button-stroke" viewBox="0 0 154 13">
-        <!-- <use href="#line"></use> -->
+        <use href="#line"></use>
       </svg>
       <svg class="button-stroke" viewBox="0 0 154 13">
-        <!-- <use href="#line"></use> -->
+        <use href="#line"></use>
       </svg>
     </a>
 
     <a class="btn" (click)="previousPage()" *ngIf='morePreviousPosts'>Go back
       <svg class="button-stroke" viewBox="0 0 154 13">
-        <!-- <use href="#line"></use> -->
+        <use href="#line"></use>
       </svg>
       <svg class="button-stroke" viewBox="0 0 154 13">
-        <!-- <use href="#line"></use> -->
+        <use href="#line"></use>
       </svg>
     </a>
     <!-- <mat-form-field class ='full-width'>
@@ -140,5 +140,9 @@
       </mat-select>
     </mat-form-field>     -->
   </div>
-
+  <div class="floatingButton">
+    <button mat-fab color="primary">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
   <app-footer></app-footer>

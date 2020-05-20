@@ -260,6 +260,9 @@ div:last-of-type span {
 ///////posts on newsfeed///////
 .container-fluid{
   // margin-top: 20px;
+  margin: 0;
+  padding: 0;
+  // margin: 0px;
 }
 .postfield{
   // background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
@@ -398,4 +401,8 @@ body {
 
 .image_dest {
   padding-bottom: 12px;
+}
+section {
+  // display: table;
+  // margin: 8px;
 }
