@@ -17,7 +17,7 @@ import { WsType } from 'src/app/util/ws-type';
   templateUrl: './create-paper.component.html',
   styleUrls: ['./create-paper.component.scss']
 })
-export class CreatePaperComponent implements OnInit {  
+export class CreatePaperComponent implements OnInit {
 
   faAsterisk = faAsterisk;
 
