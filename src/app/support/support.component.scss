@@ -2,12 +2,19 @@ ul.mtute{
     padding-left: 2rem;
     list-style-type: none;
 }
+ul.mtute.sm{
+    padding-left: 0rem;
+}
 ul li.mtute{
     padding-left: 2rem;
+    // list-style: none;
     background-image: url("../../assets/mtuteSVG.svg");
     background-position: 0 0;
     background-size: 1.5rem 1.5rem;
     background-repeat: no-repeat;
+}
+ul li.mtute.sm{
+    padding-left: 1.5rem;
 }
 
 .menu{
