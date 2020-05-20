@@ -2,7 +2,9 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/service/share/data.service';
 import { ThrowStmt } from '@angular/compiler';
-import { MatRadioChange } from '@angular/material';
+import { MatRadioChange, MatSnackBar } from '@angular/material';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { RolesService } from '../../roles.service';
 // import { Location } from '@angular/common';
 
 @Component({
@@ -41,10 +43,18 @@ export class AllUsersComponent implements OnInit {
 
   instructorClicked: boolean;
   instituteClicked: boolean;
+  sub: any;
+
+
+  MESSAGE_SUCCESS = 'ALL USERS UPDATED';
+  MESSAGE_FAIL = 'GETTING ALL USERS FAILED';
 
   constructor(
     private http: HttpClient,
     private dataService: DataService,
+    private spinnerService: Ng4LoadingSpinnerService,
+    private rolesService: RolesService,
+    private snackBar: MatSnackBar,
     // private location: Location
   ) { }
 
@@ -54,30 +64,53 @@ export class AllUsersComponent implements OnInit {
     this.showAllUsers = true;
     this.verifiedTriggered = false;
     this.notVerifiedTriggered = false;
+    this.openSnackBar('THIS COULD TAKE SOME TIME');
+    this.getAllUsers();
+  }
 
-    this.getAPIData().subscribe((response) => {
-      console.log('response with all users ', response);
-      this.response = response;
-      for (const index in this.response) {
-        if (this.response[index].data.registerItem === 'instructor') {
-          this.allInstructor.push(this.response[index]);
-        }
-        else if (this.response[index].data.registerItem === 'institute') {
-          this.allInstitute.push(this.response[index]);
-        }
+  getAllUsers() {
+    this.spinnerService.show();
+    this.rolesService.getUsers();
+    this.sub = this.rolesService.getStatus().subscribe(status => {
+
+      if (status.status === 200) {
+        this.response = this.rolesService.getResponse();
+        console.log(this.response);
+        this.separateRoles();
+        this.openSnackBar(this.MESSAGE_SUCCESS);
+        this.spinnerService.hide();
       }
-    }, ( error) => {
-      console.log('error is ', error);
+
+      else if (status.status === 400 || status.status === 0) {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      else {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      this.sub.unsubscribe();
+
     });
   }
 
-  // backClicked() {
-  //   this.location.back();
-  // }
-
-  getAPIData() {
-    return this.http.get('/api/userDetails/common/getAll');
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Done', {
+      duration: 5000,
+    });
   }
+
+  separateRoles() {
+    for (const index in this.response) {
+      if (this.response[index].data.role === 'instructor') {
+        this.allInstructor.push(this.response[index]);
+      }
+      else if (this.response[index].data.role === 'institute') {
+        this.allInstitute.push(this.response[index]);
+      }
+    }
+  }
+
   triggeredInstructor(email: string) {
     this.notTriggeredClick = false;
     this.email = email;
@@ -122,19 +155,19 @@ export class AllUsersComponent implements OnInit {
       }
       for (const index in this.allInstructor) {
         if (this.secondNamePart !== '' &&
-        this.allInstructor[index].data.name.toLowerCase() === this.firstNamePart &&
-        this.allInstructor[index].data.lastName.toLowerCase() === this.secondNamePart ) {
+        this.allInstructor[index].data.firstname.toLowerCase() === this.firstNamePart &&
+        this.allInstructor[index].data.lastname.toLowerCase() === this.secondNamePart ) {
           this.searchedInstructorList.push(this.allInstructor[index]);
       }
 
-        else if (this.allInstructor[index].data.name.toLowerCase() === this.searchInput.toLowerCase().trim() ||
-           (this.allInstructor[index].data.lastName.toLowerCase() === this.searchInput.toLowerCase().trim())) {
+        else if (this.allInstructor[index].data.firstname.toLowerCase() === this.searchInput.toLowerCase().trim() ||
+           (this.allInstructor[index].data.lastname.toLowerCase() === this.searchInput.toLowerCase().trim())) {
             this.searchedInstructorList.push(this.allInstructor[index]);
         }
       }
 
       for (const index in this.allInstitute) {
-        if (this.allInstitute[index].data.name.toLowerCase() === this.searchInput.toLowerCase().trim() ) {
+        if (this.allInstitute[index].data.firstname.toLowerCase() === this.searchInput.toLowerCase().trim() ) {
           this.searchedInstituteList.push(this.allInstitute[index]);
         }
       }
@@ -169,10 +202,10 @@ export class AllUsersComponent implements OnInit {
         for (const index in this.response) {
           // if you are upgrading this please change this to better way
           if (this.response[index].data.verify === 'assets/verification/verified.png') {
-            if (this.response[index].data.registerItem === 'instructor') {
+            if (this.response[index].data.role === 'instructor') {
               this.allVerifiedUsersInstructor.push(this.response[index]);
             }
-            else if (this.response[index].data.registerItem === 'institute'){
+            else if (this.response[index].data.role === 'institute'){
               this.allVerifiedUsersInstitute.push(this.response[index]);
             }
           }
@@ -190,10 +223,10 @@ export class AllUsersComponent implements OnInit {
         for (const index in this.response) {
           // if you are upgrading this please change this to better way
           if (this.response[index].data.verify === 'assets/verification/not_verified.png') {
-            if (this.response[index].data.registerItem === 'instructor'){
+            if (this.response[index].data.role === 'instructor'){
               this.allNotVerifiedUsersInstructor.push(this.response[index]);
             }
-            else if (this.response[index].data.registerItem === 'institute'){
+            else if (this.response[index].data.role === 'institute'){
               this.allNotVerifiedUsersInstitute.push(this.response[index]);
             }
           }
@@ -201,4 +234,10 @@ export class AllUsersComponent implements OnInit {
       }
     }
   }
+
+  // filterItems(searchTerm) {
+  //   return this.response.filter(item => {
+  //     return item.firstname.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+  //  });
+  // }
 }

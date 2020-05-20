@@ -26,13 +26,13 @@
             <div *ngIf="!searchClicked">
 
               <div class = 'col-md-4' *ngIf = allInstructor>
-                <h2 class='text-center'>Teachers</h2>
+                <h2 class='text-center'>INSTRUCTORS</h2>
                 <ul *ngFor="let field of allInstructor">
                   <div class="profileDetails card-1">
-                    <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
-                    <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                    <img *ngIf = 'field.data.img_url' class="header-image" src ={{field.data.img_url}} >
+                    <img *ngIf = '!field.data.img_url' class="header-image" src ='/assets/propic/propic.png' >
                     <div class="click">
-                      <a (click) ='triggeredInstructor(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                      <a (click) ='triggeredInstructor(field.data.email)'>{{field.data.firstname}} {{field.data.lastName}}</a>
                     </div>
                     <div id="content">
                       <img src={{field.data.verify}} class="verification"/>
@@ -47,13 +47,13 @@
                 <div *ngIf="!searchClicked">
 
               <div class = 'col-md-4'>
-                <h2 class='text-center'>Institutes</h2>
+                <h2 class='text-center'>INSTITUTES</h2>
                 <ul *ngFor="let field of allInstitute">
                   <div class="profileDetails card-1">
-                    <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
-                    <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                    <img *ngIf = 'field.data.img_url' class="header-image" src ={{field.data.img_url}} >
+                    <img *ngIf = '!field.data.img_url' class="header-image" src ='/assets/propic/propic.png' >
                     <div class="click">
-                      <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                      <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.firstname}} {{field.data.lastname}}</a>
                     </div>
                     <div id="content">
                       <img src={{field.data.verify}} class="verification"/>
@@ -69,13 +69,13 @@
 
           <div *ngIf = "searchClicked">
             <div class = 'col-md-4' *ngIf = 'searchedInstructorList[0]'>
-            <h2 class='text-center '>Teachers</h2>
+            <h2 class='text-center '>instructors</h2>
             <ul *ngFor="let field of searchedInstructorList">
               <div class="profileDetails card-1">
-                <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
-                <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                <img *ngIf = 'field.data.img_url' class="header-image" src ={{field.data.img_url}} >
+                <img *ngIf = '!field.data.img_url' class="header-image" src ='/assets/propic/propic.png' >
                 <div class="click">
-                  <a (click) ='triggeredInstructor(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                  <a (click) ='triggeredInstructor(field.data.email)'>{{field.data.firstname}} {{field.data.lastname}}</a>
                 </div>
                 <div id="content">
                   <img src={{field.data.verify}} class="verification"/>
@@ -90,10 +90,10 @@
           <h2 class='text-center '>Institutes</h2>
           <ul *ngFor="let field of searchedInstituteList">
             <div class="profileDetails card-1">
-              <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
-              <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+              <img *ngIf = 'field.data.img_url' class="header-image" src ={{field.data.img_url}} >
+              <img *ngIf = '!field.data.img_url' class="header-image" src ='/assets/propic/propic.png' >
               <div class="click">
-                <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.name}}</a>
+                <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.firstname}}</a>
               </div>
               <div id="content">
                 <img src={{field.data.verify}} class="verification"/>
@@ -113,10 +113,10 @@
                   <h2 class='text-center'>Teachers</h2>
                   <ul *ngFor="let field of allVerifiedUsersInstructor">
                     <div class="profileDetails card-1">
-                      <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
-                      <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                      <img *ngIf = 'field.data.img_url' class="header-image" src ={{field.data.img_url}} >
+                      <img *ngIf = '!field.data.img_url' class="header-image" src ='/assets/propic/propic.png' >
                       <div class="click">
-                        <a (click) ='triggeredInstructor(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                        <a (click) ='triggeredInstructor(field.data.email)'>{{field.data.firstname}} {{field.data.lastname}}</a>
                       </div>
                       <div id="content">
                         <img src={{field.data.verify}} class="verification"/>
@@ -134,10 +134,10 @@
                   <h2 class='text-center '>Institutes</h2>
                   <ul *ngFor="let field of allVerifiedUsersInstitute">
                     <div class="profileDetails card-1">
-                      <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
-                      <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                      <img *ngIf = 'field.data.img_url' class="header-image" src ={{field.data.img_url}} >
+                      <img *ngIf = '!field.data.img_url' class="header-image" src ='/assets/propic/propic.png' >
                       <div class="click">
-                        <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                        <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.firstname}} {{field.data.lastname}}</a>
                       </div>
                       <div id="content">
                         <img src={{field.data.verify}} class="verification"/>
@@ -160,10 +160,10 @@
                   <h2 class='text-center '>Teachers</h2>
                 <ul *ngFor="let field of allNotVerifiedUsersInstructor">
                   <div class="profileDetails card-1">
-                    <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
-                    <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                    <img *ngIf = 'field.data.img_url' class="header-image" src ={{field.data.img_url}} >
+                    <img *ngIf = '!field.data.img_url' class="header-image" src ='/assets/propic/propic.png' >
                     <div class="click">
-                      <a (click) ='triggeredInstructor(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                      <a (click) ='triggeredInstructor(field.data.email)'>{{field.data.firstname}} {{field.data.lastname}}</a>
                     </div>
                     <div id="content">
                       <img src={{field.data.verify}} class="verification"/>
@@ -181,10 +181,10 @@
                   <h2 class='text-center '>Institutes</h2>
                 <ul *ngFor="let field of allNotVerifiedUsersInstitute">
                   <div class="profileDetails card-1">
-                    <img *ngIf = 'field.data.proPic' class="header-image" src ={{field.data.propic}} >
-                    <img *ngIf = '!field.data.proPic' class="header-image" src ='/assets/propic/propic.png' >
+                    <img *ngIf = 'field.data.img_url' class="header-image" src ={{field.data.img_url}} >
+                    <img *ngIf = '!field.data.img_url' class="header-image" src ='/assets/propic/propic.png' >
                     <div class="click">
-                      <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.name}} {{field.data.lastName}}</a>
+                      <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.firstname}} {{field.data.lastname}}</a>
                     </div>
                     <div id="content">
                       <img src={{field.data.verify}} class="verification"/>
