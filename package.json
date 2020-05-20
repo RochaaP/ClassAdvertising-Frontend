@@ -26,6 +26,7 @@
     "@fortawesome/fontawesome-free": "^5.12.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@material/fab": "^6.0.0",
     "@ng-bootstrap/ng-bootstrap": "^5.3.0",
     "@ngx-translate/core": "^12.1.2",
     "@zoomus/websdk": "^1.7.3",
