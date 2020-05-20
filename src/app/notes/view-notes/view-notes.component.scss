@@ -14,7 +14,7 @@
     // display: flex;
     // width: 700px;
     margin-top: 20px;
-    border-radius: 20px;
+    border-radius: 1rem;
     // padding-top: 20px;
     // justify-content: center;
     // align-items: center;
@@ -131,12 +131,19 @@
 }
 
 .radios{
+  align-self: center;
   // margin-left: 10px;
   padding-top: 30px;
   padding-left: 30px;
   padding-bottom: 30px;
   // margin-top: 10px;
   // padding: initial;
-
+  border-radius: 1rem;
   background-color: #ada5d9
+}
+
+.searchBtnContainer{
+  align-content: center;
+  display: flex;
+  flex-direction: column;
 }

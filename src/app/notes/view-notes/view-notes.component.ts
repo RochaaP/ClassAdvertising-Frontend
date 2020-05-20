@@ -6,6 +6,10 @@ import { MatSnackBar } from '@angular/material';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { DataService } from 'src/app/service/share/data.service';
 import { Router } from '@angular/router';
+import { SubjectService } from 'src/app/subjects/subject.service';
+import { WsResponse } from 'src/app/util/ws-response';
+import { WsType } from 'src/app/util/ws-type';
+import { SubjectModel } from 'src/app/subjects/subject-model';
 
 @Component({
   selector: 'app-view-notes',
@@ -13,6 +17,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./view-notes.component.scss']
 })
 export class ViewNotesComponent implements OnInit {
+
+  subjectGroup: {id: string, data: SubjectModel}[] = [];
 
   response: any;
   searchedNotesList = [];
@@ -35,6 +41,7 @@ export class ViewNotesComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private spinnerService: Ng4LoadingSpinnerService,
+    private subjectService: SubjectService,
     private notesService: NotesService,
     private snackBar: MatSnackBar,
     private dataService: DataService,
@@ -61,6 +68,8 @@ export class ViewNotesComponent implements OnInit {
 
 
   ngOnInit() {
+    this.spinnerService.show();
+    this.subjectService.getSubjects(this);
 //     this.notesSearchClicked = false;
 //     this.getAPIData().subscribe((response) => {
 //       console.log('response from GET API is ', response);
@@ -159,6 +168,22 @@ export class ViewNotesComponent implements OnInit {
     this.dataService.passEmail(email);
     localStorage.setItem('navigateUser', email);
     this.router.navigate(['/profile/instructor/view/' + name + ' ' + lastName]);
+  }
+
+  onSuccess(data: WsResponse, serviceType: WsType){
+    if(serviceType == WsType.GET_SUBJECTS){
+      if(data.payload!=undefined){
+        console.log(data.payload);
+        this.subjectGroup = data.payload;
+      }
+      this.spinnerService.hide();
+    }
+  }
+
+  onFail(data: WsResponse, serviceType: WsType){
+    if(serviceType == WsType.GET_SUBJECTS){
+      this.spinnerService.hide();
+    }
   }
 
 }

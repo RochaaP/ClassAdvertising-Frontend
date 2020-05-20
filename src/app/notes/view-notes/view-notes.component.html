@@ -114,30 +114,29 @@
 
  <div class='container-fluid'>
     <div class="row">
-    <div class = 'col-md-3'>
-   
+    <div class = 'col-md-3'>   
       <div class ='row radios '>
           <mat-form-field class ='full-width'>
             <mat-select placeholder="Subject" [(ngModel)]="subjectInput" name='subject'>
-              <mat-option value="Sinhala">Sinhala</mat-option>
-              <mat-option value="Mathamatics">Mathamatics</mat-option>
-              <mat-option value="History">History</mat-option>
-              <mat-option value="Science">Science</mat-option>
+              <mat-option *ngFor="let subject of subjectGroup" value="subject.id">{{subject.data.name}}</mat-option>
             </mat-select>
           </mat-form-field>
 
          <mat-form-field class ='full-width'>
             <mat-select placeholder="Grade" [(ngModel)]="gradeInput" name='grade'>
-              <mat-option value="Grade 5">Grade 5</mat-option>
-              <mat-option value="Grade 6">Grade 6</mat-option>
-              <mat-option value="GCE OL">GCE O/L</mat-option>
-              <mat-option value="GCE AL">GCE A/L</mat-option>
+              <mat-option value="Grade_6">Grade 6</mat-option>
+              <mat-option value="Grade_7">Grade 7</mat-option>
+              <mat-option value="Grade_8">Grade 8</mat-option>
+              <mat-option value="Grade_9">Grade 9</mat-option>
+              <mat-option value="Ordinary_Level">GCE O/L</mat-option>
+              <mat-option value="Advanced_Level">GCE A/L</mat-option>
+              <mat-option value="Other">Other</mat-option>
             </mat-select>
           </mat-form-field>
 
-          <div class ='full-width'>
-            <button mat-flat-button (click)='searchNotes()'>Search</button>
-            <button mat-flat-button (click)='searchNotesClose()' disabled>Clear</button>
+          <div class='searchBtnContainer full-width'>
+            <button mat-flat-button (click)='searchNotes()' class="m-1">Search</button>
+            <button mat-flat-button (click)='searchNotesClose()' class="m-1" disabled>Clear</button>
           </div>
       </div>
 

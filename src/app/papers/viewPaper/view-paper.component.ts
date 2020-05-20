@@ -11,7 +11,7 @@ import { UserModel } from 'src/app/users/user-model';
 import { SubjectModel } from 'src/app/subjects/subject-model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CreatePaperComponent } from '../createPaper/create-paper/create-paper.component';
-import { CommonService } from 'src/app/service/common.service';
+import { SubjectService } from 'src/app/subjects/subject.service';
 
 @Component({
   selector: 'app-view-paper',
@@ -38,7 +38,7 @@ export class ViewPaperComponent implements OnInit {
     public fb: FormBuilder,
     private modalService: NgbModal, 
     private paperService: PaperService,
-    private commonService: CommonService,
+    private subjectService: SubjectService,
     private spinnerService: Ng4LoadingSpinnerService,
     private sharedService: SharedService) { 
       this.loggedInUser = this.sharedService.getLoggedInUser();
@@ -47,8 +47,10 @@ export class ViewPaperComponent implements OnInit {
   
   ngOnInit(): void {
     this.spinnerService.show();
+    debugger
     this.paperService.getPapersByInstructorId(this.loggedInUser.id, this);
     this.sharedService.viewPaperRefreshRespond().subscribe(()=>{
+      console.log("Received a View Paper Refresh Respond");
       this.refresh();
     })
   }
@@ -87,8 +89,6 @@ export class ViewPaperComponent implements OnInit {
     this.spinnerService.show();
     this.createDummyPaper();
     this.paperService.getPapersByInstructorId(this.loggedInUser.id, this);
-    this.spinnerService.show();
-    this.commonService.getSubjectsAndInstructors(this);
   }
 
   // Year will be extracted from the selected date
@@ -125,22 +125,28 @@ export class ViewPaperComponent implements OnInit {
 
   onSuccess(data: WsResponse, serviceType: WsType){
     if(serviceType == WsType.GET_ALL_PAPERS){
+      debugger
       console.log(data.payload);
       this.papers = data.payload;    
-      this.commonService.getSubjectsAndInstructors(this);
+      this.subjectService.getSubjects(this);
+      debugger
     }
     else if(serviceType == WsType.GET_SUBJECTS){
+      debugger
       console.log(data.payload);
-      let subjects: {id: string, data: SubjectModel}[] = data.payload['subjects'];
-      subjects.forEach(element => {
-        if(this.loggedInUser.data.units != undefined && this.loggedInUser.data.units.length != 0){
-          this.loggedInUser.data.units.includes(element.id)? this.subjectGroup.push(element):"";
-        }
-        this.papers.forEach(paper_el => {
-          element.id == paper_el.data.subject? paper_el.subject = element.data.name: ""
+      let subjects: {id: string, data: SubjectModel}[] = data.payload;
+      if(subjects!=undefined){
+        subjects.forEach(element => {
+          if(this.loggedInUser.data.units != undefined && this.loggedInUser.data.units.length != 0){
+            this.loggedInUser.data.units.includes(element.id)? this.subjectGroup.push(element):"";
+          }
+          this.papers.forEach(paper_el => {
+            element.id == paper_el.data.subject? paper_el.subject = element.data.name: ""
+          });
         });
-      });
+      }
       this.spinnerService.hide();
+      debugger
     }
     else if(serviceType == WsType.CREATE_PAPER){
       this.spinnerService.hide();

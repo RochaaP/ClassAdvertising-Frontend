@@ -11,7 +11,6 @@ import { Observable } from 'rxjs/internal/Observable';
 import { NotesService } from '../notes.service';
 import { ThrowStmt } from '@angular/compiler';
 import { UploadFilesService } from '../../service/Upload-files/upload-files.service';
-import { stat } from 'fs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

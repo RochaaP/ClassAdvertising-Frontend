@@ -61,7 +61,7 @@ export class ViewPostsComponent implements OnInit {
       console.log('error is ', error);
     });
 
-    if (this.authService.isUserLoggedIn().email === this.childMessage) {
+    if (this.authService.isUserLoggedIn() != undefined && this.authService.isUserLoggedIn().email === this.childMessage) {
       this.activeUserCustomization = true;
     }
 
