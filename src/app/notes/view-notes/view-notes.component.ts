@@ -131,7 +131,7 @@ export class ViewNotesComponent implements OnInit {
         this.spinnerService.hide();
         this.openSnackBar(this.MESSAGE_NOT_FOUND);
       }
-      else if (this.status === 400 || this.status === 0) {
+      else if (status.status === 400 || status.status === 0) {
         this.openSnackBar(this.MESSAGE_FAIL);
         this.spinnerService.hide();
       }
