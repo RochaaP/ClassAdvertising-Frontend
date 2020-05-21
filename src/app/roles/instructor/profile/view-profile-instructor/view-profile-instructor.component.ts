@@ -39,8 +39,9 @@ export class ViewProfileInstructorComponent implements OnInit {
     // if (!this.email) {
       this.email = localStorage.getItem('navigateUser');
       this.instructorEmail = this.email;
-      this.studentEmail = this.authService.isUserLoggedIn().email;
-
+      if(this.authService.isUserLoggedIn()!=undefined){
+        this.studentEmail = this.authService.isUserLoggedIn().email;
+      }
       console.log('email from local storage '+ this.email + '  ' +this.studentEmail);
     // }
 

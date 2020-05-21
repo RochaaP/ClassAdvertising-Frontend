@@ -6,8 +6,6 @@ import { Observable } from 'rxjs';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
-
 @Component({
   selector: 'app-edit-profile-institute',
   templateUrl: './edit-profile-institute.component.html',
