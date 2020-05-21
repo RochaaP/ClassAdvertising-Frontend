@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
   lastNameInput: string;
   contactInput: string;
   passwordInput: string;
+  subjectInput: [];
 
   responseMessage = '';
   responseMessageType = '';
@@ -215,7 +216,8 @@ export class LoginComponent implements OnInit {
         email : this.emailInput.trim(),
         firstName: this.firstNameInput.trim(),
         lastName: this.lastNameInput.trim(),
-        contact:  this.contactInput
+        contact:  this.contactInput,
+        subjects: this.subjectInput
       };
     } else if (this.role === 'institute') {
       this.authService.setUserName(this.firstNameInput);
@@ -237,7 +239,8 @@ export class LoginComponent implements OnInit {
         email : this.emailInput.trim(),
         firstName: this.firstNameInput.trim(),
         lastName: this.lastNameInput.trim(),
-        contact:  this.contactInput
+        contact:  this.contactInput,
+        subject: this.subjectInput
       };
     }
     this.requestAuthentication();
