@@ -15,6 +15,7 @@ import { AllUsersComponent } from './admin/all-users/all-users.component';
 import { ImagesChangeComponent } from './admin/images-change/images-change.component';
 import { EditProfileInstructorComponent } from './instructor/profile/edit-profile-instructor/edit-profile-instructor.component';
 import { EditProfileInstituteComponent } from './institute/profile/edit-profile-institute/edit-profile-institute.component';
+import { ViewUsersComponent } from './admin/view-users/view-users.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,7 @@ const routes: Routes = [
     { path: 'institute/classes', canActivate: [GuardService], component: AddClassesInstituteComponent },
     { path: 'institute/search', component: InstituteSearchComponent},
 
-    { path: 'admin/getallusers', component: AllUsersComponent},
+    { path: 'admin/getallusers', component: AllUsersComponent },
     { path: 'admin/images', component: ImagesChangeComponent},
 ];
 

@@ -38,6 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { PaperDetailsModalComponent } from '../papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
+import { ViewUsersComponent } from './admin/view-users/view-users.component';
 
 
 @NgModule({
@@ -61,7 +62,9 @@ import { PaperDetailsModalComponent } from '../papers/studentPaper/paperDetailsM
 
     ViewPostsComponent,
 
-    PapersComponent
+    PapersComponent,
+
+    ViewUsersComponent
 
     ],
     imports: [
