@@ -1,25 +1,27 @@
 <!-- Overlay -->
 <!-- <div *ngIf="paper.id=='0'" class="overlay-panel overlay-panel-bg" ng-style="{ 'width' : width}"></div> -->
 
-<div class="container-fluid">
+<div class="container-fluid root">
     <h4 class="text-center">Edit Paper</h4>
     <div class="container-fluid px-0 pb-5">
         <h6 *ngIf="paper.id=='0'" class="text-center">(This is a dummy paper. Create and select the paper from the paper list)</h6>
         <!-- Paper Details -->
         <div class="card my-3">
             <div class="card-header py-1">
-                <div class="row">
-                    <div class="col-md-11 col-sm-11 col-xs-11">
-                        <p class="my-1 float-left h6"><label>Paper Details</label></p>        
-                        <button mat-raised-button color="primary" *ngIf="paper.data.no_of_questions == paper.data.added_questions" class="btn btn-sm my-1 float-right h6" (click)="openPublishModal(publishConfirmModal)"><mat-label>Publish</mat-label></button>                        
+                <div class="container"			>
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            <p class="my-1 float-left h6"><label>Paper Details</label></p>        
+                            <button mat-raised-button color="primary" *ngIf="paper.data.no_of_questions == paper.data.added_questions && !paper.data.published" class="btn btn-sm my-1 float-right h6" (click)="openPublishModal(publishConfirmModal)"><mat-label>Publish</mat-label></button>                        
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <button type="button" class="btn btn-sm close float-right" (click)="isShowPaperDetail = !isShowPaperDetail">
+                                <i class="fas"
+                                    [ngClass]="{'fa-angle-up': isShowPaperDetail, 'fa-angle-down': !isShowPaperDetail}"></i>
+                            </button>
+                        </div>	
                     </div>
-                    <div class="col-md-1 col-sm-1 col-xs-1">
-                        <button type="button" class="btn btn-sm mx-0 close float-right" (click)="isShowPaperDetail = !isShowPaperDetail">
-                            <i class="fas"
-                                [ngClass]="{'fa-angle-up': isShowPaperDetail, 'fa-angle-down': !isShowPaperDetail}"></i>
-                        </button>
-                    </div>	
-                </div>			
+                </div>
             </div>
             <div *ngIf="isShowPaperDetail" class="card-body py-1">
                 <form ngNativeValidate>
@@ -28,7 +30,7 @@
                             <div class="form-group">
                                 <mat-form-field class="full-width">
                                     <input matInput type="text" [(ngModel)]="paper.data.name" name="paperName" class="form-control form-control-sm"
-                                id="paperName" placeholder="Paper Name" required >
+                                id="paperName" placeholder="Paper Name" required [readonly]="paper.data.published">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -36,7 +38,7 @@
                             <div class="form-group">
                                 <mat-form-field class="full-width">
                                     <input matInput type="text" [(ngModel)]="paper.data.year" name="paperYear" class="form-control form-control-sm"
-                                id="paperYear" placeholder="Year" required >
+                                id="paperYear" placeholder="Year" required [readonly]="paper.data.published">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -86,7 +88,7 @@
                         </div>
                     </div>
                     <hr class="mt-3 mb-2" />
-                    <div class="form-group">
+                    <div *ngIf="!paper.data.published" class="form-group">
                         <button mat-raised-button color="primary" class="btn btn-sm float-right" (click)="paperDetailSave()" [disabled]="paper.id=='0'">Save</button>
                     </div>
                 </form>
@@ -96,30 +98,30 @@
         <!-- Question list -->
         <div class="card my-3">
             <div class="card-header py-1">
-                <div class="row">
-                    <div class="col-md-9 col-sm-9">
-                        <p class="my-1 float-left h6">
-                            <span class="badge badge-primary mr-2">{{questionList.length}}</span>
-                            <label>Questions</label>
-                        </p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5">
+                            <p class="my-1 float-left h6">
+                                <span class="badge badge-primary mr-2">{{questionList.length}}</span>
+                                <label>Questions</label>
+                            </p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7">
+                            <button id="showMoreQuestion" type="button" class="btn btn-sm close float-right"
+                            (click)="isShowQuestion = !isShowQuestion">
+                            <i class="fas " [ngClass]="{'fa-angle-up': isShowQuestion, 'fa-angle-down': !isShowQuestion}"></i>
+                            </button>
+                            <button id="saveQuestions" type="button" class="btn btn-sm btn-dark mr-2 float-right"
+                            (click)="saveQuestions()" [disabled]="paper.data.published || paper.id=='0'">
+                            <i class="fas fa-save"></i>
+                            </button>
+                            <button id="addNewQuestion" type="button" class="btn btn-sm btn-dark mr-2 float-right"
+                            (click)="addNewQuestion()" [disabled]="paper.data.published || paper.id=='0'">
+                            <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-md-2 col-sm-2">
-                        <button id="saveQuestions" type="button" class="btn btn-sm btn-dark mx-1 float-right"
-                        (click)="saveQuestions()" [disabled]="paper.id=='0'">
-                        <i class="fas fa-save"></i>
-                        </button>
-                        <button id="addNewQuestion" type="button" class="btn btn-sm btn-dark mx-1 float-right"
-                        (click)="addNewQuestion()" [disabled]="paper.id=='0'">
-                        <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="col-md-1 col-sm-1">
-                        <button id="showMoreQuestion" type="button" class="btn btn-sm my-1 mx-0 close float-right"
-                        (click)="isShowQuestion = !isShowQuestion">
-                        <i class="fas " [ngClass]="{'fa-angle-up': isShowQuestion, 'fa-angle-down': !isShowQuestion}"></i>
-                        </button>
-                    </div>
-                </div>			
+                </div>
             </div>
         </div>
         <div *ngIf="isShowQuestion" class="card-body p-2">
@@ -129,7 +131,7 @@
                     <div class="">
                         <div class="col-sm-8 float-left pl-2 pr-0">
                             <div class="row">
-                                <div class="col-md-2 col-sm-2"><label>Question {{t+1}}</label></div>
+                                <div class="col-md-2 col-sm-2"><label>Q {{t+1}}</label></div>
                                 <div class="col-md-10 col-sm-10">
                                     <label (click)="openKeyboard(question.data.question, true, questionList, t, 'data.question')" class="form-control form-control-sm" id="question" name="question" [innerHTML]="question.data.question"></label>
                                 </div>
@@ -166,7 +168,7 @@
                             </div>
                             <div class="row">
                                     <div class="col-md-2 col-sm-2"><label>Answer</label></div>
-                                    <select class="col-md-10 col-sm-10 form-control form-control-sm" >
+                                    <select class="col-md-10 col-sm-10 form-control form-control-sm" disabled="paper.data.published">
                                         <option value="A"><label [innerHTML]="question.data.a"></label></option>
                                         <option value="B"><label [innerHTML]="question.data.b"></label></option>
                                         <option value="C"><label [innerHTML]="question.data.c"></label></option>
@@ -175,7 +177,7 @@
                                     </select>
                                 </div>
                         </div>
-                        <div class="col-sm-4 float-right px-0">
+                        <div *ngIf="!paper.data.published" class="col-sm-4 float-right px-0">
                             <button id="btnDeleteTopic" type="button" class="my-1 mx-2 close float-right"
                                 (click)="deleteQuestion(question, t)" [disabled]="paper.id=='0'">
                                 <i class="fas fa-trash-alt"></i>

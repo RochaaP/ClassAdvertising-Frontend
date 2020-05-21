@@ -1,38 +1,35 @@
 <!-- Body -->
 <div class="container-fluid">
   <div *ngIf="sharedService.getLoggedInUser().data.role=='instructor'" style="width: 100%;height: 100%;" [style.padding-top.px]="60" [style.height.px]="divHeight">
-    <div class="d-block d-sm-block d-md-none d-lg-none">
-      <mat-accordion>
-        <mat-expansion-panel class="mb-2" [expanded]="isShowViewPaper"(opened)="isShowViewPaper=true">
-            <mat-expansion-panel-header>
-            <mat-panel-title>
-              View Paper Panel
-            </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-view-paper></app-view-paper>    
-        </mat-expansion-panel> 
-        <mat-expansion-panel class="mb-2" [expanded]="isShowEditPaper" (opened)="isShowEditPaper=true">
-            <mat-expansion-panel-header>
-            <mat-panel-title>
-              Edit Paper Panel
-            </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-edit-paper></app-edit-paper>
-        </mat-expansion-panel> 
-    </mat-accordion>
+    <div class="container">
+      <mat-accordion multi="true">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <mat-expansion-panel class="mb-2 mr-1" [expanded]="isShowViewPaper"(opened)="isShowViewPaper=true" (closed)="isShowViewPaper=false">
+              <mat-expansion-panel-header>
+              <mat-panel-title>
+                View Paper Panel
+              </mat-panel-title>
+              </mat-expansion-panel-header>
+              <app-view-paper></app-view-paper>    
+          </mat-expansion-panel> 
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <mat-expansion-panel class="mb-2 mr-1" [expanded]="isShowEditPaper" (opened)="isShowEditPaper=true" (closed)="isShowEditPaper=false">
+              <mat-expansion-panel-header>
+              <mat-panel-title>
+                Edit Paper Panel
+              </mat-panel-title>
+              </mat-expansion-panel-header>
+              <app-edit-paper></app-edit-paper>
+            </mat-expansion-panel> 
+          </div>
+        </div>
+      </mat-accordion>
     </div>
 
-    <div class="d-none d-sm-none d-md-block d-lg-block">
-      <as-split direction="horizontal" [gutterSize]="2">
-        <as-split-area [order]="0" [size]="20">
-          <app-view-paper></app-view-paper>
-        </as-split-area>
-        <as-split-area [order]="1" [size]="80" (onchange)="sharedService.changeCreatePaperWidthRequest()">
-          <app-edit-paper></app-edit-paper>
-        </as-split-area>
-      </as-split>
-    </div>
   </div>
+
   <div *ngIf="sharedService.getLoggedInUser().data.role=='student'" style="width: 100%;height: 100%;" [style.padding-top.px]="60" [style.height.px]="divHeight">
     <app-student-paper></app-student-paper>
   </div>

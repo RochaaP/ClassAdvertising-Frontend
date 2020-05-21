@@ -4,7 +4,7 @@ export const environment = {
     zoomClientId: "eezr713VT0u99HLZYP6wng",
     redirect_url: "https%3A%2F%2Fwww.mtute.lk%2Fzoom"
   },
-  irebase : {
+  firebase : {
     apiKey: "AIzaSyD04gUUUibi9QCt47geqWxi9AX7k28zRHk",
     authDomain: "mtute-sl.firebaseapp.com",
     databaseURL: "https://mtute-sl.firebaseio.com",
