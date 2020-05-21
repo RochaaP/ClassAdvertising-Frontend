@@ -1,6 +1,7 @@
-<h4 class="text-center">Paper List</h4>
+<div class="viewRoot">
+  <h4 class="text-center">Paper List</h4>
 <button mat-raised-button color="primary" class="btn btn-secondary mb-1" style="width: 100%;" (click)="createPaper()">Create Paper<fa-icon class="ml-2" [icon]="faPlus"></fa-icon></button>
-<mat-table [dataSource]="papers" class="elevation-z8">
+<mat-table [dataSource]="papers" class="elevation-z8 mb-1">
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
@@ -23,3 +24,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </mat-table>
+</div>

@@ -10,7 +10,7 @@ export class PaperComponent implements OnInit {
 
   public divHeight: number = window.innerHeight;
 
-  public isShowViewPaper = false;
+  public isShowViewPaper = true;
 
   public isShowEditPaper = false;
   

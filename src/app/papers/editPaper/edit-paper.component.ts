@@ -14,7 +14,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { SubjectModel } from 'src/app/subjects/subject-model';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { CommonService } from 'src/app/service/common.service';
+import { SubjectService } from 'src/app/subjects/subject.service';
 
 @Component({
   selector: 'app-edit-paper',
@@ -42,7 +42,7 @@ export class EditPaperComponent implements OnInit {
     private sharedService: SharedService,
     private questionService: QuestionService, 
     private paperService: PaperService,
-    private commonService: CommonService,
+    private subjectService: SubjectService,
     private spinnerService: Ng4LoadingSpinnerService,
     private modalService: NgbModal,
     private snackBar: MatSnackBar,
@@ -52,19 +52,17 @@ export class EditPaperComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.spinnerService.show();
     // Add Dummy Details
     this.addDummyDetails();
-    this.sharedService.loadPaperWithDataRespond().subscribe(res => {      
+    this.subjectService.getSubjects(this);
+    this.sharedService.loadPaperWithDataRespond().subscribe(res => {  
+      this.spinnerService.show();          
       this.isShowPaperDetail = false;
       this.paper = res.paper;
       this.questionService.getQuestionByPaperId(this.paper.id, this);
-      this.commonService.getSubjectsAndInstructors(this);
       this.isShowPaperDetail = true;
     });    
-    // this.sharedService.changeCreatePaperWidthRespond().subscribe(res =>{
-    //   this.width = res.data;
-    // })
   }
 
   showSnackBar(notifyMsg: string, duration: number = 2000){    
@@ -76,6 +74,9 @@ export class EditPaperComponent implements OnInit {
 
   public openKeyboard(curentText: string, isArray: boolean, variable: any, index: number, path: string) {    
     console.log("___openKeyboard()___");
+    if(this.paper.data.published){
+      return;
+    }
     const modalRef = this.modalService.open(KeyboardComponent);
 
     modalRef.componentInstance.text = curentText;
@@ -136,8 +137,6 @@ export class EditPaperComponent implements OnInit {
       }
     }
   }
-
-
 
   private addDummyQuestions(){
     for (let index = 0; index < 5; index++) {
@@ -312,11 +311,13 @@ export class EditPaperComponent implements OnInit {
     }
     else if(serviceType == WsType.GET_SUBJECTS){
       console.log("GET_SUBJECTS");
-      let subjects: {id: string, data: SubjectModel}[] = data.payload['subjects'];
-      this.subjectName = "XXXXXXXXXX";
-      subjects.forEach(element => {
-        this.paper.data.subject == element.id? this.subjectName = element.data.name: ""
-      });
+      let subjects: {id: string, data: SubjectModel}[] = data.payload;
+      if(subjects!=undefined){        
+        this.subjectName = "XXXXXXXXXX";
+        subjects.forEach(element => {
+          this.paper.data.subject == element.id? this.subjectName = element.data.name: ""
+        });
+      }
       this.spinnerService.hide();
     }
     else if(serviceType == WsType.UPDATE_PAPER){

@@ -10,7 +10,6 @@ import { CreatePaperComponent } from './createPaper/create-paper/create-paper.co
 import { AnswerPaperComponent } from './studentPaper/answerPaper/answer-paper/answer-paper.component';
 import { PaperMarkingModelComponent } from './studentPaper/answerPaper/paperMarkingModel/paper-marking-model/paper-marking-model.component';
 import { KeyboardComponent } from '../util/keyboard/keyboard.component';
-import { AngularSplitModule } from 'angular-split';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatRadioModule, MatExpansionModule, MatSelectModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,7 +37,6 @@ import { QuillModule } from 'ngx-quill';
     ReactiveFormsModule,
     FontAwesomeModule,
     NgbModule,
-    AngularSplitModule,
     CountdownModule,
     QuillModule,
     MatExpansionModule,
