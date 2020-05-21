@@ -32,8 +32,8 @@ export class AuthenticationService {
           });
         }
       } else {
-        localStorage.setItem('user', null);        
-        sharedService.setLoggedInUser(null);        
+        localStorage.setItem('user', null);
+        sharedService.setLoggedInUser(null);
         sharedService.clearZoomAccessToken();
       }
     });
@@ -68,6 +68,14 @@ export class AuthenticationService {
   // async  loginWithGoogle() {
   //   return await this.angularFireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
   // }
+
+  setUserName(username) {
+    localStorage.setItem('registerUserName', JSON.stringify(username));
+  }
+
+  setRegisterItem(role) {
+    localStorage.setItem('registerItem', JSON.stringify(role));
+  }
   getEmitterUserName() {
     return JSON.parse(localStorage.getItem('registerUserName'));
   }

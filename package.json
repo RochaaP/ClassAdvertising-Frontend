@@ -43,6 +43,7 @@
     "jwt-decode": "^2.2.0",
     "lightbox2": "^2.11.1",
     "ng-bootstrap": "^1.6.3",
+    "ng-bootstrap-form-validation": "^5.0.0",
     "ng4-loading-spinner": "^1.2.3",
     "nga-read-more": "0.0.3",
     "ngx-clipboard": "^12.2.1",

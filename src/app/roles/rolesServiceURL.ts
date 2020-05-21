@@ -6,10 +6,17 @@ export class RolesServiceURL {
     public static CREAT_NOTE = RolesServiceURL.rolesExtension;
 
 
-    /// ADMIN ///
+    /// Register ///
+    public static registersUsers() {
+        return RolesServiceURL.rolesExtension + 'common/register';
+    }
 
+
+    /// ADMIN ////
     public static viewUsers() {
         return RolesServiceURL.rolesExtension + 'common/getAll';
     }
+
+
 
 }

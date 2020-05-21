@@ -20,7 +20,6 @@ export class RolesService {
 
     public getUsers() {
         this.http.get(RolesServiceURL.viewUsers()).subscribe((response: any) => {
-            console.log('roles service/ viewusers() / response ', response);
             this.setResponse(response);
             this.setStatus(response.status);
 
@@ -28,6 +27,16 @@ export class RolesService {
             console.log('error during post is ', error);
         });
     }
+
+    public registerUser(userDetails: any) {
+        this.http.post(RolesServiceURL.registersUsers(), userDetails).subscribe((response: any) => {
+            this.setResponse(response);
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during post is ', error);
+        });
+    }
+
     private setResponse(res: any) {
         this.response = res.userDetails;
     }

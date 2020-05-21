@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewsfeedComponent } from './newsfeed/newsfeed/newsfeed.component';
 import { RegisterComponent } from './register/register.component';
 import { PostaddComponent } from './roles/common/postadd/postadd.component';
+import { LoginComponent } from './login/login.component';
+
 
 import { GuardService } from './service/guard/guard.service';
 
@@ -15,8 +17,8 @@ import { MessageModule } from './messages/message.module';
 
 const routes: Routes = [
   { path: '', component: NewsfeedComponent },
-  { path: 'account/register', component: RegisterComponent },
-  { path: 'account/login', component: RegisterComponent },
+  { path: 'account/register', component: LoginComponent },
+  { path: 'account/login', component: LoginComponent },
 
   { path: 'postadd', canActivate: [GuardService], component: PostaddComponent },
 

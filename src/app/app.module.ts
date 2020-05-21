@@ -10,6 +10,7 @@ import { OwlModule } from 'ngx-owl-carousel';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { NgaReadMoreModule } from 'nga-read-more';
+import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -68,6 +69,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './support/footer/footer.component';
 import { QuillModule } from 'ngx-quill';
 import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -89,6 +91,8 @@ import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsMo
 
     FooterComponent,
 
+    LoginComponent,
+
   ],
   imports: [
     AppRoutingModule,
@@ -108,6 +112,8 @@ import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsMo
 
     QuillModule.forRoot(),
     TranslateModule.forRoot(),
+    NgBootstrapFormValidationModule.forRoot(),
+    NgBootstrapFormValidationModule,
 
     NgaReadMoreModule,
 

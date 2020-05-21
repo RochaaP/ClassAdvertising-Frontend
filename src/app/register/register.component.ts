@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SharedService } from 'src/app/shared/shared.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 
 interface User {
@@ -30,6 +31,7 @@ export class RegisterComponent implements OnInit {
   responseMessage = '';
   responseMessageType = '';
 
+  userValues = {};
   emailInput: string;
   firstNameInput: string;
   lastNameInput: string;
@@ -66,7 +68,6 @@ export class RegisterComponent implements OnInit {
 
   previousUrl;
 
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -79,8 +80,9 @@ export class RegisterComponent implements OnInit {
     private afs: AngularFirestore,
     private http: HttpClient,
     public router: Router,
-    public route: ActivatedRoute
-    ) {
+    public route: ActivatedRoute,
+    private fb: FormBuilder,
+  ) {
 
     this.selectedVal = 'login';
     this.isForgotPassword = false;
@@ -90,7 +92,36 @@ export class RegisterComponent implements OnInit {
     this.visibleHaveAccount = true;
   }
 
-  // Common Method to Show Message and Hide after 2 seconds
+  form = this.fb.group({
+    firstname: ['', [Validators.required]],
+    lastname: ['', [Validators.required]],
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+    contact: ['', [Validators.required]],
+    subject: ['', [Validators.required]]
+  });
+
+  // get f() { return this.form.controls }
+  formControls = this.form.controls;
+
+  ngOnInit() {
+    this.isUserLoggedIn();
+    this.registerItem =  JSON.parse(localStorage.getItem('registerItem'));
+    this.circleView = false;
+    this.previousUrl = this.route.snapshot.paramMap.get('previousUrl');
+  }
+
+  // Check localStorage is having User Data
+  isUserLoggedIn() {
+    this.userDetails = this.authService.isUserLoggedIn();
+    const valTemp = localStorage.getItem('registerItem');
+    if (valTemp != null) {
+      this.registerItem = valTemp;
+    }
+  }
+
+
+  // Common Method to Show Message and Hide after 5 seconds
   showMessage(type, msg) {
     this.responseMessageType = type;
     this.responseMessage = msg;
@@ -100,26 +131,8 @@ export class RegisterComponent implements OnInit {
   }
 
   // Called on switching Login/ Register tabs
-
-
   public onLoginItemChange(val: string) {
     this.registerItem = val;
-  }
-
-  // Check localStorage is having User Data
-  isUserLoggedIn() {
-    this.userDetails = this.authService.isUserLoggedIn();
-    console.log('userdetails' + this.userDetails);
-    const valTemp = localStorage.getItem('registerItem');
-    if (valTemp != null) {
-      this.registerItem = valTemp;
-    }
-
-    // this.itemTemp  = JSON.parse( localStorage.getItem('user'));
-    // if (this.itemTemp != null) {
-    //   this.emailInput = this.itemTemp.email;
-    // }
-
   }
 
   // SignOut Firebase Session and Clean LocalStorage
@@ -139,20 +152,12 @@ export class RegisterComponent implements OnInit {
   // Login user with  provided Email/ Password
   loginUser() {
     this.responseMessage = '';
-    this.authService.login(this.emailInput, this.passwordInput)
-      .then(res => {
-        console.log(res);
+    this.authService.login(this.emailInput, this.passwordInput).then(res => {
         this.showMessage('success', 'Successfully Logged In!');
         this.isUserLoggedIn();
-        // this.userService.getUserByEmail(this.emailInput).subscribe(data=>{
-        //   console.log(data);
-        //   let user: {id: string, data: UserModel} = JSON.parse(JSON.stringify(data));
-        //   this.sharedService.setLoggedInUser(user);
-        // });
-        this.sharedService.userLoggedInRespond().subscribe(()=>{
+        this.sharedService.userLoggedInRespond().subscribe(() => {
           this.getReg();
         });
-        // this.getid();
       }, err => {
         this.showMessage('danger', err.message);
       });
@@ -174,13 +179,6 @@ export class RegisterComponent implements OnInit {
 
   getUserRegData() {
     return this.http.post('api/userDetails/common/getUserRegData', {email: this.emailInput});
-  }
-
-  ngOnInit() {
-    this.isUserLoggedIn();
-    this.registerItem =  JSON.parse(localStorage.getItem('registerItem'));
-    this.circleView = false;
-    this.previousUrl = this.route.snapshot.paramMap.get('previousUrl')
   }
 
   getPost(postId) {
@@ -219,30 +217,7 @@ export class RegisterComponent implements OnInit {
     this.selectedVal = val;
   }
 
-  // Register user with  provided Email/ Password
-  registerUser() {
-    this.authService.register(this.emailInput, this.passwordInput)
-      .then(() => {
-
-        // Send Varification link in email
-        this.authService.sendEmailVerification().then(res => {
-          console.log(res);
-          this.isForgotPassword = false;
-          this.visibleHaveAccount = false;
-
-          this.showMessage('success', 'Registration Successful! Please Verify Your Email');
-
-          console.log(this.id);
-
-        }, err => {
-          this.showMessage('danger', err.message);
-        });
-        this.onSubmit();
-        this.isUserLoggedIn();
-      }, err => {
-        this.showMessage('danger', err.message);
-      });
-  }
+ 
 
   // Send link on given email to reset password
   forgotPassword() {
@@ -271,13 +246,13 @@ export class RegisterComponent implements OnInit {
 
     const id = this.afs.createId();
     this.id = id.toString();
-    let userValues = {};
+   
     localStorage.setItem('registerItem', JSON.stringify(this.registerItem));
 
     if (this.registerItem === 'instructor') {
       localStorage.setItem('registerUserName', JSON.stringify(this.firstNameInput));
 
-      userValues = {
+      this.userValues = {
         id: this.id,
         registerItem: this.registerItem,
         email : this.emailInput.trim(),
@@ -288,7 +263,7 @@ export class RegisterComponent implements OnInit {
     } else if (this.registerItem === 'institute') {
       localStorage.setItem('registerUserName', JSON.stringify(this.nameInput));
 
-      userValues = {
+      this.userValues = {
         id: this.id,
         registerItem: this.registerItem,
         email : this.emailInput.trim(),
@@ -299,7 +274,7 @@ export class RegisterComponent implements OnInit {
     else if (this.registerItem === 'student') {
       localStorage.setItem('registerUserName', JSON.stringify(this.firstNameInput));
 
-      userValues = {
+      this.userValues = {
         id: this.id,
         registerItem: this.registerItem,
         email : this.emailInput.trim(),
@@ -308,9 +283,30 @@ export class RegisterComponent implements OnInit {
         contact:  this.contactInput
       };
     }
+    this.registerUser();
+  }
 
-    this.postAPIData(userValues).subscribe((response) => {
-      console.log('register user with', response);
+   // Register user with  provided Email/ Password
+  registerUser() {
+    this.authService.register(this.emailInput, this.passwordInput).then(() => {
+      // Send Varification link in email
+      this.authService.sendEmailVerification().then(res => {
+        this.isForgotPassword = false;
+        this.visibleHaveAccount = false;
+        this.showMessage('success', 'Registration Successful! Please Verify Your Email');
+      }, err => {
+        this.showMessage('danger', err.message);
+      });
+      this.onRegisterDatabase();
+      this.isUserLoggedIn();
+    }, err => {
+      this.showMessage('danger', err.message);
+    });
+  }
+
+  onRegisterDatabase() {
+    this.postAPIData(this.userValues).subscribe((response) => {
+      console.log('register / onRegisterDtabase/ response ', response);
     }, (error) => {
       console.log('error during post is ', error);
     });

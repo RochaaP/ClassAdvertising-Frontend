@@ -1,0 +1,250 @@
+
+<div class = 'container-fluid'>
+
+    <div class="row">
+
+       
+
+        <!-- <div class=" mainClass col-md-6 col-lg-6" > -->
+            <div class="page-content" *ngIf='!circleView'>
+            <link rel="stylesheet" href="../../assets/styles/login.css"/>
+
+                <div class="form-v2-content">
+                    <div class="form-left">
+                        <img src="../../assets/login/form-v2.jpg" alt="form">
+                        <div class="text-1">
+                            <p>Bring Your Music Along<span>try Unlimited</span></p>
+                        </div>
+                        <div class="text-2">
+                            <p><span>$9.99</span>/ Month</p>
+                        </div>
+                    </div>
+                    <!-- <div class="">
+                        <h4 *ngIf = 'loginView'>Login</h4>
+                        <h4 *ngIf = '!loginView'>Register</h4>
+                    </div> -->
+            
+                    <div class = 'mainClass'>
+                         <div *ngIf='!isForgotPassword'>
+                            <form *ngIf='loginView'  [formGroup]="formGroupLogin" (validSubmit)="loginUser()">
+
+                                <h3>Login</h3>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" [(ngModel)]='emailInput' id="email" placeholder="Email"  formControlName="email">
+                                </div>
+                
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password" placeholder="Password" (keydown.enter)='loginUser()'  formControlName="password"> 
+                                </div>
+                
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Log In</button>
+                                </div>
+                                <div class= "createAccount" (click)="loginView = false; circleView = true">Create an Account</div>
+                                <a href="javascript:void(0)" (click)="this.isForgotPassword= true;">Forgot Password?</a>
+                
+                            </form>
+                
+                            <div *ngIf ='!loginView'>
+                                <div *ngIf = '!circleView'>
+                                <!-- Instructor Registration -->
+                                    <form *ngIf = "role == 'instructor'" [formGroup]="formGroupRegister" (validSubmit)="registerUser()">
+                                    
+                                        <h3>Instructor Registration</h3>
+
+                                        <div class="form-group">
+                                            <label for="firstname">First Name</label>
+                                            <input type="text" class="form-control" [(ngModel)]="firstNameInput" id="firstname" formControlName="firstname" placeholder="First Name" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="lastname">Last Name</label>
+                                            <input type="text" class="form-control" [(ngModel)]="lastNameInput" id="lastname"  formControlName="lastname" placeholder="Last Name">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" [(ngModel)]="emailInput" id="email"  formControlName="email" placeholder="Email">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password"  formControlName="password" placeholder="Password">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="contact">Contact</label>
+                                            <input type="number" class="form-control" [(ngModel)]="contactInput" id="contact"  formControlName="contact" placeholder="Contact" (keydown.enter)='onSubmit()'>
+                                        </div>
+                                
+                                        <div class="form-group">
+                                            <mat-form-field class ='full-width'>
+                                                <mat-select placeholder="Subject" [(ngModel)]="subjectInput" name='subject' formControlName='subject'>
+                                                    <mat-option *ngFor="let subject of subjectGroup" value="subject.id">{{subject.data.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                                                              
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Register</button>
+                                        </div>
+                                    </form>
+
+                                    <!-- Institute Registration -->
+                                    <form *ngIf = "role == 'institute'" [formGroup]="formGroupRegisterInstitute" (validSubmit)="registerUser()">
+                                    
+                                        <h3>Institute Registration</h3>
+
+                                        <div class="form-group">
+                                            <label for="firstname">First Name</label>
+                                            <input type="text" class="form-control" [(ngModel)]="firstNameInput" id="firstname" formControlName="firstname" placeholder="Name" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" [(ngModel)]="emailInput" id="email"  formControlName="email" placeholder="Email">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password"  formControlName="password" placeholder="Password">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="contact">Contact</label>
+                                            <input type="number" class="form-control" [(ngModel)]="contactInput" id="contact"  formControlName="contact" placeholder="Contact" (keydown.enter)='onSubmit()'>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Register</button>
+                                        </div>
+                                    </form>
+
+                                    <!-- Student Registration -->
+                                    <form *ngIf = "role == 'student'" [formGroup]="formGroupRegister" (validSubmit)="registerUser()">
+                                    
+                                        <h3>Instructor Registration</h3>
+
+                                        <div class="form-group">
+                                            <label for="firstname">First Name</label>
+                                            <input type="text" class="form-control" [(ngModel)]="firstNameInput" id="firstname" formControlName="firstname" placeholder="First Name" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="lastname">Last Name</label>
+                                            <input type="text" class="form-control" [(ngModel)]="lastNameInput" id="lastname"  formControlName="lastname" placeholder="Last Name">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" [(ngModel)]="emailInput" id="email"  formControlName="email" placeholder="Email">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" [(ngModel)]="passwordInput" id="password"  formControlName="password" placeholder="Password">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="contact">Contact</label>
+                                            <input type="number" class="form-control" [(ngModel)]="contactInput" id="contact"  formControlName="contact" placeholder="Contact" (keydown.enter)='registerUser()'>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <mat-form-field class ='full-width'>
+                                                <mat-select placeholder="Subject" [(ngModel)]="subjectInput" name='subject' formControlName='subject'>
+                                                    <mat-option *ngFor="let subject of subjectGroup" value="subject.id">{{subject.data.name}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Register</button>
+                                        </div>
+                                    </form>
+
+                                    <div class= "createAccount" (click)="loginView = true; circleView = false"> Have an Account</div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Forgot password -->
+                        <div class="form-group" *ngIf="isForgotPassword">
+                            <h3>Password Fogotten???</h3>
+
+                            <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" [(ngModel)]="emailInput" id="email" placeholder="Email">
+                            </div>
+                
+                            <button type="button" class="btn" (click)="this.isForgotPassword= false;">Cancel</button>
+                            <button type="button" class="btn btn-primary"(click)="forgotPassword()">Get email to reset passowrd</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        
+            <div class=" circleClass text-center circle col-md-5 col-lg-5" *ngIf='circleView'>
+                <h3>SELECT YOUR ROLE</h3>
+                <div class="row">
+                  <!-- <div class="col-sm-4 col-md-4 col-lg-4"> -->
+                    <div class = 'col'>
+                    <!-- normal -->
+                    <div class="ih-item circle effect6 scale_up" (click)='registerInstructor()'><a>
+                        <div class="img"><img src="assets/Classes/ArteGaleriade.jpg" alt="img"></div>
+                        <div class="info">
+                          <h3>INSTRUCTOR</h3>
+                          <p>MARKET YOUSELF</p>
+                        </div></a></div>
+                    <!-- end normal -->
+              
+                  </div>
+                  <!-- <div class="col-sm-4 col-md-4 col-lg-4"> -->
+                <div class = 'col'>
+                    <!-- colored -->
+                    <div class="ih-item circle colored effect6 scale_up" (click)='registerInstitute()'><a>
+                        <div class="img"><img src="assets/Classes/pattern2.jpg" alt="img"></div>
+                        <div class="info">
+                          <h3>INSTITUTE</h3>
+                          <p>MAKE PROFIT</p>
+                        </div></a></div>
+                    <!-- end colored-->
+              
+                  </div>
+              
+                  <!-- <div class="col-sm-4 col-md-4 col-lg-4"> -->
+                <div class = 'col'>
+                    <!-- normal -->
+                    <div class="ih-item circle effect6 scale_up" (click)='registerStudent()'><a>
+                        <div class="img"><img src="assets/Classes/ArteGaleriade.jpg" alt="img"></div>
+                        <div class="info">
+                          <h3>STUDENT</h3>
+                          <p>LEARN YOUSELF</p>
+                        </div></a></div>
+                    <!-- end normal -->
+              
+                  </div>
+                </div>
+
+                <div class="row mt-3" style="justify-content: center;">
+                  <div class="from-group">
+                    <button class="btn btn-dark backToLogin" (click)="this.circleView = false; loginView=true;">Have An Account</button>
+                  </div>
+                </div>
+              
+              </div>
+
+              
+            <div class="alert alert-{{responseMessageType}}" role="alert"
+                *ngIf="responseMessage.length">
+                {{responseMessage}}
+            </div>
+
+        </div>
+    <!-- </div> -->
+      
+</div>
