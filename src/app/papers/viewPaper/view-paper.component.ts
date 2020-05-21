@@ -47,7 +47,6 @@ export class ViewPaperComponent implements OnInit {
   
   ngOnInit(): void {
     this.spinnerService.show();
-    debugger
     this.paperService.getPapersByInstructorId(this.loggedInUser.id, this);
     this.sharedService.viewPaperRefreshRespond().subscribe(()=>{
       console.log("Received a View Paper Refresh Respond");
@@ -125,14 +124,11 @@ export class ViewPaperComponent implements OnInit {
 
   onSuccess(data: WsResponse, serviceType: WsType){
     if(serviceType == WsType.GET_ALL_PAPERS){
-      debugger
       console.log(data.payload);
       this.papers = data.payload;    
       this.subjectService.getSubjects(this);
-      debugger
     }
     else if(serviceType == WsType.GET_SUBJECTS){
-      debugger
       console.log(data.payload);
       let subjects: {id: string, data: SubjectModel}[] = data.payload;
       if(subjects!=undefined){
@@ -146,7 +142,6 @@ export class ViewPaperComponent implements OnInit {
         });
       }
       this.spinnerService.hide();
-      debugger
     }
     else if(serviceType == WsType.CREATE_PAPER){
       this.spinnerService.hide();
