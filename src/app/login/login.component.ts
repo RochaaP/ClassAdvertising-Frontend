@@ -73,7 +73,6 @@ export class LoginComponent implements OnInit {
     this.circleView = false;
     this.isForgotPassword = false;
 
-
     // this.spinnerService.show();
     this.subjectService.getSubjects(this);
 
@@ -106,15 +105,18 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
+    this.spinnerService.show();
     this.authService.login(this.emailInput, this.passwordInput).then(res => {
       this.showMessage('success', 'Successfully Logged In!');
     }, err => {
       this.showMessage('danger', err.message);
+      this.spinnerService.hide();
     });
     this.temp = this.sharedService.userLoggedInRespond().subscribe(val => {
       this.authService.setRegisterItem(JSON.parse(localStorage.getItem('loggedInUser')).data.role);
       this.authService.setUserName(JSON.parse(localStorage.getItem('loggedInUser')).data.firstname);
       this.navi();
+      this.spinnerService.hide();
       this.temp.unsubscribe();
     });
 
@@ -255,9 +257,11 @@ export class LoginComponent implements OnInit {
         this.showMessage('success', 'Registration Successful! Please Verify Your Email');
       }, err => {
         this.showMessage('danger', err.message);
+        this.spinnerService.hide();
       });
       this.registerOnDatabase();
     }, err => {
+      this.spinnerService.hide();
       this.showMessage('danger', err.message);
     });
   }

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DialogComponent } from '../../../../messages/dialog/dialog.component';
 import { ConfirmationComponent } from '../../../../messages/confirmation/confirmation.component';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-view-profile-instructor',
@@ -25,6 +26,8 @@ export class ViewProfileInstructorComponent implements OnInit {
   result: any;
   isFor: string;
 
+  showAppointmentButton: boolean;
+
   constructor(
     private data: DataService,
     private http: HttpClient,
@@ -35,12 +38,20 @@ export class ViewProfileInstructorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     // this.data.currentEmail.subscribe(message => this.email = message);
     // if (!this.email) {
       this.email = localStorage.getItem('navigateUser');
       this.instructorEmail = this.email;
-      if(this.authService.isUserLoggedIn()!=undefined){
+      if (this.authService.isUserLoggedIn() != undefined) {
         this.studentEmail = this.authService.isUserLoggedIn().email;
+        this.showAppointmentButton = true;
+      }
+      else{
+        this.showAppointmentButton = false;
+      }
+      if (this.studentEmail === this.instructorEmail) {
+        this.showAppointmentButton = false;
       }
       console.log('email from local storage '+ this.email + '  ' +this.studentEmail);
     // }
