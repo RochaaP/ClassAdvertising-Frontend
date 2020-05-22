@@ -70,6 +70,7 @@ import { FooterComponent } from './support/footer/footer.component';
 import { QuillModule } from 'ngx-quill';
 import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
 import { LoginComponent } from './login/login.component';
+import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cropper-modal.component';
 
 
 
@@ -92,6 +93,8 @@ import { LoginComponent } from './login/login.component';
     FooterComponent,
 
     LoginComponent,
+
+    ImageCropperModalComponent
 
   ],
   imports: [
@@ -147,12 +150,15 @@ import { LoginComponent } from './login/login.component';
     MatDialogModule,
 
     ScrollingModule,
-    NotificationBarModule
+    NotificationBarModule,
+
+    ImageCropperModule
   ],
   entryComponents: [
     DialogComponent,
     ConfirmationComponent,
-    PaperDetailsModalComponent
+    PaperDetailsModalComponent,
+    ImageCropperModalComponent
   ],
   providers: [],
   bootstrap: [RootComponent],

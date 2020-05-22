@@ -1,0 +1,20 @@
+image-cropper{
+    width: 100%;
+    height: auto;
+}
+
+.imageShower{
+    display: flex;
+    float: right;
+    flex-flow: row wrap;
+    align-content: flex-end; 
+}
+
+img{
+    width: 150px;
+    height: 150px;
+}
+
+.doneBtn{
+    float: right;
+}

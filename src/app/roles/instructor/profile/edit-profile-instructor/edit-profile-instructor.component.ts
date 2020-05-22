@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgModuleRef } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ImageCropperModalComponent } from 'src/app/util/image-cropper-modal/image-cropper-modal.component';
 
 
 
@@ -109,7 +111,8 @@ export class EditProfileInstructorComponent implements OnInit {
      private http: HttpClient,
      private afs: AngularFirestore,
      private snackBar: MatSnackBar,
-     private spinnerService: Ng4LoadingSpinnerService
+     private spinnerService: Ng4LoadingSpinnerService,
+     private modalService: NgbModal
     ) { }
 
   ngOnInit() {
@@ -231,30 +234,41 @@ export class EditProfileInstructorComponent implements OnInit {
 
 
   upload(event) {
-    this.uploadProfile = true;
-    const randomId = Math.random().toString(36).substring(2);
-    const path = `profilePictures/${Date.now()}_${randomId}`;
-    // Reference to storage bucket
-    const ref = this.afStorage.ref(path);
-    // The main task
-    this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
-    this.fileProfile.then(data => {
-      this.profileMetaData = JSON.stringify(data.metadata);
-    console.log(this.profileMetaData);
-        
-    });
-    this.percentageProfile = this.fileProfile.percentageChanges();
-    // console.log(this.task.img_url());
-    // this.img_url = this.task.img_url();
-    // console.log(this.img_url);
-    const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
-      // const ref = this.afStorage.ref(path);
-
-      ref.getDownloadURL().subscribe(url => {
-      const Url = url; // for ts
-      this.img_url = url; // with this you can use it in the html
+    console.log(event);
+    let file;
+    const modalRef = this.modalService.open(ImageCropperModalComponent, {size: "lg"});
+    modalRef.componentInstance.imageChangedEvent = event;
+    modalRef.componentInstance.image.subscribe(res=>{
+      file = res.imgFile;
+      console.log(file);
+      this.uploadProfile = true;
+      const randomId = Math.random().toString(36).substring(2);
+      const path = `profilePictures/${Date.now()}_${randomId}`;
+      // Reference to storage bucket
+      const ref = this.afStorage.ref(path);
+      // The main task
+      // this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
+      this.fileProfile = this.afStorage.upload(path, file);
+      this.fileProfile.then(data => {
+        this.profileMetaData = JSON.stringify(data.metadata);
+      console.log(this.profileMetaData);
+          
       });
-   });
+      this.percentageProfile = this.fileProfile.percentageChanges();
+      // console.log(this.task.img_url());
+      // this.img_url = this.task.img_url();
+      // console.log(this.img_url);
+      // const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
+      const task = this.afStorage.upload(path, file).then(() => {
+        // const ref = this.afStorage.ref(path);
+
+        ref.getDownloadURL().subscribe(url => {
+        const Url = url; // for ts
+        this.img_url = url; // with this you can use it in the html
+        });
+      });
+    });
+    
   }
 
   deleteProfile() {

@@ -39,6 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { PaperDetailsModalComponent } from '../papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
 import { ViewUsersComponent } from './admin/view-users/view-users.component';
+import { ImageCropperModalComponent } from '../util/image-cropper-modal/image-cropper-modal.component';
 
 
 @NgModule({

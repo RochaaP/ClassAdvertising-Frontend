@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h4 class="modal-title">mTute.lk</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+  
+<div class="modal-body">    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 p-1">
+                <image-cropper
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="1/1"
+                    format="png"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()"
+                    (cropperReady)="cropperReady()"
+                    (loadImageFailed)="loadImageFailed()"
+                ></image-cropper>
+            </div>
+            <div class="col-md-4 p-1 imageShower">
+                <img [src]="croppedImageBase64"/>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<div class="modal-footer">
+    <button mat-raised-button class="doneBtn" (click)="doneCropping()" color="primary">Done</button>
+</div>

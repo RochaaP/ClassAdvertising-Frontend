@@ -14,6 +14,7 @@ import { RolesModule } from './roles/roles.module';
 import { ZoomModule } from './zoom/zoom.module';
 import { NotesModule } from './notes/notes.module';
 import { MessageModule } from './messages/message.module';
+import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cropper-modal.component';
 
 const routes: Routes = [
   { path: '', component: NewsfeedComponent },
@@ -35,7 +36,9 @@ const routes: Routes = [
   { path: 'messages', canActivate: [GuardService], loadChildren: './messages/message.module#MessageModule' },
   { path: 'support', loadChildren: './support/support.module#SupportModule' },
   { path: 'profile', loadChildren: './roles/roles.module#RolesModule' },
-  { path: 'notes', loadChildren: './notes/notes.module#NotesModule' }
+  { path: 'notes', loadChildren: './notes/notes.module#NotesModule' },
+  
+  { path: 'imageCropper', component: ImageCropperModalComponent }
 
 ];
 
