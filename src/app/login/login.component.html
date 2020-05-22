@@ -13,10 +13,10 @@
                     <div class="form-left">
                         <img src="../../assets/login/form-v2.jpg" alt="form">
                         <div class="text-1">
-                            <p>Bring Your Music Along<span>try Unlimited</span></p>
+                            <p>Learn Anything<span>Try Unlimited</span></p>
                         </div>
                         <div class="text-2">
-                            <p><span>$9.99</span>/ Month</p>
+                            <!-- <p><span>$9.99</span>/ Month</p> -->
                         </div>
                     </div>
                     <!-- <div class="">
@@ -185,6 +185,11 @@
                             <button type="button" class="btn btn-primary"(click)="forgotPassword()">Get email to reset passowrd</button>
                         </div>
 
+                        <div class="alert alert-{{responseMessageType}}" role="alert"
+                            *ngIf="responseMessage.length">
+                            {{responseMessage}}
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -241,12 +246,6 @@
                 </div>
               
               </div>
-
-              
-            <div class="alert alert-{{responseMessageType}}" role="alert"
-                *ngIf="responseMessage.length">
-                {{responseMessage}}
-            </div>
 
         </div>
     <!-- </div> -->
