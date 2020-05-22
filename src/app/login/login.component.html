@@ -83,7 +83,7 @@
                                         <div class="form-group">
                                             <mat-form-field class ='full-width'>
                                                 <mat-select placeholder="Subject" [(ngModel)]="subjectInput" name='subject' formControlName='subject' multiple>
-                                                    <mat-option *ngFor="let subject of subjectGroup" value="{{subject.data.name}}">{{subject.data.name}}</mat-option>
+                                                    <mat-option *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
@@ -127,7 +127,7 @@
                                     <!-- Student Registration -->
                                     <form *ngIf = "role == 'student'" [formGroup]="formGroupRegister" (validSubmit)="registerUser()">
                                     
-                                        <h3>Instructor Registration</h3>
+                                        <h3>Student Registration</h3>
 
                                         <div class="form-group">
                                             <label for="firstname">First Name</label>
@@ -157,7 +157,7 @@
                                         <div class="form-group">
                                             <mat-form-field class ='full-width'>
                                                 <mat-select placeholder="Subject" [(ngModel)]="subjectInput" name='subject' formControlName='subject'>
-                                                    <mat-option *ngFor="let subject of subjectGroup" value="subject.id">{{subject.data.name}}</mat-option>
+                                                    <mat-option *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>

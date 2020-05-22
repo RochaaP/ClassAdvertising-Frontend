@@ -28,7 +28,7 @@ export class StudentPaperComponent implements OnInit {
   
   private loggedInUser: {id: string, data: UserModel};
 
-  public subjectFilter: string;
+  public subjectFilter: {id: string, data: SubjectModel};
   public sub_papers:{id: string, data: PaperModel, instructor: string}[];
 
   public subjectGroup: {id: string, data: SubjectModel}[] = [];
@@ -90,7 +90,7 @@ export class StudentPaperComponent implements OnInit {
     if(this.papers!=undefined){
       this.papers.forEach(el=>{
         console.log(el.subject);
-        if(el.subject == this.subjectFilter){
+        if(el.subject == this.subjectFilter.id){
           this.sub_papers = el.papers;
           console.log(el);
           this.setDataSource();

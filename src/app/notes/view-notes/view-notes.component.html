@@ -114,11 +114,11 @@
 
  <div class='container-fluid'>
     <div class="row">
-    <div class = 'col-md-3'>   
-      <div class ='row radios '>
+    <div class = 'col-md-3'> 
+      <div class ='row radios'>
           <mat-form-field class ='full-width'>
             <mat-select placeholder="Subject" [(ngModel)]="subjectInput" name='subject'>
-              <mat-option *ngFor="let subject of subjectGroup" value="subject.id">{{subject.data.name}}</mat-option>
+              <mat-option *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</mat-option>
             </mat-select>
           </mat-form-field>
 
@@ -144,7 +144,7 @@
 
     
     <div class = 'col-md-9'>
-      <ul *ngFor ="let field of response ">
+      <ul class="content" *ngFor ="let field of response ">
         <div class='postContainer'>
 
           <div class="row">

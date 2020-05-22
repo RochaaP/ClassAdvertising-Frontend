@@ -12,7 +12,7 @@ export class PaperComponent implements OnInit {
 
   public isShowViewPaper = true;
 
-  public isShowEditPaper = false;
+  public isShowEditPaper = true;
   
   constructor(public sharedService: SharedService) { }
 

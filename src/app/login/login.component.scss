@@ -244,6 +244,9 @@
 }
 
 @media (pointer: coarse) { 
+  .form-left{
+    display: none;
+  }
   .ih-item.circle.effect6 .img {
     opacity: 0;
     -webkit-transform: scale(1);
