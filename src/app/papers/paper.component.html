@@ -30,7 +30,7 @@
 
   </div>
 
-  <div *ngIf="sharedService.getLoggedInUser().data.role=='student'" style="width: 100%;height: 100%;" [style.padding-top.px]="60" [style.height.px]="divHeight">
+  <div *ngIf="sharedService.getLoggedInUser().data.role=='student'" style="width: 100%;height: 100%;" [style.height.px]="divHeight">
     <app-student-paper></app-student-paper>
   </div>
 </div>

@@ -124,6 +124,27 @@
   padding-bottom: 30px;
   // margin-top: 10px;
   // padding: initial;
-
+  // padding: initial;
+  margin-left: 1rem;
+  border-radius: 1rem;
+  margin-right: 1rem;
   background-color: #ada5d9
+}
+
+.content{  
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border-radius: 1rem;
+}
+
+.searchBtnContainer{
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-fluid{  
+  background: linear-gradient( 136deg, rgb(224,195,252) 0%, rgb(142,197,252) 100%);
+  height: 100vh;
 }

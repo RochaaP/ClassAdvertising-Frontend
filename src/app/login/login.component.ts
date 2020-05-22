@@ -73,7 +73,6 @@ export class LoginComponent implements OnInit {
     this.circleView = false;
     this.isForgotPassword = false;
 
-
     // this.spinnerService.show();
     this.subjectService.getSubjects(this);
 

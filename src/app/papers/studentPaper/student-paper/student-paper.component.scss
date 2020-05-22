@@ -1,3 +1,38 @@
 .mat-cell {
     padding: 20px 5px 5px 10px;
-  }
+}
+
+.radios{
+  align-self: center;
+  // margin-left: 10px;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  // margin-top: 10px;
+  // padding: initial;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border-radius: 1rem;
+  background-color: #ada5d9
+}
+
+.content{  
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border-radius: 1rem;
+}
+
+.searchBtnContainer{
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 30px;
+  width: 50%;
+}

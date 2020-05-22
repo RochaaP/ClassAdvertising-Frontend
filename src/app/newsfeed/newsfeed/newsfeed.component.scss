@@ -192,6 +192,15 @@ div:last-of-type span {
 }
 }
 
+@media (max-width: 479px) {
+ .wrapper{
+   .h1{
+    font-size: 45px;
+    font-weight: 100;
+   }
+ }
+}
+
 ///////////////////////////
 /* The sidebar menu */
 .sidenav {
@@ -411,3 +420,4 @@ body {
   outline: none !important;
   border: none !important;
 }
+

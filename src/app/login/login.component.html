@@ -83,7 +83,7 @@
                                         <div class="form-group">
                                             <mat-form-field class ='full-width'>
                                                 <mat-select placeholder="Subject" [(ngModel)]="subjectInput" name='subject' formControlName='subject' multiple>
-                                                    <mat-option *ngFor="let subject of subjectGroup" value="{{subject.">{{subject.data.name}}</mat-option>
+                                                    <mat-option *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
@@ -127,7 +127,7 @@
                                     <!-- Student Registration -->
                                     <form *ngIf = "role == 'student'" [formGroup]="formGroupRegister" (validSubmit)="registerUser()">
                                     
-                                        <h3>Instructor Registration</h3>
+                                        <h3>Student Registration</h3>
 
                                         <div class="form-group">
                                             <label for="firstname">First Name</label>
@@ -157,7 +157,7 @@
                                         <div class="form-group">
                                             <mat-form-field class ='full-width'>
                                                 <mat-select placeholder="Subject" [(ngModel)]="subjectInput" name='subject' formControlName='subject'>
-                                                    <mat-option *ngFor="let subject of subjectGroup" value="subject.id">{{subject.data.name}}</mat-option>
+                                                    <mat-option *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
@@ -189,14 +189,15 @@
                 </div>
             </div>
         
-            <div class=" circleClass text-center circle col-md-5 col-lg-5" *ngIf='circleView'>
+            <div class="circleClass text-center circle col-md-5 col-lg-5 col-sm-12 col-xs-12" *ngIf='circleView'>
                 <h3>SELECT YOUR ROLE</h3>
                 <div class="row">
                   <!-- <div class="col-sm-4 col-md-4 col-lg-4"> -->
                     <div class = 'col'>
                     <!-- normal -->
                     <div class="ih-item circle effect6 scale_up" (click)='registerInstructor()'><a>
-                        <div class="img"><img src="assets/Classes/ArteGaleriade.jpg" alt="img"></div>
+                        <!-- <div class="img"><img src="assets/Classes/ArteGaleriade.jpg" alt="img"></div> -->
+                        <div class="img"><img src="assets/login/Instructor.jpg" alt="img"></div>
                         <div class="info">
                           <h3>INSTRUCTOR</h3>
                           <p>MARKET YOUSELF</p>
@@ -208,7 +209,8 @@
                 <div class = 'col'>
                     <!-- colored -->
                     <div class="ih-item circle colored effect6 scale_up" (click)='registerInstitute()'><a>
-                        <div class="img"><img src="assets/Classes/pattern2.jpg" alt="img"></div>
+                        <!-- <div class="img"><img src="assets/Classes/pattern2.jpg" alt="img"></div> -->
+                        <div class="img"><img src="assets/login/Institute.jpg" alt="img"></div>
                         <div class="info">
                           <h3>INSTITUTE</h3>
                           <p>MAKE PROFIT</p>
@@ -221,7 +223,8 @@
                 <div class = 'col'>
                     <!-- normal -->
                     <div class="ih-item circle effect6 scale_up" (click)='registerStudent()'><a>
-                        <div class="img"><img src="assets/Classes/ArteGaleriade.jpg" alt="img"></div>
+                        <!-- <div class="img"><img src="assets/login/ArteGaleriade.jpg" alt="img"></div> -->
+                        <div class="img"><img src="assets/login/Student.jpg" alt="img"></div>
                         <div class="info">
                           <h3>STUDENT</h3>
                           <p>LEARN YOUSELF</p>

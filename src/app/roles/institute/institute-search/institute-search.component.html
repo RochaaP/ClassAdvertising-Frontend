@@ -11,9 +11,9 @@
           <mat-form-field class="full-width">
             <input matInput placeholder="Enter Name" [(ngModel)]='searchNameInput' name='searchName' required (keydown.enter)='searchName()'>
           </mat-form-field>
-          <div class = 'full-width'>
-            <button mat-flat-button (click)='searchName()'>Search</button>
-            <button mat-flat-button (click)='searchNameClose()'>Clear</button>
+          <div class = 'searchBtnContainer full-width'>
+            <button mat-flat-button (click)='searchName()' class="m-1">Search</button>
+            <button mat-flat-button (click)='searchNameClose()' class="m-1">Clear</button>
           </div>
 
         <!-- </div> -->
@@ -36,9 +36,9 @@
             <input matInput placeholder="Enter Subject" [(ngModel)]='searchSubjectInput' name='searchClass' required (keydown.enter)='searchClass()'>
           </mat-form-field>
 
-          <div class ='full-width'>
-            <button mat-flat-button (click)='searchClass()'>Search</button>
-            <button mat-flat-button (click)='searchClassClose()'>Clear</button>
+          <div class ='searchBtnContainer full-width'>
+            <button mat-flat-button (click)='searchClass()' class="m-1">Search</button>
+            <button mat-flat-button (click)='searchClassClose()' class="m-1">Clear</button>
           </div>
         <!-- </div> -->
       </div>
@@ -47,77 +47,79 @@
 
     <div class = 'col-md-9'>
 
-      <div *ngIf="!nameSearchClicked">
-       <div *ngIf="!classSearchClicked">
-         <div class="container">
-           <div class="row">
-            <div class="col-md-3 offset-md-1 col-sm-12 col-xs-12" *ngFor="let field of instituteResponse">
-              <div class="profileDetails card-1">
-                <img *ngIf= "field.data.img_url" class="header-image" src ={{field.data.img_url}} >
-                <img *ngIf= "!field.data.img_url" class="header-image" src =  'assets/propic/propic.png'>
-                <div class="click">
-                  <a (click) ='profileView(field.data.email, field.data.firstname)'>{{field.data.firstname}}</a>
-                </div>
-                <div id="content">
-                  <img src={{field.data.verify}} class="verification"/>
-                </div>
+      <div class="content">
+        <div *ngIf="!nameSearchClicked">
+          <div *ngIf="!classSearchClicked">
+            <div class="container">
+              <div class="row">
+               <div class="col-md-3 offset-md-1 col-sm-12 col-xs-12" *ngFor="let field of instituteResponse">
+                 <div class="profileDetails card-1">
+                   <img *ngIf= "field.data.img_url" class="header-image" src ={{field.data.img_url}} >
+                   <img *ngIf= "!field.data.img_url" class="header-image" src =  'assets/propic/propic.png'>
+                   <div class="click">
+                     <a (click) ='profileView(field.data.email, field.data.firstname)'>{{field.data.firstname}}</a>
+                   </div>
+                   <div id="content">
+                     <img src={{field.data.verify}} class="verification"/>
+                   </div>
+                 </div>
+               </div>
               </div>
             </div>
+          </div>
+         </div>
+   
+       <!-- <div *ngIf = '!classSearchClicked'> -->
+         <div *ngIf = "nameSearchClicked">
+           <div class="container">
+             <div class="row">
+               <div class="col-md-3 offset-md-1 col-sm-12 col-xs-12" *ngFor="let field of searchedList">
+                 <div class="profileDetails card-1">
+                   <img *ngIf= "field.data.img_url" class="header-image" src ={{field.data.img_url}} >
+                   <img *ngIf= "!field.data.img_url" class="header-image" src =  'assets/propic/propic.png'>
+                   <div class="click">
+                     <a (click) ='profileView(field.data.email, field.data.firstname)'>{{field.data.firstname}} </a>
+                   </div>
+                   <div id="content">
+                     <img src={{field.data.verify}} class="verification"/>
+                   </div>
+                 </div>
+               </div>
+             </div>
            </div>
          </div>
-       </div>
-      </div>
-
-    <!-- <div *ngIf = '!classSearchClicked'> -->
-      <div *ngIf = "nameSearchClicked">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3 offset-md-1 col-sm-12 col-xs-12" *ngFor="let field of searchedList">
-              <div class="profileDetails card-1">
-                <img *ngIf= "field.data.img_url" class="header-image" src ={{field.data.img_url}} >
-                <img *ngIf= "!field.data.img_url" class="header-image" src =  'assets/propic/propic.png'>
-                <div class="click">
-                  <a (click) ='profileView(field.data.email, field.data.firstname)'>{{field.data.firstname}} </a>
-                </div>
-                <div id="content">
-                  <img src={{field.data.verify}} class="verification"/>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <!-- </div> -->
-
-      <div *ngIf='classSearchClicked'>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3 offset-md-1 col-sm-12 col-xs-12" *ngFor="let field of searchedClassList; let index = index">
-              <div class="classDetails card-1">
-                <mat-accordion >
-                  <mat-expansion-panel >
-                    <mat-expansion-panel-header>
-                      <mat-panel-title>
-                        {{field.primary}}
-                      </mat-panel-title>
-                      <mat-panel-description>
-                        <a class="click" (click) ='profileView(emailClassList[index].email, emailClassList[index].name)'>{{emailClassList[index].name}}</a>
-                      </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <b>Class       : </b><p>{{field.class}}</p>
-                    <b>Day         : </b><p>{{field.day}}</p>
-                    <b>Time        : </b><p>{{field.time}}</p>
-                    <b>Medium      : </b><p>{{field.medium}}</p>
-                    <b>Class type  : </b><p>{{field.classType}}</p>
-                    <b>City        : </b><p>{{field.city}}</p>
-                    <b>District    : </b><p>{{field.district}}</p>
-                  </mat-expansion-panel>
-                </mat-accordion>
-    
-              </div>
-            </div>
-          </div>
-        </div>
+       <!-- </div> -->
+   
+         <div *ngIf='classSearchClicked'>
+           <div class="container">
+             <div class="row">
+               <div class="col-md-3 offset-md-1 col-sm-12 col-xs-12" *ngFor="let field of searchedClassList; let index = index">
+                 <div class="classDetails card-1">
+                   <mat-accordion >
+                     <mat-expansion-panel >
+                       <mat-expansion-panel-header>
+                         <mat-panel-title>
+                           {{field.primary}}
+                         </mat-panel-title>
+                         <mat-panel-description>
+                           <a class="click" (click) ='profileView(emailClassList[index].email, emailClassList[index].name)'>{{emailClassList[index].name}}</a>
+                         </mat-panel-description>
+                       </mat-expansion-panel-header>
+                       <b>Class       : </b><p>{{field.class}}</p>
+                       <b>Day         : </b><p>{{field.day}}</p>
+                       <b>Time        : </b><p>{{field.time}}</p>
+                       <b>Medium      : </b><p>{{field.medium}}</p>
+                       <b>Class type  : </b><p>{{field.classType}}</p>
+                       <b>City        : </b><p>{{field.city}}</p>
+                       <b>District    : </b><p>{{field.district}}</p>
+                     </mat-expansion-panel>
+                   </mat-accordion>
+       
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
       </div>
     </div>
   </div>
