@@ -235,12 +235,18 @@ export class EditProfileInstructorComponent implements OnInit {
 
   upload(event) {
     console.log(event);
+    if(event.target.files[0]==undefined){
+      return;
+    }
     let file;
     const modalRef = this.modalService.open(ImageCropperModalComponent, {size: "lg"});
     modalRef.componentInstance.imageChangedEvent = event;
     modalRef.componentInstance.ratio = 1;
     modalRef.componentInstance.image.subscribe(res=>{
       file = res.imgFile;
+      if(file==undefined){
+        this.openSnackBar("Please crop the image");
+      }
       console.log(file);
       this.uploadProfile = true;
       const randomId = Math.random().toString(36).substring(2);
