@@ -116,7 +116,7 @@ export class EditProfileInstructorComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-
+    
     this.triggeredcrop = false;
     const itemTemp  = JSON.parse( localStorage.getItem('user'));
     if (itemTemp != null) {
@@ -141,7 +141,7 @@ export class EditProfileInstructorComponent implements OnInit {
       }
 
       this.backgroundImageURL = response[0].more.backgroundImagePath;
-      this.backgroundMetaData = response[0].more.metaData;
+      this.backgroundMetaData = response[0].more.backgroundMetaData;
       if (!this.backgroundImageURL) {
         this.uploadBackground = false;
       } else {
@@ -335,6 +335,7 @@ export class EditProfileInstructorComponent implements OnInit {
 
 
   updateValues() {
+    console.log(this.backgroundMetaData)
     this.spinnerService.show();
     let userValues = {};
     userValues = {
