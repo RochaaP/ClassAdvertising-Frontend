@@ -8,9 +8,10 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './image-cropper-modal.component.html',
   styleUrls: ['./image-cropper-modal.component.scss']
 })
-export class ImageCropperModalComponent implements OnInit {
+export class ImageCropperModalComponent implements OnInit { 
 
-  @Input("imageChangedEvent") imageChangedEvent: any;
+  @Input("imageChangedEvent") imageChangedEvent: any;  
+  @Input("ratio") ratio: number;
   @Output() image: EventEmitter<any> = new EventEmitter();
 
   croppedImageBase64: any = '';

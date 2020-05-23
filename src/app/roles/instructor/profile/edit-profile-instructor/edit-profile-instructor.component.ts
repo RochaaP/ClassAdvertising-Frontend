@@ -238,6 +238,7 @@ export class EditProfileInstructorComponent implements OnInit {
     let file;
     const modalRef = this.modalService.open(ImageCropperModalComponent, {size: "lg"});
     modalRef.componentInstance.imageChangedEvent = event;
+    modalRef.componentInstance.ratio = 1;
     modalRef.componentInstance.image.subscribe(res=>{
       file = res.imgFile;
       console.log(file);
