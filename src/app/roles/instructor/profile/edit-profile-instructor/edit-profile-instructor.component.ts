@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, NgModuleRef } from '@angular/core';
+import { Component, OnInit, Input, NgModuleRef, HostListener } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperModalComponent } from 'src/app/util/image-cropper-modal/image-cropper-modal.component';
+import { UploadFilesService } from 'src/app/service/Upload-files/upload-files.service';
 
 
 
@@ -72,6 +73,7 @@ export class EditProfileInstructorComponent implements OnInit {
   rankedDistrictInput: string;
   rankedDistrictNameInput: string;
   rankedProfileURLInput: string;
+  rankedProfileMetaData: string;
 
   personalAchievementInput: string;
 
@@ -106,17 +108,26 @@ export class EditProfileInstructorComponent implements OnInit {
 
   triggeredcrop: boolean;
 
+  // @HostListener('window:beforeunload', ['$event'])
+  // unloadNotification($event: any) {
+  //     if (this.hasUnsavedData()) {
+  //         $event.returnValue =true;
+  //     }
+  // }
+
   constructor(
-     private afStorage: AngularFireStorage,
-     private http: HttpClient,
-     private afs: AngularFirestore,
-     private snackBar: MatSnackBar,
-     private spinnerService: Ng4LoadingSpinnerService,
-     private modalService: NgbModal
+    private afStorage: AngularFireStorage,
+    private http: HttpClient,
+    private afs: AngularFirestore,
+    private snackBar: MatSnackBar,
+    private spinnerService: Ng4LoadingSpinnerService,
+    private modalService: NgbModal,
+    private uploadFilesService: UploadFilesService,
+
     ) { }
 
   ngOnInit() {
-    
+
     this.triggeredcrop = false;
     const itemTemp  = JSON.parse( localStorage.getItem('user'));
     if (itemTemp != null) {
@@ -235,17 +246,17 @@ export class EditProfileInstructorComponent implements OnInit {
 
   upload(event) {
     console.log(event);
-    if(event.target.files[0]==undefined){
+    if (event.target.files[0] === undefined) {
       return;
     }
     let file;
-    const modalRef = this.modalService.open(ImageCropperModalComponent, {size: "lg"});
+    const modalRef = this.modalService.open(ImageCropperModalComponent, {size: 'lg'});
     modalRef.componentInstance.imageChangedEvent = event;
     modalRef.componentInstance.ratio = 1;
-    modalRef.componentInstance.image.subscribe(res=>{
+    modalRef.componentInstance.image.subscribe(res => {
       file = res.imgFile;
-      if(file==undefined){
-        this.openSnackBar("Please crop the image");
+      if (file === undefined){
+        this.openSnackBar('Please crop the image');
       }
       console.log(file);
       this.uploadProfile = true;
@@ -258,8 +269,8 @@ export class EditProfileInstructorComponent implements OnInit {
       this.fileProfile = this.afStorage.upload(path, file);
       this.fileProfile.then(data => {
         this.profileMetaData = JSON.stringify(data.metadata);
-      console.log(this.profileMetaData);
-          
+        console.log(this.profileMetaData);
+
       });
       this.percentageProfile = this.fileProfile.percentageChanges();
       // console.log(this.task.img_url());
@@ -275,13 +286,13 @@ export class EditProfileInstructorComponent implements OnInit {
         });
       });
     });
-    
+
   }
 
   deleteProfile() {
     console.log(this.profileMetaData);
     if (this.profileMetaData) {
-      console.log('edit profile inst / delete profile / '+ this.profileMetaData );
+      console.log('edit profile inst / delete profile / ' + this.profileMetaData );
       this.afStorage.ref(JSON.parse(this.profileMetaData).fullPath).delete().subscribe(() => {
       }, (error) => {
         console.log(error);
@@ -427,7 +438,8 @@ export class EditProfileInstructorComponent implements OnInit {
       rankedIsland: this.rankedIslandInput,
       rankedDistrict: this.rankedDistrictInput,
       rankedDistrictName: this.rankedDistrictNameInput,
-      rankedProfileURL:  this.rankedProfileURLInput
+      rankedProfileURL:  this.rankedProfileURLInput,
+      rankedProfileMetaData: this.rankedProfileMetaData
     };
     this.cards.push(this.details);
 
@@ -437,31 +449,30 @@ export class EditProfileInstructorComponent implements OnInit {
     this.rankedIslandInput = '';
     this.rankedDistrictNameInput = '';
     this.rankedProfileURLInput = '';
+    this.rankedProfileMetaData = '';
     this.percentageStudent = null;
   }
 
+
   uploadImageStudent(event) {
-    const randomId = Math.random().toString(36).substring(2);
-    const path = `profilePicturesofStudents/${Date.now()}_${randomId}`;
-    // Reference to storage bucket
-    const ref = this.afStorage.ref(path);
-
-    this.fileStudent = this.afStorage.upload(path, event.target.files[0]);
-    this.percentageStudent = this.fileStudent.percentageChanges();
-    // The main task
-    // this.task = this.afStorage.upload(path, event.target.files[0]);
-    // console.log(this.task.downloadURL());
-    // this.downloadURL = this.task.downloadURL();
-    // console.log(this.downloadURL);
-    const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
-      // const ref = this.afStorage.ref(path);
-      const img_url = ref.getDownloadURL().subscribe(url => {
-      const Url = url; // for ts
-      this.rankedProfileURLInput = url; // with this you can use it in the html
-      });
+    // this.uploadFile = true;
+    const tableName = 'profilePicturesofStudents';
+    this.uploadFilesService.upload(event, tableName);
+    this.percentageStudent = this.uploadFilesService.getPercentage(); // observe percentage
+    this.uploadFilesService.getDownloadURL().subscribe(url => {
+        this.rankedProfileURLInput = url.downloadURL;
     });
-    console.log('img_url ' + this.img_url);
+    this.uploadFilesService.getMetadata().subscribe(meta => {
+      this.rankedProfileMetaData = meta.metadata;
+    });
+  }
 
+  deleteFile(metaData: any) {
+    console.log(JSON.parse(metaData).fullPath);
+    this.spinnerService.show();
+    const state = this.uploadFilesService.delete(JSON.parse(metaData).fullPath);
+    console.log(state);
+    this.spinnerService.hide();
   }
 
   addPersonalAchievements() {
@@ -488,6 +499,7 @@ export class EditProfileInstructorComponent implements OnInit {
   }
 
   deleteResultAchievement(index: number) {
+    this.deleteFile(this.cards[index].rankedProfileMetaData);
     this.cards.splice(index, 1);
   }
 

@@ -94,7 +94,8 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
 
     LoginComponent,
 
-    ImageCropperModalComponent
+    ImageCropperModalComponent,
+
 
   ],
   imports: [

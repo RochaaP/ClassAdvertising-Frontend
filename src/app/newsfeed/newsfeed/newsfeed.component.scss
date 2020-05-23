@@ -421,3 +421,47 @@ body {
   border: none !important;
 }
 
+/////////////////////////banner///////////////
+home_banner_area {
+  position: relative;
+  z-index: 1;
+  min-height: 770px; }
+  .home_banner_area .banner_inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 770px; }
+    .home_banner_area .banner_inner .overlay {
+      background: url(../../../assets/background2.jpeg) no-repeat scroll center center;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 100%;
+      bottom: 0;
+      z-index: -1; }
+    .home_banner_area .banner_inner .banner_content {
+      color: #fff; }
+      .home_banner_area .banner_inner .banner_content span {
+        font-size: 24px;
+        color: #fff;
+        font-family: "Heebo", sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        display: inline-block;
+        position: relative; }
+        .home_banner_area .banner_inner .banner_content span:after {
+          content: '';
+          position: absolute;
+          left: 50%;
+          bottom: -16px;
+          transform: translateX(-50%);
+          width: 100px;
+          height: 1px;
+          background: #fff; }
+      .home_banner_area .banner_inner .banner_content h3 {
+        font-size: 60px;
+        font-family: "Heebo", sans-serif;
+        font-weight: 500; }
+      .home_banner_area .banner_inner .banner_content .main_btn {
+        margin-top: 35px; }

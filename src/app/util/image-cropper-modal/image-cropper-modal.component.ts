@@ -8,10 +8,10 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './image-cropper-modal.component.html',
   styleUrls: ['./image-cropper-modal.component.scss']
 })
-export class ImageCropperModalComponent implements OnInit { 
+export class ImageCropperModalComponent implements OnInit {
 
-  @Input("imageChangedEvent") imageChangedEvent: any;  
-  @Input("ratio") ratio: number;
+  @Input('imageChangedEvent') imageChangedEvent: any;
+  @Input('ratio') ratio: number;
   @Output() image: EventEmitter<any> = new EventEmitter();
 
   croppedImageBase64: any = '';
@@ -24,11 +24,11 @@ export class ImageCropperModalComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.imageChangedEvent);
-    if(this.ratio==undefined){
-      this.showSnackBar("Failed to get the AspectRatio");
+    if (this.ratio === undefined) {
+      this.showSnackBar('Failed to get the AspectRatio');
     }
   }
-    
+
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
   }
@@ -44,20 +44,20 @@ export class ImageCropperModalComponent implements OnInit {
       // cropper ready
   }
   loadImageFailed() {
-    this.showSnackBar("Failed to load Image");
+    this.showSnackBar('Failed to load Image');
   }
 
-  showSnackBar(notifyMsg: string, duration: number = 2000){    
+  showSnackBar(notifyMsg: string, duration: number = 2000) {
     this.snackBar.open(notifyMsg, 'Done', {
       duration: duration,
       verticalPosition: 'top'
     });
   }
 
-  doneCropping(){
-    let block = this.croppedImageBase64.split(";");
-    let contentType = block[0].split(":")[1];
-    let b64Data = block[1].split(",")[1];
+  doneCropping() {
+    let block = this.croppedImageBase64.split(';');
+    let contentType = block[0].split(':')[1];
+    let b64Data = block[1].split(',')[1];
     let sliceSize = 512;
     let byteCharacters = atob(b64Data);
     let byteArrays = [];
@@ -74,11 +74,11 @@ export class ImageCropperModalComponent implements OnInit {
         byteArrays.push(byteArray);
     }
 
-    var blob = new Blob(byteArrays, {type: contentType});    
-    let fileName: string = this.imageChangedEvent.target.files[0].name.split(".")[0];
+    var blob = new Blob(byteArrays, {type: contentType});
+    let fileName: string = this.imageChangedEvent.target.files[0].name.split('.')[0];
     console.log(blob);
     this.image.emit({
-      "imgFile": new File([blob], fileName, {type: contentType})
+      'imgFile': new File([blob], fileName, {type: contentType})
     });
     this.activeModal.dismiss();
   }

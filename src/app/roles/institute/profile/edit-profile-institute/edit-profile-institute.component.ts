@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImageCropperModalComponent } from 'src/app/util/image-cropper-modal/image-cropper-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-edit-profile-institute',
@@ -50,6 +52,7 @@ export class EditProfileInstituteComponent implements OnInit {
     private http: HttpClient,
     private spinnerService: Ng4LoadingSpinnerService,
     private snackBar: MatSnackBar,
+    private modalService: NgbModal
 
     ) { }
 
@@ -141,34 +144,46 @@ export class EditProfileInstituteComponent implements OnInit {
   }
 
   upload(event) {
-    this.uploadProfile = true;
+    if (event.target.files[0] === undefined) {
+      return;
+    }
+    let file;
+    const modalRef = this.modalService.open(ImageCropperModalComponent, {size: 'lg'});
+    modalRef.componentInstance.imageChangedEvent = event;
+    modalRef.componentInstance.ratio = 1;
+    modalRef.componentInstance.image.subscribe(res => {
+      file = res.imgFile;
+      if (file === undefined) {
+        this.openSnackBar('Please crop the image');
+      }
+      this.uploadProfile = true;
 
-    const randomId = Math.random().toString(36).substring(2);
-    const path = `profilePictures/${Date.now()}_${randomId}`;
-    this.uploadProfilePath = path;
+      const randomId = Math.random().toString(36).substring(2);
+      const path = `profilePictures/${Date.now()}_${randomId}`;
+      this.uploadProfilePath = path;
     // Reference to storage bucket
-    const ref = this.afStorage.ref(path);
-    this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
-    this.fileProfile.then(data => {
-      this.profileMetaData = JSON.stringify(data.metadata);
-    });
-    this.percentageProfile = this.fileProfile.percentageChanges();
+      const ref = this.afStorage.ref(path);
+      this.fileProfile = this.afStorage.upload(path, event.target.files[0]);
+      this.fileProfile.then(data => {
+        this.profileMetaData = JSON.stringify(data.metadata);
+      });
+      this.percentageProfile = this.fileProfile.percentageChanges();
     // The main task
     // this.task = this.afStorage.upload(path, event.target.files[0]);
     // console.log(this.task.downloadURL());
     // this.downloadURL = this.task.downloadURL();
     // console.log(this.downloadURL);
-    const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
-      const downloadURL = ref.getDownloadURL().subscribe(url => {
-      const Url = url; // for ts
-      this.downloadURL = url; // with this you can use it in the html
+      const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
+        const downloadURL = ref.getDownloadURL().subscribe(url => {
+          const Url = url; // for ts
+          this.downloadURL = url; // with this you can use it in the html
+        });
       });
-
     });
   }
 
   deleteProfile() {
-   
+
     if (this.profileMetaData) {
       this.afStorage.ref(JSON.parse(this.profileMetaData).fullPath).delete().subscribe(() => {
       }, (error) => {

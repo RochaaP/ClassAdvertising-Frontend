@@ -34,7 +34,7 @@ export class ViewProfileInstituteComponent implements OnInit {
       if (this.authService.isUserLoggedIn() != undefined) {
         this.studentEmail = this.authService.isUserLoggedIn().email;
         if (this.studentEmail === this.instituteEmail) {
-          this.showEditButton = true;    
+          this.showEditButton = true;
         }
       }
       else{
