@@ -42,7 +42,7 @@
   
         <div *ngIf='uploadProfile'>
           <img src="//placehold.it/100" src={{this.img_url}} class="avatar img-circle" class="img-thumbnail" alt="">
-          <a (click)="deleteProfile()" >Delete</a>
+          <a (click)="deleteProfile()" class="btn btn-outline-danger">Delete</a>
           <div *ngIf="percentageProfile | async as pct">
             Progress: {{ pct | number }}%
             <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
@@ -65,7 +65,7 @@
   
             <div *ngIf='uploadBackground'>
               <img src="//placehold.it/100" src={{this.backgroundImageURL}} class="avatar img-circle" class="img-thumbnail" alt="">
-              <a (click)="deleteBackground()" >Delete</a>
+              <a (click)="deleteBackground()" class="btn btn-outline-danger">Delete</a>
               <div *ngIf="percentageBackground | async as pct">
                 Progress: {{ pct | number }}%
                 <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
@@ -371,7 +371,7 @@
   
                   <div class="form-group">
                     <button type="button" class="btn btn-primary"(click)="submit()">Add achievement</button>
-                    if you have uploaded a profile photo wait till photo is shown.
+                    <label class="imageWaring m-1"><small>If you have uploaded a profile photo wait till photo is shown.</small></label>
                   </div>
   
                   <div class= "addedDetails col-md-8" *ngFor="let tab of cards; let index = index">
@@ -437,7 +437,7 @@
   
              <div class="form-group">
                 <button type="button" class="btn btn-primary"(click)="updateValues()">Update</button>
-                if you have uploaded a profile photo wait till new photo is shown.
+                <label class="imageWaring m-1"><small>If you have uploaded a profile photo wait till new photo is shown.</small></label>
               </div>
   
         </form>
