@@ -70,10 +70,11 @@ export class ImageCropperModalComponent implements OnInit {
         byteArrays.push(byteArray);
     }
 
-    var blob = new Blob(byteArrays, {type: contentType});
+    var blob = new Blob(byteArrays, {type: contentType});    
+    let fileName: string = this.imageChangedEvent.target.files[0].name.split(".")[0];
     console.log(blob);
     this.image.emit({
-      "imgFile": new File([blob], this.imageChangedEvent.target.files[0].name)
+      "imgFile": new File([blob], fileName, {type: contentType})
     });
     this.activeModal.dismiss();
   }

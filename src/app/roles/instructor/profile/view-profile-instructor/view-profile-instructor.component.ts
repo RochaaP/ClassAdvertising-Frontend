@@ -7,6 +7,9 @@ import { DialogComponent } from '../../../../messages/dialog/dialog.component';
 import { ConfirmationComponent } from '../../../../messages/confirmation/confirmation.component';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 import { ThrowStmt } from '@angular/compiler';
+import { SharedService } from 'src/app/shared/shared.service';
+import { UserModel } from 'src/app/users/user-model';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-profile-instructor',
@@ -14,6 +17,10 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./view-profile-instructor.component.scss']
 })
 export class ViewProfileInstructorComponent implements OnInit {
+
+  faEdit = faEdit;
+
+  loggedInUser: {id: string, data: UserModel};
 
   email: string;
   response: any;
@@ -27,6 +34,7 @@ export class ViewProfileInstructorComponent implements OnInit {
   isFor: string;
 
   showAppointmentButton: boolean;
+  showEditButton: boolean = false;
 
   constructor(
     private data: DataService,
@@ -34,8 +42,8 @@ export class ViewProfileInstructorComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private authService: AuthenticationService
-
-  ) { }
+  ) {
+   }
 
   ngOnInit() {
 
@@ -45,12 +53,13 @@ export class ViewProfileInstructorComponent implements OnInit {
       this.instructorEmail = this.email;
       if (this.authService.isUserLoggedIn() != undefined) {
         this.studentEmail = this.authService.isUserLoggedIn().email;
-        this.showAppointmentButton = true;
+        this.showAppointmentButton = true;        
+        if (this.studentEmail === this.instructorEmail) {
+          this.showAppointmentButton = false;    
+          this.showEditButton = true;    
+        }
       }
       else{
-        this.showAppointmentButton = false;
-      }
-      if (this.studentEmail === this.instructorEmail) {
         this.showAppointmentButton = false;
       }
       console.log('email from local storage '+ this.email + '  ' +this.studentEmail);
@@ -95,6 +104,10 @@ export class ViewProfileInstructorComponent implements OnInit {
      }
     //  console.log('from null '+result);
     });
+  }
+
+  clickProfile() {
+    this.router.navigate(['/profile/instructor/edit']);
   }
 
   openConfirmation(): void {

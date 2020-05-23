@@ -162,15 +162,15 @@ export class NavigationComponent implements OnInit {
     this.router.navigate(['/postadd']);
   }
 
-  clickProfile() {
-    if (this.registerItem === 'instructor') {
-      this.router.navigate(['/profile/instructor/edit']);
-    } else if (this.registerItem === 'institute') {
-      this.router.navigate(['/profile/institute/edit']);
-    } else if (this.registerItem === 'student') {
-      this.router.navigate(['/profile/student/edit']);
-    }
-  }
+  // clickProfile() {
+  //   if (this.registerItem === 'instructor') {
+  //     this.router.navigate(['/profile/instructor/edit']);
+  //   } else if (this.registerItem === 'institute') {
+  //     this.router.navigate(['/profile/institute/edit']);
+  //   } else if (this.registerItem === 'student') {
+  //     this.router.navigate(['/profile/student/edit']);
+  //   }
+  // }
 
   clickClasses() {
     if (this.registerItem === 'instructor') {

@@ -47,9 +47,9 @@
             <fa-icon [icon]='faUser'></fa-icon> {{userName}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf='!isStudent' data-toggle="collapse" data-target=".navbar-collapse.show">
-            <a class="dropdown-item" (click)='clickViewProfile()'><fa-icon [icon]='faIdBadge'></fa-icon> View Profile</a>
+            <a class="dropdown-item" (click)='clickViewProfile()'><fa-icon [icon]='faIdBadge'></fa-icon> Profile</a>
             <a class="dropdown-item" (click)='clickPostAd()'><fa-icon [icon]='faAd'></fa-icon> Post Ad</a>
-            <a class="dropdown-item" (click)='clickProfile()'><fa-icon [icon]='faIdCard'></fa-icon> Change Details</a>
+            <!-- <a class="dropdown-item" (click)='clickProfile()'><fa-icon [icon]='faIdCard'></fa-icon> Change Details</a> -->
             <a class="dropdown-item" (click)='clickClasses()'><fa-icon [icon]='faUserFriends'></fa-icon> Classes</a>
             <div class="dropdown-divider" *ngIf='isInstructor'></div>
             <a class="dropdown-item" (click)='clickPapers()' *ngIf='isInstructor'><fa-icon [icon]='faBookReader'></fa-icon> Papers</a>

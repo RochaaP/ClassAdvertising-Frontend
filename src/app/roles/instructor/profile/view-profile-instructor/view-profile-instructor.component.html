@@ -12,7 +12,8 @@
   
        <div class="text-center">
         <h4 >{{field.data.firstname}} {{field.data.lastname}}</h4>
-        <button mat-raised-button color="primary" class='btnAppointment' (click)='openDialog()' [disabled]='!showAppointmentButton'>Place an Appointment</button>
+        <button mat-raised-button color="primary" (click)='openDialog()' *ngIf="!showAppointmentButton && !showEditButton">Place an Appointment</button>
+        <button mat-raised-button color="primary" (click)="clickProfile()" *ngIf="showEditButton"><span>Edit Profile<fa-icon class="ml-1" [icon]="faEdit"></fa-icon></span></button>
        </div>  
     </div>
   </div>
