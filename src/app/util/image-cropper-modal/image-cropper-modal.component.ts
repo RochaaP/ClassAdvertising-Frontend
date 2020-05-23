@@ -8,9 +8,10 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './image-cropper-modal.component.html',
   styleUrls: ['./image-cropper-modal.component.scss']
 })
-export class ImageCropperModalComponent implements OnInit {
+export class ImageCropperModalComponent implements OnInit { 
 
-  @Input("imageChangedEvent") imageChangedEvent: any;
+  @Input("imageChangedEvent") imageChangedEvent: any;  
+  @Input("ratio") ratio: number;
   @Output() image: EventEmitter<any> = new EventEmitter();
 
   croppedImageBase64: any = '';
@@ -23,6 +24,9 @@ export class ImageCropperModalComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.imageChangedEvent);
+    if(this.ratio==undefined){
+      this.showSnackBar("Failed to get the AspectRatio");
+    }
   }
     
   fileChangeEvent(event: any): void {
@@ -70,10 +74,11 @@ export class ImageCropperModalComponent implements OnInit {
         byteArrays.push(byteArray);
     }
 
-    var blob = new Blob(byteArrays, {type: contentType});
+    var blob = new Blob(byteArrays, {type: contentType});    
+    let fileName: string = this.imageChangedEvent.target.files[0].name.split(".")[0];
     console.log(blob);
     this.image.emit({
-      "imgFile": new File([blob], this.imageChangedEvent.target.files[0].name)
+      "imgFile": new File([blob], fileName, {type: contentType})
     });
     this.activeModal.dismiss();
   }
