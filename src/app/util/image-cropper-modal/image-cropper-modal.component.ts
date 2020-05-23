@@ -24,6 +24,9 @@ export class ImageCropperModalComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.imageChangedEvent);
+    if(this.ratio==undefined){
+      this.showSnackBar("Failed to get the AspectRatio");
+    }
   }
     
   fileChangeEvent(event: any): void {
