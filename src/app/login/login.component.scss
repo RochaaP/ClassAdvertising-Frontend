@@ -245,9 +245,27 @@
   }
 }
 
+.portrait{
+  display: block;
+}
+.landscape{
+  display: none;
+}
+
 @media (pointer: coarse) { 
-  .form-left{
+  .portrait{
     display: none;
+  }
+  .landscape{
+    display: block;
+  }
+  .ih-item.circle {
+    width: 12rem;
+    height: 12rem;
+  }
+  .ih-item.circle .img {
+    width: 12rem;
+    height: 12rem;
   }
   .ih-item.circle.effect6 .img {
     opacity: 0;

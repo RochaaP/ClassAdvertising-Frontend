@@ -331,6 +331,9 @@ input:-moz-placeholder { /* Firefox 18- */
 	}
 }
 @media screen and (max-width: 575px) {
+	.form-v2-content {
+		margin: 5rem 1rem;
+	}
 	.form-v2-content .form-detail .form-row input {
 		width: 89.5%;
 	}
