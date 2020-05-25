@@ -183,12 +183,12 @@
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                             <button *ngIf="(questionList.length > 1) && (t != 0) && question.id!='0'" id="btnMoveUpTopic" type="button"
-                                class="my-1 mx-2 close float-right" (click)="changePositionQuestion(question, t, 'up')" [disabled]="paper.id=='0'">
+                                class="my-1 mx-2 close float-right" (click)="changePositionQuestion( t, 'up')" [disabled]="paper.id=='0'">
                                 <i class="fas fa-arrow-up"></i>
                             </button>
                             <button *ngIf="(questionList.length > 1) && (t != (questionList.length - 1)) && !(t + 1 >= questionList.length) && (questionList[t+1].id!='0')"
                                 id="btnMoveDownTopic" type="button" class="my-1 mx-2 close float-right"
-                                (click)="changePositionQuestion(question, t, 'down')" [disabled]="paper.id=='0'">
+                                (click)="changePositionQuestion( t, 'down')" [disabled]="paper.id=='0'">
                                 <i class="fas fa-arrow-down"></i>
                             </button>						
                         </div>

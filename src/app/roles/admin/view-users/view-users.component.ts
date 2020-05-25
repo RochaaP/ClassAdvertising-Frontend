@@ -30,6 +30,9 @@ export class ViewUsersComponent implements OnInit {
   MESSAGE_FAIL = 'GETTING ALL USERS FAILED';
   sub: any;
 
+  searchInput: string;
+  
+
 
   notTriggeredClick: boolean;
 
@@ -137,5 +140,22 @@ export class ViewUsersComponent implements OnInit {
       this.resultListInstitute = this.allInstitute;
 
     }
+  }
+
+  triggeredInstructor(email: string) {
+    console.log('triggereed / implemetn this')
+  }
+  triggeredInstitute(email: string) {
+    console.log('triggereed / implemetn this')
+  }
+
+  search() {
+    console.log('search triggered/ implement this.')
+  }
+  searchClose() {
+    console.log('searchClose triggered / implement this.')
+  }
+  filterItems(input: string) {
+    console.log('filterItems triggered / implement this.')
   }
 }

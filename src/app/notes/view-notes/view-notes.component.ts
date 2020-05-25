@@ -186,4 +186,9 @@ export class ViewNotesComponent implements OnInit {
     }
   }
 
+
+  searchNotesClose() {
+    console.log('searchNoteClose triggerted/ implement this');
+  }
+
 }

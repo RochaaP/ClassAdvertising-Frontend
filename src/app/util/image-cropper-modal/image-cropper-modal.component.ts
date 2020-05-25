@@ -18,7 +18,7 @@ export class ImageCropperModalComponent implements OnInit {
   croppedImage: Blob;
 
   constructor(
-    private activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private snackBar: MatSnackBar
   ) { }
 

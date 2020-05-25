@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../../../service/share/data.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-view-profile-institute',
@@ -13,6 +15,8 @@ export class ViewProfileInstituteComponent implements OnInit {
 
   email: string;
   response: any;
+  faEdit = faEdit;
+
 
   private instituteEmail: string;
   private studentEmail: string;
