@@ -12,6 +12,13 @@ import { NotesService } from '../notes.service';
 import { ThrowStmt } from '@angular/compiler';
 import { UploadFilesService } from '../../service/Upload-files/upload-files.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SubjectService } from 'src/app/subjects/subject.service';
+import { SubjectModel } from 'src/app/subjects/subject-model';
+import { WsResponse } from 'src/app/util/ws-response';
+import { WsType } from 'src/app/util/ws-type';
+import { UserModel } from 'src/app/users/user-model';
+import { SharedService } from 'src/app/shared/shared.service';
+import { isNumber } from 'util';
 
 @Component({
   selector: 'app-add-notes',
@@ -28,6 +35,8 @@ export class AddNotesComponent implements OnInit {
   descriptionInput: string;
   subjectInput: string;
   gradeInput: string;
+  
+  subjectGroup: {id: string, data: SubjectModel}[] = [];
 
 
   path: string;
@@ -49,11 +58,12 @@ export class AddNotesComponent implements OnInit {
   note: any = {
       name: '',
       subject: '',
-      gradeLevel: '',
+      grade_level: '',
       description: '',
       year: '',
   };
 
+  loggedInUser: {id: string, data: UserModel};
 
   MESSAGE_SUCCESS = 'POST UPDATED';
   MESSAGE_FAIL = 'POST FAILED';
@@ -71,14 +81,31 @@ export class AddNotesComponent implements OnInit {
     private spinnerService: Ng4LoadingSpinnerService,
     private uploadFilesService: UploadFilesService,
     public activeModal: NgbActiveModal,
-
-  ) { }
+    private subjectService: SubjectService,
+    private sharedService: SharedService
+  ) {
+    this.loggedInUser = this.sharedService.getLoggedInUser();
+   }
 
   ngOnInit() {
+    this.spinnerService.show();
     this.userDetails = this.authService.isUserLoggedIn();
+    this.subjectService.getSubjects(this);
   }
 
   onSubmit() {
+    if(this.note.name=="" || this.note.subject=="" || this.note.grade_level=="" || this.note.description==""){
+      this.openSnackBar("Please fill all required values");
+      return; 
+    }
+    if(this.note.year=="" || isNaN(Number(this.note.year))){
+      this.openSnackBar("Please select a valid year");
+      return;
+    }
+    if(this.metaData==undefined){
+      this.openSnackBar("Please upload a note");
+      return;
+    }
     this.spinnerService.show();
     console.log(this.note);
     // let userValues = {};
@@ -86,7 +113,7 @@ export class AddNotesComponent implements OnInit {
     this.id = id.toString();
     this.note.metaData = this.metaData;
     this.note.contentURL = this.downloadURL;
-    this.note.email = this.userDetails.email;
+    this.note.instructor = this.loggedInUser.id;
 
     // notes = {
     //   id: this.id,
@@ -152,9 +179,14 @@ export class AddNotesComponent implements OnInit {
       this.metaData = meta.metadata;
     });
   }
+
   deleteFile() {
+    if(this.metaData==undefined){
+      return
+    }
     this.spinnerService.show();
-    const state = this.uploadFilesService.delete(JSON.parse(this.metaData).fullPath);
+    const state = this.uploadFilesService.delete(JSON.parse(this.metaData).fullPath);    
+    this.uploadFile = false;
     console.log(state);
     this.spinnerService.hide();
     // if (state === 'success') {
@@ -192,6 +224,25 @@ export class AddNotesComponent implements OnInit {
     });
   });
 
+}
+
+onSuccess(data: WsResponse, serviceType: WsType){
+  if(serviceType == WsType.GET_SUBJECTS){
+    console.log(data.payload);
+    let subjects: {id: string, data: SubjectModel}[] = data.payload;
+    if(subjects!=undefined){
+      subjects.forEach(subject=>{
+        this.subjectGroup.push(subject);
+      });
+    }
+    this.spinnerService.hide();
+  }
+}
+
+onFail(serviceType: WsType){
+  if(serviceType == WsType.GET_SUBJECTS){
+    this.spinnerService.hide();
+  }
 }
 
 }

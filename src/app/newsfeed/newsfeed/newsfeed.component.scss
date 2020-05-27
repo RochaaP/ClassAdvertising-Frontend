@@ -192,15 +192,6 @@ div:last-of-type span {
 }
 }
 
-@media (max-width: 479px) {
- .wrapper{
-   .h1{
-    font-size: 45px;
-    font-weight: 100;
-   }
- }
-}
-
 ///////////////////////////
 /* The sidebar menu */
 .sidenav {
@@ -234,13 +225,6 @@ div:last-of-type span {
   margin-left: 160px; /* Same as the width of the sidebar */
   padding: 0px 10px;
 }
-
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-
 
 .example-container {
   width: 400px;
@@ -465,3 +449,29 @@ home_banner_area {
         font-weight: 500; }
       .home_banner_area .banner_inner .banner_content .main_btn {
         margin-top: 35px; }
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+@media (max-width: 479px) {
+ .wrapper{
+   .h1{
+    font-size: 45px;
+    font-weight: 100;
+   }
+ }
+ .parallax {
+    height: 10em;
+ }
+ .wrapper {
+	h1 {
+		color: #fff;
+    font-size: 5em;
+    margin-top: 0.5em;
+		font-weight: 100
+	}
+}
+}

@@ -136,7 +136,7 @@
 
           <div class='searchBtnContainer full-width'>
             <button mat-flat-button (click)='searchNotes()' class="m-1">Search</button>
-            <button mat-flat-button (click)='searchNotesClose()' class="m-1" disabled>Clear</button>
+            <button mat-flat-button (click)='searchNotesClear()' class="m-1" *ngIf="subjectInput!=undefined">Clear</button>
           </div>
       </div>
 

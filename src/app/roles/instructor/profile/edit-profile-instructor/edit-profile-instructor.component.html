@@ -142,6 +142,17 @@
                     <input class="form-control" type="text" placeholder="Contact" [(ngModel)]="contactInput" name='contact'>
                   </div>
               </div>
+
+              <div class="form-group">
+                <label class="col-md-3 control-label">Subject:</label>
+                <div class="col-md-8">
+                  <mat-form-field class ='full-width'>
+                    <mat-select [(ngModel)]="subjectList" name='subject' (ngModelChange)="printSubject()" multiple>
+                      <mat-option *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
   
             </mat-step>
   

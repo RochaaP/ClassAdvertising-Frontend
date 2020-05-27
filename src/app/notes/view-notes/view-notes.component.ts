@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { NotesService } from '../notes.service';
 import { MatSnackBar } from '@angular/material';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { DataService } from 'src/app/service/share/data.service';
 import { Router } from '@angular/router';
 import { SubjectService } from 'src/app/subjects/subject.service';
@@ -125,6 +124,10 @@ export class ViewNotesComponent implements OnInit {
 //   }
 
   searchNotes() {
+    if(this.subjectInput==undefined){
+      this.openSnackBar("Please select a subject");
+      return;
+    }
     this.spinnerService.show();
     this.notesService.viewNote(this.subjectInput, this.gradeInput);
     this.s = this.notesService.getStatus().subscribe(status => {
@@ -187,7 +190,10 @@ export class ViewNotesComponent implements OnInit {
   }
 
 
-  searchNotesClose() {
+  searchNotesClear() {
+    this.subjectInput = undefined;
+    this.gradeInput = "Other";
+    this.response = undefined;
     console.log('searchNoteClose triggerted/ implement this');
   }
 

@@ -11,6 +11,12 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperModalComponent } from 'src/app/util/image-cropper-modal/image-cropper-modal.component';
 import { UploadFilesService } from 'src/app/service/Upload-files/upload-files.service';
+import { SubjectModel } from 'src/app/subjects/subject-model';
+import { SubjectService } from 'src/app/subjects/subject.service';
+import { WsResponse } from 'src/app/util/ws-response';
+import { WsType } from 'src/app/util/ws-type';
+import { SharedService } from 'src/app/shared/shared.service';
+import { UserModel } from 'src/app/users/user-model';
 
 
 
@@ -38,6 +44,8 @@ export class EditProfileInstructorComponent implements OnInit {
   backgroundMetaData: any;
   uploadBackground: boolean;
 
+  subjectGroup: {id: string, data: SubjectModel}[] = [];
+
   email: string;
   id: string;
   // titleInput: string;
@@ -45,6 +53,7 @@ export class EditProfileInstructorComponent implements OnInit {
   firstNameInput: string;
   lastNameInput: string;
   contactInput: string;
+  subjectList: string[];
   universityInput: string;
   gradInput: string;
   profileImagePathInput: string;
@@ -108,6 +117,8 @@ export class EditProfileInstructorComponent implements OnInit {
 
   triggeredcrop: boolean;
 
+  loggedInUser: {id: string, data: UserModel};
+
   // @HostListener('window:beforeunload', ['$event'])
   // unloadNotification($event: any) {
   //     if (this.hasUnsavedData()) {
@@ -123,12 +134,16 @@ export class EditProfileInstructorComponent implements OnInit {
     private spinnerService: Ng4LoadingSpinnerService,
     private modalService: NgbModal,
     private uploadFilesService: UploadFilesService,
-
-    ) { }
+    private subjectService: SubjectService,
+    private sharedService: SharedService
+    ) { 
+      this.loggedInUser = this.sharedService.getLoggedInUser();
+    }
 
   ngOnInit() {
 
-    this.triggeredcrop = false;
+    this.triggeredcrop = false;    
+    this.subjectService.getSubjects(this);
     const itemTemp  = JSON.parse( localStorage.getItem('user'));
     if (itemTemp != null) {
       this.emailInput = itemTemp.email;
@@ -187,6 +202,11 @@ export class EditProfileInstructorComponent implements OnInit {
       console.log('error is ', error);
     });
  }
+
+ printSubject(){
+   console.log(this.subjectList);
+ }
+
   getAPIData() {
     return this.http.post('/api/userDetails/instructor/get', {email: this.emailInput} );
   }
@@ -363,6 +383,7 @@ export class EditProfileInstructorComponent implements OnInit {
         firstName: this.firstNameInput.trim(),
         lastName: this.lastNameInput.trim(),
         contact:  this.contactInput.trim(),
+        units: this.subjectList,
         degree: this.degreeInput,
         university: this.universityInput,
         degreeYear: this.yearInput,
@@ -501,6 +522,28 @@ export class EditProfileInstructorComponent implements OnInit {
   deleteResultAchievement(index: number) {
     this.deleteFile(this.cards[index].rankedProfileMetaData);
     this.cards.splice(index, 1);
+  }
+
+  onSuccess(data: WsResponse, serviceType: WsType){
+    if(serviceType == WsType.GET_SUBJECTS){
+      console.log(data.payload);
+      let subjects: {id: string, data: SubjectModel}[] = data.payload;
+      if(subjects!=undefined){
+        subjects.forEach(subject=>{
+          this.subjectGroup.push(subject);
+        });
+        if(this.loggedInUser.data.units!=undefined){
+          this.subjectList = this.loggedInUser.data.units;
+        }
+      }
+      this.spinnerService.hide();
+    }
+  }
+  
+  onFail(serviceType: WsType){
+    if(serviceType == WsType.GET_SUBJECTS){
+      this.spinnerService.hide();
+    }
   }
 
 }

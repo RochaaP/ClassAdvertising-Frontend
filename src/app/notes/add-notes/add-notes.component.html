@@ -10,17 +10,34 @@
               <mat-form-field class="full-width">
                 <input matInput placeholder="Title" [(ngModel)]="this.note.name" name='name' required>
               </mat-form-field>
-  
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Grade" [(ngModel)]="note.gradeLevel" name='grade' required>
-              </mat-form-field>
 
-              <mat-form-field class="full-width">
+              <!-- <mat-form-field class="full-width">
                 <input matInput placeholder="Subject" [(ngModel)]="note.subject" name='subject' required>
+              </mat-form-field> -->
+              <mat-form-field class ='full-width'>
+                <mat-select placeholder="Subject" [(ngModel)]="note.subject" name='subject' required>
+                  <mat-option *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+  
+              <!-- <mat-form-field class="full-width">
+                <input matInput placeholder="Grade" [(ngModel)]="note.gradeLevel" name='grade' required>
+              </mat-form-field> -->
+
+              <mat-form-field class ='full-width'>
+                <mat-select placeholder="Grade" [(ngModel)]="note.grade_level" name='grade' required>
+                  <mat-option value="Grade_6">Grade 6</mat-option>
+                  <mat-option value="Grade_7">Grade 7</mat-option>
+                  <mat-option value="Grade_8">Grade 8</mat-option>
+                  <mat-option value="Grade_9">Grade 9</mat-option>
+                  <mat-option value="Ordinary_Level">GCE O/L</mat-option>
+                  <mat-option value="Advanced_Level">GCE A/L</mat-option>
+                  <mat-option value="Other">Other</mat-option>
+                </mat-select>
               </mat-form-field>
 
               <mat-form-field class="full-width">
-                <textarea matInput placeholder="Year" [(ngModel)]="note.year" name='year' required></textarea>
+                <input matInput placeholder="Year" [(ngModel)]="note.year" name='year' required/>
               </mat-form-field>
   
               <mat-form-field class="full-width">
@@ -34,7 +51,7 @@
                     <div class="text-center">
                       <div *ngIf ='uploadFile'>
                         <img src="{{this.downloadURL}}"  class="avatar img-circle" class="img-thumbnail" alt="">
-                        <a (click)="deleteFile()" >Delete</a>
+                        <button mat-raised-button color="warn" (click)="deleteFile()" >Delete</button>
                         <div *ngIf="percentageposts | async as pct">
                           Progress: {{ pct | number }}%
                           <!-- <mat-progress-bar mode="indeterminate" [hidden]="true" value="{{ pct / 100 }}"></mat-progress-bar> -->
@@ -62,7 +79,7 @@
               </div>
               <div class="form-group">
                   <button type="submit" class="btn btn-success" (click)="onSubmit()">Post</button>
-                  if you have uploaded a file wait till progress becomes 100%.
+                  <small>If you have uploaded a file wait till progress becomes 100%.</small>
               </div>
           </div>
       </div>

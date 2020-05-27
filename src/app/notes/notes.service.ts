@@ -37,8 +37,9 @@ export class NotesService {
         params = params.append('subject', subject);
         params = params.append('grade', grade);
         this.http.get(notesServiceURL.viewNote(), {params}).subscribe((response: any) => {
+            console.log(response);
             // console.log('note service/ viewNotes() /response ', response);
-            this.setResponse(response);
+            this.setResponse(response.notes);
             this.setStatus(response.status);
 
         }, (error) => {
@@ -56,7 +57,7 @@ export class NotesService {
     // }
  
     private setResponse(res: any) {
-        this.response = res.userDetails;
+        this.response = res;
     }
 
     public getResponse() {
