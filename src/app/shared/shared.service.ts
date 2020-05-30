@@ -27,7 +27,6 @@ export class SharedService {
   constructor() { }
 
   public getLoggedInUser(){
-    // return this.loggedInUser;
     let user = this.loggedInUser;
     // user == undefined? user = JSON.parse(sessionStorage.getItem("loggedInUser")):"";
     user == undefined? user = JSON.parse(localStorage.getItem("loggedInUser")): "";
@@ -35,6 +34,9 @@ export class SharedService {
   }
 
   public setLoggedInUser(user: {id: string, data: UserModel}, storage: string = "LOCAL"){
+    if(user==null){
+      localStorage.removeItem("loggedInUser");
+    }
     this.loggedInUser = user;
     if(storage == "LOCAL"){
       localStorage.setItem("loggedInUser", JSON.stringify(user));
@@ -56,7 +58,8 @@ export class SharedService {
   }
 
   public clearZoomAccessToken(){
-    return localStorage.removeItem("zoomAccessToken");;
+    localStorage.removeItem("zoomAccessTokenExpiry");
+    localStorage.removeItem("zoomAccessToken");;
   }
 
   public getStudentPicUrl(){

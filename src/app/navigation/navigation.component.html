@@ -55,6 +55,9 @@
             <a class="dropdown-item" (click)='clickPapers()' *ngIf='isInstructor'><fa-icon [icon]='faBookReader'></fa-icon> Papers</a>
             <a class="dropdown-item" (click)='clickNotes()' *ngIf='isInstructor'><fa-icon [icon]='faStickyNote'></fa-icon> Notes</a>
             <a class="dropdown-item" (click)='clickMessagesinst()' *ngIf='isInstructor'><fa-icon [icon]='faEnvelope'></fa-icon> Messages</a>
+
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)='clickStudyPack()'><fa-icon [icon]='faGraduationCap'></fa-icon>StudyPack</a>
             
             <div class="dropdown-divider"></div>
             <a class="dropdown-item"  [routerLink]="'/support'"><fa-icon [icon]='faQuestionCircle'></fa-icon> Help & Support</a>
@@ -66,6 +69,9 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf='isStudent' data-toggle="collapse" data-target=".navbar-collapse.show">
             <a class="dropdown-item" (click)='clickPapers()'><fa-icon [icon]='faBookReader'></fa-icon> Papers</a>
             <a class="dropdown-item" (click)='clickMessages()'><fa-icon [icon]='faEnvelope'></fa-icon> Messages</a>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)='clickStudyPack()'><fa-icon [icon]='faGraduationCap'></fa-icon>StudyPack</a>
 
             <div class="dropdown-divider"></div>
             <a class="dropdown-item"  [routerLink]="'/support'"><fa-icon [icon]='faQuestionCircle'></fa-icon> Help & Support</a>

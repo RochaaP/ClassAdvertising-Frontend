@@ -27,12 +27,16 @@ export class AuthenticationService {
             console.log(data);
             let user: {id: string, data: UserModel} = JSON.parse(JSON.stringify(data));
             this.sharedService.setLoggedInUser(user);
+            this.setUserName(user.data.firstname);
+            this.setRegisterItem(user.data.role);
           },()=>{},()=>{
             this.sharedService.userLoggedInRequest();
           });
         }
       } else {
-        localStorage.setItem('user', null);
+        localStorage.removeItem('user');
+        localStorage.removeItem('registerItem');
+        localStorage.removeItem('resgisterUserName');
         sharedService.setLoggedInUser(null);
         sharedService.clearZoomAccessToken();
       }

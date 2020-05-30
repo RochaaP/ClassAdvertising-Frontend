@@ -17,8 +17,8 @@ import { WsResponse } from 'src/app/util/ws-response';
 import { WsType } from 'src/app/util/ws-type';
 import { SharedService } from 'src/app/shared/shared.service';
 import { UserModel } from 'src/app/users/user-model';
-
-
+import { UserService } from 'src/app/users/user.service';
+import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 
 @Component({
   selector: 'app-edit-profile-instructor',
@@ -53,7 +53,9 @@ export class EditProfileInstructorComponent implements OnInit {
   firstNameInput: string;
   lastNameInput: string;
   contactInput: string;
+  temp_subjectList: string[];
   subjectList: string[];
+  grade_level: string = "Other";
   universityInput: string;
   gradInput: string;
   profileImagePathInput: string;
@@ -119,13 +121,6 @@ export class EditProfileInstructorComponent implements OnInit {
 
   loggedInUser: {id: string, data: UserModel};
 
-  // @HostListener('window:beforeunload', ['$event'])
-  // unloadNotification($event: any) {
-  //     if (this.hasUnsavedData()) {
-  //         $event.returnValue =true;
-  //     }
-  // }
-
   constructor(
     private afStorage: AngularFireStorage,
     private http: HttpClient,
@@ -135,19 +130,20 @@ export class EditProfileInstructorComponent implements OnInit {
     private modalService: NgbModal,
     private uploadFilesService: UploadFilesService,
     private subjectService: SubjectService,
-    private sharedService: SharedService
+    private userService: UserService,
+    private sharedService: SharedService,
+    private authService: AuthenticationService
     ) { 
       this.loggedInUser = this.sharedService.getLoggedInUser();
     }
 
   ngOnInit() {
-
     this.triggeredcrop = false;    
     this.subjectService.getSubjects(this);
     const itemTemp  = JSON.parse( localStorage.getItem('user'));
     if (itemTemp != null) {
       this.emailInput = itemTemp.email;
-      console.log('asdkfjka email ' + this.emailInput);
+      console.log('email ' + this.emailInput);
     }
     this.getAPIData().subscribe((response) => {
       console.log('response from GET is ', response[0]);
@@ -155,7 +151,13 @@ export class EditProfileInstructorComponent implements OnInit {
       this.id = response[0].id;
       // this.titleInput = response[0].data.title;
       this.emailInput = response[0].data.email;
-      this.contactInput = response[0].data.contact;
+      this.contactInput = response[0].data.contact;      
+      if(response[0].data.units!=undefined){
+        this.subjectList = response[0].data.units;
+      }
+      if(response[0].data.grade_level!=undefined){
+        this.grade_level = response[0].data.grade_level;
+      }
       this.firstNameInput = response[0].data.firstname;
       this.lastNameInput = response[0].data.lastname;
       this.img_url =  response[0].data.img_url;
@@ -203,21 +205,19 @@ export class EditProfileInstructorComponent implements OnInit {
     });
  }
 
- printSubject(){
-   console.log(this.subjectList);
+ subjectSelectionChange(){
+  this.subjectList = this.temp_subjectList;
+  console.log(this.temp_subjectList);
+ }
+
+ subjectOpenedChange(){
+  this.temp_subjectList = this.subjectList;
+  console.log(this.subjectList);
  }
 
   getAPIData() {
     return this.http.post('/api/userDetails/instructor/get', {email: this.emailInput} );
   }
-  // event() {
-  //   if (this.titleInput === 'Other') {
-  //       this.show = true;
-  //   }
-  //   else {
-  //     this.show = false;
-  //   }
-  // }
 
   eventUniversity(event: { target: { checked: any; }; }) {
     if (event.target.checked) {
@@ -384,6 +384,7 @@ export class EditProfileInstructorComponent implements OnInit {
         lastName: this.lastNameInput.trim(),
         contact:  this.contactInput.trim(),
         units: this.subjectList,
+        grade_level: this.grade_level,
         degree: this.degreeInput,
         university: this.universityInput,
         degreeYear: this.yearInput,
@@ -419,7 +420,20 @@ export class EditProfileInstructorComponent implements OnInit {
         console.log(this.response.status);
         if (this.response.status === 200) {
           this.openSnackBar(this.MESSAGE_SUCCESS);
-          this.spinnerService.hide();
+          this.userService.getUserByEmail(this.loggedInUser.data.email).subscribe(res=>{
+            let user: {id: string, data: UserModel} = JSON.parse(JSON.stringify(res));
+            this.loggedInUser = user;  
+            this.sharedService.setLoggedInUser(user);
+            this.authService.setUserName(user.data.firstname);
+            this.authService.setRegisterItem(user.data.role);
+            this.sharedService.navigationRequest();          
+            this.spinnerService.hide();
+          }
+          ,err=>{
+            console.log(err);
+            this.openSnackBar(this.MESSAGE_FAIL);
+            this.spinnerService.hide();
+          });
         }
         else if (this.response.status === 400) {
           this.openSnackBar(this.MESSAGE_FAIL);
@@ -532,9 +546,6 @@ export class EditProfileInstructorComponent implements OnInit {
         subjects.forEach(subject=>{
           this.subjectGroup.push(subject);
         });
-        if(this.loggedInUser.data.units!=undefined){
-          this.subjectList = this.loggedInUser.data.units;
-        }
       }
       this.spinnerService.hide();
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSearch, faBell, faUser, faSchool, faSignOutAlt, faIdBadge, faStickyNote, faDownload, faEnvelope,
+import { faSearch, faBell, faUser, faSchool, faSignOutAlt, faIdBadge, faStickyNote, faDownload, faEnvelope, faGraduationCap,
          faChalkboardTeacher, faAd, faIdCard, faUserFriends, faBookReader, faCopy, faVideo, faQuestionCircle, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from '../service/auth/authentication.service';
 import { DataService } from '../service/share/data.service';
@@ -27,10 +27,9 @@ export class NavigationComponent implements OnInit {
     private dataService: DataService,
     private router: Router,
     private sharedService: SharedService
-  ) {
-        // dataService.getLoggedInName.subscribe(name => this.changeName(name));
-  }
+  ) { }
 
+  faGraduationCap = faGraduationCap;
   faSearch = faSearch;
   faBell = faBell;
   faUser = faUser;
@@ -193,6 +192,10 @@ export class NavigationComponent implements OnInit {
 
   clickMessagesinst() {
     this.router.navigate(['/messages/instructor']);
+  }
+
+  clickStudyPack() {
+    window.open("https://www.mtute.lk/studypack");
   }
 }
 

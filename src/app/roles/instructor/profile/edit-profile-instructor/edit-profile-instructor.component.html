@@ -137,18 +137,35 @@
               </div>
   
               <div class="form-group">
-                  <label class="col-md-3 control-label">Contact:</label>
-                  <div class="col-md-8">
+                  <label class="col-lg-3 control-label">Contact:</label>
+                  <div class="col-lg-8">
                     <input class="form-control" type="text" placeholder="Contact" [(ngModel)]="contactInput" name='contact'>
                   </div>
               </div>
 
               <div class="form-group">
-                <label class="col-md-3 control-label">Subject:</label>
-                <div class="col-md-8">
+                <label class="col-lg-3 control-label">Subject:</label>
+                <div class="col-lg-8"> 
                   <mat-form-field class ='full-width'>
-                    <mat-select [(ngModel)]="subjectList" name='subject' (ngModelChange)="printSubject()" multiple>
+                    <mat-select [(ngModel)]="temp_subjectList" name='subject' (openedChange)="subjectOpenedChange()" (selectionChange)="subjectSelectionChange()" multiple>
                       <mat-option *ngFor="let subject of subjectGroup" [value]="subject.id">{{subject.data.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Gradde/ Level:</label>
+                <div class="col-lg-8">
+                  <mat-form-field class ='full-width'>
+                    <mat-select [(ngModel)]="grade_level" name='grade' required>
+                      <mat-option value="Grade_6">Grade 6</mat-option>
+                      <mat-option value="Grade_7">Grade 7</mat-option>
+                      <mat-option value="Grade_8">Grade 8</mat-option>
+                      <mat-option value="Grade_9">Grade 9</mat-option>
+                      <mat-option value="Ordinary_Level">GCE O/L</mat-option>
+                      <mat-option value="Advanced_Level">GCE A/L</mat-option>
+                      <mat-option value="Other">Other</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>

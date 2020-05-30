@@ -113,8 +113,8 @@ export class LoginComponent implements OnInit {
       this.spinnerService.hide();
     });
     this.temp = this.sharedService.userLoggedInRespond().subscribe(val => {
-      this.authService.setRegisterItem(JSON.parse(localStorage.getItem('loggedInUser')).data.role);
-      this.authService.setUserName(JSON.parse(localStorage.getItem('loggedInUser')).data.firstname);
+      // this.authService.setRegisterItem(this.sharedService.getLoggedInUser().data.role);
+      // this.authService.setUserName(this.sharedService.getLoggedInUser().data.firstname);
       this.navi();
       this.spinnerService.hide();
       this.temp.unsubscribe();
