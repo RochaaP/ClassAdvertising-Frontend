@@ -54,7 +54,11 @@ export class ServiceUrls {
     private static commonExtension = ServiceUrls.servicePrefix + "common/";    
     public static GET_SUBJECTS_INSTRUCTORS = ServiceUrls.commonExtension + "subjects_instructors/";
 
-
+    // Support URLs
+    private static supportExtension = ServiceUrls.servicePrefix + "support/";
+    public static saveToContactUs(){
+        return ServiceUrls.supportExtension + "contactUs/"
+    }
 
     // Subject URLs
     private static subjectExtension = ServiceUrls.servicePrefix + "subjects/";

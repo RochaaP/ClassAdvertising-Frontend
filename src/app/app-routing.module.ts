@@ -37,8 +37,7 @@ const routes: Routes = [
   { path: 'support', loadChildren: './support/support.module#SupportModule' },
   { path: 'profile', loadChildren: './roles/roles.module#RolesModule' },
   { path: 'notes', loadChildren: './notes/notes.module#NotesModule' },
-  
-  { path: 'imageCropper', component: ImageCropperModalComponent }
+  { path: 'appointment', loadChildren: './appointment-form/appointment-form.module#AppointmentFormModule'}
 
 ];
 

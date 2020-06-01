@@ -1,0 +1,10 @@
+<div class="container-fluid">
+    <mat-accordion>
+        <mat-expansion-panel class="mb-1" *ngFor="let faq of faqs">
+            <mat-expansion-panel-header>
+            <mat-panel-title>{{faq.data.question}}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{faq.data.answer}}</p>
+        </mat-expansion-panel> 
+    </mat-accordion>
+</div>

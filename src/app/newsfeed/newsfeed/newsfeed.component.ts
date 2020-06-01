@@ -7,6 +7,8 @@ import { NotificationBarService, NotificationType } from 'ngx-notification-bar';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { faFilm, faChild, faDollarSign, faComment, faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppointmentFormComponent } from '../../appointment-form/appointment-form.component';
 
 @Component({
   selector: 'app-newsfeed',
@@ -47,7 +49,7 @@ export class NewsfeedComponent implements OnInit {
     private data: DataService,
     private notificationBarService: NotificationBarService,
     private snackBar: MatSnackBar,
-
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -76,6 +78,11 @@ export class NewsfeedComponent implements OnInit {
     });
 
   }
+
+  openForum(){
+    this.router.navigateByUrl('/appointment');
+  }
+
   getAPIDataw() {
     return this.http.get('/api/posts/all/' + this.pageLimit).pipe(
       timeout(3000),

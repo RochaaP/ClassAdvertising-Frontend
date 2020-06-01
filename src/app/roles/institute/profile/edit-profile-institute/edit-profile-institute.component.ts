@@ -15,6 +15,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class EditProfileInstituteComponent implements OnInit {
 
+  uploadBtnShow: boolean = true;
+
   fileProfile: AngularFireUploadTask;
   percentageProfile: Observable<number>;
 
@@ -147,6 +149,7 @@ export class EditProfileInstituteComponent implements OnInit {
     if (event.target.files[0] === undefined) {
       return;
     }
+    this.uploadBtnShow = false;
     let file;
     const modalRef = this.modalService.open(ImageCropperModalComponent, {size: 'lg'});
     modalRef.componentInstance.imageChangedEvent = event;
@@ -177,6 +180,7 @@ export class EditProfileInstituteComponent implements OnInit {
         const downloadURL = ref.getDownloadURL().subscribe(url => {
           const Url = url; // for ts
           this.downloadURL = url; // with this you can use it in the html
+          this.uploadBtnShow = true;
         });
       });
     });
@@ -200,6 +204,7 @@ export class EditProfileInstituteComponent implements OnInit {
 
   backgroundUpload(event) {
     this.uploadBackground = true;
+    this.uploadBtnShow = false;
 
     const randomId = Math.random().toString(36).substring(2);
     const path = `backgroundImages/${Date.now()}_${randomId}`;
@@ -221,6 +226,7 @@ export class EditProfileInstituteComponent implements OnInit {
       const downloadURL = ref.getDownloadURL().subscribe(url => {
       const Url = url; // for ts
       this.backgroundImageURL = url; // with this you can use it in the html
+      this.uploadBtnShow = true;
       });
 
     });

@@ -155,7 +155,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-lg-3 control-label">Gradde/ Level:</label>
+                <label class="col-lg-3 control-label">Grade/ Level:</label>
                 <div class="col-lg-8">
                   <mat-form-field class ='full-width'>
                     <mat-select [(ngModel)]="grade_level" name='grade' required>
@@ -177,7 +177,7 @@
             <mat-step label="Education Qualifications" optional>
   
               <div class="form-group">
-                <label><input type="checkbox" (change)="eventUniversity($event)"/> Degree Holder</label>
+                <label><input type="checkbox" [(ngModel)]="showhideUniversity" name="showhideUniversity"/> Degree Holder</label>
   
                     <div  *ngIf="showhideUniversity">
                       <div class="form-group">
@@ -200,22 +200,22 @@
                         </div>
   
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" [(ngModel)]="gradInput" name="radios" id="radios1" value="undergraduate" (change)="eventUnderGraduate($event)">
+                            <input class="form-check-input" type="radio" [(ngModel)]="gradInput" name="radios" id="radios1" value="undergraduate">
                             <label class="form-check-label" for="radios1">
                               Undergraduate
                             </label>
                           </div>
                           <div class="form-check">
-                            <input class="form-check-input" type="radio" [(ngModel)]="gradInput" name="radios" id="radios2" value="Postgraduate" (change)="eventPostGraduate($event)">
+                            <input class="form-check-input" type="radio" [(ngModel)]="gradInput" name="radios" id="radios2" value="Postgraduate">
                             <label class="form-check-label" for="radios2">
                               Postgraduate
                             </label>
                           </div>
   
-                          <div *ngIf="showPostGraduation">
+                          <div *ngIf="gradInput=='Postgraduate'">
   
                             <div class="form-group">
-                              <label><input type="checkbox" (change)="eventMScHolder($event)"/> MSc Holder</label>
+                              <label><input type="checkbox" [(ngModel)]="showhideMSc" name="showhideMSc"/> MSc Holder</label>
   
                               <div  *ngIf="showhideMSc">
   
@@ -244,7 +244,7 @@
                             </div>
   
                             <div class="form-group">
-                              <label><input type="checkbox" (change)="eventPhDHolder($event)"/> PhD Holder</label>
+                              <label><input type="checkbox" [(ngModel)]="showhidePhD" name="showhidePhD"/> PhD Holder</label>
   
                               <div  *ngIf="showhidePhD">
   
@@ -281,7 +281,7 @@
             <mat-step label="Teaching Qualifications" optional>
   
                 <div class="form-group">
-                    <label><input type="checkbox" (change)="eventOccupation($event)"/> Gov.Teaching</label>
+                    <label><input type="checkbox" [(ngModel)]="showhideOccupation" name="showhideOccupation"/> Gov.Teaching</label>
   
                     <div  *ngIf="showhideOccupation">
                         <div class="form-group">
@@ -398,7 +398,7 @@
                   </div>
   
                   <div class="form-group">
-                    <button type="button" class="btn btn-primary"(click)="submit()">Add achievement</button>
+                    <button *ngIf="uploadBtnShow" type="button" class="btn btn-primary"(click)="submit()">Add achievement</button>
                     <label class="imageWaring m-1"><small>If you have uploaded a profile photo wait till photo is shown.</small></label>
                   </div>
   
@@ -464,7 +464,7 @@
             </mat-vertical-stepper>
   
              <div class="form-group">
-                <button type="button" class="btn btn-primary"(click)="updateValues()">Update</button>
+                <button *ngIf="uploadBtnShow" type="button" class="btn btn-primary"(click)="updateValues()">Update</button>
                 <label class="imageWaring m-1"><small>If you have uploaded a profile photo wait till new photo is shown.</small></label>
               </div>
   

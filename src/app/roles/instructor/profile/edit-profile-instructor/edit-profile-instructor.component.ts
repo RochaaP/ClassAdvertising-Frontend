@@ -28,6 +28,7 @@ import { AuthenticationService } from 'src/app/service/auth/authentication.servi
 export class EditProfileInstructorComponent implements OnInit {
 
   // @Input() childMessageEmail: string;
+  uploadBtnShow: boolean = true;
 
   fileProfile: AngularFireUploadTask;
   percentageProfile: Observable<number>;
@@ -180,16 +181,21 @@ export class EditProfileInstructorComponent implements OnInit {
       this.universityInput = response[0].more.university;
       this.yearInput = response[0].more.degreeYear;
       this.gradInput = response[0].more.grad;
+      this.setShowHideUniversity();
+
       this.teachingSchoolInput = response[0].more.teachingSchool;
       this.yearExperienceInput = response[0].more.yearExperiences;
+      this.setShowHideOccupation();
 
       this.universityMScInput = response[0].more.universityMSc;
       this.degreeMScInput = response[0].more.degreeMSc;
       this.yearMScInput = response[0].more.yearMSc;
+      this.setShowHideMSc();
 
       this.universityPhDInput = response[0].more.universityPhD;
       this.degreePhDInput = response[0].more.degreePhd;
       this.yearPhDInput = response[0].more.yearPhD;
+      this.setShowHidePhD();
 
       this.subjectInput = response[0].more.subject;
       this.gradeAInput = response[0].more.gradeA;
@@ -204,6 +210,49 @@ export class EditProfileInstructorComponent implements OnInit {
       console.log('error is ', error);
     });
  }
+
+ setShowHideUniversity(){
+   if(!(this.universityInput==undefined || this.universityInput=="") || 
+   !(this.degreeInput==undefined || this.degreeInput=="") || 
+   !(this.yearInput==undefined || this.yearInput=="")){    
+    this.showhideUniversity = true;;
+  }
+  else{
+    this.showhideUniversity = false;
+  }
+ }
+
+ setShowHideOccupation(){   
+  if(!(this.teachingSchoolInput==undefined || this.teachingSchoolInput=="") || 
+  !(this.yearExperienceInput==undefined || this.yearExperienceInput=="")){    
+   this.showhideOccupation = true;;
+  }
+  else{
+    this.showhideOccupation = false;
+  }
+ }
+
+ setShowHideMSc(){
+  if(!(this.universityMScInput==undefined || this.universityMScInput=="") || 
+  !(this.degreeMScInput==undefined || this.degreeMScInput=="") || 
+  !(this.yearMScInput==undefined || this.yearMScInput=="")){    
+   this.showhideMSc = true;;
+ }
+ else{
+   this.showhideMSc = false;
+ }
+}
+
+setShowHidePhD(){
+  if(!(this.universityPhDInput==undefined || this.universityPhDInput=="") || 
+  !(this.degreePhDInput==undefined || this.degreePhDInput=="") || 
+  !(this.yearPhDInput==undefined || this.yearPhDInput=="")){    
+   this.showhidePhD = true;;
+ }
+ else{
+   this.showhidePhD = false;
+ }
+}
 
  subjectSelectionChange(){
   this.subjectList = this.temp_subjectList;
@@ -269,6 +318,7 @@ export class EditProfileInstructorComponent implements OnInit {
     if (event.target.files[0] === undefined) {
       return;
     }
+    this.uploadBtnShow = false;
     let file;
     const modalRef = this.modalService.open(ImageCropperModalComponent, {size: 'lg'});
     modalRef.componentInstance.imageChangedEvent = event;
@@ -303,6 +353,7 @@ export class EditProfileInstructorComponent implements OnInit {
         ref.getDownloadURL().subscribe(url => {
         const Url = url; // for ts
         this.img_url = url; // with this you can use it in the html
+        this.uploadBtnShow = true;
         });
       });
     });
@@ -327,6 +378,7 @@ export class EditProfileInstructorComponent implements OnInit {
   }
 
   backgroundUpload(event) {
+    this.uploadBtnShow = false;
     this.uploadBackground = true;
     const randomId = Math.random().toString(36).substring(2);
     const path = `backgroundImages/${Date.now()}_${randomId}`;
@@ -348,6 +400,7 @@ export class EditProfileInstructorComponent implements OnInit {
       const r = ref.getDownloadURL().subscribe(url => {
       const Url = url; // for ts
       this.backgroundImageURL = url; // with this you can use it in the html
+      this.uploadBtnShow = true;
       });
     });
     console.log('img_url ' + this.backgroundImageURL);
@@ -466,6 +519,16 @@ export class EditProfileInstructorComponent implements OnInit {
 
 
   submit() {
+    if(this.rankedNameInput==undefined||
+      this.rankedYearInput==undefined ||
+      this.rankedIslandInput==undefined||
+      this.rankedDistrictInput==undefined||
+      this.rankedDistrictNameInput==undefined||
+      this.rankedProfileURLInput==undefined||
+      this.rankedProfileMetaData==undefined){
+        this.openSnackBar("Please fill all the result achievement fields");
+        return;
+      }
 
     this.details = {
       rankedName: this.rankedNameInput,
@@ -478,18 +541,19 @@ export class EditProfileInstructorComponent implements OnInit {
     };
     this.cards.push(this.details);
 
-    this.rankedNameInput = '';
-    this.rankedDistrictInput = '';
-    this.rankedYearInput = '';
-    this.rankedIslandInput = '';
-    this.rankedDistrictNameInput = '';
-    this.rankedProfileURLInput = '';
-    this.rankedProfileMetaData = '';
+    this.rankedNameInput = undefined;
+    this.rankedDistrictInput = undefined;
+    this.rankedYearInput = undefined;
+    this.rankedIslandInput = undefined;
+    this.rankedDistrictNameInput = undefined;
+    this.rankedProfileURLInput = undefined;
+    this.rankedProfileMetaData = undefined;
     this.percentageStudent = null;
   }
 
 
   uploadImageStudent(event) {
+    this.uploadBtnShow = false;
     // this.uploadFile = true;
     const tableName = 'profilePicturesofStudents';
     this.uploadFilesService.upload(event, tableName);
@@ -499,6 +563,7 @@ export class EditProfileInstructorComponent implements OnInit {
     });
     this.uploadFilesService.getMetadata().subscribe(meta => {
       this.rankedProfileMetaData = meta.metadata;
+      this.uploadBtnShow = true;
     });
   }
 
@@ -534,7 +599,9 @@ export class EditProfileInstructorComponent implements OnInit {
   }
 
   deleteResultAchievement(index: number) {
-    this.deleteFile(this.cards[index].rankedProfileMetaData);
+    if(this.cards[index].rankedProfileMetaData!=undefined || this.cards[index].rankedProfileMetaData==""){
+      this.deleteFile(this.cards[index].rankedProfileMetaData);
+    }
     this.cards.splice(index, 1);
   }
 

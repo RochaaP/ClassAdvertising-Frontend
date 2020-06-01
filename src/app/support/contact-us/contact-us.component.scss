@@ -1,0 +1,14 @@
+.example-card{
+    margin: 1rem;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: black;
+    ::shadow{
+        color: black;
+    }
+}
+
+.example-header-image {
+    background-image: url('../../../assets/Logo.png');
+    background-size: cover;
+}

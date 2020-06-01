@@ -94,7 +94,7 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
 
     LoginComponent,
 
-    ImageCropperModalComponent,
+    ImageCropperModalComponent
 
 
   ],
@@ -151,9 +151,7 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
     MatDialogModule,
 
     ScrollingModule,
-    NotificationBarModule,
-
-    ImageCropperModule
+    NotificationBarModule
   ],
   entryComponents: [
     DialogComponent,

@@ -1,0 +1,60 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Contant Us</mat-card-title>
+      <mat-card-subtitle>We are there for you</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            If you have any complication, complaiint or suggestion, this is the right place for you to be.
+        </p>
+      <form [formGroup]="form">
+          <div class="form-group row">
+            <div class="form-group col-md-6">
+                <mat-form-feild>
+                    <mat-label>Name: </mat-label>
+                    <input matInput class="form-control" formControlName="name">
+                </mat-form-feild>
+                <div *ngIf="isSubmitted && formControls.name.invalid" class="alert alert-danger">
+                  <div *ngIf="formControls.name.errors.required">
+                    Your name is required.
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="frorm-group col-md-6">
+                <mat-form-feild>
+                    <mat-label>email: </mat-label>
+                    <input matInput class="form-control" formControlName="email">
+                </mat-form-feild>
+                <div *ngIf="isSubmitted && formControls.email.invalid" class="alert alert-danger">
+                  <div *ngIf="formControls.email.errors.required">
+                    Your email is required.
+                  </div>
+                  <div *ngIf="formControls.email.errors.email">
+                    Incorrect email.
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="form-group col-md-6">
+                <mat-form-feild>
+                    <mat-label>Desction: </mat-label>
+                    <textarea matInput class="form-control" formControlName="description"></textarea>
+                </mat-form-feild>
+                <div *ngIf="isSubmitted && formControls.description.invalid" class="alert alert-danger">
+                  <div *ngIf="formControls.description.errors.required">
+                    Description is required.
+                  </div>
+                </div> 
+            </div>
+          </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="mr-1 col-md-3" mat-raised-button color="primary" (click)="isSubmitted=true;send()">Send</button>
+        <a mat-button class="col-md-3" color="primary" [routerLink]="'/'">Back To Home</a>
+    </mat-card-actions>
+  </mat-card>

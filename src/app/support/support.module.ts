@@ -1,21 +1,35 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SupportRoutingModule } from './support-routing.module';
-import { SupportComponent } from './support.component';
+import { SupportComponent } from './support/support.component';
 import { AboutComponent } from './about/about.component';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatInputModule, MatButtonModule, MatFormFieldModule, MatSnackBarModule, MatExpansionModule } from '@angular/material';
+import { ContactUSComponent } from './contact-us/contact-us.component';
+import { FaqComponent } from './faq/faq.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     SupportComponent,
-    AboutComponent
+    AboutComponent,
+    ContactUSComponent,
+    FaqComponent
   ],
-  imports: [
-    CommonModule,
+  imports: [    
     SupportRoutingModule,
-    MatCardModule
-  ]
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatButtonModule
+  ],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class SupportModule { }
