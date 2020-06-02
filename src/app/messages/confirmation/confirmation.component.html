@@ -1,15 +1,38 @@
-<div *ngIf ="data.isFor == 'instructor'">
+<div *ngIf ="data.from == 'student'">
   <h1 mat-dialog-title></h1>
     <div mat-dialog-content>
-      <p> Do you want to place the appointment with {{this.data.email}}?</p>
+      <p> Do you want to place the appointment with <b>{{this.data.firstname}} {{this.data.lastname}}</b>?</p>
+        
         <div class='full-width'>
-            <mat-label><b>topic</b></mat-label>
-            <P>{{this.data.topic}}
+            <mat-label><b>Topic</b></mat-label>
+            <p>{{this.data.topic}}</p>
         </div>
+
+        <div class='full-width'>
+          <mat-label><b>Subject</b></mat-label>
+          <p>{{this.data.subject}}</p>
+        </div>
+        
+        <div class='full-width'>
+          <mat-label><b>Grade</b></mat-label>
+          <p>{{this.data.grade}}</p>
+        </div>
+        
+        <div class='full-width'>
+          <mat-label><b>Date</b></mat-label>
+          <p>{{this.data.date}}</p>
+        </div>
+        
+        <div class='full-width'>
+          <mat-label><b>Time</b></mat-label>
+          <p>{{this.data.time}}</p>
+        </div>
+
         <div class='full-width'>
             <mat-label><b>Description</b></mat-label>
             <p>{{this.data.description}}</p>
         </div>    
+
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="onNoClick()">Cancel</button>
@@ -17,10 +40,10 @@
     </div>
 </div>    
 
-<div *ngIf ="data.isFor == 'replyFromInstructor'">
+<div *ngIf ="data.from == 'instructor'">
   <h1 mat-dialog-title></h1>
     <div mat-dialog-content>
-      <p> Do you want to place the appointment with {{this.data.email}}?</p>
+      <p> Do you want to place the appointment with {{this.data.name}}?</p>
         <div class='full-width'>
             <mat-label><b>topic</b></mat-label>
             <P>{{this.data.topic}}
@@ -32,6 +55,15 @@
         <div class='full-width'>
           <mat-label><b>Approval</b></mat-label>
           <p>{{this.data.selected}}</p>
+        </div>
+        <div class='full-width'  *ngIf = "this.data.selectedTime == 'Agree'">
+          <mat-label><b>Date and Time</b></mat-label>
+          <p>Agreed to suggested time</p>
+        </div>
+        <div class='full-width'*ngIf = "this.data.selectedTime == 'Disagree'">
+          <mat-label><b>Suggested Date and Time</b></mat-label>
+          <p>{{this.data.date}}</p>
+          <p>{{this.data.time}}</p>
         </div>
         <div class='full-width' *ngIf = "this.data.selected == 'Yes'">
           <mat-label><b>Zoom Link</b></mat-label>

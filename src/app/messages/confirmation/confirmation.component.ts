@@ -2,11 +2,21 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 export interface DialogData {
+  firstname: string;
+  lastname: string;
+  subject: string;
+  grade: string;
+
+  date: string;
+  time: string;
+
+  from: string;
   topic: string;
   description: string;
+
   email: string;
-  isFor: string;
   selected: string;
+  selectedTime: string;
   link: string;
 }
 

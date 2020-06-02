@@ -23,7 +23,7 @@
         <mat-tab-group>
   
           <mat-tab label="About">
-            <app-profile-details-instructor [childMessage]="this.email"></app-profile-details-instructor>
+            <app-profile-details-instructor *ngIf='done' [childMessage]="this.response"></app-profile-details-instructor>
           </mat-tab>
   
           <mat-tab label="Posts">

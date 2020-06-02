@@ -19,16 +19,7 @@ export class ProfileDetailsInstructorComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getAPIData().subscribe((response) => {
-      console.log('response from GET API is ', response);
-      this.response = response;
-    }, ( error) => {
-      console.log('error is ', error);
-    });
-  }
-
-  getAPIData() {
-    return this.http.post('/api/userDetails/instructor/get', {email: this.childMessage} );
+    this.response = this.childMessage;
   }
 }
 

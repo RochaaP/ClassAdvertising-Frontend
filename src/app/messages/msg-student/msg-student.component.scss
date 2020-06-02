@@ -1,43 +1,64 @@
-.mat-list-item {
-    background-color: #ada5d9;
-    height: auto;
-}
+  .container-fluid {
+    overflow: hidden;
+  }
 
-.messages {
-    background-color: #67c426;
+  .top {
+    font-size: 4vh;
+    margin: 10px;
+    text-align: center;
+
+  }
+  .mat-list-item {
+      background-color: #ada5d9;
+      height: auto;
+  }
+  
+  .messages {
+    background-color: #cdd3cb;
     margin-bottom: 50px;
-    height: 300px;
+    height: 75vh;
     position: sticky;
     top:0;
+    filter:drop-shadow(4px 4px 4px gray);
     z-index: 999;
-
-}
-
-.click{
-    cursor:pointer;
-    font-size: 15px;
-    padding: 15px;
-  
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
+
+  .click{
+      cursor:pointer;
+      color: #f3f3f6;
+      font-size: 15px;
+      padding: 15px;
+  }
+
   .click:hover{
     text-decoration: underline;
-    color:#54a7e3;
+    color: #0b1688;    
     font-size: 15px;
   }
 
   .profileDetails {
+    background-color: #e1e9de;
+    height: 75vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
     padding-top: 12px;
     width: 240px;
-    margin:auto;
+    // margin:auto;
     filter:drop-shadow(4px 4px 4px gray);
-    justify-content: center;
-    align-items: center;
-    text-indent: 15px;
+    justify-content: start;
+    align-items: left;
+    // text-indent: 15px;
     overflow:hidden;
    
     margin: 0 12 12 12;
-  
-    // display: flex;
+  }
+
+  .nameIndividual{
+    background-color: #0d81da;
+    border-radius: 10px;
+    padding: 10px;
   }
 
   .header-image {
@@ -49,8 +70,18 @@
     height: 60px;
   }
   
-  .all {
-    overflow-y: scroll;
-    height: 500px;
-    // background-color: #ada5d9;
+  // .all {
+  //   overflow-y: scroll;
+  //   height: 500px;
+  //   // background-color: #ada5d9;
+  // }
+
+  .rightMessage {
+    text-align: right;
+    margin-left: 10px;
+    color : #082b7c;
+  }
+  
+  .leftMessage {
+    text-align: left;
   }

@@ -1,13 +1,16 @@
-<div class="container">
+<div class="container-fluid">
+  <div class = 'top'>
+    Messages
+  </div>
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <div class="row">
-      <div class="col col-md-4 all">
+      <div class="col-lg-3 col-md-3 profileDetails">
 
         
         <ul *ngFor="let field of response; let index = index" >
           <!-- <ul *ngFor="let fields of field.data.content; let subIndex = index" > -->
 
-          <div class="profileDetails card-1">
+          <div class="nameIndividual">
 
             <img *ngIf= "field.data.img_urlInst" class="header-image" src ={{field.data.img_urlInst}} >
             <img *ngIf= "!field.data.img_urlInst" class="header-image" src =  'assets/propic/propic.png'>
@@ -20,16 +23,22 @@
         <!-- </ul>     -->
       </div>
       <!-- {{response[0].data.content[0].description}} -->
-      <div class="col-6 col-md-8 messages" *ngIf ='value'>
+      <div class="col-lg-9 col-md-9 messages" *ngIf ='value'>
         <!-- <ul *ngFor="let field of response[]; let index = index" > -->
         <p><b>Topic - {{response[mainIndex].data.content[subIndex].topic}}</b> </p>
         <ul *ngFor="let fields of response[mainIndex].data.content" >
         
-          <div *ngIf = "!fields.isFor">
+          <div *ngIf = "fields.from == 'student'"  class="rightMessage">
+            <p>Grade - {{fields.grade}} </p>
+            <p>Subject - {{fields.subject}} </p>
+            <p>Date - {{fields.date}} </p>
+            <p>Time - {{fields.time}} </p>
             <p>Description - {{fields.description}} </p>
           </div>  
-          <div *ngIf = "fields.isFor">
-            <p><b>Description - {{fields.description}}</b></p>
+          <div *ngIf = "fields.from == 'instructor'" class="leftMessage" >
+            <p>Description - {{fields.description}}</p>
+            <p>Suggested Date - {{fields.date}} </p>
+            <p>Suggested Time - {{fields.time}} </p>
             <p>link - {{fields.link}} </p>
           </div>
           

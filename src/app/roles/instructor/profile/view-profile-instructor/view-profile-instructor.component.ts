@@ -10,6 +10,10 @@ import { ThrowStmt } from '@angular/compiler';
 import { SharedService } from 'src/app/shared/shared.service';
 import { UserModel } from 'src/app/users/user-model';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { Time } from '@angular/common';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { RolesService } from 'src/app/roles/roles.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-view-profile-instructor',
@@ -19,6 +23,8 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 export class ViewProfileInstructorComponent implements OnInit {
 
   faEdit = faEdit;
+
+  done = false;
 
   loggedInUser: {id: string, data: UserModel};
 
@@ -30,71 +36,92 @@ export class ViewProfileInstructorComponent implements OnInit {
 
   topic: string;
   description: string;
+  subject: string;
+  grade: string;
+  date: string;
+  time: Time;
   result: any;
   isFor: string;
 
   showAppointmentButton: boolean;
-  showEditButton: boolean = false;
+  showEditButton = false;
+  sub: any;
+
+  MESSAGE_FAIL = 'GETTING USER DETAILS FAILED';
 
   constructor(
     private data: DataService,
     private http: HttpClient,
     private router: Router,
     public dialog: MatDialog,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private spinnerService: Ng4LoadingSpinnerService,
+    private rolesService: RolesService,
+    private snackBar: MatSnackBar
   ) {
    }
 
   ngOnInit() {
-
-    // this.data.currentEmail.subscribe(message => this.email = message);
-    // if (!this.email) {
-      this.email = localStorage.getItem('navigateUser');
-      this.instructorEmail = this.email;
-      if (this.authService.isUserLoggedIn() != undefined) {
-        this.studentEmail = this.authService.isUserLoggedIn().email;
-        this.showAppointmentButton = true;        
-        if (this.studentEmail === this.instructorEmail) {
-          this.showAppointmentButton = false;    
-          this.showEditButton = true;    
-        }
-      }
-      else{
+    this.email = localStorage.getItem('navigateUser');
+    this.instructorEmail = this.email;
+    if (this.authService.isUserLoggedIn() != undefined) {
+      this.studentEmail = this.authService.isUserLoggedIn().email;
+      this.showAppointmentButton = true;
+      if (this.studentEmail === this.instructorEmail) {
         this.showAppointmentButton = false;
+        this.showEditButton = true;
       }
-      console.log('email from local storage '+ this.email + '  ' +this.studentEmail);
-    // }
+    }
+    else{
+      this.showAppointmentButton = false;
+    }
+    console.log('email from local storage '+ this.email + '  ' +this.studentEmail);
 
-    // this.email = localStorage.getItem('emailtemp');
-    // console.log("hereh here" +this.email);
-    // if (localStorage.getItem('emailtemp') && (this.email)) {
-    //   this.email = localStorage.getItem('emailtemp');
-    //   console.log("hearaer on hahd", this.email)
 
-    // }
+    this.spinnerService.show();
+    this.rolesService.getInstructor(this.email);
+    this.sub = this.rolesService.getStatus().subscribe(status => {
 
-      this.getAPIData().subscribe((response) => {
-      console.log('response from get user details ', response);
-      this.response = response;
-    }, ( error) => {
-      console.log('error is ', error);
+      if (status.status === 200) {
+        this.response = this.rolesService.getResponse();
+        this.done = true;
+        this.spinnerService.hide();
+      }
+
+      else if (status.status === 400 || status.status === 0) {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      else {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      this.sub.unsubscribe();
+
     });
   }
 
-  getAPIData() {
-    return this.http.post('/api/userDetails/instructor/get', {email: this.email} );
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Done', {
+      duration: 5000,
+    });
   }
-
-  // appointment() {
-  //   this.data.passEmail(this.email);
-  //   this.router.navigate(['/messages']);
-  // }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       height: '400px',
       width: '600px',
-      data: {topic: this.topic, description: this.description, isFor: 'instructor'}
+      data: {
+        firstname: this.response[0].data.firstname,
+        lastname: this.response[0].data.lastname,
+        topic: this.topic,
+        subject: this.subject,
+        grade: this.grade,
+        description: this.description,
+        data: this.date,
+        time: this.time,
+        from: 'student'
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -112,7 +139,17 @@ export class ViewProfileInstructorComponent implements OnInit {
 
   openConfirmation(): void {
     const dialogConf = this.dialog.open(ConfirmationComponent, {
-      data: {topic: this.result.topic, description: this.result.description,  isFor: 'instructor'}
+      data: {
+        firstname: this.response[0].data.firstname,
+        lastname: this.response[0].data.lastname,
+        topic: this.result.topic,
+        subject: this.result.subject,
+        grade: this.result.grade,
+        date: this.result.date,
+        time: this.result.time,
+        description: this.result.description,
+        from: 'student'
+      }
     });
 
     dialogConf.afterClosed().subscribe(result => {
@@ -134,9 +171,8 @@ export class ViewProfileInstructorComponent implements OnInit {
 
     userValues = {
       instructorEmail: this.instructorEmail,
-      // content: this.content,
-      topic: this.result.topic,
-      description: this.result.description,
+      content: this.result,
+      // description: this.result.description,
       studentEmail: this.studentEmail
     };
 
@@ -155,7 +191,13 @@ export class ViewProfileInstructorComponent implements OnInit {
     let content1 = {};
     content1 = {
       topic: this.result.topic,
+      subject: this.result.subject,
+      grade: this.result.grade,
+      date: this.result.date,
+      time: this.result.time,
       description: this.result.description,
+      from: this.result.from
+
     };
 
     userValues = {

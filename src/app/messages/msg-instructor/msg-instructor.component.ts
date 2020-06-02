@@ -81,7 +81,8 @@ export class MsgInstructorComponent implements OnInit {
       width: '600px',
       data: {
         topic: this.response[this.mainIndex].data.content[this.subIndex].topic,
-        isFor: 'replyFromInstructor'
+        name: this.response[this.mainIndex].data.nameStu,
+        from: 'instructor'
       }
     });
 
@@ -91,18 +92,21 @@ export class MsgInstructorComponent implements OnInit {
        this.openConfirmation();
 
      }
-    //  console.log('from null '+result);
     });
   }
 
   openConfirmation(): void {
     const dialogConf = this.dialog.open(ConfirmationComponent, {
       data: {
+        name: this.result.name,
         topic: this.result.topic,
         description: this.result.description,
         selected: this.result.selected,
-        isFor: 'replyFromInstructor',
-        link: this.result.link
+        selectedTime: this.result.selectedTime,
+        date: this.result.date,
+        time: this.result.time,
+        link: this.result.link,
+        from: 'instructor',
       }
     });
 
