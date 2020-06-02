@@ -122,13 +122,13 @@ export class PersonSearchComponent implements OnInit {
       }
       for (const index in this.instructorResponse) {
         if (this.secondNamePart !== '' &&
-            this.instructorResponse[index].data.firstname.toLowerCase() === this.firstNamePart &&
-            this.instructorResponse[index].data.lastname.toLowerCase() === this.secondNamePart ) {
+            this.instructorResponse[index].data.firstname.toLowerCase().includes(this.firstNamePart) &&
+            this.instructorResponse[index].data.lastname.toLowerCase().includes(this.secondNamePart) ) {
 
               this.searchedList.push(this.instructorResponse[index]);
 
-        } else if (this.instructorResponse[index].data.firstname.toLowerCase() === this.searchNameInput.trim().toLowerCase() ||
-                 this.instructorResponse[index].data.lastname.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
+        } else if (this.instructorResponse[index].data.firstname.toLowerCase().includes(this.searchNameInput.trim().toLowerCase()) ||
+                 this.instructorResponse[index].data.lastname.toLowerCase().includes(this.searchNameInput.trim().toLowerCase())) {
 
               this.searchedList.push(this.instructorResponse[index]);
 

@@ -134,7 +134,7 @@ export class InstituteSearchComponent implements OnInit {
       this.nameSearchClicked = true;
       this.showByName = true;
       for (const index in this.instituteResponse) {
-        if (this.instituteResponse[index].data.firstname.toLowerCase() === this.searchNameInput.trim().toLowerCase()) {
+        if (this.instituteResponse[index].data.firstname.toLowerCase().includes(this.searchNameInput.trim().toLowerCase())) {
           this.searchedList.push(this.instituteResponse[index]);
         }
       }
@@ -161,14 +161,14 @@ export class InstituteSearchComponent implements OnInit {
           // console.log("hit there");
           if (this.searchInstructorInput) {
 
-            if (name[val].primary.toLowerCase() === this.searchInstructorInput.trim().toLowerCase() &&
-                name[val].district.toLowerCase() === this.searchDistrictInput.trim().toLowerCase() &&
-                name[val].subject.toLowerCase() === this.searchSubjectInput.trim().toLowerCase() ) {
+            if (name[val].primary.toLowerCase().inlcudes(this.searchInstructorInput.trim().toLowerCase()) &&
+                name[val].district.toLowerCase().includes(this.searchDistrictInput.trim().toLowerCase()) &&
+                name[val].subject.toLowerCase().includes(this.searchSubjectInput.trim().toLowerCase()) ) {
                   this.searchedClassList.push(name[val]);
                   this.emailClassList.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
               }
-            } else if (name[val].district.toLowerCase() === this.searchDistrictInput.trim().toLowerCase() &&
-                        name[val].subject.toLowerCase() === this.searchSubjectInput.trim().toLowerCase() ) {
+            } else if (name[val].district.toLowerCase().includes(this.searchDistrictInput.trim().toLowerCase()) &&
+                        name[val].subject.toLowerCase().includes(this.searchSubjectInput.trim().toLowerCase()) ) {
                   this.searchedClassList.push(name[val]);
                   this.emailClassList.push({email: this.classResponse[index].data.email, name: this.classResponse[index].data.name});
           }
