@@ -50,7 +50,10 @@ export class PapersComponent implements OnInit {
 
   public canAnswerPaper(subjectId: string){
     let result: boolean = false;
-    let subject = this.loggedInUser.data.units.find(element => element == subjectId);
+    let subject;
+    if(this.loggedInUser.data.units!=undefined){
+      subject = this.loggedInUser.data.units.find(element => element == subjectId);
+    }
     subject != undefined? result = true: "";
     return result;
   }

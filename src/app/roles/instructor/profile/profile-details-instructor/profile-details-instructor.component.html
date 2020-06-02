@@ -34,7 +34,7 @@
     <!-- </div> -->
       <div *ngIf ="field.more.university">
         <mat-expansion-panel (opened)="panelOpenState = true"
-                            (closed)="panelOpenState = false" expanded>
+                            (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
             University Details
@@ -67,7 +67,7 @@
         </div>
     
         <div *ngIf = "field.more.universityPhD">
-          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
             <mat-panel-title>
             PhD Degree Details
@@ -80,7 +80,7 @@
         </div>
     
         <div *ngIf ="field.more.personalAchievement">
-          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
             <mat-panel-title>
               Personal Achievements
