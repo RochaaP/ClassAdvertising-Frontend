@@ -15,6 +15,8 @@ import { SubjectModel } from 'src/app/subjects/subject-model';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { SubjectService } from 'src/app/subjects/subject.service';
+import { faCaretSquareUp, faCaretSquareDown } from '@fortawesome/free-solid-svg-icons';
+import { UploadFilesService } from 'src/app/service/Upload-files/upload-files.service';
 
 @Component({
   selector: 'app-edit-paper',
@@ -23,7 +25,12 @@ import { SubjectService } from 'src/app/subjects/subject.service';
 })
 export class EditPaperComponent implements OnInit {
 
-  public paper: {id: string, data: PaperModel};
+  faCaretSquareUp = faCaretSquareUp;
+  faCaretSquareDown = faCaretSquareDown;
+
+  public imagesGroupShow: boolean = false;
+
+  public paper: {id: string, data: PaperModel, subject: string};
   public subjectName: string = "XXXXXXXXXX";
 
   public loggedInUser: {id: string, data: UserModel};
@@ -43,6 +50,7 @@ export class EditPaperComponent implements OnInit {
     private questionService: QuestionService, 
     private paperService: PaperService,
     private subjectService: SubjectService,
+    private uploadFilesService: UploadFilesService,
     private spinnerService: Ng4LoadingSpinnerService,
     private modalService: NgbModal,
     private snackBar: MatSnackBar,
@@ -55,11 +63,11 @@ export class EditPaperComponent implements OnInit {
     this.spinnerService.show();
     // Add Dummy Details
     this.addDummyDetails();
-    this.subjectService.getSubjects(this);
     this.sharedService.loadPaperWithDataRespond().subscribe(res => {  
       this.spinnerService.show();          
       this.isShowPaperDetail = false;
       this.paper = res.paper;
+      this.subjectName = this.paper.subject;
       this.questionService.getQuestionByPaperId(this.paper.id, this);
       this.isShowPaperDetail = true;
     });    
@@ -134,7 +142,8 @@ export class EditPaperComponent implements OnInit {
         questions: "",
         price: "",
         published: false
-      }
+      },
+      subject: this.subjectName
     }
   }
 
@@ -147,7 +156,7 @@ export class EditPaperComponent implements OnInit {
           subject: "Maths",
           instructor: "Erantha Welikala",
 
-          question: index.toString() + "What is the sum of (square of 2, root of 16)",
+          question: index.toString() + ".) What is the sum of (square of 2, root of 16)",
 
           a: "8",
           b: "12",
@@ -162,7 +171,22 @@ export class EditPaperComponent implements OnInit {
           
           image: false,
           image_url: "",
-          metadata: ""
+          metadata: "",
+          image_A: false,
+          imageA: "",
+          a_metadata: "",
+          image_B: false,
+          imageB: "",
+          b_metadata: "",
+          image_C: false,
+          imageC: "",
+          c_metadata: "",
+          image_D: false,
+          imageD: "",
+          d_metadata: "",
+          image_E: false,
+          imageE: "",
+          e_metadata: ""
         }
       }
       this.questionList.push(question);      
@@ -206,7 +230,22 @@ export class EditPaperComponent implements OnInit {
         
         image: false,
         image_url: "",
-        metadata: ""
+        metadata: "",
+        image_A: false,
+        imageA: "",
+        a_metadata: "",
+        image_B: false,
+        imageB: "",
+        b_metadata: "",
+        image_C: false,
+        imageC: "",
+        c_metadata: "",
+        image_D: false,
+        imageD: "",
+        d_metadata: "",
+        image_E: false,
+        imageE: "",
+        e_metadata: ""
       }
     }
     this.questionList.push(question);
@@ -234,6 +273,58 @@ export class EditPaperComponent implements OnInit {
     })
     this.questionList.forEach(async element => {
       let index: number = this.questionList.indexOf(element);
+      // Handle image_url & metadata
+      if(this.questionList[index].data.image_url == undefined){
+        this.questionList[index].data.image_url = "";
+      }
+      if(this.questionList[index].data.metadata == undefined){
+        this.questionList[index].data.metadata = "";
+      } 
+
+    
+      // Remove previously added image
+      if(!this.questionList[index].data.image){
+        if(this.questionList[index].data.image_url != "" && this.questionList[index].data.metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.metadata).fullPath); 
+          this.questionList[index].data.image_url = "";
+          this.questionList[index].data.metadata = "";     
+        }
+      }
+      if(!this.questionList[index].data.image_A){
+        if(this.questionList[index].data.imageA != "" && this.questionList[index].data.a_metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.a_metadata).fullPath); 
+          this.questionList[index].data.imageA = "";
+          this.questionList[index].data.a_metadata = "";     
+        }
+      }
+      if(!this.questionList[index].data.image_B){
+        if(this.questionList[index].data.imageB != "" && this.questionList[index].data.b_metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.b_metadata).fullPath);
+          this.questionList[index].data.imageB = "";
+          this.questionList[index].data.b_metadata = "";
+        }
+      }
+      if(!this.questionList[index].data.image_C){
+        if(this.questionList[index].data.imageC != "" && this.questionList[index].data.c_metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.c_metadata).fullPath);
+          this.questionList[index].data.imageC = "";
+          this.questionList[index].data.c_metadata = "";
+        }
+      }
+      if(!this.questionList[index].data.image_D){
+        if(this.questionList[index].data.imageD != "" && this.questionList[index].data.d_metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.d_metadata).fullPath);
+          this.questionList[index].data.imageD = "";
+          this.questionList[index].data.d_metadata = "";
+        }
+      }
+      if(!this.questionList[index].data.image_E){
+        if(this.questionList[index].data.imageE != "" && this.questionList[index].data.e_metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.e_metadata).fullPath);
+          this.questionList[index].data.imageE = "";
+          this.questionList[index].data.e_metadata = "";
+        }
+      }
       let que: QuestionModel = {
         "instructor": this.loggedInUser.id,
         "subject": this.paper.data.subject,
@@ -248,7 +339,22 @@ export class EditPaperComponent implements OnInit {
         "number": (index + 1).toString(),
         "image": element.data.image,
         "image_url": element.data.image_url,
-        "metadata": element.data.metadata
+        "metadata": element.data.metadata,
+        "image_A": false,
+        "imageA": "",
+        "a_metadata": "",
+        "image_B": false,
+        "imageB": "",
+        "b_metadata": "",
+        "image_C": false,
+        "imageC": "",
+        "c_metadata": "",
+        "image_D": false,
+        "imageD": "",
+        "d_metadata": "",
+        "image_E": false,
+        "imageE": "",
+        "e_metadata": ""
       };
       console.log(JSON.stringify(que));
       if (element.id != "0") {
@@ -257,18 +363,9 @@ export class EditPaperComponent implements OnInit {
       else {
         this.questionService.addQuestion(que, this);
       }
-      // await this.paperService.updatePaper(this.paper.data, this.paper.id).then(onfulfilled => {
-      //   console.log(onfulfilled);
-      //   // Hide Loading
-      //   // this.filterQuestionsByPaper();
-      // }, onrejected => {
-      //   console.log(onrejected);
-      //   // Hide Loading
-      //   // this.filterQuestionsByPaper();
-      // });
     });
     this.paper.data.added_questions = this.questionList.length;
-    this.paperService.updatePaper(this.paper, this);
+    this.paperService.updatePaper({id:this.paper.id, data: this.paper.data}, this);
   }
 
   public deleteQuestion(question: {id: string, data: QuestionModel}, index: number){
@@ -282,7 +379,7 @@ export class EditPaperComponent implements OnInit {
   public paperDetailSave(){
     console.log("___paperDetailSave()___");
     this.spinnerService.show();
-    this.paperService.updatePaper(this.paper, this);
+    this.paperService.updatePaper({id:this.paper.id, data: this.paper.data}, this);
   }
 
   public openPublishModal(publishModal){
@@ -309,17 +406,6 @@ export class EditPaperComponent implements OnInit {
       this.questionList = data.payload;
       this.spinnerService.hide();
     }
-    else if(serviceType == WsType.GET_SUBJECTS){
-      console.log("GET_SUBJECTS");
-      let subjects: {id: string, data: SubjectModel}[] = data.payload;
-      if(subjects!=undefined){        
-        this.subjectName = "XXXXXXXXXX";
-        subjects.forEach(element => {
-          this.paper.data.subject == element.id? this.subjectName = element.data.name: ""
-        });
-      }
-      this.spinnerService.hide();
-    }
     else if(serviceType == WsType.UPDATE_PAPER){
       console.log("UPDATE_PAPER");
       this.spinnerService.hide();
@@ -339,9 +425,6 @@ export class EditPaperComponent implements OnInit {
     if (serviceType == WsType.GET_QUESTIONS_BY_PAPER_ID){
       this.spinnerService.hide();
     }
-    else if(serviceType == WsType.GET_SUBJECTS){
-      this.spinnerService.hide();
-    }
     else if(serviceType == WsType.UPDATE_PAPER){
       console.log("UPDATE_PAPER");
       this.spinnerService.hide();
@@ -354,6 +437,204 @@ export class EditPaperComponent implements OnInit {
       let notifyMsg = "Paper is failed to publish";
       this.showSnackBar(notifyMsg);
     }
+  }
+
+  public async uploadFile(event, index: number, type: string = "questionImage", answerLetter: string = ''){
+    this.spinnerService.show();
+
+    if(type=="questionImage"){
+      // Remove previously added image
+      if(this.questionList[index].data.image_url != "" && this.questionList[index].data.metadata != ""){
+        this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.metadata).fullPath);
+      }
+      this.uploadFilesService.upload(event, "questionImages");
+      this.uploadFilesService.getDownloadURL().subscribe(url => {
+        this.questionList[index].data.image_url = url.downloadURL;
+      });
+      this.uploadFilesService.getMetadata().subscribe(meta => {
+        this.questionList[index].data.metadata = meta.metadata;
+      }); 
+            
+      // Quickly save the current question
+      this.quickSave(index);
+    }
+    else{
+      // Remove previously added image
+      if(answerLetter=='a'){
+        if(this.questionList[index].data.imageA != "" && this.questionList[index].data.a_metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.a_metadata).fullPath);          
+        }
+        this.uploadFilesService.upload(event, "questionImages");
+        this.uploadFilesService.getDownloadURL().subscribe(url => {
+          this.questionList[index].data.imageA = url.downloadURL;
+        });
+        this.uploadFilesService.getMetadata().subscribe(meta => {
+          this.questionList[index].data.a_metadata = meta.metadata;
+        });      
+                
+        // Quickly save the current question
+        this.quickSave(index);
+      }
+      else if(answerLetter=='b'){
+        if(this.questionList[index].data.imageB != "" && this.questionList[index].data.b_metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.b_metadata).fullPath);
+        }
+        this.uploadFilesService.upload(event, "questionImages");
+        this.uploadFilesService.getDownloadURL().subscribe(url => {
+          this.questionList[index].data.imageB = url.downloadURL;
+        });
+        this.uploadFilesService.getMetadata().subscribe(meta => {
+          this.questionList[index].data.b_metadata = meta.metadata;
+        });      
+                
+        // Quickly save the current question
+        this.quickSave(index);
+      }
+      else if(answerLetter=='c'){
+        if(this.questionList[index].data.imageC != "" && this.questionList[index].data.c_metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.c_metadata).fullPath);
+        }
+        this.uploadFilesService.upload(event, "questionImages");
+        this.uploadFilesService.getDownloadURL().subscribe(url => {
+          this.questionList[index].data.imageC = url.downloadURL;
+        });
+        this.uploadFilesService.getMetadata().subscribe(meta => {
+          this.questionList[index].data.c_metadata = meta.metadata;
+        });      
+                
+        // Quickly save the current question
+        this.quickSave(index);
+      }
+      else if(answerLetter=='d'){
+        if(this.questionList[index].data.imageD != "" && this.questionList[index].data.d_metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.d_metadata).fullPath);
+        }
+        this.uploadFilesService.upload(event, "questionImages");
+        this.uploadFilesService.getDownloadURL().subscribe(url => {
+          this.questionList[index].data.imageD = url.downloadURL;
+        });
+        this.uploadFilesService.getMetadata().subscribe(meta => {
+          this.questionList[index].data.d_metadata = meta.metadata;
+        });      
+                
+        // Quickly save the current question
+        this.quickSave(index);
+      }
+      else if(answerLetter=='e'){
+        if(this.questionList[index].data.imageE != "" && this.questionList[index].data.e_metadata != ""){
+          this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.e_metadata).fullPath);
+        }
+        this.uploadFilesService.upload(event, "questionImages");
+        this.uploadFilesService.getDownloadURL().subscribe(url => {
+          this.questionList[index].data.imageE = url.downloadURL;
+        });
+        this.uploadFilesService.getMetadata().subscribe(meta => {
+          this.questionList[index].data.e_metadata = meta.metadata;
+        });      
+                
+        // Quickly save the current question
+        this.quickSave(index);
+      }
+      else{
+        // ntohing to do
+      }
+    }    
+  }
+
+  private quickSave(index: number){
+    // Handle image_url & metadata
+    if(this.questionList[index].data.image_url == undefined){
+      this.questionList[index].data.image_url = "";
+    }
+    if(this.questionList[index].data.metadata == undefined){
+      this.questionList[index].data.metadata = "";
+    } 
+
+  
+    // Remove previously added image
+    if(!this.questionList[index].data.image){
+      if(this.questionList[index].data.image_url != "" && this.questionList[index].data.metadata != ""){
+        this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.metadata).fullPath); 
+        this.questionList[index].data.image_url = "";
+        this.questionList[index].data.metadata = "";     
+      }
+    }
+    if(!this.questionList[index].data.image_A){
+      if(this.questionList[index].data.imageA != "" && this.questionList[index].data.a_metadata != ""){
+        this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.a_metadata).fullPath); 
+        this.questionList[index].data.imageA = "";
+        this.questionList[index].data.a_metadata = "";     
+      }
+    }
+    if(!this.questionList[index].data.image_B){
+      if(this.questionList[index].data.imageB != "" && this.questionList[index].data.b_metadata != ""){
+        this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.b_metadata).fullPath);
+        this.questionList[index].data.imageB = "";
+        this.questionList[index].data.b_metadata = "";
+      }
+    }
+    if(!this.questionList[index].data.image_C){
+      if(this.questionList[index].data.imageC != "" && this.questionList[index].data.c_metadata != ""){
+        this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.c_metadata).fullPath);
+        this.questionList[index].data.imageC = "";
+        this.questionList[index].data.c_metadata = "";
+      }
+    }
+    if(!this.questionList[index].data.image_D){
+      if(this.questionList[index].data.imageD != "" && this.questionList[index].data.d_metadata != ""){
+        this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.d_metadata).fullPath);
+        this.questionList[index].data.imageD = "";
+        this.questionList[index].data.d_metadata = "";
+      }
+    }
+    if(!this.questionList[index].data.image_E){
+      if(this.questionList[index].data.imageE != "" && this.questionList[index].data.e_metadata != ""){
+        this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.e_metadata).fullPath);
+        this.questionList[index].data.imageE = "";
+        this.questionList[index].data.e_metadata = "";
+      }
+    }
+
+    // Define the question
+    let que: QuestionModel = {
+      "instructor": this.loggedInUser.id,
+      "subject": this.paper.data.subject,
+      "question": this.questionList[index].data.question,
+      "a": this.questionList[index].data.a,
+      "b": this.questionList[index].data.b,
+      "c": this.questionList[index].data.c,
+      "d": this.questionList[index].data.d,
+      "e": this.questionList[index].data.e,
+      "answer": this.questionList[index].data.answer,
+      "paper": this.paper.id,
+      "number": (index+1).toString(),
+      "image": this.questionList[index].data.image,
+      "image_A": this.questionList[index].data.image_A,
+      "imageA": this.questionList[index].data.imageA,
+      "image_B": this.questionList[index].data.image_B,
+      "imageB": this.questionList[index].data.imageB,
+      "image_C": this.questionList[index].data.image_C,
+      "imageC": this.questionList[index].data.imageC,
+      "image_D": this.questionList[index].data.image_D,
+      "imageD": this.questionList[index].data.imageD,
+      "image_E": this.questionList[index].data.image_E,
+      "imageE": this.questionList[index].data.imageE,
+      "image_url": this.questionList[index].data.image_url,
+      "metadata": this.questionList[index].data.metadata,
+      "a_metadata": this.questionList[index].data.a_metadata,
+      "b_metadata": this.questionList[index].data.b_metadata,
+      "c_metadata": this.questionList[index].data.c_metadata,
+      "d_metadata": this.questionList[index].data.d_metadata,
+      "e_metadata": this.questionList[index].data.e_metadata
+    }
+    console.log(JSON.stringify(que));
+    if(this.questionList[index].id != "0"){
+      this.questionService.updateQuestion({id: this.questionList[index].id, data: que});
+    }
+    else{
+      this.questionService.addQuestion(que, this);
+    }
+    this.paperService.updatePaper({id:this.paper.id, data: this.paper.data}, this);
   }
 
 }

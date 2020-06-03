@@ -28,6 +28,8 @@ export class AnswerPaperComponent implements OnInit {
   faCaretRight = faCaretRight;
   faAngleDoubleRight = faAngleDoubleRight;
 
+  public viewModalImageUrl: string;
+
   @ViewChild('countdown', { static: false }) private countdown: CountdownComponent;
 
   public config;
@@ -52,9 +54,17 @@ export class AnswerPaperComponent implements OnInit {
     private snackBar: MatSnackBar,
   ) { 
     this.loggedInUser = this.sharedService.getLoggedInUser();
-    this.paper = JSON.parse(localStorage.getItem("paper"));
-    localStorage.removeItem("loggedInUser");
-    localStorage.removeItem("paper");
+    if(localStorage.getItem("paper")!=undefined){
+      this.paper = JSON.parse(localStorage.getItem("paper"));
+      localStorage.removeItem("paper");
+    }
+    else{
+      let notifyMsg = "No paper is selected"
+      this.snackBar.open(notifyMsg, 'Done', {
+        duration: 2000,
+        verticalPosition: "top"
+      });
+    }
     if(this.loggedInUser==undefined){
       window.close();
     }
@@ -74,7 +84,7 @@ export class AnswerPaperComponent implements OnInit {
   private adjustTime(){
     this.config = {
       "leftTime": Number(this.paper.data.time) * 60,
-      "demand": true,
+      "demand": false,
       "notify": [10, 20, 60]
     }
   }
@@ -116,7 +126,72 @@ export class AnswerPaperComponent implements OnInit {
     this.current_question_index = index;
   }
 
-  public viewImage(imageModal){
+  public viewImage(imageModal, image:string){
+    switch (image) {
+      case "a": {
+        if(this.questions[this.current_question_index].data.imageA!=undefined){
+          this.viewModalImageUrl = this.questions[this.current_question_index].data.imageA;      
+        }
+        else{
+          return;
+        }
+        break;
+      }
+      case "b": {
+        if(this.questions[this.current_question_index].data.imageB!=undefined){
+          this.viewModalImageUrl = this.questions[this.current_question_index].data.imageB; 
+        }       
+        else{
+          return;
+        }
+        break;  
+      }
+      case "c": {
+        if(this.questions[this.current_question_index].data.imageC!=undefined){
+          this.viewModalImageUrl = this.questions[this.current_question_index].data.imageC;    
+        }       
+        else{
+          return;
+        }   
+        break;
+      }
+      case "d": { 
+        if(this.questions[this.current_question_index].data.imageD!=undefined){
+          this.viewModalImageUrl = this.questions[this.current_question_index].data.imageD;        
+        }      
+        else{
+          return;
+        }
+        break;
+      }
+      case "e": {  
+        if(this.questions[this.current_question_index].data.imageE!=undefined){
+          this.viewModalImageUrl = this.questions[this.current_question_index].data.imageE;     
+        }        
+        else{
+          return;
+        } 
+        break;
+      }
+      case "question": {  
+        if(this.questions[this.current_question_index].data.image_url!=undefined){
+          this.viewModalImageUrl = this.questions[this.current_question_index].data.image_url;      
+        }      
+        else{
+          return;
+        }
+        break;
+      }
+      default: {
+        if(this.questions[this.current_question_index].data.image_url!=undefined){
+          this.viewModalImageUrl = this.questions[this.current_question_index].data.image_url;  
+        }      
+        else{
+          return;
+        }
+        break;
+      }
+    }
     this.modalService.open(imageModal);
   }
 
@@ -164,6 +239,7 @@ export class AnswerPaperComponent implements OnInit {
       this.configAnswerSettings(this.questions.length);
       this.spinnerService.hide();
       this.countdown.begin();
+      console.log("countdown began");
     }
     else if(serviceType==WsType.SAVE_ATTEMPT){
       console.log("SAVE_ATTEMPT");

@@ -10,11 +10,11 @@
             <div class="card-header py-1">
                 <div class="container"			>
                     <div class="row">
-                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <div class="col-lg-10 col-md-10 col-xs-10 col-xs-10">
                             <p class="my-1 float-left h6"><label>Paper Details</label></p>        
                             <button mat-raised-button color="primary" *ngIf="paper.data.no_of_questions == paper.data.added_questions && !paper.data.published" class="btn btn-sm my-1 float-right h6" (click)="openPublishModal(publishConfirmModal)"><mat-label>Publish</mat-label></button>                        
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <div class="col-lg-2 col-md-2 col-xs-2 col-xs-2">
                             <button type="button" class="btn btn-sm close float-right" (click)="isShowPaperDetail = !isShowPaperDetail">
                                 <i class="fas"
                                     [ngClass]="{'fa-angle-up': isShowPaperDetail, 'fa-angle-down': !isShowPaperDetail}"></i>
@@ -131,51 +131,170 @@
                     <div class="">
                         <div class="col-sm-8 float-left pl-2 pr-0">
                             <div class="row">
-                                <div class="col-md-2 col-sm-2"><label>Q {{t+1}}</label></div>
-                                <div class="col-md-10 col-sm-10">
-                                    <label (click)="openKeyboard(question.data.question, true, questionList, t, 'data.question')" class="form-control form-control-sm" id="question" name="question" [innerHTML]="question.data.question"></label>
+                                <div class="col-md-2 col-xs-2"><label>Q {{t+1}}</label></div>
+                                <div class="col-md-10 col-xs-10">
+                                    <div (click)="openKeyboard(question.data.question, true, questionList, t, 'data.question')" class="form-control form-control-sm" id="question" name="question" [innerHTML]="question.data.question"></div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2 col-sm-2"><label>A</label></div>
-                                <div class="col-md-10 col-sm-10">
-                                    <label (click)="openKeyboard(question.data.a, true, questionList, t, 'data.a')" class="form-control form-control-sm" id="a" name="a" [innerHTML]="question.data.a"></label>
+                                <div class="col-md-2 col-xs-2"><label>A</label></div>
+                                <div class="col-md-10 col-xs-10">
+                                    <div (click)="openKeyboard(question.data.a, true, questionList, t, 'data.a')" class="form-control form-control-sm" id="a" name="a" [innerHTML]="question.data.a"></div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2 col-sm-2"><label>B</label></div>
-                                <div class="col-md-10 col-sm-10">
-                                    <label (click)="openKeyboard(question.data.b, true, questionList, t, 'data.b')" class="form-control form-control-sm" id="b" name="b" [innerHTML]="question.data.b"></label>
+                                <div class="col-md-2 col-xs-2"><label>B</label></div>
+                                <div class="col-md-10 col-xs-10">
+                                    <div (click)="openKeyboard(question.data.b, true, questionList, t, 'data.b')" class="form-control form-control-sm" id="b" name="b" [innerHTML]="question.data.b"></div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2 col-sm-2"><label>C</label></div>
-                                <div class="col-md-10 col-sm-10">
-                                    <label (click)="openKeyboard(question.data.c, true, questionList, t, 'data.c')" class="form-control form-control-sm" id="c" name="c" [innerHTML]="question.data.c"></label>
+                                <div class="col-md-2 col-xs-2"><label>C</label></div>
+                                <div class="col-md-10 col-xs-10">
+                                    <div (click)="openKeyboard(question.data.c, true, questionList, t, 'data.c')" class="form-control form-control-sm" id="c" name="c" [innerHTML]="question.data.c"></div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2 col-sm-2"><label>D</label></div>
-                                <div class="col-md-10 col-sm-10">
-                                    <label (click)="openKeyboard(question.data.d, true, questionList, t, 'data.d')" class="form-control form-control-sm" id="d" name="d" [innerHTML]="question.data.d"></label>
+                                <div class="col-md-2 col-xs-2"><label>D</label></div>
+                                <div class="col-md-10 col-xs-10">
+                                    <div (click)="openKeyboard(question.data.d, true, questionList, t, 'data.d')" class="form-control form-control-sm" id="d" name="d" [innerHTML]="question.data.d"></div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2 col-sm-2"><label>E</label></div>
-                                <div class="col-md-10 col-sm-10">
-                                    <label (click)="openKeyboard(question.data.e, true, questionList, t, 'data.e')" class="form-control form-control-sm" id="e" name="e" [innerHTML]="question.data.e"></label>
+                                <div class="col-md-2 col-xs-2"><label>E</label></div>
+                                <div class="col-md-10 col-xs-10">
+                                    <div (click)="openKeyboard(question.data.e, true, questionList, t, 'data.e')" class="form-control form-control-sm" id="e" name="e" [innerHTML]="question.data.e"></div>
                                 </div>
                             </div>
-                            <div class="row">
-                                    <div class="col-md-2 col-sm-2"><label>Answer</label></div>
-                                    <select class="col-md-10 col-sm-10 form-control form-control-sm" disabled="paper.data.published">
-                                        <option value="A"><label [innerHTML]="question.data.a"></label></option>
-                                        <option value="B"><label [innerHTML]="question.data.b"></label></option>
-                                        <option value="C"><label [innerHTML]="question.data.c"></label></option>
-                                        <option value="D"><label [innerHTML]="question.data.d"></label></option>
-                                        <option value="E"><label [innerHTML]="question.data.e"></label></option>
-                                    </select>
+                            <div class="row" *ngIf="paper.data.published">
+                                <div class="col-md-12 col-xs-12">                                    
+                                    <label>{{'Answer: ' + question.data.answer}}</label>
                                 </div>
+                            </div>
+                            <div class="row" *ngIf="!paper.data.published">
+                                <div class="col-md-2 col-xs-2"><label>Answer: </label></div>
+                                <select class="col-md-10 col-xs-10 form-control form-control-sm">
+                                    <option value="A"><label [innerHTML]="question.data.a"></label></option>
+                                    <option value="B"><label [innerHTML]="question.data.b"></label></option>
+                                    <option value="C"><label [innerHTML]="question.data.c"></label></option>
+                                    <option value="D"><label [innerHTML]="question.data.d"></label></option>
+                                    <option value="E"><label [innerHTML]="question.data.e"></label></option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <mat-accordion class="col-xs-12">
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                          Add/Remove Images
+                                        </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div>          
+                                          <div class="row">
+                                              <div class="col-md-10 col-xs-10"><mat-label>Image for the question: </mat-label></div>
+                                              <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=image{{t}} [(ngModel)]="question.data.image"></mat-checkbox></div>
+                                          </div>
+                                          <div class="row" *ngIf="question.data.image">
+                                            <div class="col-md-8 col-xs-8"><input
+                                              type="file"
+                                              class="upload img_input"
+                                              (change)="uploadFile($event, t)"
+                                              name=imageFile{{t}}
+                                              accept="image/*"
+                                            />
+                                            </div>
+                                            <div class="col-md-4 col-xs-4"><img *ngIf="question.data.image_url!=''" [src]="question.data.image_url"/></div>              
+                                          </div>
+                                        </div>
+                                        <div>          
+                                          <div class="row">
+                                            <div class="col-md-10 col-xs-10"><mat-label>Image for the Answer A: </mat-label></div>
+                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageA{{t}} [(ngModel)]="question.data.image_A"></mat-checkbox></div>
+                                          </div>
+                                          <div class="row" *ngIf="question.data.image_A">
+                                            <div class="col-md-8 col-xs-8"><input
+                                              type="file"
+                                              class="upload img_input"
+                                              (change)="uploadFile($event.target.files, t, 'answerImage', 'a')"
+                                              name=imageFile{{t}}
+                                              accept="image/*"
+                                            />
+                                            </div>
+                                            <div class="col-md-4 col-xs-4"><img *ngIf="question.data.imageA!=''" [src]="question.data.imageA"/></div>              
+                                          </div>
+                                        </div>
+                                        <div>          
+                                          <div class="row">
+                                            <div class="col-md-10 col-xs-10"><mat-label>Image for the Answer B: </mat-label></div>
+                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageB{{t}} [(ngModel)]="question.data.image_B"></mat-checkbox></div>
+                                          </div>
+                                          <div class="row" *ngIf="question.data.image_B">
+                                            <div class="col-md-8 col-xs-8"><input
+                                              type="file"
+                                              class="upload img_input"
+                                              (change)="uploadFile($event.target.files, t, 'answerImage', 'b')"
+                                              name=imageFile{{t}}
+                                              accept="image/*"
+                                            />
+                                            </div>
+                                            <div class="col-md-4 col-xs-4"><img *ngIf="question.data.imageB!=''" [src]="question.data.imageB"/></div>              
+                                          </div>
+                                        </div>
+                                        <div>          
+                                          <div class="row">
+                                            <div class="col-md-10 col-xs-10"><mat-label>Image for the Answer C: </mat-label></div>
+                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageC{{t}} [(ngModel)]="question.data.image_C"></mat-checkbox></div>
+                                          </div>
+                                          <div class="row" *ngIf="question.data.image_C">
+                                            <div class="col-md-8 col-xs-8"><input
+                                              type="file"
+                                              class="upload img_input"
+                                              (change)="uploadFile($event.target.files, t, 'answerImage', 'c')"
+                                              name=imageFile{{t}}
+                                              accept="image/*"
+                                            />
+                                            </div>
+                                            <div class="col-md-4 col-xs-4"><img *ngIf="question.data.imageC!=''" [src]="question.data.imageC"/></div>              
+                                          </div>
+                                        </div>
+                                        <div>          
+                                          <div class="row">
+                                            <div class="col-md-10 col-xs-10"><mat-label>Image for the Answer D: </mat-label></div>
+                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageD{{t}} [(ngModel)]="question.data.image_D"></mat-checkbox></div>
+                                          </div>
+                                          <div class="row" *ngIf="question.data.image_D">
+                                            <div class="col-md-8 col-xs-8"><input
+                                              type="file"
+                                              class="upload img_input"
+                                              (change)="uploadFile($event.target.files, t, 'answerImage', 'd')"
+                                              name=imageFile{{t}}
+                                              accept="image/*"
+                                            />
+                                            </div>
+                                            <div class="col-md-4 col-xs-4"><img *ngIf="question.data.imageD!=''" [src]="question.data.imageD"/></div>              
+                                          </div>
+                                        </div>
+                                        <div>          
+                                          <div class="row">
+                                            <div class="col-md-10 col-xs-10"><mat-label>Image for the Answer E: </mat-label></div>
+                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageE{{t}} [(ngModel)]="question.data.image_E"></mat-checkbox></div>
+                                          </div>
+                                          <div class="row" *ngIf="question.data.image_E">
+                                            <div class="col-md-8 col-xs-8"><input
+                                              type="file"
+                                              class="upload img_input"
+                                              (change)="uploadFile($event.target.files, t, 'answerImage', 'e')"
+                                              name=imageFile{{t}}
+                                              accept="image/*"
+                                            />
+                                            </div>
+                                            <div class="col-md-4 col-xs-4"><img *ngIf="question.data.imageE!=''" [src]="question.data.imageE"/></div>              
+                                          </div>
+                                        </div>  
+                                      </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                            
                         </div>
                         <div *ngIf="!paper.data.published" class="col-sm-4 float-right px-0">
                             <button id="btnDeleteTopic" type="button" class="my-1 mx-2 close float-right"

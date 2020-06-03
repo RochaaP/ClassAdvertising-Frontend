@@ -104,7 +104,7 @@ export class ViewPaperComponent implements OnInit {
     modalRef.componentInstance.subjectGroup = this.subjectGroup;
   }
 
-  public loadPaper(paper: PaperModel){
+  public loadPaper(paper: {id: string, data: PaperModel, subject: string}){
     this.sharedService.loadPaperWithDataRequest(paper);
   }
 

@@ -11,7 +11,7 @@ import { AnswerPaperComponent } from './studentPaper/answerPaper/answer-paper/an
 import { PaperMarkingModelComponent } from './studentPaper/answerPaper/paperMarkingModel/paper-marking-model/paper-marking-model.component';
 import { KeyboardComponent } from '../util/keyboard/keyboard.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatRadioModule, MatExpansionModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatRadioModule, MatExpansionModule, MatSelectModule, MatCheckboxModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -46,7 +46,8 @@ import { QuillModule } from 'ngx-quill';
     MatSelectModule,
     MatInputModule,
     MatSnackBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule
   ],
   entryComponents: [
     KeyboardComponent,
