@@ -9,10 +9,10 @@
     color:#54a7e3;
   }
   .container {
-    height: 100%;
+    // height: 100%;
     justify-content: center;
     align-items: center;
-    padding: 10px
+    // padding: 10px
   }
   .card {
     width: 300px;
@@ -54,8 +54,8 @@
   //   width: 800px;
   // }
   
-  .goBack_button{
-    // margin-top: 15px;
+  .btn{
+   margin: 2px;
   }
   
   .newCard {
@@ -87,15 +87,15 @@
   .content {
     position: relative;
   }
-  .verification {
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: block;
-    width: 50px;
-    text-indent: -999em;
-    text-decoration: none;
-  }
+  // .verification {
+  //   position: absolute;
+  //   right: 0;
+  //   top: 0;
+  //   display: block;
+  //   width: 50px;
+  //   text-indent: -999em;
+  //   text-decoration: none;
+  // }
   
   
   .header-image {
@@ -110,12 +110,12 @@
   
   .full-width {
     margin-top: 15px;
-    margin-bottom: 15px;
+    // margin-bottom: 15px;
     margin-left: 30px;
     width: 50%;
   }
   .mainContainer{
-    overflow: hidden;
+    // overflow: hidden;
   }
   
   // .radios{
@@ -126,3 +126,15 @@
     margin-left: 15px;
   }
   
+  .proPicImage{
+    height: 50px;
+    width: 50px;
+    border-radius: 70%;
+
+  }
+
+
+  .tableDetails {
+    max-height: 500px;
+    overflow-y: scroll;
+  }

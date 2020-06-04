@@ -164,7 +164,6 @@ export class ViewNotesComponent implements OnInit {
 
   viewNote(url) {
     window.open(url, '_blank');
-    console.log('asdkfj' + url);
   }
 
   triggered(email: string, name: string, lastName: string) {

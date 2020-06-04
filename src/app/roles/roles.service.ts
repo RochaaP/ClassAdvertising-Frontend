@@ -38,7 +38,7 @@ export class RolesService {
     }
 
 
-    //////// instructon - view profile //////
+    //////// instructor - view profile //////
     public getInstructor(email: string) {
         this.http.post(RolesServiceURL.getInstructor(), {email}).subscribe((response: any) => {
             this.setResponse(response);
@@ -48,6 +48,23 @@ export class RolesService {
         });
     }
 
+     //////// institute - view profile //////
+    public getInstitute(email: string) {
+        this.http.post(RolesServiceURL.getInstitute(), {email}).subscribe((response: any) => {
+            this.setResponse(response);
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during get instructor details ',error);
+        });
+    }
+
+    public verifyUser(email: string) {
+        this.http.put(RolesServiceURL.verifyUser(), {email}).subscribe((response: any) => {
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during get instructor details ',error);
+        });
+    }
     ////////// Admin //////////
 
     /////////// Each Users Count ///////////

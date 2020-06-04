@@ -58,4 +58,15 @@ export class RolesServiceURL {
     public static getInstructor() {
         return RolesServiceURL.rolesExtension + 'instructor/get';
     }
+
+    //// institute - view profile ////
+    public static getInstitute() {
+        return RolesServiceURL.rolesExtension + 'institute/get';
+    }
+
+    public static verifyUser() {
+        return RolesServiceURL.adminExtension + 'verify';
+    }
+
+    
 }

@@ -4,6 +4,9 @@ import { DataService } from '../../../../service/share/data.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { RolesService } from 'src/app/roles/roles.service';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -17,17 +20,23 @@ export class ViewProfileInstituteComponent implements OnInit {
   response: any;
   faEdit = faEdit;
 
+  done = false;
 
   private instituteEmail: string;
   private studentEmail: string;
 
   showEditButton: boolean = false;
+  sub: any;
 
   constructor(
     private data: DataService,
     private http: HttpClient,
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private spinnerService: Ng4LoadingSpinnerService,
+    private rolesService: RolesService,
+    private snackBar: MatSnackBar,
+    private dataService: DataService,
   ) { }
 
   ngOnInit() {
@@ -45,24 +54,44 @@ export class ViewProfileInstituteComponent implements OnInit {
         // nothing to do
       }
     }
+    this.viewDetailsInstitute(this.email);
+  }
 
-    console.log('this is from insti profile ' + this.email);
-    this.getAPIData().subscribe((response) => {
-      console.log('response from GET API is ', response);
-      this.response = response;
-    }, ( error) => {
-      console.log('error is ', error);
+  viewDetailsInstitute(email: string) {
+    this.done = false;
+    this.spinnerService.show();
+    this.rolesService.getInstitute(email);
+    this.sub = this.rolesService.getStatus().subscribe(status => {
+
+      if (status.status === 200) {
+        this.response = this.rolesService.getResponse();
+        console.log(this.response);
+        this.done = true;
+        // this.openSnackBar(this.MESSAGE_SUCCESS);
+        this.spinnerService.hide();
+      }
+
+      else if (status.status === 400 || status.status === 0) {
+        // this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      else {
+        // this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      this.sub.unsubscribe();
+
     });
+  }
 
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Done', {
+      duration: 5000,
+    });
   }
 
   clickProfile() {
     this.router.navigate(['/profile/institute/edit']);
   }
-
-  getAPIData() {
-    return this.http.post('/api/userDetails/institute/get', {email: this.email} );
-  }
-
 
 }

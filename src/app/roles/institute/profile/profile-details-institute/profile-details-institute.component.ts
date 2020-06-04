@@ -17,16 +17,18 @@ export class ProfileDetailsInstituteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAPIData().subscribe((response) => {
-      console.log('response from GET API is about here ', response);
-      this.response = response;
-    }, ( error) => {
-      console.log('error is ', error);
-    });
 
-  }
+    this.response = this.childMessage;
+  //   this.getAPIData().subscribe((response) => {
+  //     console.log('response from GET API is about here ', response);
+  //     this.response = response;
+  //   }, ( error) => {
+  //     console.log('error is ', error);
+  //   });
 
-  getAPIData() {
-    return this.http.post('/api/userDetails/institute/get', {email: this.childMessage});
+  // }
+
+  // getAPIData() {
+  //   return this.http.post('/api/userDetails/institute/get', {email: this.childMessage});
   }
 }

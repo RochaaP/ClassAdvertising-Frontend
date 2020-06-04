@@ -1,70 +1,136 @@
 <div class = 'mainContainer'>
-    <!-- <div  *ngIf="notTriggeredClick; else details" > -->
     <div  *ngIf="notTriggeredClick" >
   
-        <div class='searchOption' >
-            <mat-form-field class="full-width">
-                <input matInput placeholder="Enter Name" [(ngModel)]='searchInput' name='search' (keydown.enter) = 'search()' (change)='filterItems(searchInput)'>
-            </mat-form-field>
-            <button mat-flat-button (click)='search()'>Search</button>
-            <button mat-flat-button (click)='searchClose()'>Close</button>
-        </div>
-  
-  
-        <div class ='row'>
-            <div class = 'col-md-3' style='margin-left: 10px;'>
-                <p><mat-radio-button value="allUsers" (change)="event($event)" >All Users</mat-radio-button></p>
-                <p><mat-radio-button value="verifiedUsers" (change)="event($event)" > All Verified Users</mat-radio-button></p>
-                <p><mat-radio-button value="notVerifiedUsers" (change)="event($event)" >All Not Verified Users</mat-radio-button></p>
-                <!-- <p><button mat-flat-button (click)='viewInstitute(institute)'>Institutes</button></p> -->
-            </div>
+        <div class = 'btnTop'>
+          <button type="button" class="btn btn-primary" (click) = 'getUsers()'>All Users</button>
+          <button type="button" class="btn btn-info" (click)='getVerifiedUsers()'>All Verified Users</button>
+          <button type="button" class="btn btn-info" (click)='getNonVerifiedUsers()'>All Non-Verified Users</button>
+          <button type="button" class="btn btn-info" (click)='getAllUsers()'>Refresh</button>
         </div>
 
 
-        <!-- <div *ngIf ='showAllUsers'>
-            <div *ngIf="!searchClicked"> -->
-
-              <div class = 'col-md-4' >
-                <h2 class='text-center'>Teachers</h2>
-                <ul *ngFor="let field of resultListInstructor">
-                  <div class="profileDetails card-1">
-                    <img *ngIf = 'field.data.img_url' class="header-image" src ={{field.data.img_url}} >
-                    <img *ngIf = '!field.data.img_url' class="header-image" src ='/assets/propic/propic.png' >
-                    <div class="click">
-                      <a (click) ='triggeredInstructor(field.data.email)'>{{field.data.firstname}} {{field.data.lastName}}</a>
-                    </div>
-                    <div id="content">
-                      <img src={{field.data.verify}} class="verification"/>
-                    </div>
-                  </div>
-                </ul>
-              </div>
-              <!-- </div>
-          </div> -->
-
-              <!-- <div *ngIf ='showAllUsers'  #institute>
-                <div *ngIf="!searchClicked"> -->
-
-              <div class = 'col-md-4'>
-                <h2 class='text-center'>Institutes</h2>
-                <ul *ngFor="let field of resultListInstitute">
-                  <div class="profileDetails card-1">
-                    <img *ngIf = 'field.data.img_url' class="header-image" src ={{field.data.img_url}} >
-                    <img *ngIf = '!field.data.img_url' class="header-image" src ='/assets/propic/propic.png' >
-                    <div class="click">
-                      <a (click) ='triggeredInstitute(field.data.email)'>{{field.data.firstname}} {{field.data.lastname}}</a>
-                    </div>
-                    <div id="content">
-                      <img src={{field.data.verify}} class="verification"/>
-                    </div>
-                  </div>
-                </ul>
-              </div>
-
-          <!-- </div>
+        <!-- <div class='searchOption' >
+          <mat-form-field class="full-width">
+              <input matInput placeholder="Enter Name" [(ngModel)]='searchInput' name='search' (keydown.enter) = 'search()' (change)='filterItems(searchInput)'>
+          </mat-form-field>
+          <button mat-flat-button (click)='search()'>Search</button>
+          <button mat-flat-button (click)='searchClose()'>Close</button>
         </div> -->
-
-
-
     </div>
 </div>
+    <div class="card-body">
+
+      <br>
+      <div class = 'tableDetails'>
+        <table class="table table-responsive-sm table-hover table-outline mb-0">
+          <thead class="thead-light">
+            <tr>
+              <th class="text-center"><i class="icon-people"></i></th>
+              <th class="text-center">Instructor</th>
+              <th class="text-center">Activity</th>
+            </tr>
+          </thead>
+          <tbody  *ngFor="let field of resultListInstructor; let index = index">
+            <tr>
+              <td class="text-center">
+                <div class="avatar">
+                    <img  src={{field.data.verify}} class="proPicImage"/>
+                    <img *ngIf='field.data.img_url' class="proPicImage" src ={{field.data.img_url}} alt="">
+                    <img *ngIf='!field.data.img_url' class="proPicImage" src ='../../../assets/propic/propic.png' alt="">
+                  <span class="avatar-status badge-success"></span>
+                </div>
+              </td>
+              <td>
+                <div>{{field.data.firstname}} {{field.data.lastname}}</div>
+                <div class="small text-muted">
+                  Registered: {{field.data.create}}
+                </div>
+              </td>
+            
+              <td  class="text-center">
+                <div class = 'btnTop'>
+                  <button type="button" class="btn btn-primary" (click) = 'viewProfileInstructor(field.data.email, field.data.firstname, field.data.lastname)'>View Profile</button>
+                  <button type="button" class="btn btn-info" (click)='viewDetailsInstructor(field.data.email)'  data-toggle="modal" data-target="#viewDetailsInstructor">View Only Details</button>
+                  <button type="button" class="btn btn-info" (click)='verifyUser(field.data.email)'>Verify User</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+          </tbody>
+        </table>
+      </div>  
+
+      <div class = 'tableDetails'>
+        <table class="table table-responsive-sm table-hover table-outline mb-0">
+          <thead class="thead-light">
+            <tr>
+              <th class="text-center"><i class="icon-people"></i></th>
+              <th class="text-center">Institute</th>
+              <th class="text-center">Activity</th>
+            </tr>
+          </thead>
+          <tbody  *ngFor="let field of resultListInstitute; let index = index">
+            <tr>
+              <td class="text-center">
+                <div class="avatar">
+                    <img  src={{field.data.verify}} class="proPicImage"/>
+                    <img *ngIf='field.data.img_url' class="proPicImage" src ={{field.data.img_url}} alt="">
+                    <img *ngIf='!field.data.img_url' class="proPicImage" src ='../../../assets/propic/propic.png' alt="">
+                  <span class="avatar-status badge-success"></span>
+                </div>
+              </td>
+              <td>
+                <div>{{field.data.firstname}} {{field.data.lastname}}</div>
+                <div class="small text-muted">
+                  Registered: {{field.data.create}}
+                </div>
+              </td>
+            
+              <td  class="text-center">
+                <div class = 'btnTop'>
+                  <button type="button" class="btn btn-primary" (click) = 'viewProfileInstitute(field.data.email, field.data.firstname, field.data.lastname)'>View Profile</button>
+                  <button type="button" class="btn btn-info" (click)='viewDetailsInstitute(field.data.email)'  data-toggle="modal" data-target="#viewDetailsInstitute">View Only Details</button>
+                  <button type="button" class="btn btn-info" (click)='verifyUser(field.data.email)'>Verify User</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+          </tbody>
+        </table>
+      </div>  
+    </div>
+       
+    <div class="modal fade" id="viewDetailsInstructor" tabindex="-1" role="dialog" aria-labelledby="viewDetailsInstructorLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="viewDetailsInstructorLabel">Instructor Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <app-profile-details-instructor *ngIf='dataDone' [childMessage]="this.instructorDetails"></app-profile-details-instructor> 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="viewDetailsInstitute" tabindex="-1" role="dialog" aria-labelledby="viewDetailsInstituteLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="viewDetailsInstituteLabel">Institute Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <app-profile-details-institute *ngIf='dataDone' [childMessage]="this.instituteDetails"></app-profile-details-institute> 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>

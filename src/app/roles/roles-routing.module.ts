@@ -11,11 +11,8 @@ import { ViewProfileInstituteComponent } from './institute/profile/view-profile-
 import { AddClassesInstituteComponent } from './institute/classes/add-classes-institute/add-classes-institute.component';
 import { InstituteSearchComponent } from './institute/institute-search/institute-search.component';
 
-import { AllUsersComponent } from './admin/all-users/all-users.component';
-import { ImagesChangeComponent } from './admin/images-change/images-change.component';
 import { EditProfileInstructorComponent } from './instructor/profile/edit-profile-instructor/edit-profile-instructor.component';
 import { EditProfileInstituteComponent } from './institute/profile/edit-profile-institute/edit-profile-institute.component';
-import { ViewUsersComponent } from './admin/view-users/view-users.component';
 import { MenuComponent } from './admin/menu/menu.component';
 
 
@@ -31,8 +28,6 @@ const routes: Routes = [
     { path: 'institute/classes', canActivate: [GuardService], component: AddClassesInstituteComponent },
     { path: 'institute/search', component: InstituteSearchComponent},
 
-    { path: 'admin/getallusers', component: AllUsersComponent },
-    { path: 'admin/images', component: ImagesChangeComponent},
     { path: 'admin', component: MenuComponent},
 ];
 
