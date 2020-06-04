@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { RolesService } from 'src/app/roles/roles.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-faq',
@@ -7,14 +10,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaqComponent implements OnInit {
 
-  faqs: {id: string, data: any}[] = [
-    {id: "1", data: {question: "how to create a paper?", answer: "You should have an instructor account to create a paper. If you have one, the navigate to papers view. Then, click the 'Create Paper' button in the top left side."}},
-    {id: "2", data: {question: "how to upload a note?", answer: "You should have an instructor account to upload a note."}}
-  ];
 
-  constructor() { }
+  MESSAGE_SUCCESS = 'FAQS UPDATED';
+  MESSAGE_FAIL = 'GETTING FAQS FAILED';
+  subGetFAQ: any;
+  faqs: any;
+
+  constructor(
+    private spinnerService: Ng4LoadingSpinnerService,
+    private rolesService: RolesService,
+    private snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit() {
+    this.getAllFAQs();
   }
 
+  getAllFAQs() {
+    this.spinnerService.show();
+    this.rolesService.getFAQs();
+    this.subGetFAQ = this.rolesService.getStatus().subscribe(status => {
+
+      if (status.status === 200) {
+        this.faqs = this.rolesService.getResponse();
+        this.openSnackBar(this.MESSAGE_SUCCESS);
+        this.spinnerService.hide();
+      }
+
+      else if (status.status === 400 || status.status === 0) {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      else {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      this.subGetFAQ.unsubscribe();
+    });
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Done', {
+      duration: 5000,
+    });
+  }
 }

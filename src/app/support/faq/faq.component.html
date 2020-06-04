@@ -2,7 +2,7 @@
     <mat-accordion>
         <mat-expansion-panel class="mb-1" *ngFor="let faq of faqs">
             <mat-expansion-panel-header>
-            <mat-panel-title>{{faq.data.question}}</mat-panel-title>
+            <mat-panel-title><b>{{faq.data.question}}</b></mat-panel-title>
             </mat-expansion-panel-header>
             <p>{{faq.data.answer}}</p>
         </mat-expansion-panel> 
