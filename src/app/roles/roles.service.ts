@@ -37,8 +37,120 @@ export class RolesService {
         });
     }
 
+
+    //////// instructon - view profile //////
+    public getInstructor(email: string) {
+        this.http.post(RolesServiceURL.getInstructor(), {email}).subscribe((response: any) => {
+            this.setResponse(response);
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during get instructor details ',error);
+        });
+    }
+
+    ////////// Admin //////////
+
+    /////////// Each Users Count ///////////
+    public getUsersCount() {
+        this.http.get(RolesServiceURL.getUsersCount()).subscribe((response: any) => {
+            const count = [];
+            count.push({
+                instructor: response.userCount[0].instructor._size,
+                institute: response.userCount[0].institute._size,
+                student: response.userCount[0].student._size,
+                notes: response.userCount[0].notes._size,
+                posts: response.userCount[0].posts._size,
+                papers: response.userCount[0].papers._size,
+
+            });
+            this.setResponseCount(count);
+            console.log(count);
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('errors during getting users count/ admin/ users count', error);
+        });
+    }
+
+    /////////// get all subjects ///////////
+    public getSubjects() {
+        this.http.get(RolesServiceURL.getSubjects()).subscribe((response: any) => {
+            this.setResponse(response);
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during getting subjects/ admin panel ', error);
+        });
+    }
+
+    //////////// Add Subject /////////////
+    public addSubject(subject: string) {
+        this.http.post(RolesServiceURL.addSubject(), {subject}).subscribe((response: any) => {
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during adding subject /admin panel ', error);
+        });
+    }
+    /////////// Update Subject ///////////
+    public updateSubject(id: string, subject: string) {
+        this.http.put(RolesServiceURL.updateSubjects(), {id, subject}).subscribe((response: any) => {
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during updating subject /admin panel ', error);
+        });
+    }
+
+    /////////// Delete Subject ///////////
+    public deleteSubject(id: string) {
+        this.http.delete(RolesServiceURL.deleteSubjects(id)).subscribe((response: any) => {
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during updating subject /admin panel', error);
+        });
+    }
+
+    ////////// get FAQs ///////////////
+    public getFAQs() {
+        this.http.get(RolesServiceURL.getFAQs()).subscribe((response: any) => {
+            this.setResponse(response);
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during getting subjects/ admin panel ', error);
+        });
+    }
+
+    //////////// Add Subject /////////////
+    public addFAQ(question: string, answer: string) {
+        this.http.post(RolesServiceURL.addFAQs(), {question,answer}).subscribe((response: any) => {
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during adding subject /admin panel ', error);
+        });
+    }
+
+    //////// Update FAQ ////////////
+    public updateFAQ(id: string, question: string, answer: string) {
+        this.http.put(RolesServiceURL.updateFAQs(), {id, question, answer}).subscribe((response: any) => {
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during updating subject /admin panel ',error);
+        });
+    }
+
+     /////////// Delete Subject ///////////
+     public deleteFAQ(id: string) {
+        this.http.delete(RolesServiceURL.deleteFAQs(id)).subscribe((response: any) => {
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during updating subject /admin panel ', error);
+        });
+    }
+
+    private setResponseCount(count: any) {
+        this.response = count;
+    }
+
     private setResponse(res: any) {
         this.response = res.userDetails;
+        console.log('user set');
     }
 
     public getResponse() {

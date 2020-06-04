@@ -1,0 +1,14 @@
+.ck{
+    overflow-x: hidden;
+}
+
+.card {
+    filter:drop-shadow(4px 4px 4px gray);
+    border-radius: 10px;
+    padding: 7px;
+    margin: 10px;
+}
+
+.card:hover {
+    filter:drop-shadow(10px 10px 10px gray);
+}

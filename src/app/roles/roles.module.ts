@@ -30,7 +30,7 @@ import { RolesRoutingModule } from './roles-routing.module';
 
 
 import { MatButtonModule, MatTabsModule, MatTableModule, MatCardModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, MatGridListModule, MatListModule, MatSnackBarModule, MatDividerModule, MatStepperModule, MatSidenavModule, MatProgressBarModule, MatIconModule, MatRadioModule, MatPaginatorModule, MatDialogModule } from '@angular/material';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NotificationBarModule } from 'ngx-notification-bar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -40,6 +40,10 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { PaperDetailsModalComponent } from '../papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
 import { ViewUsersComponent } from './admin/view-users/view-users.component';
 import { ImageCropperModalComponent } from '../util/image-cropper-modal/image-cropper-modal.component';
+import { MenuComponent } from './admin/menu/menu.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { SubjectComponent } from './admin/subject/subject.component';
+import { FaqsComponent } from './admin/faqs/faqs.component';
 
 
 @NgModule({
@@ -65,7 +69,15 @@ import { ImageCropperModalComponent } from '../util/image-cropper-modal/image-cr
 
     PapersComponent,
 
-    ViewUsersComponent
+    ViewUsersComponent,
+
+    MenuComponent,
+
+    DashboardComponent,
+
+    SubjectComponent,
+
+    FaqsComponent
 
     ],
     imports: [
@@ -98,7 +110,8 @@ import { ImageCropperModalComponent } from '../util/image-cropper-modal/image-cr
       MatRadioModule,
       MatPaginatorModule,
       MatDialogModule,
-
+      MatDatepickerModule ,
+      
       ScrollingModule,
       NotificationBarModule
     ],

@@ -1,0 +1,40 @@
+    .top {
+        font-size: 4vh;
+        margin: 10px;
+        text-align: center;
+    }
+
+    .profileDetails {
+        background-color: #131413;
+        color: #f5faf5;
+        height: 75vh;
+        overflow-x: hidden;
+        padding-top: 12px;
+        // margin:auto;
+        filter:drop-shadow(4px 4px 4px gray);
+        justify-content: left;
+        // align-items: flex-start;
+        // text-indent: 15px;   
+        // margin: 0 12 12 12;
+    
+        // display: flex;
+    }
+
+  .fullWidth {
+    width: 100%;
+    border-style: none;
+    margin-left: 10px;
+    outline:none; 
+    text-align: left;
+  }
+
+  .fullWidth:hover {
+    cursor: pointer;
+    background-color: #1247ce;
+    width: 100%;
+    border-style: none;
+    margin-left: 10px;
+    outline:none; 
+    text-align: left;
+
+  }

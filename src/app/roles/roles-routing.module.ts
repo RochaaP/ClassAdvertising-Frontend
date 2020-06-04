@@ -16,6 +16,7 @@ import { ImagesChangeComponent } from './admin/images-change/images-change.compo
 import { EditProfileInstructorComponent } from './instructor/profile/edit-profile-instructor/edit-profile-instructor.component';
 import { EditProfileInstituteComponent } from './institute/profile/edit-profile-institute/edit-profile-institute.component';
 import { ViewUsersComponent } from './admin/view-users/view-users.component';
+import { MenuComponent } from './admin/menu/menu.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
 
     { path: 'admin/getallusers', component: AllUsersComponent },
     { path: 'admin/images', component: ImagesChangeComponent},
+    { path: 'admin', component: MenuComponent},
 ];
 
 @NgModule({
