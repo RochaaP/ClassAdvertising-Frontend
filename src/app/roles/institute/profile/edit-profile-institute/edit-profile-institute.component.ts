@@ -74,7 +74,7 @@ export class EditProfileInstituteComponent implements OnInit {
       this.emailInput = response[0].data.email;
       this.contactInput = response[0].data.contact;
       this.downloadURL =  response[0].data.img_url;
-      this.profileMetaData = response[0].data.metaData;
+      this.profileMetaData = response[0].data.metadata;
       if (!this.downloadURL) {
         this.uploadProfile = false;
       }
@@ -118,7 +118,7 @@ export class EditProfileInstituteComponent implements OnInit {
         district: this.districtInput,
         province: this.provinceInput,
         img_url: this.downloadURL,
-        metaData: this.profileMetaData,
+        metadata: this.profileMetaData,
         backgroundImagePath: this.backgroundImageURL,
         backgroundMetaData: this.backgroundMetaData
       };

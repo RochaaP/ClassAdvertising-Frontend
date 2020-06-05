@@ -1,0 +1,75 @@
+<div class = 'container-fluid pb-3'>
+    <div *ngFor="let field of response">
+  
+        <div class="flapImage col-12" id="idHot">  
+            <img src='assets/propic/noPphotoBackground.png'  class="img-fluid backgroundImage" />
+            <img *ngIf="field.data.img_url" src={{field.data.img_url}}  class="avatar" />
+            <img *ngIf="!field.data.img_url" src='assets/propic/propic.png'  class="avatar" />
+       </div>
+  
+       <div class="text-center">
+        <h4 >{{field.data.firstname}} {{field.data.lastname}}</h4>
+        <button mat-raised-button color="primary" (click)="clickProfile()" *ngIf="showEditButton"><span>Edit Profile<fa-icon class="ml-1" [icon]="faEdit"></fa-icon></span></button>
+       </div> 
+       <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Personal data
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>{{field.data.firstname}} {{field.data.lastname}}</p>
+          <p>{{field.data.email}}</p>
+          <p>{{field.data.contact}}</p>
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngIf="subjectList.length!=0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Subjects
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p *ngFor="let subjectName of subjectList">{{subjectName}}</p>
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngIf="attemptList.length!=0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Paper Attempts
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-accordian>
+            <mat-expansion-panel *ngFor="let attempt of attemptList">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{attempt.paper.name}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-6">Avg: {{attempt.data.average}}</div>
+                  <div class="col-md-6">Attempts: {{attempt.data.no_of_attempts}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">Max: {{attempt.data.highest}}</div>
+                  <div class="col-md-6">Min: {{attempt.data.lowest}}</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">Last attempt: {{attempt.timestamp}}</div>
+                </div>
+                
+                
+                
+                
+                
+              </div>
+            </mat-expansion-panel>
+          </mat-accordian>
+
+        </mat-expansion-panel>
+     </mat-accordion> 
+    </div>
+  </div>
+  
+
+  
+  

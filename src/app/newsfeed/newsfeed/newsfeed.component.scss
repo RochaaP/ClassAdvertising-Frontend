@@ -236,11 +236,6 @@ div:last-of-type span {
   border: 1px solid #555;
 }
 
-.sideBar{
-  background-image: url('../../../assets/background2.jpeg');
-  height: 200px;
-}
-
 
 .section_content{
   margin: auto;
@@ -263,7 +258,7 @@ div:last-of-type span {
 .postfield{
   // background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
   // https://www.scottlib.org/ImageRepository/Document?documentID=3348
-  background: url('../../../assets/booksBackground.jpg') no-repeat center center fixed ;
+  // background: url('../../../assets/booksBackground.jpg') no-repeat center center fixed ;
 
   -webkit-background-size: cover;
   -moz-background-size: cover;

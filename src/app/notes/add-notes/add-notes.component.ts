@@ -54,7 +54,7 @@ export class AddNotesComponent implements OnInit {
   response: any;
 
   status: any;
-  metaData: any;
+  metadata: any;
   note: any = {
       name: '',
       subject: '',
@@ -102,7 +102,7 @@ export class AddNotesComponent implements OnInit {
       this.openSnackBar("Please select a valid year");
       return;
     }
-    if(this.metaData==undefined){
+    if(this.metadata==undefined){
       this.openSnackBar("Please upload a note");
       return;
     }
@@ -111,7 +111,7 @@ export class AddNotesComponent implements OnInit {
     // let userValues = {};
     const id = this.afs.createId();
     this.id = id.toString();
-    this.note.metaData = this.metaData;
+    this.note.metadata = this.metadata;
     this.note.contentURL = this.downloadURL;
     this.note.instructor = this.loggedInUser.id;
 
@@ -176,16 +176,16 @@ export class AddNotesComponent implements OnInit {
         this.downloadURL = url.downloadURL;
     });
     this.uploadFilesService.getMetadata().subscribe(meta => {
-      this.metaData = meta.metadata;
+      this.metadata = meta.metadata;
     });
   }
 
   deleteFile() {
-    if(this.metaData==undefined){
+    if(this.metadata==undefined){
       return
     }
     this.spinnerService.show();
-    const state = this.uploadFilesService.delete(JSON.parse(this.metaData).fullPath);    
+    const state = this.uploadFilesService.delete(JSON.parse(this.metadata).fullPath);    
     this.uploadFile = false;
     console.log(state);
     this.spinnerService.hide();

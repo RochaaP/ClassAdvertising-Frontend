@@ -18,6 +18,12 @@ import { InstituteSearchComponent } from './institute/institute-search/institute
 import { ViewClassesInstituteComponent } from './institute/classes/view-classes-institute/view-classes-institute.component';
 import { ProfileDetailsInstituteComponent } from './institute/profile/profile-details-institute/profile-details-institute.component';
 
+
+// Student
+import { EditProfileStudentComponent } from './student/profile/edit-profile-student/edit-profile-student.component';
+import { ViewProfileStudentComponent } from './student/profile/view-profile-student/view-profile-student.component';
+
+
 // admin
 import { AllUsersComponent } from './admin/all-users/all-users.component';
 import { ImagesChangeComponent } from './admin/images-change/images-change.component';
@@ -37,9 +43,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { PaperDetailsModalComponent } from '../papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
 import { ViewUsersComponent } from './admin/view-users/view-users.component';
-import { ImageCropperModalComponent } from '../util/image-cropper-modal/image-cropper-modal.component';
 import { MenuComponent } from './admin/menu/menu.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SubjectComponent } from './admin/subject/subject.component';
@@ -77,7 +81,11 @@ import { FaqsComponent } from './admin/faqs/faqs.component';
 
     SubjectComponent,
 
-    FaqsComponent
+    FaqsComponent,
+
+    EditProfileStudentComponent,
+
+    ViewProfileStudentComponent
 
     ],
     imports: [

@@ -31,9 +31,20 @@
         <p>{{field.data.email}}</p>
         <p>{{field.data.contact}}</p>
       </mat-expansion-panel>
+      <mat-expansion-panel *ngIf="subjectList.length!=0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Subjects
+          </mat-panel-title>
+          <!-- <mat-panel-description>
+            Type your name and age
+          </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <p *ngFor="let subjectName of subjectList">{{subjectName}}</p>
+      </mat-expansion-panel>
     <!-- </div> -->
       <div *ngIf ="field.more.university">
-        <mat-expansion-panel expanded>
+        <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
             University Details

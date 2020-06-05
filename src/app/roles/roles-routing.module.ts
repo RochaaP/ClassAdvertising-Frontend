@@ -14,6 +14,8 @@ import { InstituteSearchComponent } from './institute/institute-search/institute
 import { EditProfileInstructorComponent } from './instructor/profile/edit-profile-instructor/edit-profile-instructor.component';
 import { EditProfileInstituteComponent } from './institute/profile/edit-profile-institute/edit-profile-institute.component';
 import { MenuComponent } from './admin/menu/menu.component';
+import { ViewProfileStudentComponent } from './student/profile/view-profile-student/view-profile-student.component';
+import { EditProfileStudentComponent } from './student/profile/edit-profile-student/edit-profile-student.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,9 @@ const routes: Routes = [
     { path: 'institute/edit', canActivate: [GuardService], component: EditProfileInstituteComponent },
     { path: 'institute/classes', canActivate: [GuardService], component: AddClassesInstituteComponent },
     { path: 'institute/search', component: InstituteSearchComponent},
+
+    { path: 'student/view/:id', component: ViewProfileStudentComponent},
+    { path: 'student/edit', canActivate: [GuardService], component: EditProfileStudentComponent },
 
     { path: 'admin', component: MenuComponent},
 ];

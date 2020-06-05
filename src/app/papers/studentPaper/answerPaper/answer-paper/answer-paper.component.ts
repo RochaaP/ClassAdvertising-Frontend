@@ -127,69 +127,53 @@ export class AnswerPaperComponent implements OnInit {
   }
 
   public viewImage(imageModal, image:string){
-    switch (image) {
-      case "a": {
-        if(this.questions[this.current_question_index].data.imageA!=undefined){
-          this.viewModalImageUrl = this.questions[this.current_question_index].data.imageA;      
-        }
-        else{
-          return;
-        }
-        break;
+    console.log(image);
+    if(image =="a") {
+      if(this.questions[this.current_question_index].data.imageA!=undefined){
+        this.viewModalImageUrl = this.questions[this.current_question_index].data.imageA;      
       }
-      case "b": {
-        if(this.questions[this.current_question_index].data.imageB!=undefined){
-          this.viewModalImageUrl = this.questions[this.current_question_index].data.imageB; 
-        }       
-        else{
-          return;
-        }
-        break;  
+      else{
+        return;
       }
-      case "c": {
-        if(this.questions[this.current_question_index].data.imageC!=undefined){
-          this.viewModalImageUrl = this.questions[this.current_question_index].data.imageC;    
-        }       
-        else{
-          return;
-        }   
-        break;
+    }
+    else if(image =="b") {
+      if(this.questions[this.current_question_index].data.imageB!=undefined){
+        this.viewModalImageUrl = this.questions[this.current_question_index].data.imageB; 
+      }       
+      else{
+        return;
+      }  
+    }
+    else if(image == "c") {
+      if(this.questions[this.current_question_index].data.imageC!=undefined){
+        this.viewModalImageUrl = this.questions[this.current_question_index].data.imageC;    
+      }       
+      else{
+        return;
+      }   
+    }
+    else if(image == "d") { 
+      if(this.questions[this.current_question_index].data.imageD!=undefined){
+        this.viewModalImageUrl = this.questions[this.current_question_index].data.imageD;        
+      }      
+      else{
+        return;
       }
-      case "d": { 
-        if(this.questions[this.current_question_index].data.imageD!=undefined){
-          this.viewModalImageUrl = this.questions[this.current_question_index].data.imageD;        
-        }      
-        else{
-          return;
-        }
-        break;
-      }
-      case "e": {  
-        if(this.questions[this.current_question_index].data.imageE!=undefined){
-          this.viewModalImageUrl = this.questions[this.current_question_index].data.imageE;     
-        }        
-        else{
-          return;
-        } 
-        break;
-      }
-      case "question": {  
-        if(this.questions[this.current_question_index].data.image_url!=undefined){
-          this.viewModalImageUrl = this.questions[this.current_question_index].data.image_url;      
-        }      
-        else{
-          return;
-        }
-        break;
-      }
-      default: {
-        if(this.questions[this.current_question_index].data.image_url!=undefined){
-          this.viewModalImageUrl = this.questions[this.current_question_index].data.image_url;  
-        }      
-        else{
-          return;
-        }
-        break;
+    }
+    else if(image == "e") {  
+      if(this.questions[this.current_question_index].data.imageE!=undefined){
+        this.viewModalImageUrl = this.questions[this.current_question_index].data.imageE;     
+      }        
+      else{
+        return;
+      } 
+    }
+    else {
+      if(this.questions[this.current_question_index].data.image_url!=undefined){
+        this.viewModalImageUrl = this.questions[this.current_question_index].data.image_url;  
+      }      
+      else{
+        return;
       }
     }
     this.modalService.open(imageModal);

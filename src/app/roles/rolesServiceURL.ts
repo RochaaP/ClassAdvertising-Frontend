@@ -3,6 +3,7 @@ export class RolesServiceURL {
 
     private static rolesExtension = RolesServiceURL.servicePrefix + 'userDetails/';
     private static adminExtension = RolesServiceURL.servicePrefix + 'admin/';
+    private static attemptExtension = RolesServiceURL.servicePrefix + 'attempts/';
 
     public static CREAT_NOTE = RolesServiceURL.rolesExtension;
 
@@ -62,6 +63,11 @@ export class RolesServiceURL {
     //// institute - view profile ////
     public static getInstitute() {
         return RolesServiceURL.rolesExtension + 'institute/get';
+    }
+
+    //// student - view profile ////
+    public static getStudent() {
+        return RolesServiceURL.rolesExtension + 'student/get';
     }
 
     public static verifyUser() {

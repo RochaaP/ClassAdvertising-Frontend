@@ -97,33 +97,38 @@
                             <div class="row" *ngIf="questions[current_question_index]?.data.a!=undefined && questions[current_question_index]?.data.a!=''" class="pb-1">
                                 <div class="col-md-12">
                                     <div [innerHTML]="'A.) ' + questions[current_question_index]?.data.a"></div>
-                                    <a *ngIf="questions[current_question_index]?.data.image_A" (click)="viewImage(imageModal, 'a')">View Answer Image</a>
+                                    <a *ngIf="questions[current_question_index]?.data.image_A" (click)="viewImage(imageModal, 'a')" class="btn">View Answer Image</a>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row" *ngIf="questions[current_question_index]?.data.b!=undefined && questions[current_question_index]?.data.b!=''" class="pb-1">
                                 <div class="col-md-12">
                                     <div [innerHTML]="'B.) ' + questions[current_question_index]?.data.b"></div>
-                                    <a *ngIf="questions[current_question_index]?.data.image_B" (click)="viewImage(imageModal, 'b')">View Answer Image</a>
+                                    <a *ngIf="questions[current_question_index]?.data.image_B" (click)="viewImage(imageModal, 'b')" class="btn">View Answer Image</a>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row" *ngIf="questions[current_question_index]?.data.c!=undefined && questions[current_question_index]?.data.c!=''" class="pb-1">
                                 <div class="col-md-12">
                                     <div [innerHTML]="'C.) ' + questions[current_question_index]?.data.c"></div>
-                                    <a *ngIf="questions[current_question_index]?.data.image_C" (click)="viewImage(imageModal, 'c')">View Answer Image</a>
+                                    <a *ngIf="questions[current_question_index]?.data.image_C" (click)="viewImage(imageModal, 'c')" class="btn">View Answer Image</a>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row" *ngIf="questions[current_question_index]?.data.d!=undefined && questions[current_question_index]?.data.d!=''" class="pb-1">
                                 <div class="col-md-12">
                                     <div [innerHTML]="'D.) ' +  questions[current_question_index]?.data.d"></div>
-                                    <a *ngIf="questions[current_question_index]?.data.image_D" (click)="viewImage(imageModal, 'd')">View Answer Image</a>
+                                    <a *ngIf="questions[current_question_index]?.data.image_D" (click)="viewImage(imageModal, 'd')" class="btn">View Answer Image</a>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row"*ngIf="questions[current_question_index]?.data.e!=undefined && questions[current_question_index]?.data.e!=''" class="pb-1">
                                 <div class="col-md-12">
                                     <div [innerHTML]="'E.) ' + questions[current_question_index]?.data.e"></div>
-                                    <a *ngIf="questions[current_question_index]?.data.image_E" (click)="viewImage(imageModal, 'e')">View Answer Image</a>
+                                    <a *ngIf="questions[current_question_index]?.data.image_E" (click)="viewImage(imageModal, 'e')" class="btn">View Answer Image</a>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field>
@@ -189,6 +194,6 @@
           </button>
     </div>
     <div class="modal-body">
-        <img [src]="questions[current_question_index]?.data.image_url">
+        <img [src]="viewModalImageUrl">
     </div>
   </ng-template>

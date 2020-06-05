@@ -147,6 +147,7 @@ export class EditProfileInstructorComponent implements OnInit {
       console.log('email ' + this.emailInput);
     }
     this.getAPIData().subscribe((response) => {
+      response = response["userDetails"];
       console.log('response from GET is ', response[0]);
 
       this.id = response[0].id;
@@ -162,7 +163,7 @@ export class EditProfileInstructorComponent implements OnInit {
       this.firstNameInput = response[0].data.firstname;
       this.lastNameInput = response[0].data.lastname;
       this.img_url =  response[0].data.img_url;
-      this.profileMetaData = response[0].data.metaData;
+      this.profileMetaData = response[0].data.metadata;
       if (!this.img_url) {
         this.uploadProfile = false;
       } else {
@@ -443,7 +444,7 @@ setShowHidePhD(){
         degreeYear: this.yearInput,
         grad: this.gradInput,
         img_url: this.img_url,
-        metaData: this.profileMetaData,
+        metadata: this.profileMetaData,
         backgroundImagePath: this.backgroundImageURL,
         backgroundMetaData: this.backgroundMetaData,
         yearExperiences: this.yearExperienceInput,
@@ -567,10 +568,10 @@ setShowHidePhD(){
     });
   }
 
-  deleteFile(metaData: any) {
-    console.log(JSON.parse(metaData).fullPath);
+  deleteFile(metadata: any) {
+    console.log(JSON.parse(metadata).fullPath);
     this.spinnerService.show();
-    const state = this.uploadFilesService.delete(JSON.parse(metaData).fullPath);
+    const state = this.uploadFilesService.delete(JSON.parse(metadata).fullPath);
     console.log(state);
     this.spinnerService.hide();
   }

@@ -58,6 +58,16 @@ export class RolesService {
         });
     }
 
+    //////// student - view profile //////
+   public getStudent(email: string) {
+       this.http.post(RolesServiceURL.getStudent(), {email}).subscribe((response: any) => {
+           this.setResponse(response);
+           this.setStatus(response.status);
+       }, (error) => {
+           console.log('error during get instructor details ',error);
+       });
+   }
+
     public verifyUser(email: string) {
         this.http.put(RolesServiceURL.verifyUser(), {email}).subscribe((response: any) => {
             this.setStatus(response.status);

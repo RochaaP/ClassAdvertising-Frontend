@@ -67,6 +67,7 @@
             <a class="dropdown-item" (click)='logoutUser()'><fa-icon [icon]='faSignOutAlt'></fa-icon> LOGOUT</a>
           </div>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf='isStudent' data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="dropdown-item" (click)='clickViewProfile()'><fa-icon [icon]='faIdBadge'></fa-icon> Profile</a>
             <a class="dropdown-item" (click)='clickPapers()'><fa-icon [icon]='faBookReader'></fa-icon> Papers</a>
             <a class="dropdown-item" (click)='clickMessages()'><fa-icon [icon]='faEnvelope'></fa-icon> Messages</a>
             
