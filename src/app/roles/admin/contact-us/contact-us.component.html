@@ -1,0 +1,13 @@
+<div class="container-fluid quest" >
+    <mat-accordion>
+        <mat-expansion-panel class="mb-1" *ngFor="let msgs of response; let index = index">
+            <mat-expansion-panel-header>
+            <mat-panel-title>{{msgs.data.name}}</mat-panel-title>
+                <mat-panel-description>
+                    {{msgs.data.email}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>{{msgs.data.description}}</p>
+        </mat-expansion-panel> 
+    </mat-accordion>
+</div>
