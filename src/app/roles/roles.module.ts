@@ -48,6 +48,7 @@ import { MenuComponent } from './admin/menu/menu.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SubjectComponent } from './admin/subject/subject.component';
 import { FaqsComponent } from './admin/faqs/faqs.component';
+import { ContactUsComponent } from './admin/contact-us/contact-us.component';
 
 
 @NgModule({
@@ -85,7 +86,9 @@ import { FaqsComponent } from './admin/faqs/faqs.component';
 
     EditProfileStudentComponent,
 
-    ViewProfileStudentComponent
+    ViewProfileStudentComponent,
+
+    ContactUsComponent
 
     ],
     imports: [

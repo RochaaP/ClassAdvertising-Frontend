@@ -75,6 +75,24 @@ export class RolesService {
             console.log('error during get instructor details ',error);
         });
     }
+
+    public makeAdmin(id: string) {
+        this.http.put(RolesServiceURL.makeAdmin(), {id}).subscribe((response: any) => {
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during get instructor details ',error);
+        });
+    }
+
+    public removeAdmin(id: string) {
+        this.http.put(RolesServiceURL.removeAdmin(), {id}).subscribe((response: any) => {
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during get instructor details ',error);
+        });
+    }
+
+
     ////////// Admin //////////
 
     /////////// Each Users Count ///////////
@@ -171,13 +189,24 @@ export class RolesService {
         });
     }
 
+    //////// Update Contact Us Details //////
+    public getContactUs() {
+        this.http.get(RolesServiceURL.getContact()).subscribe((response: any) => {
+            this.setResponse(response);
+            this.setStatus(response.status);
+        }, (error) => {
+            console.log('error during updating contact messages /admin panel ',error);
+        });
+}
+
+
     private setResponseCount(count: any) {
         this.response = count;
     }
 
     private setResponse(res: any) {
         this.response = res.userDetails;
-        console.log('user set');
+        console.log('user set', this.response);
     }
 
     public getResponse() {

@@ -263,6 +263,52 @@ export class ViewUsersComponent implements OnInit {
     });
   }
 
+  makeAdmin(id: string) {
+    this.spinnerService.show();
+    this.rolesService.makeAdmin(id);
+    this.sub = this.rolesService.getStatus().subscribe(status => {
+
+      if (status.status === 200) {
+        this.openSnackBar(this.VERIFY_SUCCESS);
+        this.spinnerService.hide();
+      }
+
+      else if (status.status === 400 || status.status === 0) {
+        this.openSnackBar(this.VERIFY_FAIL);
+        this.spinnerService.hide();
+      }
+      else {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      this.sub.unsubscribe();
+
+    });
+  }
+
+  removeAdmin(id: string) {
+    this.spinnerService.show();
+    this.rolesService.removeAdmin(id);
+    this.sub = this.rolesService.getStatus().subscribe(status => {
+
+      if (status.status === 200) {
+        this.openSnackBar(this.VERIFY_SUCCESS);
+        this.spinnerService.hide();
+      }
+
+      else if (status.status === 400 || status.status === 0) {
+        this.openSnackBar(this.VERIFY_FAIL);
+        this.spinnerService.hide();
+      }
+      else {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      this.sub.unsubscribe();
+
+    });
+  }
+
   getUsers() {
     this.resultListInstructor = this.allInstructor;
     this.resultListInstitute = this.allInstitute;
@@ -277,4 +323,6 @@ export class ViewUsersComponent implements OnInit {
     this.resultListInstructor = this.allNotVerifiedUsersInstructor;
     this.resultListInstitute = this.allNotVerifiedUsersInstitute;
   }
+
+
 }

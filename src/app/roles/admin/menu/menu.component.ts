@@ -12,6 +12,7 @@ export class MenuComponent implements OnInit {
   subjectChecked = false;
   verificationChecked = false;
   faqChecked = false;
+  contactChecked = false;
 
   ngOnInit(): void {
   }
@@ -20,6 +21,7 @@ export class MenuComponent implements OnInit {
     this.dashboardChecked = true;
     this.subjectChecked = false;
     this.verificationChecked = false;
+    this.contactChecked = false;
     this.faqChecked = false;
   }
 
@@ -27,6 +29,7 @@ export class MenuComponent implements OnInit {
     this.dashboardChecked = false;
     this.subjectChecked = true;
     this.verificationChecked = false;
+    this.contactChecked = false;
     this.faqChecked = false;
   }
 
@@ -34,6 +37,15 @@ export class MenuComponent implements OnInit {
     this.dashboardChecked = false;
     this.subjectChecked = false;
     this.verificationChecked = true;
+    this.contactChecked = false;
+    this.faqChecked = false;
+  }
+
+  contact() {
+    this.dashboardChecked = false;
+    this.subjectChecked = false;
+    this.verificationChecked = false;
+    this.contactChecked = true;
     this.faqChecked = false;
   }
 
@@ -41,6 +53,7 @@ export class MenuComponent implements OnInit {
     this.dashboardChecked = false;
     this.subjectChecked = false;
     this.verificationChecked = false;
+    this.contactChecked = false;
     this.faqChecked = true;
   }
 }

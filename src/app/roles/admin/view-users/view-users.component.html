@@ -52,6 +52,8 @@
                   <button type="button" class="btn btn-primary" (click) = 'viewProfileInstructor(field.data.email, field.data.firstname, field.data.lastname)'>View Profile</button>
                   <button type="button" class="btn btn-info" (click)='viewDetailsInstructor(field.data.email)'  data-toggle="modal" data-target="#viewDetailsInstructor">View Only Details</button>
                   <button type="button" class="btn btn-info" (click)='verifyUser(field.data.email)'>Verify User</button>
+                  <button type="button" class="btn btn-info" *ngIf="!field.data.adminFeatures" (click)='makeAdmin(field.id)'>Make Admin</button>
+                  <button type="button" class="btn btn-danger" *ngIf="field.data.adminFeatures" (click)='removeAdmin(field.id)'>Remove Admin</button>
                 </div>
               </td>
             </tr>

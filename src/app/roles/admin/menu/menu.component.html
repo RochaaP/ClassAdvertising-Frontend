@@ -7,6 +7,7 @@
             <button class='fullWidth' mat-button (click)='dashboard()'><span>Dashboard</span></button>
             <button class='fullWidth' mat-button (click)='subjects()'><span>Subjects</span></button>
             <button class='fullWidth' mat-button (click)='verification()'><span>Verification</span></button>
+            <button class='fullWidth' mat-button (click)='contact()'><span>Contact US</span></button>
             <button class='fullWidth' mat-button (click)='faq()'><span>FAQ</span></button>
         </div>
 
@@ -16,6 +17,7 @@
             <app-subject *ngIf = "subjectChecked"></app-subject>
             <app-view-users *ngIf = 'verificationChecked'></app-view-users>
             <app-faqs *ngIf = "faqChecked"></app-faqs>
+            <app-contact-us *ngIf = 'contactChecked'></app-contact-us>
         </div>
     </div>
 </div>

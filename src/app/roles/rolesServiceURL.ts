@@ -4,6 +4,7 @@ export class RolesServiceURL {
     private static rolesExtension = RolesServiceURL.servicePrefix + 'userDetails/';
     private static adminExtension = RolesServiceURL.servicePrefix + 'admin/';
     private static attemptExtension = RolesServiceURL.servicePrefix + 'attempts/';
+    private static supportExtension = RolesServiceURL.servicePrefix + 'support/';
 
     public static CREAT_NOTE = RolesServiceURL.rolesExtension;
 
@@ -55,6 +56,9 @@ export class RolesServiceURL {
         return RolesServiceURL.adminExtension + 'panel/deleteFaq/' + id;
     }
 
+    public static getContact() {
+        return RolesServiceURL.supportExtension + 'contactUs';
+    }
     /// instructor - view profile ////
     public static getInstructor() {
         return RolesServiceURL.rolesExtension + 'instructor/get';
@@ -74,5 +78,12 @@ export class RolesServiceURL {
         return RolesServiceURL.adminExtension + 'verify';
     }
 
-    
+    public static makeAdmin() {
+        return RolesServiceURL.adminExtension + 'panel/makeAdmin';
+    }
+
+    public static removeAdmin() {
+        return RolesServiceURL.adminExtension + 'panel/removeAdmin';
+    }
+
 }
