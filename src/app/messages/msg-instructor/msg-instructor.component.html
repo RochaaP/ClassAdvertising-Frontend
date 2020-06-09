@@ -2,33 +2,28 @@
   <div class = 'top'>
     Messages
   </div>
-  <!-- Stack the columns on mobile by making one full-width and the other half-width -->
   <div class="row">
     <div class="col-md-3 col-lg-3 profileDetails">
-
       
       <ul *ngFor="let field of response; let index = index" >
-        <!-- <ul *ngFor="let fields of field.data.content; let subIndex = index" > -->
 
         <div class="nameIndividual">
 
           <img *ngIf= "field.data.img_urlStu" class="header-image" src ={{field.data.img_urlStu}} >
           <img *ngIf= "!field.data.img_urlStu" class="header-image" src =  'assets/propic/propic.png'>
 
-          <!-- <div class="click"> -->
             <a class='click' (click) ='details(index,subIndex)'>{{field.data.nameStu}}</a>
-          <!-- </div> -->
         </div>
         </ul>
-      <!-- </ul>     -->
     </div>
-    <!-- {{response[0].data.content[0].description}} -->
+
+
     <div class="col-md-9 col-lg-9 messages" *ngIf ='value'>
-      <!-- <ul *ngFor="let field of response[]; let index = index" > -->
-        <p><b>Topic - {{response[mainIndex].data.content[subIndex].topic}}</b></p>
+        <!-- <p><b>Topic - {{response[mainIndex].data.content[subIndex].topic}}</b></p> -->
         <ul *ngFor="let fields of response[mainIndex].data.content" >
 
           <div *ngIf = "fields.from == 'student'" class="leftMessage">
+            <p><b>{{fields.topic}}</b></p>
             <div class='content'><p>Grade - {{fields.grade}} </p></div>
             <p>Subject - {{fields.subject}} </p>
             <p>Date - {{fields.date}} </p>
@@ -47,7 +42,6 @@
       <div class="form-group">
         <button type="submit" class="btn btn-success" (click)="reply()">Reply</button>
       </div>
-      <!-- </ul> -->
     </div>
 
   </div>

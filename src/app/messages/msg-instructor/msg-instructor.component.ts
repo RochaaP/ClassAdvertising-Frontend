@@ -6,6 +6,9 @@ import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 import { ThrowStmt } from '@angular/compiler';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { MessagesService } from '../messages.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-msg-instructor',
@@ -29,58 +32,66 @@ export class MsgInstructorComponent implements OnInit {
   mainIndex: number;
   subIndex: number;
 
+  sub: any;
+
+  MESSAGE_SUCCESS = 'SUBJECTS UPDATED';
+  MESSAGE_FAIL = 'GETTING SUBJECTS FAILED';
+
   constructor(
     private data: DataService,
     public dialog: MatDialog,
     private http: HttpClient,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private spinnerService: Ng4LoadingSpinnerService,
+    private messagesService: MessagesService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
 
-    // this.data.currentEmail.subscribe(message => this.instructorEmail = message);
     this.instructorEmail = this.authService.isUserLoggedIn().email;
-    // this.getMessages();
-    this.getTempMessages();
+    this.getMessages();
     this.mainIndex = 0;
     this.subIndex = 0;
-    // this.openDialog();
   }
 
   getMessages() {
-    this.getAPIData().subscribe((response) => {
-      console.log('response from msg inst/', response);
-      this.response = response;
-      this.value = this.response[0].data.content;
+    this.spinnerService.show();
+    this.messagesService.getMessages(this.instructorEmail);
+    this.sub = this.messagesService.getStatus().subscribe(status => {
 
-      // console.log('msgInst / get message' , response[0].data);
+      if (status.status === 200) {
+        this.response = this.messagesService.getResponse();
+        this.openSnackBar(this.MESSAGE_SUCCESS);
+        this.spinnerService.hide();
+      }
+      else if (status.status === 400 || status.status === 0) {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      else {
+        this.openSnackBar(this.MESSAGE_FAIL);
+        this.spinnerService.hide();
+      }
+      this.sub.unsubscribe();
+
     });
   }
-  getAPIData() {
-    return this.http.post('api/appointments/getAppointments/instructor',  {email: this.instructorEmail});
-  }
 
-  getTempMessages() {
-
-  this.getTempMsgData().subscribe((response) => {
-        console.log('response from msg inst/', response);
-        this.response = response;
-        // this.value = this.response[0].data.content;
-
-        // console.log('msgInst / get message' , response[0].data);
-      });
-    }
-  getTempMsgData() {
-    return this.http.post('api/temp/appointments/getAppointments/instructor',  {email: this.instructorEmail});
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Done', {
+      duration: 5000,
+    });
   }
 
 
   reply(): void {
+    const length = this.response[this.mainIndex].data.content.length;
     const dialogRef = this.dialog.open(DialogComponent, {
       height: '400px',
       width: '600px',
       data: {
-        topic: this.response[this.mainIndex].data.content[this.subIndex].topic,
+        topic: this.response[this.mainIndex].data.content[length - 1].topic,
         name: this.response[this.mainIndex].data.nameStu,
         from: 'instructor'
       }
