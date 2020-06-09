@@ -192,10 +192,10 @@
                                         <div>          
                                           <div class="row">
                                               <div class="col-md-10 col-xs-10"><mat-label>Image for the question: </mat-label></div>
-                                              <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=image{{t}} [(ngModel)]="question.data.image"></mat-checkbox></div>
+                                              <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=image{{t}} [(ngModel)]="question.data.image" [disabled]="paper.data.published"></mat-checkbox></div>
                                           </div>
                                           <div class="row" *ngIf="question.data.image">
-                                            <div class="col-md-8 col-xs-8"><input
+                                            <div *ngIf="!paper.data.published" class="col-md-8 col-xs-8"><input
                                               type="file"
                                               class="upload img_input"
                                               (change)="uploadFile($event, t)"
@@ -209,15 +209,15 @@
                                         <div>          
                                           <div class="row">
                                             <div class="col-md-10 col-xs-10"><mat-label>Image for the Answer A: </mat-label></div>
-                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageA{{t}} [(ngModel)]="question.data.image_A"></mat-checkbox></div>
+                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageA{{t}} [(ngModel)]="question.data.image_A" [disabled]="paper.data.published"></mat-checkbox></div>
                                           </div>
                                           <div class="row" *ngIf="question.data.image_A">
-                                            <div class="col-md-8 col-xs-8"><input
+                                            <div *ngIf="!paper.data.published" class="col-md-8 col-xs-8"><input
                                               type="file"
                                               class="upload img_input"
                                               (change)="uploadFile($event, t, 'answerImage', 'a')"
                                               name=imageFile{{t}}
-                                              accept="image/*"
+                                              accept="image/*"                                              
                                             />
                                             </div>
                                             <div class="col-md-4 col-xs-4"><img *ngIf="question.data.imageA!=''" [src]="question.data.imageA"/></div>              
@@ -226,15 +226,16 @@
                                         <div>          
                                           <div class="row">
                                             <div class="col-md-10 col-xs-10"><mat-label>Image for the Answer B: </mat-label></div>
-                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageB{{t}} [(ngModel)]="question.data.image_B"></mat-checkbox></div>
+                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageB{{t}} [(ngModel)]="question.data.image_B" [disabled]="paper.data.published"></mat-checkbox></div>
                                           </div>
                                           <div class="row" *ngIf="question.data.image_B">
-                                            <div class="col-md-8 col-xs-8"><input
+                                            <div *ngIf="!paper.data.published" class="col-md-8 col-xs-8"><input
                                               type="file"
                                               class="upload img_input"
                                               (change)="uploadFile($event, t, 'answerImage', 'b')"
                                               name=imageFile{{t}}
                                               accept="image/*"
+                                              [disabled]="paper.data.published"
                                             />
                                             </div>
                                             <div class="col-md-4 col-xs-4"><img *ngIf="question.data.imageB!=''" [src]="question.data.imageB"/></div>              
@@ -243,15 +244,16 @@
                                         <div>          
                                           <div class="row">
                                             <div class="col-md-10 col-xs-10"><mat-label>Image for the Answer C: </mat-label></div>
-                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageC{{t}} [(ngModel)]="question.data.image_C"></mat-checkbox></div>
+                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageC{{t}} [(ngModel)]="question.data.image_C" [disabled]="paper.data.published"></mat-checkbox></div>
                                           </div>
                                           <div class="row" *ngIf="question.data.image_C">
-                                            <div class="col-md-8 col-xs-8"><input
+                                            <div *ngIf="!paper.data.published" class="col-md-8 col-xs-8"><input
                                               type="file"
                                               class="upload img_input"
                                               (change)="uploadFile($event, t, 'answerImage', 'c')"
                                               name=imageFile{{t}}
                                               accept="image/*"
+                                              [disabled]="paper.data.published"
                                             />
                                             </div>
                                             <div class="col-md-4 col-xs-4"><img *ngIf="question.data.imageC!=''" [src]="question.data.imageC"/></div>              
@@ -260,10 +262,10 @@
                                         <div>          
                                           <div class="row">
                                             <div class="col-md-10 col-xs-10"><mat-label>Image for the Answer D: </mat-label></div>
-                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageD{{t}} [(ngModel)]="question.data.image_D"></mat-checkbox></div>
+                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageD{{t}} [(ngModel)]="question.data.image_D" [disabled]="paper.data.published"></mat-checkbox></div>
                                           </div>
                                           <div class="row" *ngIf="question.data.image_D">
-                                            <div class="col-md-8 col-xs-8"><input
+                                            <div *ngIf="!paper.data.published" class="col-md-8 col-xs-8"><input
                                               type="file"
                                               class="upload img_input"
                                               (change)="uploadFile($event, t, 'answerImage', 'd')"
@@ -277,10 +279,10 @@
                                         <div>          
                                           <div class="row">
                                             <div class="col-md-10 col-xs-10"><mat-label>Image for the Answer E: </mat-label></div>
-                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageE{{t}} [(ngModel)]="question.data.image_E"></mat-checkbox></div>
+                                            <div class="col-md-2 col-xs-2"><mat-checkbox style="float: right;" name=imageE{{t}} [(ngModel)]="question.data.image_E" [disabled]="paper.data.published"></mat-checkbox></div>
                                           </div>
                                           <div class="row" *ngIf="question.data.image_E">
-                                            <div class="col-md-8 col-xs-8"><input
+                                            <div *ngIf="!paper.data.published" class="col-md-8 col-xs-8"><input
                                               type="file"
                                               class="upload img_input"
                                               (change)="uploadFile($event, t, 'answerImage', 'e')"

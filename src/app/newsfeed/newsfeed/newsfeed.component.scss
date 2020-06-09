@@ -6,12 +6,30 @@
   overflow: hidden;
 }
 
+app-footer {   
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
 .container {
   height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;  
+  
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 .wrapper {
   text-align: center;
@@ -200,28 +218,6 @@ body {
   border: none !important;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-
-@media (max-width: 479px) {
- .wrapper{
-   .h1{
-    font-size: 45px;
-    font-weight: 100;
-   }
- }
- .parallax {
-    height: 10em;
- }
- .wrapper {
-	h1 {
-		color: #fff;
-    font-size: 5em;
-    margin-top: 0.5em;
-		font-weight: 100
-	}
-}
-}
-
 
 ////////////// Banner //////////
 .parallax {
@@ -239,6 +235,28 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+
+@media (max-width: 479px) {
+ .wrapper{
+   .h1{
+    font-size: 45px;
+    font-weight: 100;
+   }
+ }
+ .parallax {
+    min-height: 50vh;
+ }
+ .wrapper {
+	h1 {
+		color: #fff;
+    font-size: 5em;
+    margin-top: 0.5em;
+		font-weight: 100
+	}
+}
 }
 
 .baner-content {
