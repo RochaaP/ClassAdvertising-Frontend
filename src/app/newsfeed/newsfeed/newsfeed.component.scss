@@ -451,3 +451,37 @@ body {
 	border-radius: 20px;
 	cursor: pointer;
 }
+
+.mat-fab{
+  background-color: blue;
+  background-size: cover;
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 100;
+}
+
+.mat-fab:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.mat-fab .tooltiptext {
+  visibility: hidden;
+  width: auto;
+  padding: 1rem;
+  background-color: blue;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.mat-fab:hover .tooltiptext {  
+  visibility: visible;
+  top: -5px;
+  right: 105%;
+}
