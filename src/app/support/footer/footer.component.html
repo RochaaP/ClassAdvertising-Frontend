@@ -1,6 +1,6 @@
   
-  <footer class="footer">
-    <!-- <div class="footer__addr">
+  <!-- <footer class="footer">
+    <div class="footer__addr">
       <h1 class="footer__logo">mtute</h1>
           
       <h2>Contact</h2>
@@ -10,7 +10,7 @@
             
         <a class="footer__btn" href="mailto:example@gmail.com">Email Us</a>
       </address>
-    </div> -->
+    </div>
     
     <ul class="footer__nav">
       <li class="nav__item">
@@ -30,7 +30,7 @@
           </li>
         </ul>
       </li>
-<!--       
+      
       <li class="nav__item nav__item--extra">
         <h2 class="nav__title">Technology</h2>
         
@@ -59,7 +59,7 @@
             <a href="#">IoT</a>
           </li>
         </ul>
-      </li> -->
+      </li>
       <li class="nav__item">
         <h2 class="nav__title">Mtute</h2>
         
@@ -100,4 +100,56 @@
     <div class="legal">
       <p>&copy; 2020 mtute.lk. All rights reserved.</p>
     </div>
-  </footer>
+  </footer> -->
+
+
+
+
+  <section id="footer">
+		<div class="container">
+			<div class="row text-center text-xs-center text-sm-left text-md-left">
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<h5>Mtute</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a [routerLink]="'/support/contact'"><i class="fa fa-angle-double-right"></i>Contact Us</a></li>
+						<li><a [routerLink]="'/support'"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<h5>Legal</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a [routerLink]="'/support/about'"><i class="fa fa-angle-double-right"></i>About</a></li>
+						<li><a [routerLink]="'/support'"><i class="fa fa-angle-double-right"></i>Support</a></li>
+						<li><a [routerLink]="'/support'"  [queryParams]="{viewPrivacy: true}"><i class="fa fa-angle-double-right"></i>Privacy Policy</a></li>
+						<li><a [routerLink]="'/support'"  [queryParams]="{viewTermsConditions: true}"><i class="fa fa-angle-double-right"></i>Terms of Use</a></li>
+					</ul>
+				</div>
+				<!-- <div class="col-xs-12 col-sm-4 col-md-4">
+					<h5>Quick links</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Home</a></li>
+						<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>About</a></li>
+						<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+						<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+						<li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
+					</ul>
+				</div> -->
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+					<ul class="list-unstyled list-inline social text-center">
+						<li class="list-inline-item"><a href="https://www.facebook.com/mtute.lk/"><i class="fa fa-facebook"></i></a></li>
+						<li class="list-inline-item"><a href="https://www.youtube.com/channel/UC5AMDYTDgLWrxQMT2ohExIA/videos"><i class="fa fa-youtube"></i></a></li>
+					</ul>
+				</div>
+				<hr>
+			</div>	
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+					<p class="h6">© 2020 mtute.lk All right Reversed.</p>
+				</div>
+				<hr>
+			</div>	
+		</div>
+	</section>
+	<!-- ./Footer -->
