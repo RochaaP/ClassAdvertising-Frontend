@@ -468,7 +468,6 @@ body {
 
 .mat-fab .tooltiptext {
   visibility: hidden;
-  width: auto;
   padding: 1rem;
   background-color: blue;
   color: #fff;
@@ -477,7 +476,7 @@ body {
 
   /* Position the tooltip */
   position: absolute;
-  z-index: 1;
+  z-index: 100;
 }
 
 .mat-fab:hover .tooltiptext {  
