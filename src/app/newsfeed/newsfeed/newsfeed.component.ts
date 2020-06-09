@@ -79,7 +79,7 @@ export class NewsfeedComponent implements OnInit {
 
   }
 
-  openForum(){
+  openForum() {
     this.router.navigateByUrl('/appointment');
   }
 

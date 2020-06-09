@@ -1,112 +1,18 @@
 :root{
   position: fixed;
 }
-.note {
-  position: absolute;
-  z-index: 101;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #fde073;
-  text-align: center;
-  line-height: 2.5;
-  overflow: hidden; 
-  -webkit-box-shadow: 0 0 5px black;
-  -moz-box-shadow:    0 0 5px black;
-  box-shadow:         0 0 5px black;
-}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-.card {
-    width: 500px;
-    margin-top: 15px;
-    filter:drop-shadow(4px 4px 4px gray);
-  }
-.val{
-  max-height: 20px;
-  object-position: right;
-  // background-image: url('../../../assets/propic/propic.png');
+.container-fluid{
+  overflow: hidden;
 }
-
 
 .container {
   height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  
+  padding: 10px;  
 }
-
-.parallax {
-  /* The image used */
-  // background-image:url('../../../assets/background2.jpeg');
-  background-image: url('../../../assets/backgroundWallpaper.jpg');
-  width:100%;
-  height:30em;
-  filter:drop-shadow(4px 8px 10px gray);
-  filter:opacity(95%);
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.middleTextTop {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 4em;
-  font-style: oblique;
-  color: red;
-}
-.text-js{
-  opacity: 0;
-}
-.cursor{
-  display: block;
-  position: absolute;
-  height: 100%;
-  top: 0;
-  right: -5px;
-  width: 2px;
-  /* Change colour of Cursor Here */
-  background-color: white;
-  z-index: 1;
-  animation: flash 0.5s none infinite alternate;
-}
-
-.verification {
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: block;
-  width: 50px;
-  text-indent: -999em;
-  text-decoration: none;
-}
-
-//new
-$avatar-size: 32px;
-$body-background: #333641;
-
-@font-face {
-	font-family: "ubuntu";
-	font-style: italic;
-	font-weight: 300;
-	src: local("Lato Light Italic"), local("Lato-LightItalic"),
-		url(https://fonts.gstatic.com/s/ubuntucondensed/v8/u-4k0rCzjgs5J7oXnJcM_0kACGMtT-Dfqw.woff2)
-			format("woff2");
-}
-
-a {
-	text-decoration: none;
-	color: #9ca0b1;
-}
-
 .wrapper {
   text-align: center;
   justify-content: center;
@@ -120,7 +26,9 @@ a {
 		text-transform: lowercase;
 		font-weight: 700;
 		font-family: "Josefin Sans", sans-serif;
-		background: linear-gradient(to right, #d11121 10%, rgb(216, 129, 129) 50%, #ce0505 60%);
+    // background: linear-gradient(to right, #d11121 10%, rgb(216, 129, 129) 50%, #ce0505 60%);
+		background: linear-gradient(to right, #d11121 10%, rgb(216, 129, 129) 50%, #290808 10%,  rgb(158, 45, 45) 20%);
+    
 		background-size: auto auto;
 		background-clip: border-box;
 		background-size: 200% auto;
@@ -140,121 +48,10 @@ a {
 	}
 }
 
-.new{
-  @import url('https://fonts.googleapis.com/css?family=Roboto:300');
-
-
-div {
-  display:inline-block;
-  overflow:hidden;
-  white-space:nowrap;
-  font-size: 2vw;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  color:black;
-}
-
-div:first-of-type {    /* For increasing performance
-                       ID/Class should've been used.
-                       For a small demo
-                       it's okaish for now */
-  animation: showup 7s infinite;
-}
-
-div:last-of-type {
-  width:0px;
-  animation: reveal 7s infinite;
-}
-
-div:last-of-type span {
-  margin-left:-355px;
-  animation: slidein 7s infinite;
-}
-
-@keyframes showup {
-    0% {opacity:0;}
-    20% {opacity:1;}
-    80% {opacity:1;}
-    100% {opacity:0;}
-}
-
-@keyframes slidein {
-    0% { margin-left:-800px; }
-    20% { margin-left:-800px; }
-    35% { margin-left:0px; }
-    100% { margin-left:0px; }
-}
-
-@keyframes reveal {
-    0% {opacity:0;width:0px;}
-    20% {opacity:1;width:0px;}
-    30% {width:355px;}
-    80% {opacity:1;}
-    100% {opacity:0;width:355px;}
-}
-}
-
-///////////////////////////
-/* The sidebar menu */
-.sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 160px; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  background-color: #111; /* Black */
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
-}
-
-/* The navigation menu links */
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-/* Style page content */
-.main {
-  margin-left: 160px; /* Same as the width of the sidebar */
-  padding: 0px 10px;
-}
-
-.example-container {
-  width: 400px;
-  height: 200px;
-  margin: 10px;
-  border: 1px solid #555;
-}
-
-
-.section_content{
-  margin: auto;
-  padding-top: 50px;
-}
-
-.imageContainer{
-  height: 20px;
-  width: 20px;;
-}
-
-
 ///////posts on newsfeed///////
 .container-fluid{
-  // margin-top: 20px;
   margin: 0;
   padding: 0;
-  // margin: 0px;
 }
 .postfield{
   // background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
@@ -272,11 +69,14 @@ div:last-of-type span {
 }
 .postContainer{
   margin-top: 20px;
+  color: #0fee29;
   border-radius: 20px;
   padding: 15px;
-  background: #1f4037;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #99f2c8, #2a4c43);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  // background: #1f4037;  /* fallback for old browsers */
+  // background: -webkit-linear-gradient(to right, #99f2c8, #2a4c43);  /* Chrome 10-25, Safari 5.1-6 */
+  // background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: url('../../../assets/notes/blackboard.jpg');
+
   box-shadow: 1px 12px 54px rgba(22, 21, 21, 0.2);
   margin:0 auto;
 }
@@ -306,7 +106,8 @@ div:last-of-type span {
 .title{
   align-items: center;
   font-size: large;
-  color: #110d7a;
+  color: #51f064;
+
 }
 
 .zoom {
@@ -337,7 +138,7 @@ div:last-of-type span {
 //////////////////////////
 .click{
   cursor:pointer;
-  color: #110d7a;
+  color: #51f064;
 
 
 }
@@ -391,11 +192,6 @@ body {
 	}
 }
 
-.image_dest {
-  padding-bottom: 12px;
-}
-
-
 .floatingButton:focus {
   display: flex;
   justify-content: center;
@@ -404,56 +200,7 @@ body {
   border: none !important;
 }
 
-/////////////////////////banner///////////////
-home_banner_area {
-  position: relative;
-  z-index: 1;
-  min-height: 770px; }
-  .home_banner_area .banner_inner {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    min-height: 770px; }
-    .home_banner_area .banner_inner .overlay {
-      background: url(../../../assets/background2.jpeg) no-repeat scroll center center;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 100%;
-      bottom: 0;
-      z-index: -1; }
-    .home_banner_area .banner_inner .banner_content {
-      color: #fff; }
-      .home_banner_area .banner_inner .banner_content span {
-        font-size: 24px;
-        color: #fff;
-        font-family: "Heebo", sans-serif;
-        text-transform: uppercase;
-        margin-bottom: 24px;
-        display: inline-block;
-        position: relative; }
-        .home_banner_area .banner_inner .banner_content span:after {
-          content: '';
-          position: absolute;
-          left: 50%;
-          bottom: -16px;
-          transform: translateX(-50%);
-          width: 100px;
-          height: 1px;
-          background: #fff; }
-      .home_banner_area .banner_inner .banner_content h3 {
-        font-size: 60px;
-        font-family: "Heebo", sans-serif;
-        font-weight: 500; }
-      .home_banner_area .banner_inner .banner_content .main_btn {
-        margin-top: 35px; }
-
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
 
 @media (max-width: 479px) {
  .wrapper{
@@ -473,4 +220,213 @@ home_banner_area {
 		font-weight: 100
 	}
 }
+}
+
+
+////////////// Banner //////////
+.parallax {
+  background-image: url('../../../assets/backgroundWallpaper.jpg');
+  width:100%;
+  min-height:75vh;
+  filter:drop-shadow(4px 8px 10px gray);
+  filter:opacity(95%);
+  // border-radius: 0 0 85% 85% / 30%;     //comment this to remove circular view of top image
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.baner-content {
+	  width: 100%;
+  	text-align: center;
+    vertical-align: middle;
+}
+
+.baner-content .text-content {
+	text-align: center;
+}
+
+.baner-content .text-content p {
+  color: #004d40;
+  font-family: monospace;
+  margin: 0 auto;
+
+}
+
+.baner-content .text-content .primary-white-button {
+	margin-top: 25px;
+}
+
+@media (min-width: 669px) {
+    .typewriter {
+      font-size: 6vh;
+      max-width: 200vh;
+      overflow: hidden; /* Ensures the content is not revealed until the animation */
+      border-right: .15em solid orange; /* The typwriter cursor */
+      white-space: nowrap; /* Keeps the content on a single line */
+      letter-spacing: .15em; /* Adjust as needed */
+      animation: 
+        typing 3.5s steps(30, end),
+        blink-caret .5s step-end infinite;
+  }
+
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange }
+  }
+}
+//////////////// service item///////////////
+#about .service-item {
+  padding-top: 25px;
+  text-align: center;
+  margin-bottom: 40px;
+
+}
+
+#about .service-item .icon {
+	width: 95px;
+	height: 95px;
+	display: inline-block;
+	text-align: center;
+	line-height: 104px;
+	border: 3px solid #fff;
+	border-radius: 50%;
+	background-color: #f7c552;
+}
+
+#about .service-item h4 {
+	margin-bottom: 30px;
+	margin-top: 45px;
+	font-size: 17px;
+	font-weight: 500;
+	color: rgb(29, 28, 28);
+	letter-spacing: 1px;
+}
+
+#about .service-item .line-dec {
+	width: 100%;
+	height: 1px;
+	background-color: rgba(14, 13, 13, 0.5);
+}
+
+#about .service-item p {
+	color: rgb(19, 17, 17);
+	margin-top: 30px;
+}
+
+#about .service-item .primary-blue-button {
+  margin-top: 35px;
+  cursor: pointer;
+}
+
+.primary-blue-button a {
+	display: inline-block;
+	background-color: #33c1cf;
+	font-size: 13px;
+	padding: 12px 18px;
+	color: #fff;
+	font-weight: 500;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	text-decoration: none;
+	border-radius: 20px;
+}
+
+.primary-blue-button:hover {
+  transform: translateY(-3px);
+
+}
+
+.primary-blue-button:active {
+  transform: translateY(-1px);
+  // box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+#about .card{
+  // background-color: #004d40;
+  background: -webkit-linear-gradient(to right, #99f2c8, #2a4c43);
+  background: linear-gradient(to right, #99f2c8, #1f4037); 
+  border-radius: 15px;
+}
+
+#about .card:hover {
+  box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12)
+;
+  transition: box-shadow 0.4s ease-in-out;
+}
+#about .card::after {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+@media (max-width: 569px) {
+  #about .card{
+    margin: 25px;
+  }
+}
+
+
+
+/////////// contact us ///////////////
+
+#contact-us {
+	background-color: #596065;
+	text-align: center;
+	padding: 80px 0px;
+}
+
+#contact-us .section-heading h4 {
+	margin-top: 0px;
+	font-size: 20px;
+	text-transform: uppercase;
+	font-weight: 700;
+	color: #fff;
+	letter-spacing: 1px;
+}
+
+#contact-us .section-heading .line-dec {
+	width: 270px;
+	height: 1px;
+	background-color: rgba(250, 250, 250, 0.5);
+	margin: 20px auto 15px auto;
+}
+
+#contact-us .section-heading p {
+	color: #fff;
+	padding: 0px 33%;
+}
+
+#contact-us .pop-button h4{
+  margin-top: 30px;
+	display: inline-block;
+	background-color: #33c1cf;
+	font-size: 13px!important;
+	padding: 12px 18px;
+	color: #fff;
+	font-weight: 400!important;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	text-decoration: none;
+	border-radius: 20px;
+	cursor: pointer;
 }

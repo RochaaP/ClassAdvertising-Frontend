@@ -1,20 +1,72 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 
-<!-- (click)='triggered(field.data.email)' -->
-<!-- .toDate() | date: 'yyyy MMM dd hh:mm' -->
-<!-- <div class="continer"> -->
   <div class='container-fluid'>
 
-  <div class="parallax">
-    <div class="wrapper">
-      <h1>mtute.lk</h1>
-      
+      <div class="parallax baner-content" id="home">
+        <div class="container">
+            <div class="text-content">
+                <div class="wrapper">
+                    <h1>mtute.lk</h1>
+                </div>    
+                <p class="typewriter">An Educational Platform</p>
+            </div>
+        </div>
+      </div>
+    
+  <section id="about" class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12 card">
+                <div class="service-item">
+                    <div class="icon servicetitle animated fadeInDown">
+                      <fa-icon [icon]="envilopIcon"  size="2x" ></fa-icon>
+                    </div>
+                    <h4>Request an Online Lesson</h4>
+                    <div class="line-dec animated zoomIn"></div>
+                    <p class='animated zoomIn'>Please fill the form in order to assign you an ideal instructor for your learning requirement</p>
+                    <div class="primary-blue-button">
+                      <a (click)="openForum()">Go to Forum</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12 card">
+                <div class="service-item">
+                    <div class="icon servicetitle animated fadeInDown">
+                      <fa-icon [icon]="childIcon" size="2x" ></fa-icon>
+                    </div>
+                    <h4>Inspire Students</h4>
+                    <div class="line-dec animated zoomIn"></div>
+                    <p class='animated zoomIn'>Help people learn new skills, advance their careers, and explore thier hobbies by sharing your knowledge</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12 card">
+                <div class="service-item">
+                    <div class="icon servicetitle animated fadeInDown">
+                      <fa-icon [icon]="moneyIcon"  size="2x"></fa-icon> 
+                    </div>
+                    <h4>Earn Money</h4>
+                    <div class="line-dec animated zoomIn"></div>
+                    <p class='animated zoomIn'>Earn money every time a student purchases your courses, Get paid monthly through PayPal or Payment. It is your choice</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12 card ">
+                <div class="service-item">
+                    <div class="icon servicetitle animated fadeInDown">
+                      <fa-icon [icon]="commentIcon"  size="2x"></fa-icon>
+                    </div>
+                    <h4>Join Our community</h4>
+                    <div class="line-dec animated zoomIn"></div>
+                    <p class='animated zoomIn'>Take advantages of out active community of instructors to help you through your course creation process</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</section>
+
 
   <!-- <notification-bar></notification-bar> -->
-  <section class="section_content">
+  <!-- <section class="section_content">
     <div class="container">
       <div class='row'>
 
@@ -26,7 +78,6 @@
           </div>
           <div class="servicetitle  animated zoomIn">
             <p>Please fill the form in order to assign you an ideal instructor for your learning requirement</p>
-            <!-- <a mat-raised-button color="primary" href="https://docs.google.com/forms/d/e/1FAIpQLSd4nRTkNQ45WbLmKKMIiCGN7m4cUVkrNwusVPtc3IC9TN-XVQ/viewform">Go to Forum</a> -->
             <a mat-raised-button color="primary" (click)="openForum()">Go to Forum</a>
           </div>
         </div>
@@ -65,10 +116,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   
-  <div class ="container-fluid postfield">
+  <!-- <div class ="container-fluid postfield">
       <ul *ngFor ="let field of response">
         <div class='postContainer col-md-7'>
 
@@ -86,7 +137,7 @@
               <div class= "col">
                 <p>By <a class="click" (click) ='triggered(field.data.email,field.data.registerItem, field.data.name)'> {{field.data.name}}</a></p>
                 <p class="title">{{field.data.title}}</p>
-                <!-- {{field.data.create.toDate  | date: 'dd.mm.yyyy hh:MM:ss'}} -->
+                {{field.data.create.toDate  | date: 'dd.mm.yyyy hh:MM:ss'}}
               </div>
           </div>
 
@@ -134,18 +185,20 @@
         <use href="#line"></use>
       </svg>
     </a>
-    <!-- <mat-form-field class ='full-width'>
-      <mat-select placeholder="25" [(ngModel)]="pageLimitInput" name='pageLimit'>
-        <mat-option value=5>25</mat-option>
-        <mat-option value=50>50</mat-option>
-        <mat-option value=75>75</mat-option>
-        <mat-option value=100>100</mat-option>
-      </mat-select>
-    </mat-form-field>     -->
-  </div>
-  <!-- <div class="floatingButton">
-    <button mat-fab color="primary">
-      <mat-icon>delete</mat-icon>
-    </button>
   </div> -->
+
+  <div id="contact-us">
+  <div class="container">
+      <div class="col-md-12">
+          <div class="section-heading animated fadeInDown">
+              <h4>Contact Us</h4>
+              <div class="line-dec"></div>
+              <p>MTUTE is a platform for students, instructors and intitutes. Need a support..?? Do not hesitate..!! Contact Us...!!</p>
+              <div class="pop-button">
+                  <a [routerLink]="'/support/contact'"><h4>Send us a message</h4></a>
+              </div>
+          </div>
+    </div>
+  </div>
+</div>  
   <app-footer></app-footer>
