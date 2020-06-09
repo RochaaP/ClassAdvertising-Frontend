@@ -41,3 +41,8 @@ nav {
   visibility: visible;
   transform: scaleX(1);
 }
+
+.navbar-brand {
+  position: fixed;
+  z-index: 200;
+}
