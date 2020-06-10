@@ -15,6 +15,7 @@ import { ZoomModule } from './zoom/zoom.module';
 import { NotesModule } from './notes/notes.module';
 import { MessageModule } from './messages/message.module';
 import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cropper-modal.component';
+import { PaymentComponent } from './service/payment/payment.component';
 
 const routes: Routes = [
   { path: '', component: NewsfeedComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   // { path: 'notes', loadChildren: () => NotesModule },
 
   // While building
+  { path: 'payment', component: PaymentComponent},
   { path: 'papers', canActivate: [GuardService], loadChildren: './papers/paper.module#PaperModule' },
   { path: 'zoom', canActivate: [GuardService], loadChildren: './zoom/zoom.module#ZoomModule' },
   { path: 'messages', canActivate: [GuardService], loadChildren: './messages/message.module#MessageModule' },
