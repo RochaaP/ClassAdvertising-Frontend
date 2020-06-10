@@ -204,30 +204,30 @@ Upload all values
     <hr>
     <div class = "subcontainer"  class="parallax">
   
-        <form class="form col" >
+        <form class="form col" [formGroup]="formGroupClasses" (validSubmit)="submit()" >
   
           <mat-form-field class="full-width">
-            <input matInput placeholder="Lecture's Name" [(ngModel)]="primaryInput" name="class">
+            <input matInput placeholder="Lecture's Name" [(ngModel)]="primaryInput"  formControlName="name">
           </mat-form-field>
   
           <mat-form-field class="full-width">
-            <input matInput placeholder="Grade/Class" [(ngModel)]="classInput" name="class">
+            <input matInput placeholder="Grade/Class" [(ngModel)]="classInput"  formControlName="class">
           </mat-form-field>
   
           <mat-form-field class="full-width">
-            <input matInput placeholder="Subject" [(ngModel)]="subjectInput" name="subject">
+            <input matInput placeholder="Subject" [(ngModel)]="subjectInput"  formControlName="subject">
           </mat-form-field>
   
           <mat-form-field class="full-width">
-            <input matInput placeholder="Starting Time" [(ngModel)]="timeInput" name='time'>
+            <input matInput placeholder="Starting Time" [(ngModel)]="timeInput"  formControlName='time'>
           </mat-form-field>
   
           <mat-form-field class="full-width">
-            <input matInput placeholder="City" [(ngModel)]="cityInput" name='city'>
+            <input matInput placeholder="City" [(ngModel)]="cityInput"  formControlName='city'>
           </mat-form-field>
   
           <mat-form-field class ='full-width'>
-            <mat-select placeholder="District" [(ngModel)]="DistrictInput" name='District'>
+            <mat-select placeholder="District" [(ngModel)]="DistrictInput"  formControlName='district'>
               <mat-option value="Ampara">Ampara</mat-option>
               <mat-option value="Anuradhapura">Anuradhapura</mat-option>
               <mat-option value="Badulla">Badulla</mat-option>
@@ -257,7 +257,7 @@ Upload all values
           </mat-form-field>
   
           <mat-form-field class ='full-width'>
-            <mat-select placeholder="Class Day" [(ngModel)]="dayInput" name='day'>
+            <mat-select placeholder="Class Day" [(ngModel)]="dayInput"  formControlName='day'>
               <mat-option value="Monday">Monday</mat-option>
               <mat-option value="Tuesday">Tuesday</mat-option>
               <mat-option value="Wednesday">Wednesday</mat-option>
@@ -269,7 +269,7 @@ Upload all values
           </mat-form-field>
   
           <mat-form-field class ='full-width'>
-            <mat-select placeholder="Medium" [(ngModel)]="mediumInput" name='medium'>
+            <mat-select placeholder="Medium" [(ngModel)]="mediumInput"  formControlName='medium'>
               <mat-option value="Sinhala">Sinhala</mat-option>
               <mat-option value="English">English</mat-option>
               <mat-option value="Tamil">Tamil</mat-option>
@@ -277,13 +277,13 @@ Upload all values
           </mat-form-field>
   
           <mat-form-field class ='full-width'>
-            <mat-select placeholder="Class Type" [(ngModel)]="classTypeInput" name='classtype'>
+            <mat-select placeholder="Class Type" [(ngModel)]="classTypeInput"  formControlName='classtype'>
               <mat-option value="Hall Class">Hall Class</mat-option>
               <mat-option value="Group Class">Group Class</mat-option>
               <mat-option value="Limited Class">Limited Class</mat-option>
             </mat-select>
           </mat-form-field>
-          <button mat-raised-button class="example-delete-tab-button" (click)="submit()" [disabled]= "editListAll || editListNew">
+          <button mat-raised-button class="example-delete-tab-button" typle='submit' [disabled]= "editListAll || editListNew">
             Add Details
           </button>
           <button mat-raised-button class="example-delete-tab-button" (click)="clear()" >

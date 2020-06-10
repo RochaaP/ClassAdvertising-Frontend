@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -51,6 +51,9 @@ export class AddClassesInstructorComponent implements OnInit {
   response: any = [];
   recievedContent: any;
 
+  formGroupClasses: FormGroup;
+
+
   MESSAGE_SUCCESS = 'DETAILS UPDATED';
   MESSAGE_FAIL = 'UPDATE FAILED';
 
@@ -63,6 +66,19 @@ export class AddClassesInstructorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.formGroupClasses = new FormGroup({
+      grade: new FormControl('', [Validators.required]),
+      subject: new FormControl('', [Validators.required]),
+      place: new FormControl('', [Validators.required]),
+      time: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
+      district: new FormControl('', [Validators.required]),
+      day: new FormControl('', [Validators.required]),
+      medium: new FormControl('', [Validators.required]),
+      classtype: new FormControl('', [Validators.required])
+    });
+
     this.nameInput = '';
     this.userDetails = this.authService.isUserLoggedIn();
     this.registerItem = JSON.parse(localStorage.getItem('registerItem'));
@@ -71,28 +87,6 @@ export class AddClassesInstructorComponent implements OnInit {
       this.getExistingValues();
     }
   }
-
-  // addTab(selectAfterAdding: boolean) {
-  //   this.tabs.push(this.nameInput);
-  //   this.nameInput = '';
-
-  //   if (selectAfterAdding) {
-  //     // this.selected.setValue(this.tabs.length - 1);
-  //   }
-  // }
-
-  // removeTab(index: number) {
-  //   delete this.tabs[index];
-  // }
-  // removeDe(index: number) {
-  //   // delete this.cards[index];
-  //   // this.cards.splice(index, 1);
-  //   // delete this.cards[index];
-  //   this.cards.forEach(o => {
-  //     console.log('asjdkgh' + o.index);
-  // });
-  //   console.log(this.cards);
-  // }
 
   submit() {
     this.details = {
