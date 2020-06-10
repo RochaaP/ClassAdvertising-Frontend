@@ -9,7 +9,7 @@ import { MessageRoutingModule } from './message-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatTabsModule, MatTableModule, MatCardModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, MatGridListModule, MatListModule, MatSnackBarModule, MatDividerModule, MatStepperModule, MatSidenavModule, MatProgressBarModule, MatIconModule, MatRadioModule, MatPaginatorModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatSelectModule, MatSnackBarModule, MatDialogModule } from '@angular/material';
 
 
 
@@ -30,24 +30,9 @@ import { MatButtonModule, MatTabsModule, MatTableModule, MatCardModule, MatExpan
       ReactiveFormsModule,
 
       MatButtonModule,
-      MatTabsModule,
-      MatTableModule,
-      MatCardModule,
-      MatExpansionModule,
-      MatFormFieldModule,
       MatInputModule,
-      MatCheckboxModule,
       MatSelectModule,
-      MatGridListModule,
-      MatListModule,
       MatSnackBarModule,
-      MatDividerModule,
-      MatStepperModule,
-      MatSidenavModule,
-      MatProgressBarModule,
-      MatIconModule,
-      MatRadioModule,
-      MatPaginatorModule,
       MatDialogModule,
     ],
     schemas: [NO_ERRORS_SCHEMA]

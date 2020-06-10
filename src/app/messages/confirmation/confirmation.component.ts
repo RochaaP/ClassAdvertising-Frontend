@@ -14,6 +14,7 @@ export interface DialogData {
   topic: string;
   description: string;
 
+  name: string;
   email: string;
   selected: string;
   selectedTime: string;
