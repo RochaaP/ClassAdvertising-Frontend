@@ -31,7 +31,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
@@ -48,7 +47,6 @@ import { DropzoneDirective } from './service/dropzone/dropzone.directive';
 import { NotificationBarModule } from 'ngx-notification-bar';
 
 import { RootComponent } from './root/root.component';
-import { RegisterComponent } from './register/register.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
 import { NewsfeedComponent } from './newsfeed/newsfeed/newsfeed.component';
@@ -77,7 +75,6 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
 @NgModule({
   declarations: [
     RootComponent,
-    RegisterComponent,
     NavigationComponent,
     NewsfeedComponent,
     PostaddComponent,
@@ -147,7 +144,6 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
     MatProgressBarModule,
     MatIconModule,
     MatRadioModule,
-    MatPaginatorModule,
     MatDialogModule,
 
     ScrollingModule,

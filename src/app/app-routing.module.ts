@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NewsfeedComponent } from './newsfeed/newsfeed/newsfeed.component';
-import { RegisterComponent } from './register/register.component';
 import { PostaddComponent } from './roles/common/postadd/postadd.component';
 import { LoginComponent } from './login/login.component';
 
