@@ -4,6 +4,8 @@
 
 .container-fluid{
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
@@ -49,34 +51,20 @@
 }
 
 ///////posts on newsfeed///////
-.container-fluid{
-  margin: 0;
-  padding: 0;
-}
-.postfield{
-  // background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
-  // https://www.scottlib.org/ImageRepository/Document?documentID=3348
-  // background: url('../../../assets/booksBackground.jpg') no-repeat center center fixed ;
 
+.postfield{
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
 }
-.scroll {
-  overflow-y: scroll;
-  max-height: 500px;
-}
+
 .postContainer{
   margin-top: 20px;
   color: #0fee29;
   border-radius: 20px;
   padding: 15px;
-  // background: #1f4037;  /* fallback for old browsers */
-  // background: -webkit-linear-gradient(to right, #99f2c8, #2a4c43);  /* Chrome 10-25, Safari 5.1-6 */
-  // background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background-image: url('../../../assets/notes/blackboard.jpg');
-
+  background-image: url('../../../assets/notes/blackboard.jpg'); 
   box-shadow: 1px 12px 54px rgba(22, 21, 21, 0.2);
   margin:0 auto;
 }
@@ -87,15 +75,23 @@
   z-index: 3;
 }
 
+.verify-image{
+  width: 50px;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 50px;
+  text-indent: -999em;
+  text-decoration: none;
+}
+
 .header-image {
-  // background-image: url('../../../assets/propic/propic.png');
   background-size: cover;
   border-radius: 70%;
   object-position: left;
   width: 60px;
   height: 60px;
 }
-
 
 .proPicImage{
   margin-bottom: 30px;
@@ -126,36 +122,17 @@
   position: relative;
 }
 
-.verify-image{
-  width: 50px;
-  right: 0;
-  top: 0;
-  display: block;
-  width: 50px;
-  text-indent: -999em;
-  text-decoration: none;
-}
-//////////////////////////
 .click{
   cursor:pointer;
   color: #51f064;
-
-
 }
+
 .click:hover{
   text-decoration: underline;
   color:#0095ff;
 }
 
-
-* {
-	box-sizing: border-box;
-}
-
-body {
-	background-color: #263238;
-}
-
+//////// paginator /////
 .btn {
 	display: inline-block;
 	color: rgb(128, 12, 12);
@@ -192,14 +169,6 @@ body {
 	}
 }
 
-.floatingButton:focus {
-  display: flex;
-  justify-content: center;
-  width: 120px;
-  outline: none !important;
-  border: none !important;
-}
-
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 
 @media (max-width: 479px) {
@@ -225,7 +194,7 @@ body {
 
 ////////////// Banner //////////
 .parallax {
-  background-image: url('../../../assets/backgroundWallpaper.jpg');
+  background-image: url('../../../assets/backgroundWallpaper.jpg'); 
   width:100%;
   min-height:75vh;
   filter:drop-shadow(4px 8px 10px gray);
