@@ -70,6 +70,7 @@ import { QuillModule } from 'ngx-quill';
 import { PaperDetailsModalComponent } from './papers/studentPaper/paperDetailsModal/paper-details-modal/paper-details-modal.component';
 import { LoginComponent } from './login/login.component';
 import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cropper-modal.component';
+import { PaymentComponent } from './service/payment/payment.component';
 
 
 
@@ -93,6 +94,8 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
     LoginComponent,
 
     ImageCropperModalComponent,
+
+    PaymentComponent,
 
 
   ],
