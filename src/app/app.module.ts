@@ -32,6 +32,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
+
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 // firebase
@@ -55,7 +57,6 @@ import { PostaddComponent } from './roles/common/postadd/postadd.component';
 
 import { UploadTaskComponent } from './service/upload-task/upload-task.component';
 
-import { MatGridListModule } from '@angular/material/grid-list';
 
 
 import { DialogComponent } from './messages/dialog/dialog.component';

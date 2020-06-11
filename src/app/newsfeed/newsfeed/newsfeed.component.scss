@@ -8,12 +8,30 @@
   padding: 0;
 }
 
+app-footer {   
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
 .container {
   height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;  
+  
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 .wrapper {
   text-align: center;
@@ -169,6 +187,14 @@
 	}
 }
 
+.floatingButton:focus {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  outline: none !important;
+  border: none !important;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 
 @media (max-width: 479px) {
@@ -179,7 +205,7 @@
    }
  }
  .parallax {
-    height: 10em;
+    min-height: 50vh;
  }
  .wrapper {
 	h1 {
@@ -200,7 +226,7 @@
   filter:drop-shadow(4px 8px 10px gray);
   filter:opacity(95%);
   // border-radius: 0 0 85% 85% / 30%;     //comment this to remove circular view of top image
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  // clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 
 
   /* Create the parallax scrolling effect */
@@ -221,7 +247,7 @@
 }
 
 .baner-content .text-content p {
-  color: #004d40;
+  color: #9ba832;
   font-family: monospace;
   margin: 0 auto;
 
@@ -272,7 +298,11 @@
 	line-height: 104px;
 	border: 3px solid #fff;
 	border-radius: 50%;
-	background-color: #f7c552;
+  // background-color: #f7c552;
+  // background-color: #33c1cf;
+  background-color: #6fc9e2;
+  
+  
 }
 
 #about .service-item h4 {
@@ -329,9 +359,11 @@
 
 #about .card{
   // background-color: #004d40;
-  background: -webkit-linear-gradient(to right, #99f2c8, #2a4c43);
-  background: linear-gradient(to right, #99f2c8, #1f4037); 
+  // background: -webkit-linear-gradient(to right, #99f2c8, #2a4c43);
+  // background: linear-gradient(to right, #99f2c8, #1f4037); 
   border-radius: 15px;
+  border-color: blue($color: #2b5bd4);
+  border-width: medium;
 }
 
 #about .card:hover {
@@ -401,4 +433,38 @@
 	text-decoration: none;
 	border-radius: 20px;
 	cursor: pointer;
+}
+
+.mat-fab{
+  // background-color: blue;
+	background-color: #33c1cf;
+  background-size: cover;
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 100;
+}
+
+.mat-fab:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.mat-fab .tooltiptext {
+  visibility: hidden;
+  padding: 1rem;
+  background-color: blue;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 100;
+}
+
+.mat-fab:hover .tooltiptext {  
+  visibility: visible;
+  top: -5px;
+  right: 105%;
 }
