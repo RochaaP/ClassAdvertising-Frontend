@@ -16,17 +16,18 @@ import { EditProfileInstituteComponent } from './institute/profile/edit-profile-
 import { MenuComponent } from './admin/menu/menu.component';
 import { ViewProfileStudentComponent } from './student/profile/view-profile-student/view-profile-student.component';
 import { EditProfileStudentComponent } from './student/profile/edit-profile-student/edit-profile-student.component';
+import { GuardInsService } from '../service/guard/guard-ins.service';
 
 
 const routes: Routes = [
 
     { path: 'instructor/view/:id', component: ViewProfileInstructorComponent},
-    { path: 'instructor/edit', canActivate: [GuardService], component: EditProfileInstructorComponent },
+    { path: 'instructor/edit', canActivate: [GuardService, GuardInsService], component: EditProfileInstructorComponent },
     { path: 'instructor/classes', canActivate: [GuardService], component: AddClassesInstructorComponent},
     { path: 'instructor/search', component: PersonSearchComponent},
 
     { path: 'institute/view/:id', component: ViewProfileInstituteComponent},
-    { path: 'institute/edit', canActivate: [GuardService], component: EditProfileInstituteComponent },
+    { path: 'institute/edit', canActivate: [GuardService, GuardInsService], component: EditProfileInstituteComponent },
     { path: 'institute/classes', canActivate: [GuardService], component: AddClassesInstituteComponent },
     { path: 'institute/search', component: InstituteSearchComponent},
 

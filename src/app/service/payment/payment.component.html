@@ -1,17 +1,14 @@
 <div class="container">
-    <form (ngSubmit)="formSubmit()"> 
+    <form *ngIf="type=='initial'" ngNoForm  [action]="paymentService.checkoutUrl" method="POST"> 
+        <input type="hidden" name="merchant_id" [(ngModel)]="payment.merchant_id">    <!-- Replace your Merchant ID -->
+        <input type="hidden" name="return_url" [(ngModel)]="payment.return_url">
+        <input type="hidden" name="cancel_url" [(ngModel)]="payment.cancel_url">
+        <input type="hidden" name="notify_url" [(ngModel)]="payment.notify_url"> 
+        <input type="hidden" name="order_id" [(ngModel)]="payment.order_id"> 
         <div class="row">
             <h4>
                 Item Details
             </h4>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                Order Id:
-            </div>            
-            <div class="col-md-8">
-                <input class="form-control" type="text" name="order_id" [(ngModel)]="payment.order_id">
-            </div>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -34,7 +31,7 @@
                 Amount:
             </div>            
             <div class="col-md-8">
-                <input class="form-control" type="text" name="amount" [(ngModel)]="payment.amount">  
+                <input class="form-control" type="text" name="amount" [(ngModel)]="payment.amount" readonly>  
             </div>
         </div>
         <div class="row">
@@ -47,7 +44,7 @@
                 Firstname:
             </div>            
             <div class="col-md-8">
-                <input class="form-control" type="text" name="first_name" [(ngModel)]="payment.first_name">
+                <input class="form-control" type="text" name="first_name" [(ngModel)]="payment.first_name" readonly>
             </div>
         </div>
         <div class="row">
@@ -55,7 +52,7 @@
                 Lastname:
             </div>            
             <div class="col-md-8">
-                <input class="form-control" type="text" name="last_name" [(ngModel)]="payment.last_name">
+                <input class="form-control" type="text" name="last_name" [(ngModel)]="payment.last_name" readonly>
             </div>
         </div>
         <div class="row">
@@ -71,7 +68,7 @@
                 Phone No.:
             </div>            
             <div class="col-md-8">
-                <input class="form-control" type="text" name="phone" [(ngModel)]="payment.phone">
+                <input class="form-control" type="text" name="phone" [(ngModel)]="payment.phone" required>
             </div>
         </div>
         <div class="row">
@@ -79,7 +76,7 @@
                 Address:
             </div>            
             <div class="col-md-8">
-                <input class="form-control" type="text" name="address" [(ngModel)]="payment.address">
+                <input class="form-control" type="text" name="address" [(ngModel)]="payment.address" required>
             </div>
         </div>
         <div class="row">
@@ -87,7 +84,7 @@
                 City:
             </div>            
             <div class="col-md-8">
-                <input class="form-control" type="text" name="city" [(ngModel)]="payment.city">
+                <input class="form-control" type="text" name="city" [(ngModel)]="payment.city" required>
             </div>
         </div>
         <div class="row">
@@ -100,4 +97,6 @@
         </div>
         <button mat-raised-button class="btn" type="submit" color="primary">Pay</button>
     </form>
+    <div class="success" *ngIf="type=='return'"><fa-icon [icon]="faCheck"></fa-icon>Payment was successful</div>
+    <div class="failed" *ngIf="type=='cancel'"><fa-icon [icon]="faTimes"></fa-icon>Payment was failed</div>
 </div>
