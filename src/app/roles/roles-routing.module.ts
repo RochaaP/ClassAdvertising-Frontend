@@ -34,7 +34,7 @@ const routes: Routes = [
     { path: 'student/view/:id', component: ViewProfileStudentComponent},
     { path: 'student/edit', canActivate: [GuardService], component: EditProfileStudentComponent },
 
-    { path: 'admin', component: MenuComponent},
+    { path: 'admin', canActivate: [GuardService], component: MenuComponent},
 ];
 
 @NgModule({

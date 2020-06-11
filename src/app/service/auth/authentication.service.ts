@@ -5,12 +5,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { UserService } from 'src/app/users/user.service';
 import { SharedService } from 'src/app/shared/shared.service';
 import { UserModel } from 'src/app/users/user-model';
+import { validateEventsArray } from '@angular/fire/firestore';
 // import { loadavg } from 'os';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+
+  private isAdmin = false;
 
   constructor(
     public angularFireAuth: AngularFireAuth,
@@ -29,6 +32,7 @@ export class AuthenticationService {
             this.sharedService.setLoggedInUser(user);
             this.setUserName(user.data.firstname);
             this.setRegisterItem(user.data.role);
+            this.setIsAdmin(user.data.adminFeatures);
           },()=>{},()=>{
             this.sharedService.userLoggedInRequest();
           });
@@ -86,5 +90,13 @@ export class AuthenticationService {
 
   getRegisterItem() {
     return JSON.parse(localStorage.getItem('registerItem'));
+  }
+
+  private setIsAdmin(va: boolean) {
+    this.isAdmin = va;
+  }
+
+  getIsAdmin(){
+    return this.isAdmin;
   }
 }

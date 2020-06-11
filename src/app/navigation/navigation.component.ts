@@ -21,6 +21,7 @@ export class NavigationComponent implements OnInit {
 
   isStudent: boolean;
   isInstructor: boolean;
+  isAdmin: boolean;
 
   constructor(
     private authService: AuthenticationService,
@@ -114,6 +115,7 @@ export class NavigationComponent implements OnInit {
     this.userLogged = true;
     this.userName = this.authService.getEmitterUserName();
     this.registerItem = this.authService.getRegisterItem();
+    this.isAdmin = this.authService.getIsAdmin();
 
     if (this.registerItem === 'student') {
       this.isStudent = true;
