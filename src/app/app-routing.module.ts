@@ -13,10 +13,10 @@ const routes: Routes = [
   { path: 'account/register', component: LoginComponent },
   { path: 'account/login', component: LoginComponent },
 
-  { path: 'postadd', canActivate: [GuardService], component: PostaddComponent },
+  // { path: 'postadd', canActivate: [GuardService], component: PostaddComponent },
 
   // While building
-  { path: 'payments', canActivate: [GuardService, GuardInsService], loadChildren: './payments/payments.module#PaymentsModule'},
+  // { path: 'payments', canActivate: [GuardService, GuardInsService], loadChildren: './payments/payments.module#PaymentsModule'},
   { path: 'papers', canActivate: [GuardService], loadChildren: './papers/paper.module#PaperModule' },
   { path: 'zoom', canActivate: [GuardService, GuardInsService], loadChildren: './zoom/zoom.module#ZoomModule' },
   { path: 'messages', canActivate: [GuardService], loadChildren: './messages/message.module#MessageModule' },

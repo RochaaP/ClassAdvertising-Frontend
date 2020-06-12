@@ -54,7 +54,7 @@ export class NewsfeedComponent implements OnInit {
 
   ngOnInit() {
     this.pageCount = 0;
-    this.pageLimit = 1;
+    this.pageLimit = 5;
     this.moreNextPosts = true;
     this.morePreviousPosts = false;
     
