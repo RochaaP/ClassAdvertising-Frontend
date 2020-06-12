@@ -6,7 +6,6 @@ import { LoginComponent } from './login/login.component';
 
 
 import { GuardService } from './service/guard/guard.service';
-import { PaymentComponent } from './service/payment/payment.component';
 import { GuardInsService } from './service/guard/guard-ins.service';
 
 const routes: Routes = [
@@ -17,7 +16,7 @@ const routes: Routes = [
   { path: 'postadd', canActivate: [GuardService], component: PostaddComponent },
 
   // While building
-  { path: 'payments', canActivate: [GuardService, GuardInsService], component: PaymentComponent},
+  { path: 'payments', canActivate: [GuardService, GuardInsService], loadChildren: './payments/payments.module#PaymentsModule'},
   { path: 'papers', canActivate: [GuardService], loadChildren: './papers/paper.module#PaperModule' },
   { path: 'zoom', canActivate: [GuardService, GuardInsService], loadChildren: './zoom/zoom.module#ZoomModule' },
   { path: 'messages', canActivate: [GuardService], loadChildren: './messages/message.module#MessageModule' },

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { PaymentModel } from './payment-model';
-import { PaymentService } from './payment.service';
-import { ActivatedRoute } from '@angular/router';
+import { PaymentModel } from '../../payments/payment-model';
+import { PaymentService } from '../payment.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserModel } from 'src/app/users/user-model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-payment',
-  templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
+  selector: 'app-initiate-payments',
+  templateUrl: './initiate-payments.component.html',
+  styleUrls: ['./initiate-payments.component.scss']
 })
-export class PaymentComponent implements OnInit {
+export class InitiatePaymentsComponent implements OnInit {
 
   faCheck = faCheckCircle;
   faTimes = faTimesCircle;
@@ -20,8 +20,8 @@ export class PaymentComponent implements OnInit {
 
   payment: PaymentModel = {
     merchant_id: "1214010",
-    return_url: "http://localhost:4200/payments?type=return",
-    cancel_url: "http://localhost:4200/payments?type=cancel",
+    return_url: "http://localhost:4200/payments/initiate?type=return",
+    cancel_url: "http://localhost:4200/payments/initiate?type=cancel",
     notify_url: "https://www.mtute.lk/api/payments",
     order_id: "",
     items: "Post Ad",
@@ -40,6 +40,7 @@ export class PaymentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
+    private router: Router,
     public paymentService: PaymentService,
     private sharedService: SharedService
   ) {
@@ -59,10 +60,8 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-  formSubmit(){
-    console.log(this.payment);
-
-    // this.paymentService.payUsingPayHere(this.payment);
+  viewPayments(){
+    this.router.navigateByUrl("payments");
   }
 
 }

@@ -5,11 +5,13 @@ import { Observable } from 'rxjs';
 import { DataService } from '../../../service/share/data.service';
 import { AuthenticationService } from '../../../service/auth/authentication.service';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { PostsService } from '../posts.service';
 import { UploadFilesService } from 'src/app/service/Upload-files/upload-files.service';
+import { PaymentService } from 'src/app/payments/payment.service';
+import { PaymentModel } from 'src/app/payments/payment-model';
 
 
 @Component({
@@ -18,6 +20,10 @@ import { UploadFilesService } from 'src/app/service/Upload-files/upload-files.se
   styleUrls: ['./postadd.component.scss']
 })
 export class PostaddComponent implements OnInit {
+
+  paymentId: string;
+  payment_id: string;
+  canCreatePost: boolean = false;
 
   fileposts: AngularFireUploadTask;
   percentageposts: Observable<number>;
@@ -64,8 +70,10 @@ export class PostaddComponent implements OnInit {
     private authService: AuthenticationService,
     private http: HttpClient,
     public router: Router,
+    public route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private postsService: PostsService,
+    private paymentService: PaymentService,
     private spinnerService: Ng4LoadingSpinnerService,
     private uploadFilesService: UploadFilesService,
 
@@ -76,11 +84,31 @@ export class PostaddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinnerService.show();
     this.userDetails = this.authService.isUserLoggedIn();
     console.log('userdetails' + this.userDetails.email);
     this.registerItem = JSON.parse(localStorage.getItem('registerItem'));
     console.log('registerItem Postadd ' + this.registerItem);
-    this.uploadImage = false;
+    this.uploadImage = false;    
+    this.paymentId = this.route.snapshot.paramMap.get('paymentId');
+    if(this.paymentId!=undefined){
+      this.paymentService.getPaymentDetailsByPaymentId(this.paymentId).subscribe(res=>{
+        if(res!=undefined){
+          let payment: {id: string, data: any} = JSON.parse(JSON.stringify(res))[0];
+          if(payment.data.status_code=="2"){
+            this.payment_id = payment.id;
+            this.canCreatePost = true;
+          }
+          else{
+            this.paymentId!=undefined;
+          }
+        }
+        this.spinnerService.hide();
+      });
+    }
+    else{
+      this.spinnerService.hide();
+    }
   }
 
   onDrop(files: FileList) {
@@ -92,6 +120,10 @@ export class PostaddComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.payment_id==undefined){
+      this.openSnackBar(this.MESSAGE_FAIL);
+      return;
+    }
     this.spinnerService.show();
 
     // let userValues = {};
@@ -101,11 +133,12 @@ export class PostaddComponent implements OnInit {
     this.post.contentURL = this.downloadURL;
     this.post.registerItem = this.registerItem;
     this.post.email = this.userDetails.email;
+    this.post.payment_id = this.payment_id;
   
     this.status = this.postsService.addPost(this.post, this.id);
     this.sub = this.postsService.getStatus().subscribe(status => {
       if (status.status === 200) {
-        console.log('herer ',status.status)
+        console.log('here ',status.status)
         this.openSnackBar(this.MESSAGE_SUCCESS);
         this.spinnerService.hide();
         this.navi();

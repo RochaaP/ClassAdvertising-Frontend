@@ -95,8 +95,13 @@
                 <input class="form-control" name="country" [(ngModel)]="payment.country" readonly>
             </div>
         </div>
-        <button mat-raised-button class="btn" type="submit" color="primary">Pay</button>
+        <!-- <button mat-raised-button class="btn" type="submit" color="primary">Pay</button> -->
+        <input name="submit" class="my-1" type="image" src="https://www.payhere.lk/downloads/images/pay_with_payhere.png" style="width:200px;" value="Pay">
     </form>
-    <div class="success" *ngIf="type=='return'"><fa-icon [icon]="faCheck"></fa-icon>Payment was successful</div>
-    <div class="failed" *ngIf="type=='cancel'"><fa-icon [icon]="faTimes"></fa-icon>Payment was failed</div>
+    <div class="container">
+        <div class="success" *ngIf="type=='return'"><fa-icon [icon]="faCheck"></fa-icon>Payment was successfully processed</div>
+        <button mat-raised-button class="btn" (click)="viewPayments()">View Payment Status</button>
+    </div>
+    
+    <div class="failed" *ngIf="type=='cancel'"><fa-icon [icon]="faTimes"></fa-icon>Payment was failed to process</div>
 </div>

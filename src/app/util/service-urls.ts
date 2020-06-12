@@ -49,6 +49,8 @@ export class ServiceUrls {
         return ServiceUrls.questionExtension + id;
     }
 
+    // Paymnet URLs
+    public static getPaymentDetails = ServiceUrls.servicePrefix + "payments/"
 
     // Common URLs
     private static commonExtension = ServiceUrls.servicePrefix + "common/";    

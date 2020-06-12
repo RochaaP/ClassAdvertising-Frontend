@@ -1,11 +1,11 @@
 <div class = "container-fluid">
   <form class = 'form'>
-    <div class="row">
+    <div *ngIf="canCreatePost" class="row">
         <div class="text-center">
             <h4>Post an Advertisement</h4>
         </div>
 
-        <div class = "col-10 formInputs">
+        <div class = "col-md-12 formInputs">
 
             <mat-form-field class="full-width">
               <input matInput placeholder="Title" [(ngModel)]="post.title" name='title' required>
@@ -90,6 +90,12 @@
                 <button type="submit" class="btn btn-success" (click)="onSubmit()">Post</button>
                 if you have uploaded a post wait till shown.
             </div>
+        </div>
+    </div>
+    <div *ngIf="paymentId==undefined || !canCreatePost" class="row">
+        <div class = "colmd-12 text-center">
+          <p>To grant the permission to add a post, a payment should be done</p><br>
+          <a [routerLink]="[ '/payments/initiate' ]">Create a payment</a>
         </div>
     </div>
   </form>

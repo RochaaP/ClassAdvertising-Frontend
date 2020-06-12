@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ServiceUrls } from '../util/service-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,21 @@ export class PaymentService {
   constructor(
     private http: HttpClient
   ) { }
+
+  getPaymentDetailsByUserId(userId){    
+    let url = ServiceUrls.getPaymentDetails + "byUser/" + userId;
+    return this.http.get(url);
+  }
+
+  getPaymentDetailsByPaymentId(paymentId){    
+    let url = ServiceUrls.getPaymentDetails + "byPaymentId/" + paymentId;
+    return this.http.get(url);
+  }
+
+  deletePayment(id){
+    let url = ServiceUrls.getPaymentDetails + id;
+    return this.http.delete(url);
+  }
 
   payUsingPayHere(payment){
     const headerDict = {

@@ -1,0 +1,26 @@
+<div class="container">
+    <h4>Payment Details</h4>
+    <table class="table table-responsive-sm table-hover table-outline mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th>Payment Id</th>
+            <th>Payment Status</th>
+            <th>Status Message</th>
+            <th>Post Created</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody  *ngFor="let payment of payments; let index = index">
+            <tr>
+                <th>{{payment.data.payment_id}}</th>
+                <th>{{returnPaymentStatus(payment.data.status_code)}}</th>
+                <th>{{payment.data.status_message}}</th>
+                <th><div *ngIf="payment.data.status_code=='3'">Yes</div><div *ngIf="payment.data.status_code!='3'">No</div></th>
+                <th>
+                    <button mat-raised-button *ngIf="payment.data.status_code=='2'" color="primary" class="btn" (click)="createPost(payment.data.payment_id)">Create a Post</button>
+                    <button mat-raised-button *ngIf="payment.data.status_code!='2' && payment.data.status_code!='0'" color="warn" class="btn" (click)="deletePayment(payment.id)">Delete Entry</button>
+                </th>
+              </tr>
+        </tbody>
+      </table>
+</div>
