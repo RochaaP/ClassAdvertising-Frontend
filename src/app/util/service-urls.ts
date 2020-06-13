@@ -23,6 +23,9 @@ export class ServiceUrls {
         return ServiceUrls.paperExtension + "instructoremail/" + email;
     }
     public static getPapersBySubject(){
+        return ServiceUrls.paperExtension + "subject/";
+    }
+    public static getPapersBySubjects(){
         return ServiceUrls.paperExtension + "subjects/";
     }
 

@@ -43,9 +43,27 @@ export class PaperService {
     });
   }
 
-  public getPapersBySubject(subjectList: string[], callBack: WsCallback){
+  public getPapersBySubject(subject: string, callBack: WsCallback){
     console.log("getPapersBySubject()___");
     let url = ServiceUrls.getPapersBySubject();
+    let request = {
+      "subject": subject
+    }
+    this.http.post(url, request).subscribe(data =>{
+      var modified = JSON.parse(JSON.stringify(data));
+					var res = new WsResponse(modified);
+					callBack.onSuccess(res, WsType.GET_ALL_PAPERS);
+    },
+    error => {
+      var modified = JSON.parse(JSON.stringify(error));
+      var res = new WsResponse(modified);
+      callBack.onFail(res, WsType.GET_ALL_PAPERS);
+    });
+  }
+
+  public getPapersBySubjects(subjectList: string[], callBack: WsCallback){
+    console.log("getPapersBySubjects()___");
+    let url = ServiceUrls.getPapersBySubjects();
     let request = {
       "subjectArray": subjectList
     }

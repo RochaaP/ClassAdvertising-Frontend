@@ -83,8 +83,14 @@ export class StudentPaperComponent implements OnInit {
       }
     }
   }
+  
 
   public filterPapersBySubject(){
+    this.spinnerService.show();
+    this.paperService.getPapersBySubject(this.subjectFilter.id, this);
+  }
+
+  public filterPapersBySubject_post(){
     console.log(this.subjectFilter);
     this.sub_papers = [];
     if(this.papers!=undefined){
@@ -101,6 +107,7 @@ export class StudentPaperComponent implements OnInit {
       });
     }
     console.log(this.sub_papers);
+    this.spinnerService.hide();
   }
 
   public loadPaper(paperInstance: {id: string, data: PaperModel, instructor: string}){
@@ -122,8 +129,9 @@ export class StudentPaperComponent implements OnInit {
       this.userGroup = data.payload['instructors'];
       data.payload['subjects'].forEach(element => {
         this.loggedInUser.data.units.includes(element.id)? this.subjectGroup.push(element):"";
-      });
-      this.paperService.getPapersBySubject(this.loggedInUser.data.units, this);
+      });      
+      this.spinnerService.hide();
+      //this.paperService.getPapersBySubject(this.loggedInUser.data.units, this);
     }
     else if(serviceType == WsType.GET_ALL_PAPERS){
       console.log(data.payload);
@@ -139,7 +147,7 @@ export class StudentPaperComponent implements OnInit {
           })
         })
       }
-      this.spinnerService.hide();
+      this.filterPapersBySubject_post();
     }
   }
 
