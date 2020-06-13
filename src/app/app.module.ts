@@ -7,8 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { OwlModule } from 'ngx-owl-carousel';
-
-import { TranslateModule } from '@ngx-translate/core';
 import { NgaReadMoreModule } from 'nga-read-more';
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
@@ -78,26 +76,22 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
     NewsfeedComponent,
     PostaddComponent,
 
-    DropzoneDirective,
+    DropzoneDirective, // What is this
 
-    UploadTaskComponent,
-
-    DialogComponent,
-    ConfirmationComponent,
-    PaperDetailsModalComponent,
+    UploadTaskComponent, // Do we need this
 
     FooterComponent,
 
     LoginComponent,
 
+    DialogComponent,
+    ConfirmationComponent,
+    PaperDetailsModalComponent,
     ImageCropperModalComponent
 
   ],
   imports: [
     AppRoutingModule,
-    // RouterModule.forRoot(
-    //   appRoutes, {onSameUrlNavigation: 'reload'}//, useHash: true, enableTracing: true
-    // ),
     BrowserModule,
     HttpClientModule,
     FontAwesomeModule,
@@ -106,18 +100,17 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
     ReactiveFormsModule,
     ImageCropperModule,
     Ng4LoadingSpinnerModule.forRoot(),
-    OwlModule,
+    OwlModule, // Why and where do we need this
 
 
     QuillModule.forRoot(),
-    TranslateModule.forRoot(),
     NgBootstrapFormValidationModule.forRoot(),
-    NgBootstrapFormValidationModule,
+    NgBootstrapFormValidationModule, // Why there are two modules
 
-    NgaReadMoreModule,
+    NgaReadMoreModule, // Why and where do we need this
 
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    AngularFireDatabaseModule, // I think this module is no need
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
@@ -125,24 +118,24 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
     BrowserAnimationsModule,
 
     MatButtonModule,
-    MatTabsModule,
-    MatTableModule,
-    MatCardModule,
-    MatExpansionModule,
+    //MatTabsModule,
+    //MatTableModule,
+    //MatCardModule,
+    //MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule,
+    //MatCheckboxModule,
     MatSelectModule,
-    MatGridListModule,
-    MatListModule,
+    //MatGridListModule,
+    //MatListModule,
     MatSnackBarModule,
-    MatDividerModule,
-    MatStepperModule,
-    MatSidenavModule,
-    MatProgressBarModule,
-    MatIconModule,
-    MatRadioModule,
-    MatDialogModule,
+    //MatDividerModule,
+    //MatStepperModule,
+    //MatSidenavModule,
+    //MatProgressBarModule,
+    //MatIconModule,
+    //MatRadioModule,
+    //MatDialogModule,
 
     ScrollingModule,
     NotificationBarModule

@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 import { SubjectService } from 'src/app/subjects/subject.service';
 import { faCaretSquareUp, faCaretSquareDown } from '@fortawesome/free-solid-svg-icons';
 import { UploadFilesService } from 'src/app/service/Upload-files/upload-files.service';
+import { isNumber } from 'util';
 
 @Component({
   selector: 'app-edit-paper',
@@ -44,6 +45,20 @@ export class EditPaperComponent implements OnInit {
 
   public publish: string = 'no';
   public description: string = "";
+
+  // image subscriptions
+  urlQuestionImage: Subscription;
+  metadataQuestionImage: Subscription;
+  urlQuestionImageA: Subscription;
+  metadataQuestionImageA: Subscription;
+  urlQuestionImageB: Subscription;
+  metadataQuestionImageB: Subscription;
+  urlQuestionImageC: Subscription;
+  metadataQuestionImageC: Subscription;
+  urlQuestionImageD: Subscription;
+  metadataQuestionImageD: Subscription;
+  urlQuestionImageE: Subscription;
+  metadataQuestionImageE: Subscription;
 
   constructor(
     private sharedService: SharedService,
@@ -101,25 +116,44 @@ export class EditPaperComponent implements OnInit {
           let length = path_var.length;
           switch (length){
             case 1: {
-              modalText != undefined ? variable[index][path_var[0]] = modalText : variable = curentText;
+              modalText != undefined ? variable[index][path_var[0]] = modalText : variable[index][path_var[0]] = "";
               break;
             }
             case 2: {
-              modalText != undefined ? variable[index][path_var[0]][path_var[1]] = modalText : variable = curentText;
+              modalText != undefined ? variable[index][path_var[0]][path_var[1]] = modalText : variable[index][path_var[0]][path_var[1]] = "";
               break;
             }
             case 3: {
-              modalText != undefined ? variable[index][path_var[0]][path_var[1]][path_var[2]] = modalText : variable = curentText;
+              modalText != undefined ? variable[index][path_var[0]][path_var[1]][path_var[2]] = modalText : variable[index][path_var[0]][path_var[1]][path_var[2]] = "";
               break;
             }
           }
         }
       }
       else{
-        modalText != undefined ? variable = modalText : variable = curentText;
+        modalText != undefined ? variable = modalText : variable = "";
       }
       modalSubscription.unsubscribe();
     });
+  }
+
+  public formatYear(){
+    let result = true;
+    if(this.paper.data.year.length!=4){      
+      this.showSnackBar("Invalid year",1000);
+      result = false;
+      document.getElementsByName("paperYear")[0].style.color = "red";
+    }
+    else if(Number(this.paper.data.year)<1950){      
+      this.showSnackBar("Invalid year",1000);
+      result = false;
+      document.getElementsByName("paperYear")[0].style.color = "red";
+    }
+    this.paper.data.year = this.paper.data.year.replace(new RegExp("[a-zA-Z]+"), "");
+    this.paper.data.year = this.paper.data.year.slice(0,4);
+    console.log(this.paper.data.year);
+    return result;
+    
   }
 
   private addDummyDetails(){
@@ -378,6 +412,9 @@ export class EditPaperComponent implements OnInit {
 
   public paperDetailSave(){
     console.log("___paperDetailSave()___");
+    if(!this.formatYear()){
+      return
+    }
     this.spinnerService.show();
     this.paperService.updatePaper({id:this.paper.id, data: this.paper.data}, this);
   }
@@ -440,6 +477,14 @@ export class EditPaperComponent implements OnInit {
   }
 
   public async uploadFile(event, index: number, type: string = "questionImage", answerLetter: string = ''){
+    if((this.urlQuestionImage != undefined&&!this.urlQuestionImage.closed) || (this.urlQuestionImageA != undefined&&!this.urlQuestionImageA.closed) || 
+    (this.urlQuestionImageB != undefined&&!this.urlQuestionImageB.closed) || (this.urlQuestionImageC != undefined&&!this.urlQuestionImageC.closed) || 
+    (this.urlQuestionImageD != undefined&&!this.urlQuestionImageD.closed) || (this.urlQuestionImageE != undefined&&!this.urlQuestionImageE.closed) || 
+    (this.metadataQuestionImage != undefined&&!this.metadataQuestionImage.closed) || (this.metadataQuestionImageA != undefined&&!this.metadataQuestionImageA.closed) || 
+    (this.metadataQuestionImageB != undefined&&!this.metadataQuestionImageB.closed) || (this.metadataQuestionImageC != undefined&&!this.metadataQuestionImageC.closed) || 
+    (this.metadataQuestionImageD != undefined&&!this.metadataQuestionImageD.closed) || (this.metadataQuestionImageE != undefined&&!this.metadataQuestionImageE.closed)){
+        this.showSnackBar("Please wait until pending uploading is finished");
+      }
     this.spinnerService.show();
 
     if(type=="questionImage"){
@@ -448,11 +493,13 @@ export class EditPaperComponent implements OnInit {
         this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.metadata).fullPath);
       }
       this.uploadFilesService.upload(event, "questionImages");
-      this.uploadFilesService.getDownloadURL().subscribe(url => {
+      this.urlQuestionImage = this.uploadFilesService.getDownloadURL().subscribe(url => {
         this.questionList[index].data.image_url = url.downloadURL;
+        this.urlQuestionImage.unsubscribe();
       });
-      this.uploadFilesService.getMetadata().subscribe(meta => {
+      this.metadataQuestionImage = this.uploadFilesService.getMetadata().subscribe(meta => {
         this.questionList[index].data.metadata = meta.metadata;
+        this.metadataQuestionImage.unsubscribe();
       }); 
             
       // Quickly save the current question
@@ -465,11 +512,13 @@ export class EditPaperComponent implements OnInit {
           this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.a_metadata).fullPath);          
         }
         this.uploadFilesService.upload(event, "questionImages");
-        this.uploadFilesService.getDownloadURL().subscribe(url => {
+        this.urlQuestionImageA = this.uploadFilesService.getDownloadURL().subscribe(url => {
           this.questionList[index].data.imageA = url.downloadURL;
+          this.urlQuestionImageA.unsubscribe();
         });
-        this.uploadFilesService.getMetadata().subscribe(meta => {
+        this.metadataQuestionImageA = this.uploadFilesService.getMetadata().subscribe(meta => {
           this.questionList[index].data.a_metadata = meta.metadata;
+          this.metadataQuestionImageA.unsubscribe();
         });      
                 
         // Quickly save the current question
@@ -480,11 +529,13 @@ export class EditPaperComponent implements OnInit {
           this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.b_metadata).fullPath);
         }
         this.uploadFilesService.upload(event, "questionImages");
-        this.uploadFilesService.getDownloadURL().subscribe(url => {
+        this.urlQuestionImageB = this.uploadFilesService.getDownloadURL().subscribe(url => {
           this.questionList[index].data.imageB = url.downloadURL;
+          this.urlQuestionImageB.unsubscribe();
         });
-        this.uploadFilesService.getMetadata().subscribe(meta => {
+        this.metadataQuestionImageB = this.uploadFilesService.getMetadata().subscribe(meta => {
           this.questionList[index].data.b_metadata = meta.metadata;
+          this.metadataQuestionImageB.unsubscribe();
         });      
                 
         // Quickly save the current question
@@ -495,11 +546,13 @@ export class EditPaperComponent implements OnInit {
           this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.c_metadata).fullPath);
         }
         this.uploadFilesService.upload(event, "questionImages");
-        this.uploadFilesService.getDownloadURL().subscribe(url => {
+        this.urlQuestionImageC = this.uploadFilesService.getDownloadURL().subscribe(url => {
           this.questionList[index].data.imageC = url.downloadURL;
+          this.urlQuestionImageC.unsubscribe();
         });
-        this.uploadFilesService.getMetadata().subscribe(meta => {
+        this.metadataQuestionImageC = this.uploadFilesService.getMetadata().subscribe(meta => {
           this.questionList[index].data.c_metadata = meta.metadata;
+          this.metadataQuestionImageC.unsubscribe();
         });      
                 
         // Quickly save the current question
@@ -510,11 +563,13 @@ export class EditPaperComponent implements OnInit {
           this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.d_metadata).fullPath);
         }
         this.uploadFilesService.upload(event, "questionImages");
-        this.uploadFilesService.getDownloadURL().subscribe(url => {
+        this.urlQuestionImageD = this.uploadFilesService.getDownloadURL().subscribe(url => {
           this.questionList[index].data.imageD = url.downloadURL;
+          this.urlQuestionImageD.unsubscribe();
         });
-        this.uploadFilesService.getMetadata().subscribe(meta => {
+        this.metadataQuestionImageD = this.uploadFilesService.getMetadata().subscribe(meta => {
           this.questionList[index].data.d_metadata = meta.metadata;
+          this.metadataQuestionImageD.unsubscribe();
         });      
                 
         // Quickly save the current question
@@ -525,11 +580,13 @@ export class EditPaperComponent implements OnInit {
           this.uploadFilesService.delete(JSON.parse(this.questionList[index].data.e_metadata).fullPath);
         }
         this.uploadFilesService.upload(event, "questionImages");
-        this.uploadFilesService.getDownloadURL().subscribe(url => {
+        this.urlQuestionImageE = this.uploadFilesService.getDownloadURL().subscribe(url => {
           this.questionList[index].data.imageE = url.downloadURL;
+          this.urlQuestionImageE.unsubscribe();
         });
-        this.uploadFilesService.getMetadata().subscribe(meta => {
+        this. metadataQuestionImageE = this.uploadFilesService.getMetadata().subscribe(meta => {
           this.questionList[index].data.e_metadata = meta.metadata;
+          this.metadataQuestionImageE.unsubscribe();
         });      
                 
         // Quickly save the current question

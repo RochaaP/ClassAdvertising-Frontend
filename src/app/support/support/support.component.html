@@ -22,6 +22,9 @@
                     <div class="row">
                         <div class="btn btn-sm btn-outline-dark mb-1 mr-2" (click)="handleToggles('privacy')" style="width: 100%;">Privacy</div>
                     </div>
+                    <div class="row">
+                        <div class="btn btn-sm btn-outline-dark mb-1 mr-2" (click)="handleToggles('contact')" style="width: 100%;">Contact Support</div>
+                    </div>
                 </div>
                 <div class="col-sm-12 col-xs-12">
                     <div *ngIf="viewTermsConditions">
@@ -611,7 +614,7 @@
                             <li class="mtute sm mb-4">
                                 <b>Join with mtute.lk</b>
                                 <p>
-                                    If you are still wonering whether you want join the mtute community or not follow this documentation and go ahead we are waiting for you.
+                                    If you are still wondering whether you want join the mtute community or not follow this documentation and go ahead we are waiting for you.
                                 </p>
                                 <ul>
                                     <li>
@@ -688,7 +691,7 @@
                             <hr>
                             <li class="mtute sm" id="zoomDoc_sm">
                                 <a id="zoomDoc"></a>
-                                <b>Use ZOOM with mtute.lk</b>
+                                <b>Use Zoom with mtute.lk</b>
                                 <p>
                                     Zoom is the leader in modern enterprise video communications, with an easy, reliable cloud platform for video and audio conferencing, collaboration, chat, and webinars across mobile devices, desktops, telephones, and room systems. Zoom Rooms is the original software-based conference room solution used around the world in board, conference, huddle, and training rooms, as well as executive offices and classrooms. Founded in 2011, Zoom helps businesses and organizations bring their teams together in a frictionless environment to get more done. Zoom is a publicly traded company on Nasdaq (ticker: ZM) and headquartered in San Jose, California.<br>
                                     <small>Copied from Zoom Website</small>                  
@@ -699,13 +702,13 @@
                                 </ul>          
                                 <ul>
                                     <li>Why do we use Zoom?
-                                        <p>The main idea of using zoom is to connect a student and an instructor more relaibility. 
+                                        <p>The main idea of using Zoom is to connect a student and an instructor more relaibility. 
                                             Let's think of a situation where student is going through a paper and he/ she got a problem, 
                                             now they don't have to be clueless. 
                                             They can place an appoinment to the corresponding instructor using our mtute.lk page.
                                         </p>
                                         <p>
-                                            Then an instructor can create a meeting with zoom using our API and send the join url to the student who placed an appoinment.
+                                            Then an instructor can create a meeting with Zoom using our API and send the join url to the student who placed an appoinment.
                                         </p>
                                     </li>
                                     <li>
@@ -713,12 +716,35 @@
                                         <p>Requirements for instructors</p>
                                         <ul>
                                             <li>
-                                                Zoom Account (If you don't have a zoom account you could signin using your google account)
+                                                Zoom Account (If you don't have a Zoom account you could signin using your google account)
                                             </li>
                                         </ul>
                                         <p>*No requirement for students.</p>
                                     </li>
                                 </ul>
+                            </li>
+                        </ul>
+                    </div>                       
+                    <div *ngIf="viewContact">
+                        <ul class="mtute sm">
+                            <a id="mtuteSupport_sm"></a>
+                            <li class="mtute sm mb-4">
+                                <b>Contact mtute.lk support team</b>
+                                <p>24x7 hours of service and fast responses with guaranteed satisfaction service. Our support team will response you within 2 hours during day time(8am-6pm) in Sri lanka(Time zone in Sri Lanka (GMT+5:30)). Night time responses might be delayed.</p>
+                                <p>There is not just one way to us. We are there for you with many options.</p>
+                                <ul>
+                                    <li>
+                                        Contact Support service through the site - <a [routerLink]="[ '/support/contact']">Contact Us</a>                                        
+                                    </li>
+                                    <li>
+                                        Reach us through mails - <a class="contact" ngxClipboard [cbContent]="'ruwan.chamara@mtute.lk'">ruwan.chamara@mtute.lk</a>
+                                        <p>We ensure you to response for your mail requests as soon as possible. Click on the mail to copy it.</p>
+                                    </li>
+                                    <li>
+                                        Reach us through whatsapp/ mobile - <a class="contact" ngxClipboard [cbContent]="'+94764995640'">+94764995640</a>
+                                        <p>Friendly customer service. Click on the phone number to copy it.</p>
+                                    </li>
+                                </ul>                             
                             </li>
                         </ul>
                     </div>
@@ -753,6 +779,9 @@
                     </div>
                     <div class="row">
                         <div class="btn btn-sm btn-outline-dark mb-1 mr-2" (click)="handleToggles('privacy')" style="width: 100%;">Privacy</div>
+                    </div>                    
+                    <div class="row">
+                        <div class="btn btn-sm btn-outline-dark mb-1 mr-2" (click)="handleToggles('contact')" style="width: 100%;">Contact Support</div>
                     </div>
                 </div>
                 <div class="col-md-10 col-sm-12 col-xs-12 content">
@@ -1420,7 +1449,7 @@
                             <hr>
                             <li class="mtute" id="zoomDoc">
                                 <a id="zoomDoc"></a>
-                                <b>Use ZOOM with mtute.lk</b>
+                                <b>Use Zoom with mtute.lk</b>
                                 <p>
                                     Zoom is the leader in modern enterprise video communications, with an easy, reliable cloud platform for video and audio conferencing, collaboration, chat, and webinars across mobile devices, desktops, telephones, and room systems. Zoom Rooms is the original software-based conference room solution used around the world in board, conference, huddle, and training rooms, as well as executive offices and classrooms. Founded in 2011, Zoom helps businesses and organizations bring their teams together in a frictionless environment to get more done. Zoom is a publicly traded company on Nasdaq (ticker: ZM) and headquartered in San Jose, California.<br>
                                     <small>Copied from Zoom Website</small>                  
@@ -1431,13 +1460,13 @@
                                 </ul>          
                                 <ul>
                                     <li>Why do we use Zoom?
-                                        <p>The main idea of using zoom is to connect a student and an instructor more relaibility. 
+                                        <p>The main idea of using Zoom is to connect a student and an instructor more relaibility. 
                                             Let's think of a situation where student is going through a paper and he/ she got a problem, 
                                             now they don't have to be clueless. 
                                             They can place an appoinment to the corresponding instructor using our mtute.lk page.
                                         </p>
                                         <p>
-                                            Then an instructor can create a meeting with zoom using our API and send the join url to the student who placed an appoinment.
+                                            Then an instructor can create a meeting with Zoom using our API and send the join url to the student who placed an appoinment.
                                         </p>
                                     </li>
                                     <li>
@@ -1445,16 +1474,16 @@
                                         <p>Requirements for instructors</p>
                                         <ul>
                                             <li>
-                                                Zoom Account (If you don't have a zoom account you could signin using your google account)
+                                                Zoom Account (If you don't have a Zoom account you could signin using your google account)
                                             </li>
                                         </ul><br>
                                         <p>*No requirement for students.</p>                                        
                                     </li>
-                                    <li>What zoom features can be accessedusing mtute.lk
+                                    <li>What Zoom features can be accessedusing mtute.lk
                                         <ul>
                                             <li>View user inforamations</li>
-                                            <li>View zoom meetings</li>
-                                            <li>Create zoom meetings</li>
+                                            <li>View Zoom meetings</li>
+                                            <li>Create Zoom meetings</li>
                                         </ul>
                                     </li>
                                     <li>
@@ -1462,11 +1491,11 @@
                                         <ol>
                                             <li>First of all you have to be logged in to mtute.lk. Follow above instructions in Login section.</li>
                                             <li>
-                                                Then select "Zoom" navigation menu. Now you are in zoom page of mtute.lk.
+                                                Then select "Zoom" navigation menu. Now you are in Zoom page of mtute.lk.
                                             </li>
                                             <li>
-                                                Then click the "Login" button in the zoom page body.<br>
-                                                <small>Now you will be directed to zoom login supplied by zoom.us. Sign up from there. Next you will be asked whether to authorize our app or not. Click authorize and then you will be redirected to zoom page of mtute.lk once authorization is finished.</small><br>
+                                                Then click the "Login" button in the Zoom page body.<br>
+                                                <small>Now you will be directed to Zoom login supplied by Zoom. Sign up from there. Next you will be asked whether to authorize our app or not. Click authorize and then you will be redirected to Zoom page of mtute.lk once authorization is finished.</small><br>
                                                 <img src="../../assets/support/Zoom 00.JPG"><br>
                                                 <img src="../../assets/support/Zoom 01.JPG"><br>
                                                 <img src="../../assets/support/Zoom 02.JPG">
@@ -1478,11 +1507,11 @@
                                         <ol>
                                             <li>First of all you have to be logged in to mtute.lk. Follow above instructions in Login section.</li>
                                             <li>
-                                                Then select "Zoom" navigation menu. Now you are in zoom page of mtute.lk.
+                                                Then select "Zoom" navigation menu. Now you are in Zoom page of mtute.lk.
                                             </li>
                                             <li>
-                                                Then click the "Login" button in the zoom page body.<br>
-                                                <small>Now you will be directed to zoom login supplied by zoom.us. Sign in from there. Then you will be redirected to zoom page of mtute.lk once authorization is finished</small>
+                                                Then click the "Login" button in the Zoom page body.<br>
+                                                <small>Now you will be directed to Zoom login supplied by Zoom. Sign in from there. Then you will be redirected to Zoom page of mtute.lk once authorization is finished</small>
                                             </li>
                                         </ol>
                                     </li>
@@ -1490,7 +1519,7 @@
                                         Create Meeting
                                         <ol>
                                             <li>
-                                                First of all you have to be logged in to mtute.lk and zoom.us. Follow above instructions to Login.
+                                                First of all you have to be logged in to mtute.lk and Zoom.us. Follow above instructions to Login.
                                             </li>
                                             <li>
                                                 Click the "Create Meeting"<br>
@@ -1506,7 +1535,7 @@
                                         Join Meeting(For Instructors)
                                         <ol>
                                             <li>
-                                                First of all you have to be logged in to mtute.lk and zoom.us. Follow above instructions to Login.
+                                                First of all you have to be logged in to mtute.lk and Zoom. Follow above instructions to Login.
                                             </li>
                                             <li>
                                                 Click the "Join Meeting"<br>
@@ -1522,6 +1551,29 @@
                                         </ul>
                                     </li>
                                 </ul>
+                            </li>
+                        </ul>
+                    </div>                   
+                    <div *ngIf="viewContact">
+                        <ul class="mtute sm">
+                            <a id="mtuteSupport_sm"></a>
+                            <li class="mtute sm mb-4">
+                                <b>Contact mtute.lk support team</b>
+                                <p>24x7 hours of service and fast responses with guaranteed satisfaction service. Our support team will response you within 2 hours during day time(8am-6pm) in Sri lanka(Time zone in Sri Lanka (GMT+5:30)). Night time responses might be delayed.</p>
+                                <p>There is not just one way to us. We are there for you with many options.</p>
+                                <ul>
+                                    <li>
+                                        Contact Support service through the site - <a [routerLink]="[ '/support/contact']">Contact Us</a>                                        
+                                    </li>
+                                    <li>
+                                        Reach us through mails - <a class="contact" ngxClipboard [cbContent]="'ruwan.chamara@mtute.lk'">ruwan.chamara@mtute.lk</a>
+                                        <p>We ensure you to response for your mail requests as soon as possible. Click on the mail to copy it.</p>
+                                    </li>
+                                    <li>
+                                        Reach us through whatsapp/ mobile - <a class="contact" ngxClipboard [cbContent]="'+94764995640'">+94764995640</a>
+                                        <p>Friendly customer service. Click on the phone number to copy it.</p>
+                                    </li>
+                                </ul>                             
                             </li>
                         </ul>
                     </div>

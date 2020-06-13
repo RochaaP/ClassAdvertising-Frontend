@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <mat-form-field class="full-width">
                                     <input matInput type="text" [(ngModel)]="paper.data.year" name="paperYear" class="form-control form-control-sm"
-                                id="paperYear" placeholder="Year" required [readonly]="paper.data.published">
+                                id="paperYear" placeholder="Year" required [readonly]="paper.data.published" (ngModelChange)="formatYear()">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -173,13 +173,13 @@
                             </div>
                             <div class="row" *ngIf="!paper.data.published">
                                 <div class="col-md-2 col-xs-2"><label>Answer: </label></div>
-                                <select class="col-md-10 col-xs-10 form-control form-control-sm">
-                                    <option value="A"><label [innerHTML]="question.data.a"></label></option>
-                                    <option value="B"><label [innerHTML]="question.data.b"></label></option>
-                                    <option value="C"><label [innerHTML]="question.data.c"></label></option>
-                                    <option value="D"><label [innerHTML]="question.data.d"></label></option>
-                                    <option value="E"><label [innerHTML]="question.data.e"></label></option>
-                                </select>
+                                <mat-select class="col-md-10 col-xs-10 form-control form-control-sm" [(ngModel)]="question.data.answer">
+                                    <mat-option *ngIf="question.data.a!=undefined && question.data.a!=''" value="A"><div [innerHTML]="question.data.a"></div></mat-option>
+                                    <mat-option *ngIf="question.data.b!=undefined && question.data.b!=''" value="B"><div [innerHTML]="question.data.b"></div></mat-option>
+                                    <mat-option *ngIf="question.data.c!=undefined && question.data.c!=''" value="C"><div [innerHTML]="question.data.c"></div></mat-option>
+                                    <mat-option *ngIf="question.data.c!=undefined && question.data.d!=''" value="D"><div [innerHTML]="question.data.d"></div></mat-option>
+                                    <mat-option *ngIf="question.data.e!=undefined && question.data.e!=''" value="E"><div [innerHTML]="question.data.e"></div></mat-option>
+                                </mat-select>
                             </div>
                             <div class="row">
                                 <mat-accordion class="col-xs-12">

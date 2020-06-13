@@ -11,6 +11,7 @@ export class SupportComponent implements OnInit {
   public viewTermsConditions: boolean = false;
   public viewPrivacy: boolean = false;
   public viewDoc: boolean = true;
+  public viewContact: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,46 +33,65 @@ export class SupportComponent implements OnInit {
   public handleToggles(buttonType: string){
     switch (buttonType) {
       case 'terms':{  
-        console.log('terms');
         if(this.viewTermsConditions){
           this.viewTermsConditions=false;
           this.viewPrivacy=false;
           this.viewDoc=false;
+          this.viewContact=false;
         }
         else{          
           this.viewTermsConditions=true;
           this.viewPrivacy=false;
           this.viewDoc=false;
+          this.viewContact=false;
         }
         break;
       }
       
-      case 'privacy': {    
-        console.log('privacy');   
+      case 'privacy': {   
         if(this.viewPrivacy){
           this.viewTermsConditions=false;
           this.viewPrivacy=false;
           this.viewDoc=false;
+          this.viewContact=false;
         }
         else{          
           this.viewTermsConditions=false;
           this.viewPrivacy=true;
           this.viewDoc=false;
+          this.viewContact=false;
         }
         break;
       }
       
       case 'doc': {    
-        console.log('doc');   
         if(this.viewDoc){
           this.viewTermsConditions=false;
           this.viewPrivacy=false;
           this.viewDoc=false;
+          this.viewContact=false;
         }
         else{          
           this.viewTermsConditions=false;
           this.viewPrivacy=false;
           this.viewDoc=true;
+          this.viewContact=false;
+        }
+        break;
+      }
+      
+      case 'contact': {      
+        if(this.viewContact){
+          this.viewTermsConditions=false;
+          this.viewPrivacy=false;
+          this.viewDoc=false;
+          this.viewContact=false;
+        }
+        else{          
+          this.viewTermsConditions=false;
+          this.viewPrivacy=false;
+          this.viewDoc=false;
+          this.viewContact=true;
         }
         break;
       }

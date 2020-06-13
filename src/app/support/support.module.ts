@@ -8,6 +8,7 @@ import { MatCardModule, MatInputModule, MatButtonModule, MatFormFieldModule, Mat
 import { ContactUSComponent } from './contact-us/contact-us.component';
 import { FaqComponent } from './faq/faq.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ClipboardModule,
     
     MatCardModule,
     MatInputModule,
