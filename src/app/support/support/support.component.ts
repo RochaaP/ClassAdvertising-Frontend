@@ -24,6 +24,8 @@ export class SupportComponent implements OnInit {
       .subscribe(params => {
         console.log(params);
         //  Defaults to 0 if no query param provided.
+        this.viewDoc = params.viewDoc;
+        this.viewContact = params.viewContact;
         this.viewPrivacy = params.viewPrivacy;
         this.viewTermsConditions = params.viewTermsConditions;
         // this.page = +params['page'] || 0;

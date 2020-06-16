@@ -40,7 +40,7 @@ export class AuthenticationService {
       } else {
         localStorage.removeItem('user');
         localStorage.removeItem('registerItem');
-        localStorage.removeItem('resgisterUserName');
+        localStorage.removeItem('registerUserName');
         sharedService.setLoggedInUser(null);
         sharedService.clearZoomAccessToken();
       }
@@ -66,6 +66,10 @@ export class AuthenticationService {
 
   async logout() {
     return await this.angularFireAuth.auth.signOut();
+  }
+
+  async deleteUser(){
+    return await this.angularFireAuth.auth.currentUser.delete();
   }
 
 

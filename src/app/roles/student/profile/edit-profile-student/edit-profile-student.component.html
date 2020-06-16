@@ -101,9 +101,51 @@
               </div>
   
         </form>
+        <div class="row">
+          <mat-accordian class="mb-3">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Account Settings
+                </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-label>Delete account you account. This change can not be reverted.</mat-label>
+                  <ul>
+                    <li>
+                      You will lose access for the mtute.lk as a registered user. But you can surf as a guest user.
+                    </li>
+                    <li>
+                      You will lose access for the mtute mobile application as well.
+                    </li>
+                    <li>
+                      Ownership of the published papers and notes will be transfered under mtute organization.
+                    </li>
+                  </ul>
+                  <button mat-raised-button color="warn" (click)="deleteAccountPopUp(deleteAccConfirm)">Delete Account</button>
+            </mat-expansion-panel>
+          </mat-accordian>
+        </div>
       </div>
   </div>
   </div>
   <hr>
+
+  <ng-template #deleteAccConfirm let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Confirm deletion</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Are you sure you want to delete the account?</strong></p>
+      <p>All information associated to this user account will be permanently deleted.</p>
+      <span class="text-danger">This operation can not be undone.</span>
+    </div>
+    <div class="modal-footer">
+      <button type="button" ngbAutofocus class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+      <button type="button" class="btn btn-danger" (click)="modal.close('Ok click');deleteAccount();">Ok</button>
+    </div>
+  </ng-template>
   
   

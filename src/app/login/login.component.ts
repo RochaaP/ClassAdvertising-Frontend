@@ -113,8 +113,6 @@ export class LoginComponent implements OnInit {
       this.spinnerService.hide();
     });
     this.temp = this.sharedService.userLoggedInRespond().subscribe(val => {
-      // this.authService.setRegisterItem(this.sharedService.getLoggedInUser().data.role);
-      // this.authService.setUserName(this.sharedService.getLoggedInUser().data.firstname);
       this.navi();
       this.spinnerService.hide();
       this.temp.unsubscribe();
@@ -218,7 +216,7 @@ export class LoginComponent implements OnInit {
         email : this.emailInput.trim(),
         firstName: this.firstNameInput.trim(),
         lastName: this.lastNameInput.trim(),
-        contact:  this.contactInput,
+        contact:  this.contactInput.toString(),
         subjects: this.subjectInput
       };
     } else if (this.role === 'institute') {
@@ -229,7 +227,7 @@ export class LoginComponent implements OnInit {
         registerItem: this.role,
         email : this.emailInput.trim(),
         name: this.firstNameInput.trim(),
-        contact:  this.contactInput
+        contact:  this.contactInput.toString()
       };
     }
     else if (this.role === 'student') {
@@ -241,7 +239,7 @@ export class LoginComponent implements OnInit {
         email : this.emailInput.trim(),
         firstName: this.firstNameInput.trim(),
         lastName: this.lastNameInput.trim(),
-        contact:  this.contactInput,
+        contact:  this.contactInput.toString(),
         subject: this.subjectInput
       };
     }

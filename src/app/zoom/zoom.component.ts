@@ -60,7 +60,6 @@ export class ZoomComponent implements OnInit {
       // Reading Zoom Code
       this.route.queryParamMap.subscribe(params=>{
         this.code = params.get("code");
-        console.log(this.code);
         if(this.code!=undefined){   
           this.getAccessToken();
         }

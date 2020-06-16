@@ -7,6 +7,10 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImageCropperModalComponent } from 'src/app/util/image-cropper-modal/image-cropper-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { SharedService } from 'src/app/shared/shared.service';
+import { UserService } from 'src/app/users/user.service';
+import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 
 @Component({
   selector: 'app-edit-profile-institute',
@@ -49,10 +53,14 @@ export class EditProfileInstituteComponent implements OnInit {
   MESSAGE_FAIL = 'UPDATE FAILED';
 
   constructor(
+    private router: Router,
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage,
     private http: HttpClient,
     private spinnerService: Ng4LoadingSpinnerService,
+    private sharedService: SharedService,
+    private userService: UserService,
+    private authService: AuthenticationService,
     private snackBar: MatSnackBar,
     private modalService: NgbModal
 
@@ -252,5 +260,23 @@ export class EditProfileInstituteComponent implements OnInit {
     this.snackBar.open(message, 'Done', {
       duration: 5000,
     });
+  }
+
+  deleteAccountPopUp(modal: any){
+    this.modalService.open(modal);
+  }
+
+  deleteAccount(){
+    this.spinnerService.show();    
+    this.userService.removeUser(this.id).subscribe(res=>{
+      this.authService.deleteUser();
+      this.authService.logout();
+      this.sharedService.clearZoomAccessToken();
+      localStorage.removeItem('user');
+      localStorage.removeItem('registerItem');
+      localStorage.removeItem('registerUserName');
+      this.spinnerService.hide();
+      this.router.navigateByUrl("/");
+    });  
   }
 }

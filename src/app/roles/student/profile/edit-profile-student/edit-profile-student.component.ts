@@ -14,6 +14,7 @@ import { AuthenticationService } from 'src/app/service/auth/authentication.servi
 import { WsResponse } from 'src/app/util/ws-response';
 import { WsType } from 'src/app/util/ws-type';
 import { ImageCropperModalComponent } from 'src/app/util/image-cropper-modal/image-cropper-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile-student',
@@ -53,6 +54,7 @@ export class EditProfileStudentComponent implements OnInit {
   constructor(
     private afStorage: AngularFireStorage,
     private http: HttpClient,
+    private router: Router,
     private snackBar: MatSnackBar,
     private spinnerService: Ng4LoadingSpinnerService,
     private modalService: NgbModal,
@@ -222,6 +224,27 @@ export class EditProfileStudentComponent implements OnInit {
 
   postAPIData(userValues: object) {
     return this.http.post('api/userDetails/student/update', userValues);
+  }
+
+  deleteAccountPopUp(modal: any){
+    this.modalService.open(modal);
+  }
+
+  deleteAccount(){
+    this.spinnerService.show();  
+    this.authService.deleteUser().then(()=>{            
+      this.authService.logout();      
+      this.userService.removeUser(this.loggedInUser.id).subscribe(res=>{
+        this.sharedService.logoutRequest();
+        this.spinnerService.hide();
+        this.router.navigateByUrl("/");
+      });  
+    },
+    onRejected=>{
+    }).catch(err=>{
+      this.openSnackBar("Please re-login before continue");
+      this.router.navigateByUrl("account/login");
+    });
   }
 
   onSuccess(data: WsResponse, serviceType: WsType){

@@ -20,4 +20,9 @@ export class UserService {
     }
     return this.http.post(url, request);
   }
+
+  public removeUser(id: string){
+    let url = ServiceUrls.deleteUser(id);
+    return this.http.delete(url);
+  }
 }

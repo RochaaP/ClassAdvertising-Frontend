@@ -10,6 +10,8 @@ export class SharedService {
   public createPaperWidth = 75;
   public sidePanelWidth = 5;
 
+  private remoteUserID: string = "vhW15gAUqTYAw0VjZ2HD";
+
   private loggedInUser: {id: string, data: UserModel};
   
   private studentPicUrl: string = "https://firebasestorage.googleapis.com/v0/b/mtute-sl.appspot.com/o/profilePictures%2FDefault%2Fstudent.jpg?alt=media&token=f61b56c0-f737-45d4-bfc3-3dba1de9683f";
@@ -23,8 +25,13 @@ export class SharedService {
   @Output() viewPaperRefresh: EventEmitter<any> = new EventEmitter();
   @Output() navigationRefresh: EventEmitter<any> = new EventEmitter();
   @Output() userLoggedIn: EventEmitter<any> = new EventEmitter();
+  @Output() logout: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
+
+  public getRemoteUserID(){
+    return this.remoteUserID;
+  }
 
   public getLoggedInUser(){
     let user = this.loggedInUser;
@@ -51,7 +58,8 @@ export class SharedService {
   }
 
   public setZoomAccessToken(token: any){
-    let expiryTime = (new Date()).getUTCSeconds() + 3500;
+    let curTime = new Date().getTime();
+    let expiryTime = curTime/1000 + 3500;
     localStorage.setItem("zoomAccessTokenExpiry", expiryTime.toString());
     localStorage.setItem("zoomAccessToken", JSON.stringify(token));
     return token;
@@ -86,6 +94,14 @@ export class SharedService {
 
   public languageRespond() {
     return this.language;
+  }
+
+  public logoutRequest(){
+    this.logout.emit();
+  }
+
+  public logoutRespond(){
+    return this.logout;
   }
 
   public addTabItemRequest(data) {

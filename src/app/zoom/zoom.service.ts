@@ -14,7 +14,7 @@ export class ZoomService {
   constructor(private http: HttpClient) { }
 
   public isTokenExpired(){
-    let curTime = (new Date()).getUTCSeconds();
+    let curTime = new Date().getTime();
     let expiryTime = Number(localStorage.getItem("zoomAccessTokenExpiry"));
     if(curTime>=expiryTime){
       return true;

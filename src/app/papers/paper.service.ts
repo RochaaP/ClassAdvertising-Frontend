@@ -13,6 +13,12 @@ export class PaperService {
 
   constructor(private http: HttpClient) { }
 
+  public subscribe_GetPapersByInstructorId(instructorId: string){
+    console.log("___subscribe_GetPapersByInstructorId()___");
+    let url = ServiceUrls.getPapersByInstructorId(instructorId);
+    return this.http.get(url);
+  }
+
   public getPapersByInstructorId(instructorId: string, callBack: WsCallback){
     console.log("___getPapersByInstructorId()___");
     let url = ServiceUrls.getPapersByInstructorId(instructorId);
@@ -93,6 +99,12 @@ export class PaperService {
       var res = new WsResponse(modified);
       callBack.onFail(res, WsType.CREATE_PAPER);
     });
+  }
+
+  public subscribeUpdatePaper(paper: {id: string, data: PaperModel}){
+    console.log("___subscribeUpdatePaper()___");
+    let url = ServiceUrls.UPDATE_PAPER;
+    return this.http.put(url, paper);
   }
 
   public updatePaper(paper: {id: string, data: PaperModel}, callBack: WsCallback){

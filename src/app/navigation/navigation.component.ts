@@ -69,6 +69,10 @@ export class NavigationComponent implements OnInit {
       this.achieveData();
     });
 
+    this.sharedService.logoutRespond().subscribe(()=>{
+      this.logoutUser();
+    })
+
   }
 
   isUserLoggedIn() {
@@ -138,7 +142,7 @@ export class NavigationComponent implements OnInit {
         this.userLogged = false;
         localStorage.removeItem('user');
         localStorage.removeItem('registerItem');
-        localStorage.removeItem('resgisterUserName');
+        localStorage.removeItem('registerUserName');
         this.router.navigate(['/']);
       });
   }

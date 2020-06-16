@@ -1,11 +1,8 @@
-import { Component, OnInit, Input, NgModuleRef, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { HttpClient } from '@angular/common/http';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +16,10 @@ import { SharedService } from 'src/app/shared/shared.service';
 import { UserModel } from 'src/app/users/user-model';
 import { UserService } from 'src/app/users/user.service';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
+import { PaperModel } from 'src/app/papers/paper-model';
+import { PaperService } from 'src/app/papers/paper.service';
+import { Router } from '@angular/router';
+import { NavigationComponent } from 'src/app/navigation/navigation.component';
 
 @Component({
   selector: 'app-edit-profile-instructor',
@@ -125,7 +126,6 @@ export class EditProfileInstructorComponent implements OnInit {
   constructor(
     private afStorage: AngularFireStorage,
     private http: HttpClient,
-    private afs: AngularFirestore,
     private snackBar: MatSnackBar,
     private spinnerService: Ng4LoadingSpinnerService,
     private modalService: NgbModal,
@@ -133,7 +133,8 @@ export class EditProfileInstructorComponent implements OnInit {
     private subjectService: SubjectService,
     private userService: UserService,
     private sharedService: SharedService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
     ) { 
       this.loggedInUser = this.sharedService.getLoggedInUser();
     }
@@ -348,15 +349,15 @@ setShowHidePhD(){
       // this.img_url = this.task.img_url();
       // console.log(this.img_url);
       // const task = this.afStorage.upload(path, event.target.files[0]).then(() => {
-      const task = this.afStorage.upload(path, file).then(() => {
-        // const ref = this.afStorage.ref(path);
-
-        ref.getDownloadURL().subscribe(url => {
-        const Url = url; // for ts
-        this.img_url = url; // with this you can use it in the html
-        this.uploadBtnShow = true;
+        const task = this.afStorage.upload(path, file).then(() => {
+          // const ref = this.afStorage.ref(path);
+  
+          ref.getDownloadURL().subscribe(url => {
+          const Url = url; // for ts
+          this.img_url = url; // with this you can use it in the html
+          this.uploadBtnShow = true;
+          });
         });
-      });
     });
 
   }
@@ -412,7 +413,7 @@ setShowHidePhD(){
     if (this.backgroundMetaData) {
       this.afStorage.ref(JSON.parse(this.backgroundMetaData).fullPath).delete().subscribe(() => {
 
-      }, (error) => {
+      }, () => {
         console.log('deleted Failed');
       }, () => {
         console.log('successfully deleted');
@@ -604,6 +605,27 @@ setShowHidePhD(){
       this.deleteFile(this.cards[index].rankedProfileMetaData);
     }
     this.cards.splice(index, 1);
+  }
+
+  deleteAccountPopUp(modal: any){
+    this.modalService.open(modal);
+  }
+
+  deleteAccount(){
+    this.spinnerService.show();  
+    this.authService.deleteUser().then(()=>{            
+      this.authService.logout();      
+      this.userService.removeUser(this.loggedInUser.id).subscribe(res=>{
+        this.sharedService.logoutRequest();
+        this.spinnerService.hide();
+        this.router.navigateByUrl("/");
+      });  
+    },
+    onRejected=>{
+    }).catch(err=>{
+      this.openSnackBar("Please re-login before continue");
+      this.router.navigateByUrl("account/login");
+    });
   }
 
   onSuccess(data: WsResponse, serviceType: WsType){
