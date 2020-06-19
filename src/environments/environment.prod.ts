@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   zoom : {
-    zoomClientId: "eezr713VT0u99HLZYP6wng",
+    zoomClientId: "hPDxBy3PR7eOfPslM0gNnw",//"eezr713VT0u99HLZYP6wng"
     redirect_url: "https%3A%2F%2Fwww.mtute.lk%2Fzoom"
   },
   firebase : {
