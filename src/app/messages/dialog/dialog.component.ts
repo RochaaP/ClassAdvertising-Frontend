@@ -46,6 +46,7 @@ formGroupAppointment: FormGroup;
         time: new FormControl('', [Validators.required]),
         description: new FormControl('', [Validators.required]),
       });
+      console.log('asdkf', this.data)
     }
 
     onNoClick(): void {

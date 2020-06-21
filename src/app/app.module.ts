@@ -76,9 +76,9 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
     NewsfeedComponent,
     PostaddComponent,
 
-    DropzoneDirective, // What is this
+    DropzoneDirective, // What is this >> post or note upload by drag and drop 
 
-    UploadTaskComponent, // Do we need this
+    UploadTaskComponent, // Do we need this >> it worked fine earlier.. somethings wrong now.. need to check again .. o
 
     FooterComponent,
 
@@ -135,7 +135,7 @@ import { ImageCropperModalComponent } from './util/image-cropper-modal/image-cro
     //MatProgressBarModule,
     //MatIconModule,
     //MatRadioModule,
-    //MatDialogModule,
+    MatDialogModule,    /// this was the reason for "place an appoitment" error..
 
     ScrollingModule,
     NotificationBarModule
