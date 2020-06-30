@@ -20,6 +20,8 @@ export class PaperMarkingModelComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.questions)
+    console.log(this.answers)
   }
 
   closeWindow(){

@@ -35,8 +35,7 @@ export class StudentPaperComponent implements OnInit {
   private userGroup: {id: string, name: string}[] = [];
   private papers: {subject: string, papers:{id: string, data: PaperModel, instructor: string}[]}[];
 
-  public displayedColumns: string[] = ['name', 'year', 'instructor', 'grade_level', 'load'];
-  public mobileDisplayedColumns: string[] = ['name', 'year', 'instructor', 'grade_level'];
+  public displayedColumns: string[] = ['name', 'year', 'instructor', 'grade_level'];
   dataSource: MatTableDataSource<{id: string, data: PaperModel, instructor: string}>;
 
   constructor(

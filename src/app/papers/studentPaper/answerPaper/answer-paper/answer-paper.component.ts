@@ -219,7 +219,18 @@ export class AnswerPaperComponent implements OnInit {
   onSuccess(data: WsResponse, serviceType: WsType){
     if(serviceType==WsType.GET_QUESTIONS_BY_PAPER_ID){
       console.log("GET_QUESTIONS_BY_PAPER_ID");
-      this.questions = data.payload;
+      let tempQuestions:{id: string, data: QuestionModel}[] = data.payload;
+      this.questions = tempQuestions.sort((a, b)=>{
+        if(Number(a.data.number) > Number(b.data.number)){
+          return 1;
+        }
+        else if(Number(a.data.number) < Number(b.data.number)){
+          return -1;
+        }
+        else{
+          return 0;
+        }
+      })
       this.configAnswerSettings(this.questions.length);
       this.spinnerService.hide();
       this.countdown.begin();

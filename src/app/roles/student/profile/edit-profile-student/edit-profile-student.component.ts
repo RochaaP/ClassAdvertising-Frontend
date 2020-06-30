@@ -241,7 +241,7 @@ export class EditProfileStudentComponent implements OnInit {
       });  
     },
     onRejected=>{
-    }).catch(err=>{
+      console.log(onRejected);
       this.openSnackBar("Please re-login before continue");
       this.router.navigateByUrl("account/login");
     });

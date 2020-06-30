@@ -20,7 +20,7 @@
                 </div>
                 <div class="card-body">
                     <div *ngFor="let question of questions; let t = index" class="mb-4">
-                        <div class="badge" [ngClass]="{'badge-danger': answers[t]!=questions[t].data.answer, 'badge-success': answers[t]==questions[t].data.answer}" [innerHTML]="question.data.number"></div>
+                        <div class="badge" [ngClass]="{'badge-danger': answers[t]!=question.data.answer, 'badge-success': answers[t]==question.data.answer}" [innerHTML]="question.data.number"></div>
                         <div [innerHTML]="question.data.question"></div>
                         <div *ngIf="question.data.a!=undefined && question.data.a!=''" [innerHTML]="question.data.a" [ngStyle]="{'color': question.data.answer==answers[t] && question.data.answer=='A'?'green': question.data.answer!=answers[t] && question.data.answer=='A'?'yellow':''}"></div>
                         <div *ngIf="question.data.b!=undefined && question.data.b!=''" [innerHTML]="question.data.b" [ngStyle]="{'color': question.data.answer==answers[t] && question.data.answer=='B'?'green': question.data.answer!=answers[t] && question.data.answer=='B'?'yellow':''}"></div>
